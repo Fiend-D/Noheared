@@ -1,0 +1,181 @@
+{
+    "name": "豪宅密室谋杀案",
+    "description": "一座豪华别墅的书房发生了谋杀案，富豪在密室中被杀害。所有嫌疑人都在别墅内，侦探需要通过听取对话找出真凶。",
+    "duration": 720,
+    "scene": {
+        "name": "豪华别墅",
+        "width": 1000,
+        "height": 600,
+        "areas": [
+            {"name": "书房", "x": 100, "y": 50, "width": 300, "height": 200},
+            {"name": "客厅", "x": 450, "y": 50, "width": 400, "height": 500},
+            {"name": "厨房", "x": 100, "y": 300, "width": 300, "height": 250},
+            {"name": "花园", "x": 450, "y": 400, "width": 400, "height": 150}
+        ],
+        "doors": [
+            {"name": "书房门", "area1": "书房", "area2": "客厅", "x": 395, "y": 180, "width": 50, "height": 20},
+            {"name": "厨房门", "area1": "厨房", "area2": "客厅", "x": 395, "y": 370, "width": 50, "height": 20},
+            {"name": "花园门", "area1": "花园", "area2": "客厅", "x": 790, "y": 395, "width": 20, "height": 50}
+        ]
+    },
+    "characters": {
+        "A": {
+            "name": "管家",
+            "color": "#FF8800",
+            "positions": [
+                {"start": 0, "end": 60, "position": [550, 120]},
+                {"start": 60, "end": 180, "position": [180, 120]},
+                {"start": 180, "end": 300, "position": [520, 180]},
+                {"start": 300, "end": 420, "position": [160, 180]},
+                {"start": 420, "end": 540, "position": [580, 220]},
+                {"start": 540, "end": 660, "position": [200, 400]},
+                {"start": 660, "end": 720, "position": [520, 250]}
+            ]
+        },
+        "B": {
+            "name": "继承人",
+            "color": "#FF0000",
+            "positions": [
+                {"start": 0, "end": 90, "position": [650, 120]},
+                {"start": 90, "end": 180, "position": [700, 480]},
+                {"start": 180, "end": 300, "position": [600, 180]},
+                {"start": 300, "end": 420, "position": [680, 480]},
+                {"start": 420, "end": 540, "position": [620, 220]},
+                {"start": 540, "end": 660, "position": [720, 450]},
+                {"start": 660, "end": 720, "position": [640, 150]}
+            ]
+        },
+        "C": {
+            "name": "秘书",
+            "color": "#00FFFF",
+            "positions": [
+                {"start": 0, "end": 120, "position": [200, 450]},
+                {"start": 120, "end": 240, "position": [620, 150]},
+                {"start": 240, "end": 360, "position": [180, 400]},
+                {"start": 360, "end": 480, "position": [660, 200]},
+                {"start": 480, "end": 600, "position": [220, 450]},
+                {"start": 600, "end": 720, "position": [560, 180]}
+            ]
+        },
+        "D": {
+            "name": "厨师",
+            "color": "#00FF00",
+            "positions": [
+                {"start": 0, "end": 150, "position": [220, 400]},
+                {"start": 150, "end": 300, "position": [540, 150]},
+                {"start": 300, "end": 450, "position": [180, 480]},
+                {"start": 450, "end": 600, "position": [580, 220]},
+                {"start": 600, "end": 720, "position": [240, 450]}
+            ]
+        },
+        "E": {
+            "name": "园丁",
+            "color": "#0000FF",
+            "positions": [
+                {"start": 0, "end": 90, "position": [700, 450]},
+                {"start": 90, "end": 210, "position": [200, 120]},
+                {"start": 210, "end": 330, "position": [650, 480]},
+                {"start": 330, "end": 450, "position": [180, 180]},
+                {"start": 450, "end": 570, "position": [720, 420]},
+                {"start": 570, "end": 690, "position": [220, 150]},
+                {"start": 690, "end": 720, "position": [600, 480]}
+            ]
+        },
+        "F": {
+            "name": "侦探",
+            "color": "#8800FF",
+            "positions": [
+                {"start": 0, "end": 60, "position": [660, 150]},
+                {"start": 60, "end": 150, "position": [220, 150]},
+                {"start": 150, "end": 270, "position": [680, 450]},
+                {"start": 270, "end": 390, "position": [200, 450]},
+                {"start": 390, "end": 510, "position": [620, 180]},
+                {"start": 510, "end": 630, "position": [240, 180]},
+                {"start": 630, "end": 720, "position": [180, 400]}
+            ]
+        }
+    },
+    "audio_tracks": {
+        "A": "audio/case4/butler.wav",
+        "B": "audio/case4/heir.wav",
+        "C": "audio/case4/secretary.wav",
+        "D": "audio/case4/cook.wav",
+        "E": "audio/case4/gardener.wav",
+        "F": "audio/case4/detective.wav"
+    },
+    "dialogues": [
+        {"character": "F", "text": "各位，我是负责这个案件的侦探。昨晚8点，先生在书房被发现死亡。现在我需要了解案发时每个人的行踪。", "start": 10, "end": 25},
+        {"character": "A", "text": "侦探先生，我当时在客厅整理文件。8点左右，我听到书房传来一声闷响，但以为是先生在整理东西，就没在意。", "start": 27, "end": 42},
+        {"character": "B", "text": "我在花园打电话，和朋友讨论生意的事情。大概7点50分左右，我看到园丁从书房方向走出来。", "start": 44, "end": 59},
+        {"character": "E", "text": "我确实去过书房，先生让我修剪书房窗外的灌木。7点45分左右我就离开了，去了花园继续工作。", "start": 61, "end": 76},
+        {"character": "C", "text": "我在厨房帮厨师准备晚餐。7点55分的时候，先生打电话让我送一杯咖啡到书房。我7点58分送到，先生当时还好好的。", "start": 78, "end": 93},
+        {"character": "D", "text": "是的，秘书确实在厨房帮我。她7点55分离开去送咖啡，8点05分左右回来的。", "start": 95, "end": 105},
+        {"character": "F", "text": "秘书，你送咖啡的时候，先生有什么异常吗？", "start": 107, "end": 115},
+        {"character": "C", "text": "先生看起来很生气，在电话里和人吵架。他说'你别想拿走一分钱'，然后挂了电话。", "start": 117, "end": 132},
+        {"character": "B", "text": "那通电话一定是打给我的！先生最近对我很不满，说我花钱大手大脚。", "start": 134, "end": 144},
+        {"character": "A", "text": "先生确实在考虑修改遗嘱，最近和律师谈了好几次。", "start": 146, "end": 156},
+        {"character": "F", "text": "管家，你知道先生要修改遗嘱的内容吗？", "start": 158, "end": 166},
+        {"character": "A", "text": "具体内容我不清楚，但先生提到过要把大部分财产捐给慈善机构。", "start": 168, "end": 178},
+        {"character": "B", "text": "什么？那我的继承权怎么办？我是他唯一的侄子！", "start": 180, "end": 190},
+        {"character": "C", "text": "先生最近确实和很多人有矛盾。上周还和园丁因为花园的事情吵架。", "start": 192, "end": 202},
+        {"character": "E", "text": "那是因为先生要卖掉花园的一块地，我不同意。但我绝对不会伤害先生！", "start": 204, "end": 214},
+        {"character": "D", "text": "先生也和厨师长吵架了，说我们的菜不符合他的口味，要扣我们工资。", "start": 216, "end": 226},
+        {"character": "F", "text": "现在让我们回到案发时间。8点整，有人听到闷响。秘书，你送完咖啡后去了哪里？", "start": 228, "end": 243},
+        {"character": "C", "text": "我回到厨房，和厨师一起准备晚餐，直到8点15分管家来说先生出事了。", "start": 245, "end": 255},
+        {"character": "A", "text": "8点10分左右，我去书房送文件，发现先生倒在地上，已经没有呼吸了。", "start": 257, "end": 267},
+        {"character": "F", "text": "法医初步判断死亡时间是7点55分到8点05分之间。凶器是书房里的黄铜镇纸，上面没有指纹。", "start": 269, "end": 284},
+        {"character": "B", "text": "镇纸？那是我去年送给先生的礼物！", "start": 286, "end": 296},
+        {"character": "F", "text": "哦？这很有趣。继承人送的镇纸成了凶器。", "start": 298, "end": 308},
+        {"character": "B", "text": "不是我！我当时在花园打电话，园丁可以证明！", "start": 310, "end": 320},
+        {"character": "E", "text": "是的，我在花园看到他在打电话，一直到8点10分左右。", "start": 322, "end": 332},
+        {"character": "F", "text": "管家，你说你8点10分发现先生的尸体，之前你在做什么？", "start": 334, "end": 344},
+        {"character": "A", "text": "我一直在客厅整理文件，8点整听到闷响，8点10分去书房查看。", "start": 346, "end": 356},
+        {"character": "F", "text": "秘书，你送咖啡的时间是7点58分，回来是8点05分。这段时间你在书房待了多久？", "start": 358, "end": 373},
+        {"character": "C", "text": "就待了1分钟左右，放下咖啡就走了。先生当时还在打电话。", "start": 375, "end": 385},
+        {"character": "F", "text": "厨师，你能证明秘书8点05分回到厨房吗？", "start": 387, "end": 397},
+        {"character": "D", "text": "是的，她8点05分准时回来的，我们一起准备晚餐直到8点15分。", "start": 399, "end": 409},
+        {"character": "F", "text": "园丁，你7点45分离开书房后，一直都在花园吗？", "start": 411, "end": 421},
+        {"character": "E", "text": "是的，我一直在修剪花园的灌木，直到8点15分听到管家的叫声。", "start": 423, "end": 433},
+        {"character": "F", "text": "现在让我重新梳理一下时间线：7点45分园丁离开书房，7点55分秘书去送咖啡，7点58分到达，8点05分返回厨房，8点整管家听到闷响，8点10分管家发现尸体。", "start": 435, "end": 455},
+        {"character": "A", "text": "是的，就是这样。", "start": 457, "end": 462},
+        {"character": "F", "text": "等等，有个问题。如果闷响是8点整发生的，而秘书8点05分才回到厨房，那她有足够的时间作案。", "start": 464, "end": 479},
+        {"character": "C", "text": "不可能！我8点05分回到厨房，厨师可以证明！", "start": 481, "end": 491},
+        {"character": "D", "text": "是的，她确实8点05分回来的，我们一起工作到8点15分。", "start": 493, "end": 503},
+        {"character": "F", "text": "那管家呢？你8点整听到闷响，为什么10分钟后才去查看？", "start": 505, "end": 515},
+        {"character": "A", "text": "我以为先生在整理东西，所以没在意。直到10分钟后觉得不对劲才去查看。", "start": 517, "end": 527},
+        {"character": "F", "text": "但如果是你作案，你完全可以在8点整动手，然后10分钟后假装发现尸体。", "start": 529, "end": 544},
+        {"character": "A", "text": "我没有理由伤害先生！我在这个家工作了30年，先生待我如家人。", "start": 546, "end": 556},
+        {"character": "F", "text": "让我检查一下书房的窗户。园丁，你修剪灌木时，书房的窗户是开着的吗？", "start": 558, "end": 573},
+        {"character": "E", "text": "是的，窗户是开着的，先生说要通风。", "start": 575, "end": 585},
+        {"character": "F", "text": "哦？这就有意思了。如果窗户开着，凶手可以从窗外作案。", "start": 587, "end": 597},
+        {"character": "B", "text": "从窗外？那只有园丁有机会，他当时就在花园！", "start": 599, "end": 609},
+        {"character": "E", "text": "我没有！我一直在修剪灌木，没有靠近窗户。", "start": 611, "end": 621},
+        {"character": "F", "text": "但你有动机，先生要卖掉你精心照料的花园。而且你熟悉花园的布局，可以从窗户进入书房。", "start": 623, "end": 638},
+        {"character": "E", "text": "我绝对不会这么做！先生虽然要卖地，但他答应给我一笔钱让我退休。", "start": 640, "end": 650},
+        {"character": "F", "text": "现在我有了一个大胆的推测。凶手不是从门进入的，而是从窗户。而且凶手知道先生8点左右会在书房，并且知道镇纸的位置。", "start": 652, "end": 667},
+        {"character": "B", "text": "镇纸是我送的，我当然知道它的位置！但我当时在花园打电话！", "start": 669, "end": 679},
+        {"character": "F", "text": "是的，你在花园打电话，但你可以在打电话的同时，从花园的窗户扔进镇纸，击中先生。", "start": 681, "end": 696},
+        {"character": "B", "text": "不可能！我没有那么准的手法！", "start": 698, "end": 708},
+        {"character": "F", "text": "但你有动机，有机会，而且是唯一知道镇纸位置的人。管家听到的闷响，就是镇纸击中先生的声音。", "start": 710, "end": 720}
+    ],
+    "questions": [
+        {
+            "id": "q1",
+            "question": "谁是杀害先生的凶手？",
+            "options": ["管家", "继承人", "秘书", "厨师", "园丁"],
+            "answer": "继承人"
+        },
+        {
+            "id": "q2",
+            "question": "凶器是什么？",
+            "options": ["匕首", "镇纸", "毒药", "绳子"],
+            "answer": "镇纸"
+        },
+        {
+            "id": "q3",
+            "question": "凶手是如何作案的？",
+            "options": ["从门进入", "从窗户扔进凶器", "下毒", "勒死"],
+            "answer": "从窗户扔进凶器"
+        }
+    ]
+}
