@@ -1,0 +1,139 @@
+{
+    "name": "美术馆",
+    "description": "闭馆后，名画《呐喊》突然失窃，需要通过听取不同角色的对话，找出窃贼的身份和作案手法。",
+    "duration": 180,
+    "scene": {
+        "name": "美术馆",
+        "width": 900,
+        "height": 500,
+        "areas": [
+            {"name": "展厅", "x": 100, "y": 100, "width": 300, "height": 200},
+            {"name": "办公室", "x": 500, "y": 100, "width": 250, "height": 200},
+            {"name": "走廊", "x": 100, "y": 300, "width": 650, "height": 100},
+            {"name": "仓库", "x": 100, "y": 400, "width": 300, "height": 80}
+        ],
+        "doors": [
+            {"name": "展厅门", "area1": "展厅", "area2": "走廊", "x": 250, "y": 300, "width": 30, "height": 20},
+            {"name": "办公室门", "area1": "办公室", "area2": "走廊", "x": 625, "y": 300, "width": 30, "height": 20},
+            {"name": "仓库门", "area1": "仓库", "area2": "走廊", "x": 240, "y": 390, "width": 40, "height": 20}
+        ]
+    },
+    "characters": {
+        "H": {
+            "name": "馆长",
+            "color": "#FF0000",
+            "positions": [
+                {"start": 0, "end": 40, "position": [580, 180]},
+                {"start": 40, "end": 60, "position": [620, 150]},
+                {"start": 60, "end": 90, "position": [550, 200]},
+                {"start": 90, "end": 120, "position": [300, 330]},
+                {"start": 120, "end": 150, "position": [250, 330]},
+                {"start": 150, "end": 180, "position": [650, 180]}
+            ]
+        },
+        "I": {
+            "name": "保安",
+            "color": "#00FF00",
+            "positions": [
+                {"start": 0, "end": 20, "position": [350, 330]},
+                {"start": 20, "end": 50, "position": [280, 330]},
+                {"start": 50, "end": 90, "position": [200, 150]},
+                {"start": 90, "end": 115, "position": [220, 180]},
+                {"start": 115, "end": 155, "position": [380, 330]},
+                {"start": 155, "end": 180, "position": [320, 330]}
+            ]
+        },
+        "J": {
+            "name": "员工",
+            "color": "#0000FF",
+            "positions": [
+                {"start": 0, "end": 30, "position": [420, 330]},
+                {"start": 30, "end": 60, "position": [600, 180]},
+                {"start": 60, "end": 90, "position": [680, 220]},
+                {"start": 90, "end": 125, "position": [650, 200]},
+                {"start": 125, "end": 165, "position": [620, 160]},
+                {"start": 165, "end": 180, "position": [710, 180]}
+            ]
+        },
+        "K": {
+            "name": "画家",
+            "color": "#FFFF00",
+            "positions": [
+                {"start": 0, "end": 65, "position": [180, 180]},
+                {"start": 65, "end": 90, "position": [250, 200]},
+                {"start": 90, "end": 130, "position": [200, 150]},
+                {"start": 130, "end": 180, "position": [280, 200]}
+            ]
+        },
+        "L": {
+            "name": "经纪人",
+            "color": "#FF00FF",
+            "positions": [
+                {"start": 0, "end": 75, "position": [150, 200]},
+                {"start": 75, "end": 90, "position": [220, 220]},
+                {"start": 90, "end": 135, "position": [160, 180]},
+                {"start": 135, "end": 180, "position": [240, 200]}
+            ]
+        },
+        "M": {
+            "name": "清洁女工",
+            "color": "#00FFFF",
+            "positions": [
+                {"start": 0, "end": 90, "position": [200, 440]},
+                {"start": 90, "end": 125, "position": [480, 330]},
+                {"start": 125, "end": 180, "position": [280, 440]}
+            ]
+        }
+    },
+    "audio_tracks": {
+        "H": "audio/case3/curator.wav",
+        "I": "audio/case3/security.wav",
+        "J": "audio/case3/employee.wav",
+        "K": "audio/case3/actorA.wav",
+        "L": "audio/case3/actorB.wav",
+        "M": "audio/case3/cleaner.wav"
+    },
+    "dialogues": [
+        {"character": "J", "text": "保安，今天闭馆后你巡逻的时候注意点，听说最近有小偷盯上了《呐喊》。", "start": 10, "end": 18},
+        {"character": "I", "text": "放心吧，我会每半小时巡逻一次，绝对不会出问题。", "start": 19, "end": 25},
+        {"character": "J", "text": "那就好，我先去办公室找馆长汇报工作。", "start": 26, "end": 30},
+        {"character": "H", "text": "你来了，今天的参观人数怎么样？", "start": 35, "end": 40},
+        {"character": "J", "text": "还不错，比预期多了20%。对了，馆长，关于《呐喊》的安保，我已经让保安加强巡逻了。", "start": 41, "end": 48},
+        {"character": "H", "text": "好的，辛苦你了。对了，明天有个重要的客人要来，你准备一下。", "start": 49, "end": 55},
+        {"character": "K", "text": "经纪人，你看这幅《呐喊》，真的很有冲击力。", "start": 60, "end": 66},
+        {"character": "L", "text": "是啊，这可是蒙克的代表作，价值连城。不过听说最近有人想偷它？", "start": 67, "end": 73},
+        {"character": "K", "text": "偷？谁有那个胆子？这里的安保系统可是最先进的。", "start": 74, "end": 80},
+        {"character": "M", "text": "哎，又要打扫展厅了，真是麻烦。", "start": 85, "end": 90},
+        {"character": "I", "text": "馆长，不好了！《呐喊》不见了！", "start": 95, "end": 100},
+        {"character": "H", "text": "什么？怎么可能？我明明锁在展柜里的！", "start": 101, "end": 106},
+        {"character": "I", "text": "我刚才巡逻的时候还在，现在展柜的玻璃被打碎了，画不见了。", "start": 107, "end": 113},
+        {"character": "J", "text": "怎么会这样？我刚才还在办公室，没听到任何动静。", "start": 114, "end": 120},
+        {"character": "K", "text": "什么？《呐喊》被偷了？这可是大新闻！", "start": 121, "end": 127},
+        {"character": "L", "text": "馆长，你应该报警，这可是价值连城的名画。", "start": 128, "end": 134},
+        {"character": "M", "text": "我刚才在打扫仓库，没看到有人进来。", "start": 135, "end": 140},
+        {"character": "H", "text": "保安，你不是说会每半小时巡逻一次吗？怎么会发生这种事？", "start": 141, "end": 147},
+        {"character": "I", "text": "我...我刚才去了趟厕所，就离开了几分钟。", "start": 148, "end": 154},
+        {"character": "J", "text": "馆长，我觉得我们应该检查一下监控，看看是谁干的。", "start": 155, "end": 161},
+        {"character": "H", "text": "好的，我们去监控室看看。", "start": 162, "end": 166}
+    ],
+    "questions": [
+        {
+            "id": "q1",
+            "question": "谁发现了《呐喊》失窃？",
+            "options": ["保安", "馆长", "员工"],
+            "answer": "保安"
+        },
+        {
+            "id": "q2",
+            "question": "保安离开岗位去做什么了？",
+            "options": ["去厕所", "吃饭", "抽烟"],
+            "answer": "去厕所"
+        },
+        {
+            "id": "q3",
+            "question": "谁最后提出去检查监控？",
+            "options": ["馆长", "员工", "经纪人"],
+            "answer": "员工"
+        }
+    ]
+}
