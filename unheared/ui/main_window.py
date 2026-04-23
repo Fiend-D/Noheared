@@ -30,8 +30,9 @@ class MainWindow(QMainWindow):
         # 当前说话的角色（用于声波纹）
         self.current_speaking = set()
         
-        # 缓存上次字幕 HTML，避免每 100ms 重复 setHtml 造成卡顿
-        self._last_dialogue_html = ''
+        # 字幕历史记录
+        self._subtitle_history = []
+        self._seen_dialogue_ids = set()
         
         # 选中的角色（用于标记）
         self.selected_char_id = None
@@ -248,18 +249,26 @@ class MainWindow(QMainWindow):
         self.timer.start(100)
         
     def load_cases(self):
-        # 加载案例列表
-        import os
+        # 加载案例列表，显示脚本名称
+        import os, json
         cases_dir = 'unheared/cases'
         if os.path.exists(cases_dir):
             for f in sorted(os.listdir(cases_dir)):
                 if f.endswith('.json'):
                     case_id = f[:-5]
-                    item = QListWidgetItem(case_id)
+                    case_path = os.path.join(cases_dir, f)
+                    try:
+                        with open(case_path, 'r', encoding='utf-8') as cf:
+                            case_data = json.load(cf)
+                        case_title = case_data.get('name', case_id)
+                    except Exception:
+                        case_title = case_id
+                    item = QListWidgetItem(case_title)
+                    item.setData(Qt.ItemDataRole.UserRole, case_id)
                     self.case_list.addItem(item)
     
     def select_case(self, item):
-        case_id = item.text()
+        case_id = item.data(Qt.ItemDataRole.UserRole)
         if self.case_manager.load_case(case_id):
             case_info = self.case_manager.get_case_info()
             self.setWindowTitle(f'疑案追声 - {case_info["name"]}')
@@ -273,7 +282,14 @@ class MainWindow(QMainWindow):
             for track_id, file_path in audio_tracks.items():
                 self.audio_player.add_track(track_id, file_path)
             
-            # 加载场景（每个案例必须自带场景，case1 也已补上）
+            # 加载脚步声音效
+            import os
+            project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            walk_path = os.path.join(project_root, 'unheared', 'audio', 'footsteps', 'walk.wav')
+            run_path = os.path.join(project_root, 'unheared', 'audio', 'footsteps', 'run.wav')
+            self.audio_player.add_footstep_tracks(walk_path, run_path)
+            
+            # 加载场景
             scene_data = self.case_manager.get_scene()
             self.scene_map.load_scene(scene_data)
             
@@ -343,6 +359,7 @@ class MainWindow(QMainWindow):
         self.update_dialogues(position)
         self.update_character_positions(position)
         self.update_speaking_animations(position)
+        self.update_footstep_sounds()
         
         # 检查播放状态变化
         is_playing = self.audio_player.is_playing()
@@ -371,23 +388,46 @@ class MainWindow(QMainWindow):
                     self.time_slider.setValue(slider_value)
     
     def update_dialogues(self, timestamp):
+        # 检测时间回退（seek），清空历史重新构建
+        if getattr(self, 'last_timestamp', None) is not None and timestamp < self.last_timestamp - 0.5:
+            self._subtitle_history.clear()
+            self._seen_dialogue_ids.clear()
+        
         dialogues = self.case_manager.get_dialogues(timestamp)
         if dialogues:
-            dialogue_text = '\n'.join([
-                f'<span style="color:#7aa8d8;">{d["character"]}</span>: <span style="color:#e0e4ec;">{d["text"]}</span>'
-                for d in dialogues
-            ])
-            # 只在字幕内容真正变化时才 setHtml，避免每 100ms 强制刷新 QTextEdit
-            if dialogue_text != self._last_dialogue_html:
-                self.dialogue_display.setHtml(dialogue_text)
-                self._last_dialogue_html = dialogue_text
-        else:
-            # 保留上一条字幕，但淡化显示（原作风格）
-            if self._last_dialogue_html:
-                # 已经有字幕，保持显示（不重复清空）
-                pass
-            else:
+            for d in dialogues:
+                dialogue_key = (d['character'], d['text'], d['start'])
+                if dialogue_key not in self._seen_dialogue_ids:
+                    self._seen_dialogue_ids.add(dialogue_key)
+                    self._subtitle_history.append({
+                        'time': d['start'],
+                        'character': d['character'],
+                        'text': d['text']
+                    })
+                    if len(self._subtitle_history) > 100:
+                        self._subtitle_history.pop(0)
+            self._refresh_dialogue_display()
+        
+        # 播放结束或重置时清空
+        if not self.audio_player.is_playing() and self.audio_player.get_position() <= 0.1:
+            if self._subtitle_history:
+                self._subtitle_history.clear()
+                self._seen_dialogue_ids.clear()
                 self.dialogue_display.clear()
+    
+    def _refresh_dialogue_display(self):
+        """刷新字幕显示区域"""
+        if not self._subtitle_history:
+            return
+        lines = []
+        for entry in self._subtitle_history[-25:]:
+            time_str = f"{int(entry['time'] // 60):02d}:{int(entry['time'] % 60):02d}"
+            lines.append(
+                f'<span style="color:#5a7a9a;font-size:11px;">[{time_str}]</span> '
+                f'<span style="color:#7aa8d8;">{entry["character"]}</span>: '
+                f'<span style="color:#e0e4ec;">{entry["text"]}</span>'
+            )
+        self.dialogue_display.setHtml('<br>'.join(lines))
     
     def update_speaking_animations(self, timestamp):
         """更新角色说话状态，控制声波纹"""
@@ -405,6 +445,14 @@ class MainWindow(QMainWindow):
             self.scene_map.set_speaking(char_id, False)
         
         self.current_speaking = current_speaking_chars
+    
+    def update_footstep_sounds(self):
+        """更新脚步声效：根据监听点周围角色的移动状态播放走路/跑动声"""
+        if not hasattr(self.audio_player, '_footstep_channels') or not self.audio_player._footstep_channels:
+            return
+        state = self.scene_map.get_footstep_state()
+        for movement_type, volume in state.items():
+            self.audio_player.set_footstep_volume(movement_type, volume)
     
     def _update_character_audio(self, char_id, char_x, char_y, listener_x, listener_y):
         """根据角色和监听点的位置关系更新音量和声像"""
@@ -430,14 +478,16 @@ class MainWindow(QMainWindow):
         
         listener_x, listener_y = self.scene_map.get_listener_position()
         
-        for char_id, pos in positions.items():
+        for char_id, data in positions.items():
+            pos = data['position']
+            movement = data.get('movement', 'walk')
             x, y = pos
             if is_seeking:
                 if char_id in self.scene_map.characters:
                     self.scene_map.characters[char_id]['x'] = x
                     self.scene_map.characters[char_id]['y'] = y
             
-            self.scene_map.update_character_position(char_id, x, y)
+            self.scene_map.update_character_position(char_id, x, y, movement)
             
             if char_id in self.scene_map.characters:
                 actual_x = self.scene_map.characters[char_id]['x']
@@ -457,15 +507,16 @@ class MainWindow(QMainWindow):
         listener_x, listener_y = self.scene_map.get_listener_position()
         position = self.audio_player.get_position()
         
-        # 获取所有有音频轨道的角色（而不仅仅是当前有位置数据的角色）
         audio_tracks = self.case_manager.get_audio_tracks()
         all_char_ids = list(audio_tracks.keys())
         
         for char_id in all_char_ids:
-            # 获取角色当前位置（如果有）
-            char_x, char_y = self.case_manager.get_character_position_at_time(char_id, position) or (0, 0)
+            char_data = self.case_manager.get_character_position_at_time(char_id, position)
+            if char_data:
+                char_x, char_y = char_data['position']
+            else:
+                char_x, char_y = 0, 0
             
-            # 如果场景中有该角色，使用实际显示位置
             if char_id in self.scene_map.characters:
                 char_x = self.scene_map.characters[char_id]['x']
                 char_y = self.scene_map.characters[char_id]['y']
