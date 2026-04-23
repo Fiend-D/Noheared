@@ -60,25 +60,32 @@ class CaseManager:
         return {}
 
     def get_character_positions(self, timestamp):
+        """获取所有角色在指定时间戳的位置和移动状态"""
         if self.current_case:
             positions = {}
             for char_id, char_data in self.current_case.get('characters', {}).items():
                 if 'positions' in char_data:
                     for pos in char_data['positions']:
                         if pos['start'] <= timestamp <= pos['end']:
-                            positions[char_id] = pos['position']
+                            positions[char_id] = {
+                                'position': pos['position'],
+                                'movement': pos.get('movement', 'walk')
+                            }
                             break
             return positions
         return {}
 
     def get_character_position_at_time(self, char_id, timestamp):
-        """根据时间戳获取指定角色的位置"""
+        """根据时间戳获取指定角色的位置和移动状态"""
         if self.current_case:
             char_data = self.current_case.get('characters', {}).get(char_id)
             if char_data and 'positions' in char_data:
                 for pos in char_data['positions']:
                     if pos['start'] <= timestamp <= pos['end']:
-                        return pos['position']
+                        return {
+                            'position': pos['position'],
+                            'movement': pos.get('movement', 'walk')
+                        }
         return None
 
     def get_scene(self):
