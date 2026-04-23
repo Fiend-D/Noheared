@@ -1,11 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import random
 from PyQt6.QtWidgets import QWidget, QToolTip
 from PyQt6.QtCore import Qt, QTimer, QPoint, QPointF
 from PyQt6.QtGui import QPainter, QPen, QColor, QBrush, QRadialGradient
 
 class SceneMap(QWidget):
+    # 移动速度常量
+    WALK_SPEED = 2.5
+    RUN_SPEED = 5.0
+    STAIR_SPEED_FACTOR = 0.5
+    
+    # 碰撞避免参数
+    MIN_SEPARATION = 30
+    MIN_SEPARATION_STAIRS = 18
+    
     def __init__(self):
         super().__init__()
         self.setMinimumSize(800, 400)
@@ -25,7 +35,10 @@ class SceneMap(QWidget):
             ]
         }
         
-        # 构建区域邻接图: {area_name: [(door_info, neighbor_area), ...]}
+        # 装饰物列表 [{type, x, y, w, h, color}, ...]
+        self.decorations = []
+        
+        # 构建区域邻接图
         self.area_graph = {}
         for area in self.scene['areas']:
             self.area_graph[area['name']] = []
@@ -33,15 +46,15 @@ class SceneMap(QWidget):
             self.area_graph[door['area1']].append((door, door['area2']))
             self.area_graph[door['area2']].append((door, door['area1']))
         
-        # 角色数据 - 将由案例数据加载
+        # 角色数据
         self.characters = {}
         
         # 监听点位置（主角）
         self.listener_pos = QPoint(self.width() // 2, self.height() // 2)
         self.listener_target_x = float(self.listener_pos.x())
         self.listener_target_y = float(self.listener_pos.y())
-        self.listener_path = []  # 监听点路径点
-        self.listener_radius = 100
+        self.listener_path = []
+        self.listener_radius = 120  # 增大监听范围
         
         # 选中状态
         self.selected_character = None
@@ -60,8 +73,99 @@ class SceneMap(QWidget):
         self.move_timer.timeout.connect(self.update_positions)
         self.move_timer.start(16)
     
+    def _is_stair_area(self, area_name):
+        """判断区域是否为楼梯"""
+        return '楼梯' in area_name
+    
+    def _generate_decorations(self):
+        """为场景区域生成装饰物（家具）"""
+        self.decorations = []
+        furniture_types = ['bed', 'sofa', 'sofa_l', 'round_table', 'table_rect',
+                           'bookshelf', 'cabinet', 'rug', 'plant', 'desk', 'bathtub', 'tv_stand']
+        # 冷蓝灰色调
+        furniture_colors = [
+            QColor(55, 65, 85), QColor(60, 70, 90), QColor(50, 60, 80),
+            QColor(65, 75, 95), QColor(45, 55, 75), QColor(70, 80, 100)
+        ]
+        rug_colors = [
+            QColor(80, 50, 50, 80), QColor(50, 70, 50, 80), QColor(50, 50, 80, 80),
+            QColor(70, 60, 50, 80), QColor(60, 60, 60, 80)
+        ]
+        
+        for area in self.scene.get('areas', []):
+            # 楼梯区域不放家具
+            if self._is_stair_area(area['name']):
+                continue
+            
+            area_w = area['width']
+            area_h = area['height']
+            area_x = area['x']
+            area_y = area['y']
+            
+            # 区域太小不放家具
+            if area_w < 60 or area_h < 60:
+                continue
+            
+            # 根据区域大小决定家具数量
+            num_furniture = min(3, max(1, (area_w * area_h) // 15000))
+            
+            placed = []
+            for _ in range(num_furniture):
+                ftype = random.choice(furniture_types)
+                
+                # 家具尺寸
+                if ftype == 'bed':
+                    fw, fh = random.choice([(50, 70), (70, 50)])
+                elif ftype in ('sofa', 'sofa_l'):
+                    fw, fh = random.choice([(50, 30), (30, 50), (60, 30), (30, 60)])
+                elif ftype == 'round_table':
+                    fw = fh = random.choice([20, 25, 30])
+                elif ftype == 'table_rect':
+                    fw, fh = random.choice([(35, 25), (40, 30), (50, 30)])
+                elif ftype == 'bookshelf':
+                    fw, fh = random.choice([(40, 15), (15, 40)])
+                elif ftype == 'cabinet':
+                    fw, fh = random.choice([(35, 20), (40, 25)])
+                elif ftype == 'rug':
+                    fw, fh = random.choice([(50, 40), (60, 50), (40, 30)])
+                elif ftype == 'plant':
+                    fw = fh = random.choice([12, 15, 18])
+                elif ftype == 'desk':
+                    fw, fh = random.choice([(45, 25), (50, 30), (35, 25)])
+                elif ftype == 'bathtub':
+                    fw, fh = random.choice([(50, 25), (55, 30)])
+                elif ftype == 'tv_stand':
+                    fw, fh = random.choice([(40, 15), (45, 18)])
+                else:
+                    fw, fh = 30, 30
+                
+                # 尝试放置（简单碰撞避免）
+                margin = 8
+                max_attempts = 15
+                for attempt in range(max_attempts):
+                    fx = area_x + margin + random.randint(0, max(0, area_w - fw - margin * 2))
+                    fy = area_y + margin + random.randint(0, max(0, area_h - fh - margin * 2))
+                    
+                    # 检查是否与其他家具重叠
+                    overlap = False
+                    for px, py, pw, ph in placed:
+                        if not (fx + fw + 5 < px or fx > px + pw + 5 or fy + fh + 5 < py or fy > py + fh + 5):
+                            overlap = True
+                            break
+                    
+                    if not overlap:
+                        placed.append((fx, fy, fw, fh))
+                        color = random.choice(rug_colors) if ftype == 'rug' else random.choice(furniture_colors)
+                        self.decorations.append({
+                            'type': ftype,
+                            'x': fx, 'y': fy,
+                            'w': fw, 'h': fh,
+                            'color': color
+                        })
+                        break
+    
     def load_scene(self, scene_data):
-        """从案例数据加载场景（地图、区域、门）"""
+        """从案例数据加载场景"""
         if not scene_data:
             return
         self.scene = scene_data
@@ -80,6 +184,8 @@ class SceneMap(QWidget):
         self.listener_pos = QPoint(w // 2, h // 2)
         self.listener_target_x = float(w // 2)
         self.listener_target_y = float(h // 2)
+        # 生成装饰物
+        self._generate_decorations()
         self.update()
     
     def load_characters(self, characters_data):
@@ -93,15 +199,16 @@ class SceneMap(QWidget):
             color = QColor(color_hex)
             self.characters[char_id] = {
                 'name': data.get('name', char_id),
-                'x': 0,
-                'y': 0,
-                'target_x': 0,
-                'target_y': 0,
+                'x': 0, 'y': 0,
+                'target_x': 0, 'target_y': 0,
                 'color': color,
                 'marked': False,
                 'assigned_name': '',
                 'info': '',
-                'path': []  # 路径点列表 [(x,y), ...]
+                'path': [],
+                'movement': 'walk',
+                'is_moving': False,
+                'move_direction': (0, 0)
             }
         self.update()
     
@@ -118,11 +225,11 @@ class SceneMap(QWidget):
     
     def get_character_area(self, x, y):
         """判断坐标在哪个区域内（含门区域）"""
-        # 先检查门（门的优先级更高）
+        # 先检查门
         for door in self.scene.get('doors', []):
             if (door['x'] <= x <= door['x'] + door['width'] and
                 door['y'] <= y <= door['y'] + door['height']):
-                return door['area1']  # 门算在 area1 一侧
+                return door['area1']
         # 检查普通区域
         for area in self.scene['areas']:
             if (area['x'] <= x <= area['x'] + area['width'] and
@@ -131,31 +238,22 @@ class SceneMap(QWidget):
         return None
     
     def can_hear_each_other(self, x1, y1, x2, y2):
-        """
-        判断两个位置是否能互相听到声音。
-        规则：必须在同一区域内。
-        门/走廊等区域边界不允许声音传播。
-        """
+        """判断两个位置是否能互相听到声音（必须在同一区域内）"""
         area1 = self.get_character_area(x1, y1)
         area2 = self.get_character_area(x2, y2)
-
         if area1 is None or area2 is None:
             return False
-
         return area1 == area2
     
     def constrain_to_walkable(self, x, y):
         """将坐标限制到最近的合法可行走区域内"""
-        # 如果已经在某个区域内，直接返回
         if self.get_character_area(x, y) is not None:
             return (x, y)
         
-        # 找到所有区域中距离最近的内部点
         best_x, best_y = x, y
         best_dist = float('inf')
         
         for area in self.scene.get('areas', []):
-            # 点到矩形内部的最近点
             cx = max(area['x'], min(x, area['x'] + area['width']))
             cy = max(area['y'], min(y, area['y'] + area['height']))
             dist = ((x - cx) ** 2 + (y - cy) ** 2) ** 0.5
@@ -163,10 +261,8 @@ class SceneMap(QWidget):
                 best_dist = dist
                 best_x, best_y = cx, cy
         
-        # 限制在 widget 边界内
         best_x = max(0, min(best_x, self.width()))
         best_y = max(0, min(best_y, self.height()))
-        
         return (best_x, best_y)
     
     def find_path_from(self, from_x, from_y, target_x, target_y):
@@ -177,7 +273,6 @@ class SceneMap(QWidget):
         if cur_area == tgt_area or cur_area is None or tgt_area is None:
             return [(target_x, target_y)]
         
-        # BFS 找区域路径
         from collections import deque
         queue = deque([(cur_area, [])])
         visited = {cur_area}
@@ -185,7 +280,6 @@ class SceneMap(QWidget):
         while queue:
             area, path = queue.popleft()
             if area == tgt_area:
-                # 构建完整路径点
                 full_path = []
                 for door, _ in path:
                     door_cx = door['x'] + door['width'] / 2
@@ -199,13 +293,126 @@ class SceneMap(QWidget):
                     visited.add(neighbor)
                     queue.append((neighbor, path + [(door, neighbor)]))
         
-        # 未找到路径，直接走（fallback）
         return [(target_x, target_y)]
     
     def find_path(self, char_id, target_x, target_y):
         """寻找角色从当前位置到目标位置的路径"""
         char = self.characters[char_id]
         return self.find_path_from(char['x'], char['y'], target_x, target_y)
+    
+    def _get_movement_speed(self, char_id):
+        """获取角色的当前移动速度，考虑走路/跑动和楼梯"""
+        char = self.characters[char_id]
+        movement = char.get('movement', 'walk')
+        base_speed = self.RUN_SPEED if movement == 'run' else self.WALK_SPEED
+        
+        # 检查是否在楼梯区域
+        area = self.get_character_area(char['x'], char['y'])
+        if area and self._is_stair_area(area):
+            base_speed *= self.STAIR_SPEED_FACTOR
+        
+        return base_speed
+    
+    def _draw_decoration(self, painter, deco):
+        """绘制单个装饰物"""
+        x, y, w, h = deco['x'], deco['y'], deco['w'], deco['h']
+        ftype = deco['type']
+        color = deco['color']
+        
+        pen = QPen(color.darker(120))
+        pen.setWidth(1)
+        painter.setPen(pen)
+        
+        if ftype == 'bed':
+            painter.setBrush(QBrush(color))
+            painter.drawRect(x, y, w, h)
+            # 头板
+            if w > h:
+                painter.setBrush(QBrush(color.darker(130)))
+                painter.drawRect(x, y, 8, h)
+            else:
+                painter.setBrush(QBrush(color.darker(130)))
+                painter.drawRect(x, y, w, 8)
+        
+        elif ftype in ('sofa', 'sofa_l'):
+            painter.setBrush(QBrush(color))
+            painter.drawRect(x, y, w, h)
+            # 靠背
+            painter.setBrush(QBrush(color.lighter(110)))
+            if w > h:
+                painter.drawRect(x, y, w, 8)
+            else:
+                painter.drawRect(x, y, 8, h)
+        
+        elif ftype == 'round_table':
+            painter.setBrush(QBrush(color))
+            painter.drawEllipse(x, y, w, h)
+        
+        elif ftype == 'table_rect':
+            painter.setBrush(QBrush(color))
+            painter.drawRect(x, y, w, h)
+            # 桌面高光线
+            painter.setPen(QPen(color.lighter(130), 1))
+            painter.drawLine(x + 2, y + 3, x + w - 2, y + 3)
+        
+        elif ftype == 'bookshelf':
+            painter.setBrush(QBrush(color))
+            painter.drawRect(x, y, w, h)
+            # 书架横线
+            painter.setPen(QPen(color.darker(140), 1))
+            for i in range(1, 4):
+                by = y + int(h * i / 4)
+                painter.drawLine(x + 2, by, x + w - 2, by)
+        
+        elif ftype == 'cabinet':
+            painter.setBrush(QBrush(color))
+            painter.drawRect(x, y, w, h)
+            # 抽屉线
+            painter.setPen(QPen(color.darker(130), 1))
+            painter.drawLine(x + 2, y + h // 2, x + w - 2, y + h // 2)
+            # 把手
+            painter.setBrush(QBrush(color.lighter(150)))
+            painter.drawEllipse(x + w // 2 - 2, y + h // 4 - 2, 4, 4)
+            painter.drawEllipse(x + w // 2 - 2, y + 3 * h // 4 - 2, 4, 4)
+        
+        elif ftype == 'rug':
+            painter.setBrush(QBrush(color))
+            painter.setPen(Qt.PenStyle.NoPen)
+            painter.drawRect(x, y, w, h)
+        
+        elif ftype == 'plant':
+            # 花盆
+            pot_color = QColor(100, 70, 50)
+            painter.setBrush(QBrush(pot_color))
+            painter.setPen(QPen(pot_color.darker(120), 1))
+            painter.drawRect(x + w // 4, y + h // 2, w // 2, h // 2)
+            # 叶子
+            leaf_color = QColor(60, 100, 60)
+            painter.setBrush(QBrush(leaf_color))
+            painter.setPen(QPen(leaf_color.darker(120), 1))
+            painter.drawEllipse(x + 2, y + 2, w - 4, h // 2 + 2)
+        
+        elif ftype == 'desk':
+            painter.setBrush(QBrush(color))
+            painter.setPen(QPen(color.darker(120), 1))
+            painter.drawRect(x, y, w, h)
+            # 桌面
+            painter.setPen(QPen(color.lighter(130), 1))
+            painter.drawLine(x + 2, y + 3, x + w - 2, y + 3)
+        
+        elif ftype == 'bathtub':
+            painter.setBrush(QBrush(color.lighter(110)))
+            painter.setPen(QPen(color.darker(120), 1))
+            painter.drawRoundedRect(x, y, w, h, 6, 6)
+        
+        elif ftype == 'tv_stand':
+            painter.setBrush(QBrush(color))
+            painter.setPen(QPen(color.darker(120), 1))
+            painter.drawRect(x, y, w, h)
+            # 电视
+            tv_color = QColor(30, 30, 35)
+            painter.setBrush(QBrush(tv_color))
+            painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -235,18 +442,21 @@ class SceneMap(QWidget):
             painter.setPen(QPen(QColor(150, 160, 190), 1))
             painter.drawText(area['x'] + 10, area['y'] + 20, area['name'])
         
-        # 门（绘制为开口，表示通道）
+        # 门
         for door in self.scene.get('doors', []):
             pen = QPen(QColor(160, 170, 200))
             pen.setWidth(2)
             painter.setPen(pen)
             painter.setBrush(QBrush(QColor(50, 60, 85)))
             painter.drawRect(door['x'], door['y'], door['width'], door['height'])
-            # 门的标签
             painter.setPen(QPen(QColor(180, 190, 210), 1))
             painter.drawText(door['x'], door['y'] - 4, door['name'])
         
-        # 监听范围
+        # 装饰物（家具）
+        for deco in self.decorations:
+            self._draw_decoration(painter, deco)
+        
+        # 监听范围（柔和光晕）
         listener_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius)
         listener_gradient.setColorAt(0.0, QColor(80, 160, 255, 30))
         listener_gradient.setColorAt(1.0, QColor(80, 160, 255, 0))
@@ -255,8 +465,7 @@ class SceneMap(QWidget):
         painter.drawEllipse(
             self.listener_pos.x() - self.listener_radius,
             self.listener_pos.y() - self.listener_radius,
-            self.listener_radius * 2,
-            self.listener_radius * 2
+            self.listener_radius * 2, self.listener_radius * 2
         )
         
         # 监听点中心
@@ -275,13 +484,11 @@ class SceneMap(QWidget):
             cx, cy = char['x'], char['y']
             base_color = char['color']
             
-            # 声波纹（只在监听范围内显示）
             dist_to_listener = ((cx - self.listener_pos.x()) ** 2 + (cy - self.listener_pos.y()) ** 2) ** 0.5
             in_listener_range = dist_to_listener <= self.listener_radius
             
             if in_listener_range and char_id in self.speaking_animations and self.speaking_animations[char_id]['active']:
                 anim = self.speaking_animations[char_id]
-                # 循环周期 900ms，让波纹持续产生，角色说话期间一直扩散
                 elapsed = (current_time - anim['start_time']) % 900
                 for i in range(3):
                     wave_delay = i * 300
@@ -316,7 +523,20 @@ class SceneMap(QWidget):
             painter.setBrush(QBrush(QColor(255, 255, 255, 60)))
             painter.drawEllipse(int(cx - 6), int(cy - 6), 12, 12)
             
-            # 标记后显示名称（已分配的名称，不是真实身份）
+            # 移动方向指示器（小箭头）
+            if char.get('is_moving'):
+                dx, dy = char.get('move_direction', (0, 0))
+                if abs(dx) > 0.01 or abs(dy) > 0.01:
+                    dir_len = (dx**2 + dy**2)**0.5
+                    if dir_len > 0:
+                        ndx, ndy = dx / dir_len, dy / dir_len
+                        arrow_len = 14
+                        ax = cx + ndx * arrow_len
+                        ay = cy + ndy * arrow_len
+                        painter.setPen(QPen(QColor(255, 255, 255, 120), 1))
+                        painter.drawLine(int(cx), int(cy), int(ax), int(ay))
+            
+            # 标记后显示名称
             if char['marked'] and char.get('assigned_name'):
                 painter.setPen(QPen(QColor(220, 220, 240), 1))
                 font = painter.font()
@@ -327,7 +547,7 @@ class SceneMap(QWidget):
                 font.setBold(False)
                 painter.setFont(font)
             
-            # 标记状态（黄色边框）
+            # 标记状态
             if char['marked']:
                 painter.setPen(QPen(QColor(255, 220, 80), 2))
                 painter.setBrush(Qt.BrushStyle.NoBrush)
@@ -344,21 +564,31 @@ class SceneMap(QWidget):
                 painter.setPen(QPen(QColor(200, 220, 255), 1, Qt.PenStyle.DashLine))
                 painter.setBrush(Qt.BrushStyle.NoBrush)
                 painter.drawEllipse(int(cx - 16), int(cy - 16), 32, 32)
+        
+        # === 迷雾/光照效果 ===
+        # 在监听点周围创建光照，其他地方变暗
+        fog_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius * 1.8)
+        fog_gradient.setColorAt(0.0, QColor(0, 0, 0, 0))
+        fog_gradient.setColorAt(0.4, QColor(0, 0, 0, 40))
+        fog_gradient.setColorAt(0.7, QColor(0, 0, 0, 120))
+        fog_gradient.setColorAt(1.0, QColor(0, 0, 0, 200))
+        painter.setBrush(QBrush(fog_gradient))
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.drawRect(self.rect())
     
-    def update_character_position(self, char_id, x, y):
+    def update_character_position(self, char_id, x, y, movement='walk'):
         """设置角色目标位置，并计算路径"""
         if char_id in self.characters:
             self.characters[char_id]['target_x'] = x
             self.characters[char_id]['target_y'] = y
-            # 重新计算路径
+            self.characters[char_id]['movement'] = movement
             path = self.find_path(char_id, x, y)
             self.characters[char_id]['path'] = path
     
     def resolve_collisions(self):
         """全局冲突解决：迭代推开重叠的角色"""
-        min_separation = 30  # 两个角色圆心最小距离
         chars = list(self.characters.items())
-        for _ in range(4):  # 迭代4次确保收敛
+        for _ in range(4):
             for i in range(len(chars)):
                 for j in range(i + 1, len(chars)):
                     id1, c1 = chars[i]
@@ -366,8 +596,15 @@ class SceneMap(QWidget):
                     dx = c1['x'] - c2['x']
                     dy = c1['y'] - c2['y']
                     dist = (dx ** 2 + dy ** 2) ** 0.5
-                    if dist < min_separation and dist > 0:
-                        overlap = (min_separation - dist) / 2.0
+                    
+                    # 根据是否在楼梯区域使用不同的最小间距
+                    area1 = self.get_character_area(c1['x'], c1['y'])
+                    area2 = self.get_character_area(c2['x'], c2['y'])
+                    in_stairs = (area1 and self._is_stair_area(area1)) or (area2 and self._is_stair_area(area2))
+                    min_sep = self.MIN_SEPARATION_STAIRS if in_stairs else self.MIN_SEPARATION
+                    
+                    if dist < min_sep and dist > 0:
+                        overlap = (min_sep - dist) / 2.0
                         ratio = overlap / dist
                         c1['x'] += dx * ratio
                         c1['y'] += dy * ratio
@@ -390,21 +627,28 @@ class SceneMap(QWidget):
             distance = (dx ** 2 + dy ** 2) ** 0.5
             
             if distance > 1.0:
-                speed = min(5.0, distance * 0.12 + 0.8)
+                speed = self._get_movement_speed(char_id)
+                # 距离目标很近时减速
+                speed = min(speed, distance)
                 ratio = speed / distance
                 char['x'] += dx * ratio
                 char['y'] += dy * ratio
+                char['is_moving'] = True
+                char['move_direction'] = (dx / distance, dy / distance)
                 updated = True
             elif distance > 0.1:
                 char['x'] = next_x
                 char['y'] = next_y
+                char['is_moving'] = True
+                char['move_direction'] = (0, 0)
                 updated = True
             else:
                 if char.get('path') and len(char['path']) > 0:
                     char['path'].pop(0)
-                continue
+                char['is_moving'] = False
+                char['move_direction'] = (0, 0)
         
-        # === 监听点（主角）平滑移动，走路径点，速度和角色一致 ===
+        # === 监听点（主角）平滑移动 ===
         if self.listener_path:
             next_lx, next_ly = self.listener_path[0]
         else:
@@ -416,7 +660,7 @@ class SceneMap(QWidget):
         
         if ldist > 1.0:
             speed = min(5.0, ldist * 0.12 + 0.8)
-            speed = max(speed, 1.5)  # 监听点用 QPoint(int)，确保至少移动 1 像素不卡住
+            speed = max(speed, 1.5)
             new_lx = self.listener_pos.x() + ldx * (speed / ldist)
             new_ly = self.listener_pos.y() + ldy * (speed / ldist)
             self.listener_pos = QPoint(int(new_lx), int(new_ly))
@@ -429,7 +673,6 @@ class SceneMap(QWidget):
             if hasattr(self, 'listener_move_callback') and callable(self.listener_move_callback):
                 self.listener_move_callback(next_lx, next_ly)
         else:
-            # 到达当前路径点，切换到下一个
             if self.listener_path:
                 self.listener_path.pop(0)
         
@@ -440,6 +683,25 @@ class SceneMap(QWidget):
         
         if updated:
             self.update()
+    
+    def get_footstep_state(self):
+        """返回监听点周围需要播放脚步声的状态
+        返回: {'walk': volume, 'run': volume}
+        """
+        state = {'walk': 0.0, 'run': 0.0}
+        listener_x, listener_y = self.get_listener_position()
+        
+        for char_id, char in self.characters.items():
+            if char.get('is_moving'):
+                dx = char['x'] - listener_x
+                dy = char['y'] - listener_y
+                dist = (dx ** 2 + dy ** 2) ** 0.5
+                if dist < self.listener_radius:
+                    vol = max(0.0, 1.0 - dist / self.listener_radius)
+                    movement = char.get('movement', 'walk')
+                    state[movement] = max(state[movement], vol)
+        
+        return state
     
     def get_character_position(self, char_id):
         if char_id in self.characters:
@@ -464,25 +726,21 @@ class SceneMap(QWidget):
             if hasattr(self, 'mark_callback') and callable(self.mark_callback):
                 self.mark_callback(clicked_char, self.characters[clicked_char]['marked'])
         else:
-            # 点击空白处：设置监听点目标位置（限制在合法区域内），计算路径后平滑移动过去
             raw_x, raw_y = event.pos().x(), event.pos().y()
             new_x, new_y = self.constrain_to_walkable(raw_x, raw_y)
             self.listener_target_x = new_x
             self.listener_target_y = new_y
-            # 主角也要走门，计算路径
             self.listener_path = self.find_path_from(
                 self.listener_pos.x(), self.listener_pos.y(), new_x, new_y
             )
             self.update()
     
     def mouseMoveEvent(self, event):
-        # 鼠标移动只用于检测悬停角色，不移动监听点
         self.hovered_character = None
         for char_id, char in self.characters.items():
             distance = ((event.pos().x() - char['x']) ** 2 + (event.pos().y() - char['y']) ** 2) ** 0.5
             if distance <= 18:
                 self.hovered_character = char_id
-                # 未标记时不暴露真实身份！
                 if char['marked'] and char.get('assigned_name'):
                     tooltip = f"? [{char['assigned_name']}]"
                 else:
@@ -529,7 +787,6 @@ class SceneMap(QWidget):
     
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        # 窗口变化时，将监听点限制到最近的合法位置
         new_x, new_y = self.constrain_to_walkable(self.listener_pos.x(), self.listener_pos.y())
         self.listener_pos = QPoint(int(new_x), int(new_y))
         self.listener_target_x = new_x
