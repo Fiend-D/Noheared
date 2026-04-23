@@ -16,6 +16,11 @@ class SceneMap(QWidget):
     MIN_SEPARATION = 30
     MIN_SEPARATION_STAIRS = 18
     
+    # 楼层区域（用于视觉区分和楼梯传送）
+    UPPER_FLOOR_AREAS = {'露天甲板', '餐厅', '赌场', '音乐厅', '厨房', '医务室'}
+    LOWER_FLOOR_AREAS = {'船长室', '豪华套房', '普通客房', '船员休息室'}
+    FLOOR_DIVIDER_Y = 460  # 上下层分界线
+    
     def __init__(self):
         super().__init__()
         self.setMinimumSize(800, 400)
@@ -76,6 +81,18 @@ class SceneMap(QWidget):
     def _is_stair_area(self, area_name):
         """判断区域是否为楼梯"""
         return '楼梯' in area_name
+    
+    def _get_area_floor(self, area_name):
+        """判断区域属于上层还是下层"""
+        if area_name in self.UPPER_FLOOR_AREAS:
+            return 'upper'
+        elif area_name in self.LOWER_FLOOR_AREAS:
+            return 'lower'
+        return None
+    
+    def _is_stair_door(self, door):
+        """判断门是否为楼梯门"""
+        return '楼梯' in door['name']
     
     def _generate_decorations(self):
         """为场景区域生成装饰物（家具）"""
@@ -414,6 +431,177 @@ class SceneMap(QWidget):
             painter.setBrush(QBrush(tv_color))
             painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
+    def _draw_door(self, painter, door):
+        """绘制门：普通门画成开口，楼梯门画成楼梯图标+方向箭头"""
+        x, y, w, h = door['x'], door['y'], door['width'], door['height']
+        
+        if self._is_stair_door(door):
+            # === 楼梯门 ===
+            # 画楼梯背景框
+            painter.setPen(QPen(QColor(180, 160, 120), 2))
+            painter.setBrush(QBrush(QColor(55, 50, 40, 120)))
+            painter.drawRect(x, y, w, h)
+            
+            # 画台阶（横线）
+            painter.setPen(QPen(QColor(170, 150, 110), 1))
+            steps = 4
+            for i in range(1, steps):
+                sy = y + i * h / steps
+                painter.drawLine(int(x), int(sy), int(x + w), int(sy))
+            
+            # 画竖线分隔（表示台阶竖面）
+            step_w = w / 3
+            for i in range(1, 3):
+                sx = x + i * step_w
+                painter.drawLine(int(sx), int(y), int(sx), int(y + h))
+            
+            # 方向箭头（判断 area1 是否在上层）
+            area1_floor = self._get_area_floor(door['area1'])
+            area2_floor = self._get_area_floor(door['area2'])
+            if area1_floor == 'upper' and area2_floor == 'lower':
+                arrow = '↓'
+            elif area1_floor == 'lower' and area2_floor == 'upper':
+                arrow = '↑'
+            else:
+                # 上层内部楼梯（甲板↔生活）
+                arrow = '↓' if area1_floor == 'upper' else '↑'
+            
+            painter.setPen(QPen(QColor(220, 200, 160), 1))
+            font = painter.font()
+            old_size = font.pointSize()
+            font.setPointSize(10)
+            font.setBold(True)
+            painter.setFont(font)
+            # 在门上方或下方标注箭头
+            label_y = y - 14 if y > 30 else y + h + 14
+            painter.drawText(int(x), int(label_y) - 10, int(w), 14,
+                            Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
+                            arrow)
+            font.setPointSize(old_size)
+            font.setBold(False)
+            painter.setFont(font)
+            
+            # 标注去向
+            painter.setPen(QPen(QColor(180, 170, 150), 1))
+            painter.drawText(int(x), int(label_y) + 2, int(w), 12,
+                            Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
+                            door['name'])
+        else:
+            # === 普通门：画成开口样式 ===
+            painter.setPen(QPen(QColor(140, 160, 200), 2))
+            painter.setBrush(Qt.BrushStyle.NoBrush)
+            
+            if w > h:
+                # 水平开口：上下两条线 + 左右短竖线
+                painter.drawLine(int(x), int(y), int(x + w), int(y))
+                painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
+                mid_h = h / 2
+                painter.drawLine(int(x), int(y), int(x), int(y + h))
+                painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
+            else:
+                # 垂直开口：左右两条线 + 上下短横线
+                painter.drawLine(int(x), int(y), int(x), int(y + h))
+                painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
+                painter.drawLine(int(x), int(y), int(x + w), int(y))
+                painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
+            
+            # 门名称标签
+            painter.setPen(QPen(QColor(160, 170, 190), 1))
+            painter.drawText(int(x), int(y) - 4, door['name'])
+    
+    def _draw_floor_divider(self, painter):
+        """绘制楼层分隔线"""
+        if not self.scene.get('areas'):
+            return
+        # 检查场景是否包含 case5 的上下层区域
+        has_upper = any(a['name'] in self.UPPER_FLOOR_AREAS for a in self.scene['areas'])
+        has_lower = any(a['name'] in self.LOWER_FLOOR_AREAS for a in self.scene['areas'])
+        if not (has_upper and has_lower):
+            return
+        
+        divider_y = self.FLOOR_DIVIDER_Y
+        w = self.width()
+        
+        # 画分隔带背景
+        painter.fillRect(0, divider_y - 2, w, 4, QColor(40, 45, 60, 200))
+        
+        # 画虚线
+        pen = QPen(QColor(100, 115, 150), 2, Qt.PenStyle.DashLine)
+        painter.setPen(pen)
+        painter.drawLine(0, divider_y, w, divider_y)
+        
+        # 标注
+        painter.setPen(QPen(QColor(130, 145, 180), 1))
+        font = painter.font()
+        old_size = font.pointSize()
+        font.setPointSize(11)
+        font.setBold(True)
+        painter.setFont(font)
+        painter.drawText(15, divider_y - 8, "上层甲板")
+        painter.drawText(15, divider_y + 18, "下层舱室")
+        font.setPointSize(old_size)
+        font.setBold(False)
+        painter.setFont(font)
+    
+    def _teleport_character(self, char_id, door):
+        """将角色通过楼梯门传送到目标区域"""
+        char = self.characters[char_id]
+        
+        # 确定当前在哪个区域（通过坐标判断）
+        current_area_name = None
+        for area in self.scene.get('areas', []):
+            if (area['x'] <= char['x'] <= area['x'] + area['width'] and
+                area['y'] <= char['y'] <= area['y'] + area['height']):
+                current_area_name = area['name']
+                break
+        
+        # 确定目标区域
+        if current_area_name == door['area1']:
+            target_area_name = door['area2']
+        elif current_area_name == door['area2']:
+            target_area_name = door['area1']
+        else:
+            # 角色在门区域内，默认传送到 area2
+            target_area_name = door['area2']
+        
+        # 找到目标区域
+        target_area = None
+        for area in self.scene.get('areas', []):
+            if area['name'] == target_area_name:
+                target_area = area
+                break
+        if not target_area:
+            return
+        
+        # 计算目标位置：目标区域中心，偏向远离门的方向偏移 40px
+        target_cx = target_area['x'] + target_area['width'] / 2
+        target_cy = target_area['y'] + target_area['height'] / 2
+        door_cx = door['x'] + door['width'] / 2
+        door_cy = door['y'] + door['height'] / 2
+        
+        dx = target_cx - door_cx
+        dy = target_cy - door_cy
+        dist = (dx ** 2 + dy ** 2) ** 0.5
+        if dist > 0:
+            offset_x = dx / dist * 40
+            offset_y = dy / dist * 40
+        else:
+            offset_x = 0
+            offset_y = 0
+        
+        char['x'] = door_cx + offset_x
+        char['y'] = door_cy + offset_y
+        
+        # 确保在目标区域内
+        char['x'] = max(target_area['x'] + 8, min(char['x'], target_area['x'] + target_area['width'] - 8))
+        char['y'] = max(target_area['y'] + 8, min(char['y'], target_area['y'] + target_area['height'] - 8))
+        
+        # 如果 path 下一个节点是当前门的中心，移除它
+        if char.get('path') and len(char['path']) > 0:
+            next_x, next_y = char['path'][0]
+            if abs(next_x - door_cx) < 10 and abs(next_y - door_cy) < 10:
+                char['path'].pop(0)
+    
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
@@ -431,26 +619,33 @@ class SceneMap(QWidget):
         for y in range(0, self.height(), grid_size):
             painter.drawLine(0, y, self.width(), y)
         
-        # 场景区域
+        # 场景区域（上层/下层用不同色调区分）
         for area in self.scene.get('areas', []):
-            pen = QPen(QColor(120, 140, 180))
+            floor = self._get_area_floor(area['name'])
+            if floor == 'upper':
+                pen_color = QColor(120, 150, 190)
+                fill_color = QColor(42, 55, 78, 80)
+            elif floor == 'lower':
+                pen_color = QColor(120, 170, 150)
+                fill_color = QColor(42, 65, 58, 80)
+            else:
+                pen_color = QColor(120, 140, 180)
+                fill_color = QColor(40, 50, 70, 80)
+            
+            pen = QPen(pen_color)
             pen.setWidth(2)
             painter.setPen(pen)
-            brush = QBrush(QColor(40, 50, 70, 80))
-            painter.setBrush(brush)
+            painter.setBrush(QBrush(fill_color))
             painter.drawRect(area['x'], area['y'], area['width'], area['height'])
             painter.setPen(QPen(QColor(150, 160, 190), 1))
             painter.drawText(area['x'] + 10, area['y'] + 20, area['name'])
         
-        # 门
+        # 楼层分隔线
+        self._draw_floor_divider(painter)
+        
+        # 门（优化外观）
         for door in self.scene.get('doors', []):
-            pen = QPen(QColor(160, 170, 200))
-            pen.setWidth(2)
-            painter.setPen(pen)
-            painter.setBrush(QBrush(QColor(50, 60, 85)))
-            painter.drawRect(door['x'], door['y'], door['width'], door['height'])
-            painter.setPen(QPen(QColor(180, 190, 210), 1))
-            painter.drawText(door['x'], door['y'] - 4, door['name'])
+            self._draw_door(painter, door)
         
         # 装饰物（家具）
         for deco in self.decorations:
@@ -647,6 +842,23 @@ class SceneMap(QWidget):
                     char['path'].pop(0)
                 char['is_moving'] = False
                 char['move_direction'] = (0, 0)
+            
+            # === 楼梯传送检测 ===
+            # 当角色靠近楼梯门中心时，直接传送到目标区域
+            import time as pytime
+            now = pytime.time()
+            if char.get('teleport_cooldown', 0) < now:
+                for door in self.scene.get('doors', []):
+                    if not self._is_stair_door(door):
+                        continue
+                    door_cx = door['x'] + door['width'] / 2
+                    door_cy = door['y'] + door['height'] / 2
+                    dist_to_door = ((char['x'] - door_cx) ** 2 + (char['y'] - door_cy) ** 2) ** 0.5
+                    if dist_to_door < 18:  # 靠近门中心 18px 内触发传送
+                        self._teleport_character(char_id, door)
+                        char['teleport_cooldown'] = now + 0.6  # 0.6秒冷却，防止死循环
+                        updated = True
+                        break
         
         # === 监听点（主角）平滑移动 ===
         if self.listener_path:
