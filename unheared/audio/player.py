@@ -7,17 +7,19 @@ import pygame
 
 
 class AudioPlayer:
+    MIXER_FREQUENCY = 24000  # 统一混音器采样率
+
     def __init__(self):
-        # 24000Hz 匹配音频文件，-16 表示 16bit 有符号，1 声道，512 缓冲区（低延迟）
         if not pygame.mixer.get_init():
-            pygame.mixer.init(frequency=24000, size=-16, channels=1, buffer=1024)
+            pygame.mixer.init(frequency=self.MIXER_FREQUENCY, size=-16, channels=1, buffer=1024)
             pygame.mixer.set_num_channels(32)
         else:
             # 切换到新案件时，先停掉所有已有的 channel，防止旧音频残留
             for i in range(32):
                 pygame.mixer.Channel(i).stop()
 
-        self._raw_arrays = {}        # track_id -> numpy int16 array
+        self._raw_arrays = {}        # track_id -> numpy int16 array (已重采样到 MIXER_FREQUENCY)
+        self._sample_rates = {}      # track_id -> 原始采样率
         self._channel_indices = {}   # track_id -> pygame channel index
         self._sounds = {}            # track_id -> current pygame Sound
         self._next_channel_index = 0
@@ -34,12 +36,29 @@ class AudioPlayer:
         self._start_time = None      # perf_counter 时间戳
         self._is_playing = False
 
+    @staticmethod
+    def _resample_audio(arr, orig_rate, target_rate):
+        """使用线性插值将音频重采样到目标采样率"""
+        if orig_rate == target_rate:
+            return arr
+        old_len = len(arr)
+        new_len = int(old_len * target_rate / orig_rate)
+        if new_len == 0:
+            return arr
+        old_indices = np.linspace(0, old_len - 1, new_len)
+        indices = old_indices.astype(np.int32)
+        frac = old_indices - indices
+        indices = np.clip(indices, 0, old_len - 2)
+        result = (arr[indices] * (1 - frac) + arr[indices + 1] * frac).astype(np.int16)
+        return result
+
     def add_track(self, track_id, file_path):
         import os
         import wave
         abs_path = os.path.abspath(file_path)
         if not os.path.exists(abs_path):
             self._raw_arrays[track_id] = None
+            self._sample_rates[track_id] = self.MIXER_FREQUENCY
             return
 
         with wave.open(abs_path, 'rb') as wf:
@@ -63,8 +82,11 @@ class AudioPlayer:
             if n_channels == 2:
                 arr = arr.reshape(-1, 2).mean(axis=1).astype(np.int16)
 
+            # 重采样到统一混音器采样率，确保播放速度和音调正确
+            arr = self._resample_audio(arr, framerate, self.MIXER_FREQUENCY)
             self._raw_arrays[track_id] = arr
-            track_duration = n_frames / framerate
+            self._sample_rates[track_id] = framerate
+            track_duration = len(arr) / self.MIXER_FREQUENCY
             self.duration = max(self.duration, track_duration)
 
         # 分配固定 channel
@@ -78,7 +100,7 @@ class AudioPlayer:
             return None
 
         arr = self._raw_arrays[track_id]
-        start_sample = int(start_seconds * 24000)
+        start_sample = int(start_seconds * self.MIXER_FREQUENCY)
 
         if start_sample >= len(arr):
             return None
