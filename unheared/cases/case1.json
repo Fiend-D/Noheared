@@ -1,77 +1,231 @@
 {
-    "name": "办公室谜案",
-    "description": "一个办公室里发生了一起神秘事件，你需要通过声音找出真相。",
-    "duration": 120,
-    "scene": {
-        "name": "办公室",
-        "width": 800,
-        "height": 400,
-        "areas": [
-            {"name": "房间1", "x": 100, "y": 100, "width": 200, "height": 150},
-            {"name": "房间2", "x": 400, "y": 100, "width": 200, "height": 150},
-            {"name": "走廊", "x": 100, "y": 250, "width": 500, "height": 100}
-        ],
-        "doors": [
-            {"name": "房间1门", "area1": "房间1", "area2": "走廊", "x": 190, "y": 250, "width": 20, "height": 10},
-            {"name": "房间2门", "area1": "房间2", "area2": "走廊", "x": 490, "y": 250, "width": 20, "height": 10}
-        ]
-    },
-    "characters": {
-        "A": {
-            "name": "经理",
-            "color": "#FF0000",
-            "positions": [
-                {"start": 0, "end": 60, "position": [160, 160]},
-                {"start": 60, "end": 80, "position": [200, 280]},
-                {"start": 80, "end": 120, "position": [170, 160]}
-            ]
-        },
-        "B": {
-            "name": "员工",
-            "color": "#00FF00",
-            "positions": [
-                {"start": 0, "end": 60, "position": [230, 200]},
-                {"start": 60, "end": 80, "position": [280, 280]},
-                {"start": 80, "end": 120, "position": [450, 150]}
-            ]
-        },
-        "C": {
-            "name": "清洁工",
-            "color": "#0000FF",
-            "positions": [
-                {"start": 0, "end": 30, "position": [350, 280]},
-                {"start": 30, "end": 80, "position": [200, 200]},
-                {"start": 80, "end": 120, "position": [540, 200]}
-            ]
-        }
-    },
-    "audio_tracks": {
-        "A": "audio/case1/manager.wav",
-        "B": "audio/case1/employee.wav",
-        "C": "audio/case1/cleaner.wav"
-    },
-    "dialogues": [
-        {"character": "A", "text": "今天的报告准备好了吗？", "start": 10, "end": 15},
-        {"character": "B", "text": "是的，经理，我已经准备好了。", "start": 16, "end": 20},
-        {"character": "A", "text": "好的，放在我桌上吧。", "start": 21, "end": 25},
-        {"character": "C", "text": "打扰一下，我来打扫卫生了。", "start": 30, "end": 35},
-        {"character": "B", "text": "好的，进来吧。", "start": 36, "end": 40},
-        {"character": "A", "text": "我的文件怎么不见了？", "start": 60, "end": 65},
-        {"character": "B", "text": "我刚才还看到在桌上的。", "start": 66, "end": 70},
-        {"character": "C", "text": "我刚才打扫的时候看到了，可能被风吹到地上了。", "start": 71, "end": 78}
+  "name": "办公室谜案",
+  "description": "一个办公室里发生了一起神秘事件，你需要通过声音找出真相。",
+  "duration": 120,
+  "scene": {
+    "name": "办公室",
+    "width": 800,
+    "height": 400,
+    "areas": [
+      {
+        "name": "房间1",
+        "x": 100,
+        "y": 100,
+        "width": 200,
+        "height": 150
+      },
+      {
+        "name": "房间2",
+        "x": 400,
+        "y": 100,
+        "width": 200,
+        "height": 150
+      },
+      {
+        "name": "走廊",
+        "x": 100,
+        "y": 250,
+        "width": 500,
+        "height": 100
+      }
     ],
-    "questions": [
+    "doors": [
+      {
+        "name": "房间1门",
+        "area1": "房间1",
+        "area2": "走廊",
+        "x": 190,
+        "y": 250,
+        "width": 20,
+        "height": 10
+      },
+      {
+        "name": "房间2门",
+        "area1": "房间2",
+        "area2": "走廊",
+        "x": 490,
+        "y": 250,
+        "width": 20,
+        "height": 10
+      }
+    ]
+  },
+  "characters": {
+    "A": {
+      "name": "经理",
+      "color": "#FF0000",
+      "positions": [
         {
-            "id": "q1",
-            "question": "谁让B准备报告？",
-            "options": ["经理", "员工", "清洁工"],
-            "answer": "经理"
+          "start": 0,
+          "end": 60,
+          "position": [
+            160,
+            160
+          ],
+          "movement": "walk"
         },
         {
-            "id": "q2",
-            "question": "谁进入了办公室打扫卫生？",
-            "options": ["经理", "员工", "清洁工"],
-            "answer": "清洁工"
+          "start": 60,
+          "end": 80,
+          "position": [
+            200,
+            280
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 80,
+          "end": 120,
+          "position": [
+            170,
+            160
+          ],
+          "movement": "walk"
         }
-    ]
+      ]
+    },
+    "B": {
+      "name": "员工",
+      "color": "#00FF00",
+      "positions": [
+        {
+          "start": 0,
+          "end": 60,
+          "position": [
+            230,
+            200
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 60,
+          "end": 80,
+          "position": [
+            280,
+            280
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 80,
+          "end": 120,
+          "position": [
+            450,
+            150
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "C": {
+      "name": "清洁工",
+      "color": "#0000FF",
+      "positions": [
+        {
+          "start": 0,
+          "end": 30,
+          "position": [
+            350,
+            280
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 30,
+          "end": 80,
+          "position": [
+            200,
+            200
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 80,
+          "end": 120,
+          "position": [
+            540,
+            200
+          ],
+          "movement": "walk"
+        }
+      ]
+    }
+  },
+  "audio_tracks": {
+    "A": "audio/case1/manager.wav",
+    "B": "audio/case1/employee.wav",
+    "C": "audio/case1/cleaner.wav"
+  },
+  "dialogues": [
+    {
+      "character": "A",
+      "text": "今天的报告准备好了吗？",
+      "start": 10,
+      "end": 15
+    },
+    {
+      "character": "B",
+      "text": "是的，经理，我已经准备好了。",
+      "start": 16,
+      "end": 20
+    },
+    {
+      "character": "A",
+      "text": "好的，放在我桌上吧。",
+      "start": 21,
+      "end": 25
+    },
+    {
+      "character": "C",
+      "text": "打扰一下，我来打扫卫生了。",
+      "start": 30,
+      "end": 35
+    },
+    {
+      "character": "B",
+      "text": "好的，进来吧。",
+      "start": 36,
+      "end": 40
+    },
+    {
+      "character": "A",
+      "text": "我的文件怎么不见了？",
+      "start": 60,
+      "end": 65
+    },
+    {
+      "character": "B",
+      "text": "我刚才还看到在桌上的。",
+      "start": 66,
+      "end": 70
+    },
+    {
+      "character": "C",
+      "text": "我刚才打扫的时候看到了，可能被风吹到地上了。",
+      "start": 71,
+      "end": 78
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "question": "谁让B准备报告？",
+      "options": [
+        "经理",
+        "员工",
+        "清洁工"
+      ],
+      "answer": "经理"
+    },
+    {
+      "id": "q2",
+      "question": "谁进入了办公室打扫卫生？",
+      "options": [
+        "经理",
+        "员工",
+        "清洁工"
+      ],
+      "answer": "清洁工"
+    }
+  ]
 }
