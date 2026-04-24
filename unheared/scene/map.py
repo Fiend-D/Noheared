@@ -431,20 +431,56 @@ class SceneMap(QWidget):
             painter.setBrush(QBrush(tv_color))
             painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
-    def _draw_stair_marker(self, painter, door):
-        """绘制楼梯传送标记：发光圆圈 + 方向箭头"""
+    def _draw_wall_gap(self, painter, door, bg_color=QColor(20, 28, 46)):
+        """在墙壁上画出门的缺口"""
         x, y, w, h = door['x'], door['y'], door['width'], door['height']
         cx, cy = x + w / 2, y + h / 2
         
-        # 方向判断
+        # 用背景色"擦除"墙壁线，形成缺口
+        gap_margin = 3
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.setBrush(QBrush(bg_color))
+        painter.drawRect(int(x - gap_margin), int(y - gap_margin), 
+                        int(w + gap_margin * 2), int(h + gap_margin * 2))
+        
+        # 画门框短线（表示缺口的边缘）
+        frame_color = QColor(90, 115, 155)
+        painter.setPen(QPen(frame_color, 2))
+        
+        if w > h:  # 水平门（左右通行）
+            # 上下门框短竖线
+            painter.drawLine(int(x), int(y), int(x), int(y + h))
+            painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
+        else:  # 垂直门（上下通行）
+            # 左右门框短横线
+            painter.drawLine(int(x), int(y), int(x + w), int(y))
+            painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
+    
+    def _draw_stair_marker(self, painter, door):
+        """绘制楼梯传送标记：墙壁缺口 + 发光标记 + 通向地点标注"""
+        x, y, w, h = door['x'], door['y'], door['width'], door['height']
+        cx, cy = x + w / 2, y + h / 2
+        
+        # 先画墙壁缺口
+        self._draw_wall_gap(painter, door)
+        
+        # 方向判断 & 目标区域
         area1_floor = self._get_area_floor(door['area1'])
         area2_floor = self._get_area_floor(door['area2'])
         if area1_floor == 'upper' and area2_floor == 'lower':
             arrow = '↓'
+            target_name = door['area2']
         elif area1_floor == 'lower' and area2_floor == 'upper':
             arrow = '↑'
+            target_name = door['area2']
         else:
-            arrow = '↓' if area1_floor == 'upper' else '↑'
+            # 上层内部
+            if area1_floor == 'upper':
+                arrow = '↓'
+                target_name = door['area2']
+            else:
+                arrow = '↑'
+                target_name = door['area2']
         
         # 外发光
         glow = QRadialGradient(QPointF(cx, cy), 22)
@@ -472,6 +508,31 @@ class SceneMap(QWidget):
                         arrow)
         font.setPointSize(old_size)
         font.setBold(False)
+        painter.setFont(font)
+        
+        # === 通向地点标注 ===
+        label = f"{arrow} {target_name}"
+        font = painter.font()
+        old_size = font.pointSize()
+        font.setPointSize(9)
+        painter.setFont(font)
+        
+        # 计算标注位置（门的右侧或下方）
+        if w > h:  # 水平门，标注在上方或下方
+            label_x = int(cx - 40)
+            label_y = int(y - 20)
+        else:  # 垂直门，标注在右侧
+            label_x = int(x + w + 4)
+            label_y = int(cy - 6)
+        
+        # 文字阴影
+        painter.setPen(QPen(QColor(20, 22, 30), 1))
+        painter.drawText(label_x + 1, label_y + 1, label)
+        # 文字
+        painter.setPen(QPen(QColor(220, 200, 160), 1))
+        painter.drawText(label_x, label_y, label)
+        
+        font.setPointSize(old_size)
         painter.setFont(font)
     
     def _draw_floor_labels(self, painter):
@@ -646,10 +707,12 @@ class SceneMap(QWidget):
         # 楼层分隔线
         self._draw_floor_labels(painter)
         
-        # 门（传送逻辑需要保留，但简化绘制）
+        # 绘制所有门：普通门画成墙壁缺口，楼梯门额外加标记和标注
         for door in self.scene.get('doors', []):
             if self._is_stair_door(door):
                 self._draw_stair_marker(painter, door)
+            else:
+                self._draw_wall_gap(painter, door)
         
         # === 监听范围 ===
         listener_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius)
