@@ -294,7 +294,7 @@
           "start": 180,
           "end": 240,
           "position": [
-            450,
+            430,
             360
           ],
           "movement": "walk"
@@ -303,7 +303,7 @@
           "start": 240,
           "end": 360,
           "position": [
-            520,
+            500,
             130
           ],
           "movement": "walk"
@@ -321,7 +321,7 @@
           "start": 600,
           "end": 900,
           "position": [
-            520,
+            500,
             130
           ],
           "movement": "walk"
@@ -339,7 +339,7 @@
           "start": 1200,
           "end": 1800,
           "position": [
-            520,
+            500,
             130
           ],
           "movement": "walk"
@@ -363,7 +363,7 @@
           "start": 60,
           "end": 180,
           "position": [
-            850,
+            830,
             150
           ],
           "movement": "walk"
@@ -373,7 +373,7 @@
           "end": 240,
           "position": [
             450,
-            360
+            340
           ],
           "movement": "walk"
         },
@@ -381,7 +381,7 @@
           "start": 240,
           "end": 360,
           "position": [
-            520,
+            540,
             130
           ],
           "movement": "walk"
@@ -399,7 +399,7 @@
           "start": 480,
           "end": 600,
           "position": [
-            720,
+            740,
             360
           ],
           "movement": "run"
@@ -408,7 +408,7 @@
           "start": 600,
           "end": 900,
           "position": [
-            520,
+            540,
             130
           ],
           "movement": "walk"
@@ -417,7 +417,7 @@
           "start": 900,
           "end": 1800,
           "position": [
-            850,
+            830,
             150
           ],
           "movement": "walk"
@@ -432,7 +432,7 @@
           "start": 0,
           "end": 120,
           "position": [
-            150,
+            170,
             100
           ],
           "movement": "walk"
@@ -441,7 +441,7 @@
           "start": 120,
           "end": 300,
           "position": [
-            720,
+            700,
             360
           ],
           "movement": "walk"
@@ -450,7 +450,7 @@
           "start": 300,
           "end": 420,
           "position": [
-            520,
+            560,
             130
           ],
           "movement": "walk"
@@ -459,7 +459,7 @@
           "start": 420,
           "end": 540,
           "position": [
-            720,
+            700,
             360
           ],
           "movement": "walk"
@@ -468,7 +468,7 @@
           "start": 540,
           "end": 660,
           "position": [
-            420,
+            400,
             660
           ],
           "movement": "walk"
@@ -477,7 +477,7 @@
           "start": 660,
           "end": 900,
           "position": [
-            720,
+            700,
             360
           ],
           "movement": "walk"
@@ -486,7 +486,7 @@
           "start": 900,
           "end": 1800,
           "position": [
-            720,
+            700,
             360
           ],
           "movement": "walk"
@@ -510,7 +510,7 @@
           "start": 120,
           "end": 240,
           "position": [
-            850,
+            870,
             150
           ],
           "movement": "walk"
@@ -519,7 +519,7 @@
           "start": 240,
           "end": 300,
           "position": [
-            450,
+            470,
             360
           ],
           "movement": "run"
@@ -528,7 +528,7 @@
           "start": 300,
           "end": 420,
           "position": [
-            520,
+            580,
             130
           ],
           "movement": "walk"
@@ -546,7 +546,7 @@
           "start": 720,
           "end": 1080,
           "position": [
-            850,
+            870,
             150
           ],
           "movement": "walk"
@@ -570,7 +570,7 @@
           "start": 0,
           "end": 300,
           "position": [
-            850,
+            900,
             150
           ],
           "movement": "walk"
@@ -588,7 +588,7 @@
           "start": 480,
           "end": 720,
           "position": [
-            850,
+            900,
             150
           ],
           "movement": "walk"
@@ -606,7 +606,7 @@
           "start": 1200,
           "end": 1800,
           "position": [
-            850,
+            900,
             150
           ],
           "movement": "walk"
@@ -630,7 +630,7 @@
           "start": 360,
           "end": 480,
           "position": [
-            520,
+            600,
             130
           ],
           "movement": "walk"
@@ -663,7 +663,7 @@
           "start": 360,
           "end": 480,
           "position": [
-            520,
+            620,
             130
           ],
           "movement": "walk"
@@ -681,7 +681,7 @@
           "start": 720,
           "end": 960,
           "position": [
-            520,
+            620,
             130
           ],
           "movement": "walk"
@@ -715,7 +715,7 @@
           "end": 240,
           "position": [
             450,
-            360
+            380
           ],
           "movement": "walk"
         },
@@ -723,7 +723,7 @@
           "start": 240,
           "end": 360,
           "position": [
-            520,
+            640,
             130
           ],
           "movement": "walk"
@@ -732,7 +732,7 @@
           "start": 360,
           "end": 420,
           "position": [
-            420,
+            440,
             660
           ],
           "movement": "run"
@@ -741,7 +741,7 @@
           "start": 420,
           "end": 600,
           "position": [
-            520,
+            640,
             130
           ],
           "movement": "walk"
@@ -759,7 +759,7 @@
           "start": 1200,
           "end": 1800,
           "position": [
-            520,
+            640,
             130
           ],
           "movement": "walk"
@@ -783,7 +783,7 @@
           "start": 240,
           "end": 420,
           "position": [
-            520,
+            660,
             130
           ],
           "movement": "walk"
@@ -801,7 +801,7 @@
           "start": 600,
           "end": 900,
           "position": [
-            520,
+            660,
             130
           ],
           "movement": "walk"
