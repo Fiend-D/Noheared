@@ -201,8 +201,8 @@ class SceneMap(QWidget):
         self.listener_pos = QPoint(w // 2, h // 2)
         self.listener_target_x = float(w // 2)
         self.listener_target_y = float(h // 2)
-        # 生成装饰物
-        self._generate_decorations()
+        # 加载背景图
+        self._load_background_image()
         self.update()
     
     def load_characters(self, characters_data):
@@ -602,58 +602,72 @@ class SceneMap(QWidget):
             if abs(next_x - door_cx) < 10 and abs(next_y - door_cy) < 10:
                 char['path'].pop(0)
     
+    def _load_background_image(self):
+        """加载案件对应的背景图"""
+        import os
+        self._bg_pixmap = None
+        scene_name = self.scene.get('name', '')
+        # 尝试根据场景名匹配 case ID
+        case_id = None
+        for cid in ['case1', 'case2', 'case3', 'case4', 'case5']:
+            bg_path = os.path.join('unheared', 'resources', 'backgrounds', f'{cid}_bg.png')
+            if os.path.exists(bg_path):
+                # 简单匹配：检查场景中是否有特征区域名
+                area_names = {a['name'] for a in self.scene.get('areas', [])}
+                if cid == 'case1' and '房间1' in area_names:
+                    case_id = cid
+                elif cid == 'case2' and '化妆间' in area_names:
+                    case_id = cid
+                elif cid == 'case3' and '展厅' in area_names:
+                    case_id = cid
+                elif cid == 'case4' and '书房' in area_names:
+                    case_id = cid
+                elif cid == 'case5' and '露天甲板' in area_names:
+                    case_id = cid
+        
+        if case_id:
+            from PyQt6.QtGui import QPixmap
+            bg_path = os.path.join('unheared', 'resources', 'backgrounds', f'{case_id}_bg.png')
+            if os.path.exists(bg_path):
+                self._bg_pixmap = QPixmap(bg_path)
+                # 根据背景图调整 widget 大小
+                self.setMinimumSize(self._bg_pixmap.width(), self._bg_pixmap.height())
+    
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         
-        # 深色背景
-        painter.fillRect(self.rect(), QColor(30, 32, 40))
+        # === 绘制背景图 ===
+        if hasattr(self, '_bg_pixmap') and self._bg_pixmap:
+            painter.drawPixmap(0, 0, self._bg_pixmap)
+        else:
+            # 备用：纯色背景
+            painter.fillRect(self.rect(), QColor(20, 28, 46))
         
-        # 网格
-        pen = QPen(QColor(45, 50, 65))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        grid_size = 40
-        for x in range(0, self.width(), grid_size):
-            painter.drawLine(x, 0, x, self.height())
-        for y in range(0, self.height(), grid_size):
-            painter.drawLine(0, y, self.width(), y)
-        
-        # 场景区域（上层/下层用不同色调区分）
+        # === 场景区域高亮（半透明叠加，用于楼层区分） ===
         for area in self.scene.get('areas', []):
             floor = self._get_area_floor(area['name'])
             if floor == 'upper':
-                pen_color = QColor(120, 150, 190)
-                fill_color = QColor(42, 55, 78, 80)
+                fill_color = QColor(60, 90, 140, 25)
             elif floor == 'lower':
-                pen_color = QColor(120, 170, 150)
-                fill_color = QColor(42, 65, 58, 80)
+                fill_color = QColor(60, 130, 110, 25)
             else:
-                pen_color = QColor(120, 140, 180)
-                fill_color = QColor(40, 50, 70, 80)
-            
-            pen = QPen(pen_color)
-            pen.setWidth(2)
-            painter.setPen(pen)
+                fill_color = QColor(50, 70, 100, 20)
             painter.setBrush(QBrush(fill_color))
+            painter.setPen(Qt.PenStyle.NoPen)
             painter.drawRect(area['x'], area['y'], area['width'], area['height'])
-            painter.setPen(QPen(QColor(150, 160, 190), 1))
-            painter.drawText(area['x'] + 10, area['y'] + 20, area['name'])
         
         # 楼层分隔线
         self._draw_floor_divider(painter)
         
-        # 门（优化外观）
+        # 门（传送逻辑需要保留，但简化绘制）
         for door in self.scene.get('doors', []):
-            self._draw_door(painter, door)
+            if self._is_stair_door(door):
+                self._draw_door(painter, door)
         
-        # 装饰物（家具）
-        for deco in self.decorations:
-            self._draw_decoration(painter, deco)
-        
-        # 监听范围（柔和光晕）
+        # === 监听范围 ===
         listener_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius)
-        listener_gradient.setColorAt(0.0, QColor(80, 160, 255, 30))
+        listener_gradient.setColorAt(0.0, QColor(80, 160, 255, 25))
         listener_gradient.setColorAt(1.0, QColor(80, 160, 255, 0))
         painter.setBrush(QBrush(listener_gradient))
         painter.setPen(Qt.PenStyle.NoPen)
@@ -663,25 +677,27 @@ class SceneMap(QWidget):
             self.listener_radius * 2, self.listener_radius * 2
         )
         
-        # 监听点中心
+        # 监听点
         painter.setPen(QPen(QColor(100, 180, 255), 2))
         painter.setBrush(QBrush(QColor(100, 180, 255)))
-        painter.drawEllipse(self.listener_pos.x() - 4, self.listener_pos.y() - 4, 8, 8)
-        painter.setPen(QPen(QColor(100, 180, 255), 1))
+        painter.drawEllipse(self.listener_pos.x() - 3, self.listener_pos.y() - 3, 6, 6)
+        painter.setPen(QPen(QColor(100, 180, 255, 150), 1))
         painter.setBrush(Qt.BrushStyle.NoBrush)
-        painter.drawEllipse(self.listener_pos.x() - 8, self.listener_pos.y() - 8, 16, 16)
+        painter.drawEllipse(self.listener_pos.x() - 7, self.listener_pos.y() - 7, 14, 14)
         
-        # 绘制角色
+        # === 绘制角色（更贴合原作） ===
         import time
         current_time = int(time.time() * 1000)
         
         for char_id, char in self.characters.items():
             cx, cy = char['x'], char['y']
             base_color = char['color']
+            r, g, b = base_color.red(), base_color.green(), base_color.blue()
             
             dist_to_listener = ((cx - self.listener_pos.x()) ** 2 + (cy - self.listener_pos.y()) ** 2) ** 0.5
             in_listener_range = dist_to_listener <= self.listener_radius
             
+            # === 声波纹（更精致） ===
             if in_listener_range and char_id in self.speaking_animations and self.speaking_animations[char_id]['active']:
                 anim = self.speaking_animations[char_id]
                 elapsed = (current_time - anim['start_time']) % 900
@@ -690,83 +706,88 @@ class SceneMap(QWidget):
                     wave_elapsed = elapsed - wave_delay
                     if wave_elapsed > 0:
                         progress = min(wave_elapsed * self.wave_speed / self.wave_max_radius, 1.0)
-                        radius = 15 + progress * self.wave_max_radius
-                        alpha = int(180 * (1.0 - progress))
-                        wave_color = QColor(base_color.red(), base_color.green(), base_color.blue(), alpha)
+                        radius = 10 + progress * self.wave_max_radius
+                        alpha = int(160 * (1.0 - progress))
+                        wave_color = QColor(r, g, b, alpha)
                         pen = QPen(wave_color)
-                        pen.setWidth(2)
+                        pen.setWidth(1)
                         painter.setPen(pen)
                         painter.setBrush(Qt.BrushStyle.NoBrush)
                         painter.drawEllipse(int(cx - radius), int(cy - radius), int(radius * 2), int(radius * 2))
             
-            # 发光效果
-            glow_gradient = QRadialGradient(QPointF(cx, cy), 18)
-            glow_gradient.setColorAt(0.0, QColor(base_color.red(), base_color.green(), base_color.blue(), 180))
-            glow_gradient.setColorAt(0.6, QColor(base_color.red(), base_color.green(), base_color.blue(), 80))
-            glow_gradient.setColorAt(1.0, QColor(base_color.red(), base_color.green(), base_color.blue(), 0))
+            # === 外发光（更柔和、更小） ===
+            glow_gradient = QRadialGradient(QPointF(cx, cy), 14)
+            glow_gradient.setColorAt(0.0, QColor(r, g, b, 200))
+            glow_gradient.setColorAt(0.5, QColor(r, g, b, 90))
+            glow_gradient.setColorAt(1.0, QColor(r, g, b, 0))
             painter.setBrush(QBrush(glow_gradient))
             painter.setPen(Qt.PenStyle.NoPen)
-            painter.drawEllipse(int(cx - 18), int(cy - 18), 36, 36)
+            painter.drawEllipse(int(cx - 14), int(cy - 14), 28, 28)
             
-            # 核心圆圈
-            painter.setPen(QPen(QColor(base_color.red(), base_color.green(), base_color.blue(), 200), 2))
-            painter.setBrush(QBrush(QColor(base_color.red(), base_color.green(), base_color.blue(), 120)))
-            painter.drawEllipse(int(cx - 10), int(cy - 10), 20, 20)
+            # === 核心圆点（更小、更精致） ===
+            painter.setPen(QPen(QColor(r, g, b, 220), 2))
+            painter.setBrush(QBrush(QColor(r, g, b, 160)))
+            painter.drawEllipse(int(cx - 7), int(cy - 7), 14, 14)
             
-            # 内部高亮
+            # === 中心亮点 ===
             painter.setPen(Qt.PenStyle.NoPen)
-            painter.setBrush(QBrush(QColor(255, 255, 255, 60)))
-            painter.drawEllipse(int(cx - 6), int(cy - 6), 12, 12)
+            painter.setBrush(QBrush(QColor(255, 255, 255, 100)))
+            painter.drawEllipse(int(cx - 3), int(cy - 3), 6, 6)
             
-            # 移动方向指示器（小箭头）
+            # === 移动方向指示 ===
             if char.get('is_moving'):
                 dx, dy = char.get('move_direction', (0, 0))
                 if abs(dx) > 0.01 or abs(dy) > 0.01:
                     dir_len = (dx**2 + dy**2)**0.5
                     if dir_len > 0:
                         ndx, ndy = dx / dir_len, dy / dir_len
-                        arrow_len = 14
+                        arrow_len = 10
                         ax = cx + ndx * arrow_len
                         ay = cy + ndy * arrow_len
-                        painter.setPen(QPen(QColor(255, 255, 255, 120), 1))
+                        painter.setPen(QPen(QColor(255, 255, 255, 100), 1))
                         painter.drawLine(int(cx), int(cy), int(ax), int(ay))
             
-            # 标记后显示名称
+            # === 标记后显示名称（更精致的标签） ===
             if char['marked'] and char.get('assigned_name'):
-                painter.setPen(QPen(QColor(220, 220, 240), 1))
+                # 文字阴影
+                painter.setPen(QPen(QColor(20, 22, 30), 1))
                 font = painter.font()
-                font.setPointSize(10)
+                font.setPointSize(9)
                 font.setBold(True)
                 painter.setFont(font)
-                painter.drawText(int(cx - 30), int(cy - 22), char['assigned_name'])
+                painter.drawText(int(cx - 28), int(cy - 20), char['assigned_name'])
+                # 文字
+                painter.setPen(QPen(QColor(220, 220, 240), 1))
+                painter.drawText(int(cx - 29), int(cy - 21), char['assigned_name'])
                 font.setBold(False)
                 painter.setFont(font)
             
-            # 标记状态
+            # === 标记状态（金色外圈） ===
             if char['marked']:
-                painter.setPen(QPen(QColor(255, 220, 80), 2))
+                painter.setPen(QPen(QColor(255, 210, 70), 2))
                 painter.setBrush(Qt.BrushStyle.NoBrush)
-                painter.drawEllipse(int(cx - 14), int(cy - 14), 28, 28)
+                painter.drawEllipse(int(cx - 10), int(cy - 10), 20, 20)
             
-            # 选中状态
+            # === 选中状态（白色外圈+虚线） ===
             if char_id == self.selected_character:
                 painter.setPen(QPen(QColor(255, 255, 255), 2))
                 painter.setBrush(Qt.BrushStyle.NoBrush)
-                painter.drawEllipse(int(cx - 12), int(cy - 12), 24, 24)
+                painter.drawEllipse(int(cx - 10), int(cy - 10), 20, 20)
+                painter.setPen(QPen(QColor(255, 255, 255, 120), 1, Qt.PenStyle.DashLine))
+                painter.drawEllipse(int(cx - 13), int(cy - 13), 26, 26)
             
-            # 悬停效果
+            # === 悬停效果 ===
             if char_id == self.hovered_character:
-                painter.setPen(QPen(QColor(200, 220, 255), 1, Qt.PenStyle.DashLine))
+                painter.setPen(QPen(QColor(200, 220, 255, 150), 1, Qt.PenStyle.DashLine))
                 painter.setBrush(Qt.BrushStyle.NoBrush)
-                painter.drawEllipse(int(cx - 16), int(cy - 16), 32, 32)
+                painter.drawEllipse(int(cx - 13), int(cy - 13), 26, 26)
         
         # === 迷雾/光照效果 ===
-        # 在监听点周围创建光照，其他地方变暗
         fog_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius * 1.8)
         fog_gradient.setColorAt(0.0, QColor(0, 0, 0, 0))
-        fog_gradient.setColorAt(0.4, QColor(0, 0, 0, 40))
-        fog_gradient.setColorAt(0.7, QColor(0, 0, 0, 120))
-        fog_gradient.setColorAt(1.0, QColor(0, 0, 0, 200))
+        fog_gradient.setColorAt(0.4, QColor(0, 0, 0, 30))
+        fog_gradient.setColorAt(0.7, QColor(0, 0, 0, 100))
+        fog_gradient.setColorAt(1.0, QColor(0, 0, 0, 180))
         painter.setBrush(QBrush(fog_gradient))
         painter.setPen(Qt.PenStyle.NoPen)
         painter.drawRect(self.rect())
