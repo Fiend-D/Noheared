@@ -644,7 +644,7 @@ class SceneMap(QWidget):
             painter.drawRect(area['x'], area['y'], area['width'], area['height'])
         
         # 楼层分隔线
-        self._draw_floor_divider(painter)
+        self._draw_floor_labels(painter)
         
         # 门（传送逻辑需要保留，但简化绘制）
         for door in self.scene.get('doors', []):
