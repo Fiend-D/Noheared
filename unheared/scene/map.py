@@ -4,7 +4,7 @@
 import random
 from PyQt6.QtWidgets import QWidget, QToolTip
 from PyQt6.QtCore import Qt, QTimer, QPoint, QPointF
-from PyQt6.QtGui import QPainter, QPen, QColor, QBrush, QRadialGradient
+from PyQt6.QtGui import QPainter, QPen, QColor, QBrush, QRadialGradient, QPainterPath
 
 class SceneMap(QWidget):
     # 移动速度常量
@@ -246,6 +246,17 @@ class SceneMap(QWidget):
         for door in self.scene.get('doors', []):
             if (door['x'] <= x <= door['x'] + door['width'] and
                 door['y'] <= y <= door['y'] + door['height']):
+                # 门内区域归属不能固定为 area1，否则会导致跨门时路径反复重算卡住
+                area1 = next((a for a in self.scene.get('areas', []) if a['name'] == door['area1']), None)
+                area2 = next((a for a in self.scene.get('areas', []) if a['name'] == door['area2']), None)
+                if area1 and area2:
+                    c1x = area1['x'] + area1['width'] / 2
+                    c1y = area1['y'] + area1['height'] / 2
+                    c2x = area2['x'] + area2['width'] / 2
+                    c2y = area2['y'] + area2['height'] / 2
+                    d1 = ((x - c1x) ** 2 + (y - c1y) ** 2) ** 0.5
+                    d2 = ((x - c2x) ** 2 + (y - c2y) ** 2) ** 0.5
+                    return door['area1'] if d1 <= d2 else door['area2']
                 return door['area1']
         # 检查普通区域
         for area in self.scene['areas']:
@@ -281,6 +292,15 @@ class SceneMap(QWidget):
         best_x = max(0, min(best_x, self.width()))
         best_y = max(0, min(best_y, self.height()))
         return (best_x, best_y)
+
+    def _constrain_to_area(self, x, y, area_name, margin=4):
+        """将坐标限制在指定区域内，避免碰撞推挤导致穿墙"""
+        area = next((a for a in self.scene.get('areas', []) if a['name'] == area_name), None)
+        if not area:
+            return self.constrain_to_walkable(x, y)
+        cx = max(area['x'] + margin, min(x, area['x'] + area['width'] - margin))
+        cy = max(area['y'] + margin, min(y, area['y'] + area['height'] - margin))
+        return (cx, cy)
     
     def find_path_from(self, from_x, from_y, target_x, target_y):
         """寻找从指定位置到目标位置的路径（必须经门穿越）"""
@@ -298,10 +318,12 @@ class SceneMap(QWidget):
             area, path = queue.popleft()
             if area == tgt_area:
                 full_path = []
-                for door, _ in path:
-                    door_cx = door['x'] + door['width'] / 2
-                    door_cy = door['y'] + door['height'] / 2
-                    full_path.append((door_cx, door_cy))
+                prev_area = cur_area
+                for door, next_area in path:
+                    entry_x, entry_y, exit_x, exit_y = self._get_door_transit_points(door, prev_area, next_area)
+                    full_path.append((entry_x, entry_y))
+                    full_path.append((exit_x, exit_y))
+                    prev_area = next_area
                 full_path.append((target_x, target_y))
                 return full_path
             
@@ -311,6 +333,42 @@ class SceneMap(QWidget):
                     queue.append((neighbor, path + [(door, neighbor)]))
         
         return [(target_x, target_y)]
+
+    def _get_door_transit_points(self, door, from_area_name, to_area_name):
+        """根据门的方向和两侧区域，生成穿门时的入口点和出口点"""
+        door_cx = door['x'] + door['width'] / 2
+        door_cy = door['y'] + door['height'] / 2
+        from_area = next((a for a in self.scene.get('areas', []) if a['name'] == from_area_name), None)
+        to_area = next((a for a in self.scene.get('areas', []) if a['name'] == to_area_name), None)
+
+        if not from_area or not to_area:
+            return (door_cx, door_cy, door_cx, door_cy)
+
+        from_cx = from_area['x'] + from_area['width'] / 2
+        from_cy = from_area['y'] + from_area['height'] / 2
+        to_cx = to_area['x'] + to_area['width'] / 2
+        to_cy = to_area['y'] + to_area['height'] / 2
+
+        margin = 10
+        pass_span = 14
+        if door['width'] >= door['height']:
+            # 水平门：上下穿越
+            edge_y = door['y'] if from_cy < door_cy else door['y'] + door['height']
+            toward_y = door['y'] if to_cy < door_cy else door['y'] + door['height']
+            entry_x = max(door['x'] + margin, min(from_cx, door['x'] + door['width'] - margin))
+            exit_x = max(door['x'] + margin, min(to_cx, door['x'] + door['width'] - margin))
+            entry_y = edge_y - pass_span if from_cy < door_cy else edge_y + pass_span
+            exit_y = toward_y - pass_span if to_cy < door_cy else toward_y + pass_span
+            return (entry_x, entry_y, exit_x, exit_y)
+
+        # 垂直门：左右穿越
+        edge_x = door['x'] if from_cx < door_cx else door['x'] + door['width']
+        toward_x = door['x'] if to_cx < door_cx else door['x'] + door['width']
+        entry_y = max(door['y'] + margin, min(from_cy, door['y'] + door['height'] - margin))
+        exit_y = max(door['y'] + margin, min(to_cy, door['y'] + door['height'] - margin))
+        entry_x = edge_x - pass_span if from_cx < door_cx else edge_x + pass_span
+        exit_x = toward_x - pass_span if to_cx < door_cx else toward_x + pass_span
+        return (entry_x, entry_y, exit_x, exit_y)
     
     def find_path(self, char_id, target_x, target_y):
         """寻找角色从当前位置到目标位置的路径"""
@@ -432,32 +490,32 @@ class SceneMap(QWidget):
             painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
     def _draw_wall_gap(self, painter, door, bg_color=QColor(20, 28, 46)):
-        """在墙壁上画出门的缺口"""
+        """绘制更贴近原作的门洞：缺口 + 门框边缘 + 微光"""
         x, y, w, h = door['x'], door['y'], door['width'], door['height']
-        cx, cy = x + w / 2, y + h / 2
-        
-        # 用背景色"擦除"墙壁线，形成缺口
-        gap_margin = 3
+        cx, cy = x + w / 2.0, y + h / 2.0
+
         painter.setPen(Qt.PenStyle.NoPen)
         painter.setBrush(QBrush(bg_color))
-        painter.drawRect(int(x - gap_margin), int(y - gap_margin), 
-                        int(w + gap_margin * 2), int(h + gap_margin * 2))
-        
-        # 画门框短线（表示缺口的边缘）
-        frame_color = QColor(90, 115, 155)
-        painter.setPen(QPen(frame_color, 2))
-        
-        if w > h:  # 水平门（左右通行）
-            # 上下门框短竖线
-            painter.drawLine(int(x), int(y), int(x), int(y + h))
-            painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
-        else:  # 垂直门（上下通行）
-            # 左右门框短横线
-            painter.drawLine(int(x), int(y), int(x + w), int(y))
-            painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
+        opening_path = QPainterPath()
+        opening_path.addRoundedRect(float(x - 2), float(y - 2), float(w + 4), float(h + 4), 3.0, 3.0)
+        painter.drawPath(opening_path)
+
+        frame_main = QColor(128, 158, 198, 210)
+        frame_highlight = QColor(178, 205, 235, 150)
+        painter.setPen(QPen(frame_main, 2))
+        if w >= h:
+            painter.drawLine(int(x), int(y - 1), int(x), int(y + h + 1))
+            painter.drawLine(int(x + w), int(y - 1), int(x + w), int(y + h + 1))
+            painter.setPen(QPen(frame_highlight, 1))
+            painter.drawLine(int(x + 1), int(cy), int(x + w - 1), int(cy))
+        else:
+            painter.drawLine(int(x - 1), int(y), int(x + w + 1), int(y))
+            painter.drawLine(int(x - 1), int(y + h), int(x + w + 1), int(y + h))
+            painter.setPen(QPen(frame_highlight, 1))
+            painter.drawLine(int(cx), int(y + 1), int(cx), int(y + h - 1))
     
     def _draw_stair_marker(self, painter, door):
-        """绘制楼梯传送标记：墙壁缺口 + 发光标记 + 通向地点标注"""
+        """绘制楼梯门：精致阶梯底板 + 内嵌标识（无外置标签）"""
         x, y, w, h = door['x'], door['y'], door['width'], door['height']
         cx, cy = x + w / 2, y + h / 2
         
@@ -482,57 +540,69 @@ class SceneMap(QWidget):
                 arrow = '↑'
                 target_name = door['area2']
         
-        # 外发光
-        glow = QRadialGradient(QPointF(cx, cy), 22)
-        glow.setColorAt(0.0, QColor(200, 180, 120, 60))
-        glow.setColorAt(0.5, QColor(200, 180, 120, 20))
-        glow.setColorAt(1.0, QColor(200, 180, 120, 0))
-        painter.setBrush(QBrush(glow))
-        painter.setPen(Qt.PenStyle.NoPen)
-        painter.drawEllipse(int(cx - 22), int(cy - 22), 44, 44)
-        
-        # 内圈
-        painter.setPen(QPen(QColor(200, 180, 120, 180), 2))
-        painter.setBrush(QBrush(QColor(200, 180, 120, 40)))
-        painter.drawEllipse(int(cx - 12), int(cy - 12), 24, 24)
-        
-        # 箭头
-        painter.setPen(QPen(QColor(240, 220, 170), 1))
+        # 阶梯底板渐变（更精致）
+        if w >= h:
+            plate_grad = QRadialGradient(QPointF(cx, cy), max(w, h))
+        else:
+            plate_grad = QRadialGradient(QPointF(cx, cy), max(w, h))
+        plate_grad.setColorAt(0.0, QColor(80, 108, 146, 210))
+        plate_grad.setColorAt(1.0, QColor(42, 58, 84, 210))
+        painter.setPen(QPen(QColor(160, 195, 235, 180), 1))
+        painter.setBrush(QBrush(plate_grad))
+        painter.drawRoundedRect(int(x), int(y), int(w), int(h), 4, 4)
+
+        # 阶梯台阶（真实楼梯感）
+        painter.setBrush(Qt.BrushStyle.NoBrush)
+        step_main = QColor(208, 228, 252, 140)
+        step_shadow = QColor(20, 30, 46, 120)
+        if w >= h:
+            step_count = 5
+            usable_w = max(10, w - 10)
+            each = usable_w / step_count
+            for i in range(step_count):
+                sx = x + 5 + i * each
+                painter.setPen(QPen(step_shadow, 1))
+                painter.drawLine(int(sx), int(y + 4), int(sx), int(y + h - 4))
+                painter.setPen(QPen(step_main, 1))
+                painter.drawLine(int(sx + 1), int(y + 4), int(sx + 1), int(y + h - 4))
+        else:
+            step_count = 5
+            usable_h = max(10, h - 10)
+            each = usable_h / step_count
+            for i in range(step_count):
+                sy = y + 5 + i * each
+                painter.setPen(QPen(step_shadow, 1))
+                painter.drawLine(int(x + 4), int(sy), int(x + w - 4), int(sy))
+                painter.setPen(QPen(step_main, 1))
+                painter.drawLine(int(x + 4), int(sy + 1), int(x + w - 4), int(sy + 1))
+
+        # 内嵌方向箭头 + 目的地简称（直接写在楼梯上）
+        painter.setPen(QPen(QColor(236, 246, 255, 230), 2))
+        if arrow == '↑':
+            painter.drawLine(int(cx), int(cy + 4), int(cx), int(cy - 6))
+            painter.drawLine(int(cx), int(cy - 6), int(cx - 4), int(cy - 2))
+            painter.drawLine(int(cx), int(cy - 6), int(cx + 4), int(cy - 2))
+        else:
+            painter.drawLine(int(cx), int(cy - 4), int(cx), int(cy + 6))
+            painter.drawLine(int(cx), int(cy + 6), int(cx - 4), int(cy + 2))
+            painter.drawLine(int(cx), int(cy + 6), int(cx + 4), int(cy + 2))
+
+        label_text = target_name[:3]
         font = painter.font()
         old_size = font.pointSize()
-        font.setPointSize(12)
+        font.setPointSize(8)
         font.setBold(True)
         painter.setFont(font)
-        painter.drawText(int(cx - 12), int(cy - 10), 24, 24,
+        painter.setPen(QPen(QColor(22, 30, 42, 220), 1))
+        painter.drawText(int(cx - 13), int(cy + 12), 28, 10,
                         Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
-                        arrow)
+                        label_text)
+        painter.setPen(QPen(QColor(220, 236, 255, 220), 1))
+        painter.drawText(int(cx - 14), int(cy + 11), 28, 10,
+                        Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
+                        label_text)
         font.setPointSize(old_size)
         font.setBold(False)
-        painter.setFont(font)
-        
-        # === 通向地点标注 ===
-        label = f"{arrow} {target_name}"
-        font = painter.font()
-        old_size = font.pointSize()
-        font.setPointSize(9)
-        painter.setFont(font)
-        
-        # 计算标注位置（门的右侧或下方）
-        if w > h:  # 水平门，标注在上方或下方
-            label_x = int(cx - 40)
-            label_y = int(y - 20)
-        else:  # 垂直门，标注在右侧
-            label_x = int(x + w + 4)
-            label_y = int(cy - 6)
-        
-        # 文字阴影
-        painter.setPen(QPen(QColor(20, 22, 30), 1))
-        painter.drawText(label_x + 1, label_y + 1, label)
-        # 文字
-        painter.setPen(QPen(QColor(220, 200, 160), 1))
-        painter.drawText(label_x, label_y, label)
-        
-        font.setPointSize(old_size)
         painter.setFont(font)
     
     def _draw_floor_labels(self, painter):
@@ -875,6 +945,17 @@ class SceneMap(QWidget):
                         c1['y'] += dy * ratio
                         c2['x'] -= dx * ratio
                         c2['y'] -= dy * ratio
+                        # 优先留在原区域，避免被挤到墙另一侧
+                        area1_after = self.get_character_area(c1['x'], c1['y'])
+                        area2_after = self.get_character_area(c2['x'], c2['y'])
+                        if area1 and area1_after != area1:
+                            c1['x'], c1['y'] = self._constrain_to_area(c1['x'], c1['y'], area1)
+                        else:
+                            c1['x'], c1['y'] = self.constrain_to_walkable(c1['x'], c1['y'])
+                        if area2 and area2_after != area2:
+                            c2['x'], c2['y'] = self._constrain_to_area(c2['x'], c2['y'], area2)
+                        else:
+                            c2['x'], c2['y'] = self.constrain_to_walkable(c2['x'], c2['y'])
     
     def update_positions(self):
         """平滑移动角色到目标位置，走路径点；平滑移动监听点；全局碰撞避免"""
@@ -912,6 +993,20 @@ class SceneMap(QWidget):
                     char['path'].pop(0)
                 char['is_moving'] = False
                 char['move_direction'] = (0, 0)
+
+            # 如果已经进入门洞区域，直接跳过当前路径点，减少门口来回抖动
+            if char.get('path'):
+                for door in self.scene.get('doors', []):
+                    if (door['x'] - 4 <= char['x'] <= door['x'] + door['width'] + 4 and
+                        door['y'] - 4 <= char['y'] <= door['y'] + door['height'] + 4):
+                        while char['path']:
+                            px, py = char['path'][0]
+                            if (door['x'] - 4 <= px <= door['x'] + door['width'] + 4 and
+                                door['y'] - 4 <= py <= door['y'] + door['height'] + 4):
+                                char['path'].pop(0)
+                            else:
+                                break
+                        break
             
             # === 楼梯传送检测 ===
             import time as pytime
@@ -920,10 +1015,18 @@ class SceneMap(QWidget):
                 for door in self.scene.get('doors', []):
                     if not self._is_stair_door(door):
                         continue
-                    door_cx = door['x'] + door['width'] / 2
-                    door_cy = door['y'] + door['height'] / 2
-                    dist_to_door = ((char['x'] - door_cx) ** 2 + (char['y'] - door_cy) ** 2) ** 0.5
-                    if dist_to_door < 30:  # 增大触发范围到 30px，避免卡住
+                    current_area = self.get_character_area(char['x'], char['y'])
+                    # 仅当角色在该楼梯连接的任一侧区域时触发，避免误传送
+                    if current_area not in (door['area1'], door['area2']):
+                        continue
+                    if current_area == door['area1']:
+                        entry_x, entry_y, _, _ = self._get_door_transit_points(door, door['area1'], door['area2'])
+                    else:
+                        entry_x, entry_y, _, _ = self._get_door_transit_points(door, door['area2'], door['area1'])
+
+                    dist_to_entry = ((char['x'] - entry_x) ** 2 + (char['y'] - entry_y) ** 2) ** 0.5
+                    # 只在楼梯入口附近触发，避免“全房间吸附传送”异常
+                    if dist_to_entry < 24:
                         self._teleport_character(char_id, door)
                         char['teleport_cooldown'] = now + 1.0  # 1秒冷却，确保远离
                         updated = True

@@ -124,42 +124,35 @@ def generate_case_background(case_file, output_dir):
     for gy in range(0, canvas_h, grid_size):
         draw.line([(0, gy), (canvas_w, gy)], fill=grid_color, width=1)
     
-    # 绘制房间
+    # 绘制房间（保留填充与墙体边界）
     room_fill = (28, 40, 62)  # 房间填充色
-    room_border = (90, 115, 155)  # 房间边框
     
     for i, area in enumerate(areas):
         ax, ay, aw, ah = area['x'], area['y'], area['width'], area['height']
         
         # 房间填充
         draw.rectangle([ax, ay, ax + aw, ay + ah], fill=room_fill)
-        
-        # 房间内部元素
-        if not any(s in area['name'] for s in ['楼梯', '走廊', '甲板']):
-            draw_room_interior(draw, area, seed=i * 100 + hash(area['name']) % 1000)
-    
-    # 绘制墙壁线（房间边框，留出门口）
+    # 绘制墙壁线（房间边框，门口留缺口）
     wall_width = 3
     wall_color = (90, 115, 155)
     
     # 先收集每个区域边上的门
     door_edges = {}  # (area_name, edge) -> door
     for door in doors:
-        # 简单判断门在哪个区域的哪条边上
         dx, dy, dw, dh = door['x'], door['y'], door['width'], door['height']
         dcx, dcy = dx + dw / 2, dy + dh / 2
         
         for area in areas:
             ax, ay, aw, ah = area['x'], area['y'], area['width'], area['height']
-            # 门中心靠近区域的哪条边
             edges = []
-            if abs(dcy - ay) < 10 and ax <= dcx <= ax + aw:
+            edge_snap = 26
+            if abs(dcy - ay) < edge_snap and ax <= dcx <= ax + aw:
                 edges.append(('top', area['name']))
-            if abs(dcy - (ay + ah)) < 10 and ax <= dcx <= ax + aw:
+            if abs(dcy - (ay + ah)) < edge_snap and ax <= dcx <= ax + aw:
                 edges.append(('bottom', area['name']))
-            if abs(dcx - ax) < 10 and ay <= dcy <= ay + ah:
+            if abs(dcx - ax) < edge_snap and ay <= dcy <= ay + ah:
                 edges.append(('left', area['name']))
-            if abs(dcx - (ax + aw)) < 10 and ay <= dcy <= ay + ah:
+            if abs(dcx - (ax + aw)) < edge_snap and ay <= dcy <= ay + ah:
                 edges.append(('right', area['name']))
             
             for edge, name in edges:
@@ -168,37 +161,26 @@ def generate_case_background(case_file, output_dir):
     # 绘制每个区域的墙壁线，在门的位置留缺口
     for area in areas:
         ax, ay, aw, ah = area['x'], area['y'], area['width'], area['height']
-        
-        # 收集四条边上的门
         top_doors = door_edges.get((area['name'], 'top'), [])
         bottom_doors = door_edges.get((area['name'], 'bottom'), [])
         left_doors = door_edges.get((area['name'], 'left'), [])
         right_doors = door_edges.get((area['name'], 'right'), [])
         
         def draw_edge_with_gaps(y_or_x, is_horizontal, doors_on_edge, start, end):
-            """在一条边上绘制墙壁线，留出门口"""
             segments = []
             current = start
-            
-            # 按坐标排序门
-            if is_horizontal:
-                doors_sorted = sorted(doors_on_edge, key=lambda d: d[0])
-            else:
-                doors_sorted = sorted(doors_on_edge, key=lambda d: d[1])
+            doors_sorted = sorted(doors_on_edge, key=lambda d: d[0] if is_horizontal else d[1])
             
             for door in doors_sorted:
                 if is_horizontal:
                     d_start = door[0]
                     d_end = door[0] + door[2]
-                    if current < d_start:
-                        segments.append((current, d_start))
-                    current = max(current, d_end)
                 else:
                     d_start = door[1]
                     d_end = door[1] + door[3]
-                    if current < d_start:
-                        segments.append((current, d_start))
-                    current = max(current, d_end)
+                if current < d_start:
+                    segments.append((current, d_start))
+                current = max(current, d_end)
             
             if current < end:
                 segments.append((current, end))
@@ -209,20 +191,12 @@ def generate_case_background(case_file, output_dir):
                 else:
                     draw_wall_line(draw, y_or_x, seg_start, y_or_x, seg_end, wall_color, wall_width)
         
-        # 上边缘
         draw_edge_with_gaps(ay, True, top_doors, ax, ax + aw)
-        # 下边缘
         draw_edge_with_gaps(ay + ah, True, bottom_doors, ax, ax + aw)
-        # 左边缘
         draw_edge_with_gaps(ax, False, left_doors, ay, ay + ah)
-        # 右边缘
         draw_edge_with_gaps(ax + aw, False, right_doors, ay, ay + ah)
-    
-    # 绘制门区域（如果门不在任何区域边缘上，单独绘制）
-    for door in doors:
-        dx, dy, dw, dh = door['x'], door['y'], door['width'], door['height']
-        # 门的小标记
-        draw.rectangle([dx, dy, dx + dw, dy + dh], outline=(100, 125, 165), width=1)
+
+    # 按要求：不绘制门方框，不绘制房间内部家具线条
     
     # 绘制区域名称
     font = None

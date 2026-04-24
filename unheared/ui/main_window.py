@@ -442,6 +442,7 @@ class MainWindow(QMainWindow):
 
     def update_ui(self):
         position = self.audio_player.get_position()
+        duration = self.audio_player.get_duration()
         self.update_time()
         self.update_dialogues(position)
         self.update_character_positions(position)
@@ -455,9 +456,10 @@ class MainWindow(QMainWindow):
                 self.play_button.setText('⏸ 暂停')
             else:
                 self.play_button.setText('▶ 播放')
-                # 播放结束时重置进度条
-                self.time_slider.setValue(0)
-                self.dialogue_display.clear()
+                # 仅在自然播放结束时重置，暂停时保留当前进度
+                if duration > 0 and position >= duration - 0.2:
+                    self.time_slider.setValue(0)
+                    self.dialogue_display.clear()
         self.was_playing = is_playing
 
     def update_time(self):
