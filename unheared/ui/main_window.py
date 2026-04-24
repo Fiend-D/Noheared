@@ -378,7 +378,7 @@ class MainWindow(QMainWindow):
 
             # 加载场景
             scene_data = self.case_manager.get_scene()
-            self.scene_map.load_scene(scene_data)
+            self.scene_map.load_scene(scene_data, case_id=case_id)
 
             # 初始化场景
             self.init_scene()

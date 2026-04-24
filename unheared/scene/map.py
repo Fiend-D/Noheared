@@ -17,8 +17,10 @@ class SceneMap(QWidget):
     MIN_SEPARATION_STAIRS = 18
     
     # 楼层区域（用于视觉区分和楼梯传送）
-    UPPER_FLOOR_AREAS = {'露天甲板', '餐厅', '赌场', '音乐厅', '厨房', '医务室'}
-    LOWER_FLOOR_AREAS = {'船长室', '豪华套房', '普通客房', '船员休息室'}
+    UPPER_FLOOR_AREAS = {'露天甲板', '餐厅', '赌场', '音乐厅', '厨房', '医务室',
+                         '书房', '会客厅', '画室', '宴会厅', '酒窖', '大厅'}
+    LOWER_FLOOR_AREAS = {'船长室', '豪华套房', '普通客房', '船员休息室',
+                         '主人卧室', '客房A', '客房B', '客房C', '老板套房', '露台'}
     FLOOR_DIVIDER_Y = 460  # 上下层分界线
     
     def __init__(self):
@@ -181,7 +183,7 @@ class SceneMap(QWidget):
                         })
                         break
     
-    def load_scene(self, scene_data):
+    def load_scene(self, scene_data, case_id=None):
         """从案例数据加载场景"""
         if not scene_data:
             return
@@ -202,7 +204,7 @@ class SceneMap(QWidget):
         self.listener_target_x = float(w // 2)
         self.listener_target_y = float(h // 2)
         # 加载背景图
-        self._load_background_image()
+        self._load_background_image(case_id)
         self.update()
     
     def load_characters(self, characters_data):
@@ -490,9 +492,10 @@ class SceneMap(QWidget):
             painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
     def _draw_wall_gap(self, painter, door, bg_color=QColor(20, 28, 46)):
-        """绘制更贴近原作的门洞：缺口 + 门框边缘 + 微光"""
+        """绘制门洞：缺口 + 垂直墙壁的两条线段"""
         x, y, w, h = door['x'], door['y'], door['width'], door['height']
         cx, cy = x + w / 2.0, y + h / 2.0
+        arm = 8
 
         painter.setPen(Qt.PenStyle.NoPen)
         painter.setBrush(QBrush(bg_color))
@@ -500,19 +503,13 @@ class SceneMap(QWidget):
         opening_path.addRoundedRect(float(x - 2), float(y - 2), float(w + 4), float(h + 4), 3.0, 3.0)
         painter.drawPath(opening_path)
 
-        frame_main = QColor(128, 158, 198, 210)
-        frame_highlight = QColor(178, 205, 235, 150)
-        painter.setPen(QPen(frame_main, 2))
+        painter.setPen(QPen(QColor(128, 158, 198, 210), 2))
         if w >= h:
-            painter.drawLine(int(x), int(y - 1), int(x), int(y + h + 1))
-            painter.drawLine(int(x + w), int(y - 1), int(x + w), int(y + h + 1))
-            painter.setPen(QPen(frame_highlight, 1))
-            painter.drawLine(int(x + 1), int(cy), int(x + w - 1), int(cy))
+            painter.drawLine(int(x), int(cy), int(x + arm), int(cy))
+            painter.drawLine(int(x + w), int(cy), int(x + w - arm), int(cy))
         else:
-            painter.drawLine(int(x - 1), int(y), int(x + w + 1), int(y))
-            painter.drawLine(int(x - 1), int(y + h), int(x + w + 1), int(y + h))
-            painter.setPen(QPen(frame_highlight, 1))
-            painter.drawLine(int(cx), int(y + 1), int(cx), int(y + h - 1))
+            painter.drawLine(int(cx), int(y), int(cx), int(y + arm))
+            painter.drawLine(int(cx), int(y + h), int(cx), int(y + h - arm))
     
     def _draw_stair_marker(self, painter, door):
         """绘制楼梯门：精致阶梯底板 + 内嵌标识（无外置标签）"""
@@ -719,35 +716,15 @@ class SceneMap(QWidget):
             if abs(next_x - door_cx) < 10 and abs(next_y - door_cy) < 10:
                 char['path'].pop(0)
     
-    def _load_background_image(self):
+    def _load_background_image(self, case_id=None):
         """加载案件对应的背景图"""
         import os
         self._bg_pixmap = None
-        scene_name = self.scene.get('name', '')
-        # 尝试根据场景名匹配 case ID
-        case_id = None
-        for cid in ['case1', 'case2', 'case3', 'case4', 'case5']:
-            bg_path = os.path.join('unheared', 'resources', 'backgrounds', f'{cid}_bg.png')
-            if os.path.exists(bg_path):
-                # 简单匹配：检查场景中是否有特征区域名
-                area_names = {a['name'] for a in self.scene.get('areas', [])}
-                if cid == 'case1' and '房间1' in area_names:
-                    case_id = cid
-                elif cid == 'case2' and '化妆间' in area_names:
-                    case_id = cid
-                elif cid == 'case3' and '展厅' in area_names:
-                    case_id = cid
-                elif cid == 'case4' and '书房' in area_names:
-                    case_id = cid
-                elif cid == 'case5' and '露天甲板' in area_names:
-                    case_id = cid
-        
         if case_id:
             from PyQt6.QtGui import QPixmap
             bg_path = os.path.join('unheared', 'resources', 'backgrounds', f'{case_id}_bg.png')
             if os.path.exists(bg_path):
                 self._bg_pixmap = QPixmap(bg_path)
-                # 根据背景图调整 widget 大小
                 self.setMinimumSize(self._bg_pixmap.width(), self._bg_pixmap.height())
     
     def paintEvent(self, event):
