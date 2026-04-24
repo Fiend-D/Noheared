@@ -431,114 +431,100 @@ class SceneMap(QWidget):
             painter.setBrush(QBrush(tv_color))
             painter.drawRect(x + 4, y - h // 3, w - 8, h // 2)
     
-    def _draw_door(self, painter, door):
-        """绘制门：普通门画成开口，楼梯门画成楼梯图标+方向箭头"""
+    def _draw_stair_marker(self, painter, door):
+        """绘制楼梯传送标记：发光圆圈 + 方向箭头"""
         x, y, w, h = door['x'], door['y'], door['width'], door['height']
+        cx, cy = x + w / 2, y + h / 2
         
-        if self._is_stair_door(door):
-            # === 楼梯门 ===
-            # 画楼梯背景框
-            painter.setPen(QPen(QColor(180, 160, 120), 2))
-            painter.setBrush(QBrush(QColor(55, 50, 40, 120)))
-            painter.drawRect(x, y, w, h)
-            
-            # 画台阶（横线）
-            painter.setPen(QPen(QColor(170, 150, 110), 1))
-            steps = 4
-            for i in range(1, steps):
-                sy = y + i * h / steps
-                painter.drawLine(int(x), int(sy), int(x + w), int(sy))
-            
-            # 画竖线分隔（表示台阶竖面）
-            step_w = w / 3
-            for i in range(1, 3):
-                sx = x + i * step_w
-                painter.drawLine(int(sx), int(y), int(sx), int(y + h))
-            
-            # 方向箭头（判断 area1 是否在上层）
-            area1_floor = self._get_area_floor(door['area1'])
-            area2_floor = self._get_area_floor(door['area2'])
-            if area1_floor == 'upper' and area2_floor == 'lower':
-                arrow = '↓'
-            elif area1_floor == 'lower' and area2_floor == 'upper':
-                arrow = '↑'
-            else:
-                # 上层内部楼梯（甲板↔生活）
-                arrow = '↓' if area1_floor == 'upper' else '↑'
-            
-            painter.setPen(QPen(QColor(220, 200, 160), 1))
-            font = painter.font()
-            old_size = font.pointSize()
-            font.setPointSize(10)
-            font.setBold(True)
-            painter.setFont(font)
-            # 在门上方或下方标注箭头
-            label_y = y - 14 if y > 30 else y + h + 14
-            painter.drawText(int(x), int(label_y) - 10, int(w), 14,
-                            Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
-                            arrow)
-            font.setPointSize(old_size)
-            font.setBold(False)
-            painter.setFont(font)
-            
-            # 标注去向
-            painter.setPen(QPen(QColor(180, 170, 150), 1))
-            painter.drawText(int(x), int(label_y) + 2, int(w), 12,
-                            Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
-                            door['name'])
+        # 方向判断
+        area1_floor = self._get_area_floor(door['area1'])
+        area2_floor = self._get_area_floor(door['area2'])
+        if area1_floor == 'upper' and area2_floor == 'lower':
+            arrow = '↓'
+        elif area1_floor == 'lower' and area2_floor == 'upper':
+            arrow = '↑'
         else:
-            # === 普通门：画成开口样式 ===
-            painter.setPen(QPen(QColor(140, 160, 200), 2))
-            painter.setBrush(Qt.BrushStyle.NoBrush)
-            
-            if w > h:
-                # 水平开口：上下两条线 + 左右短竖线
-                painter.drawLine(int(x), int(y), int(x + w), int(y))
-                painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
-                mid_h = h / 2
-                painter.drawLine(int(x), int(y), int(x), int(y + h))
-                painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
-            else:
-                # 垂直开口：左右两条线 + 上下短横线
-                painter.drawLine(int(x), int(y), int(x), int(y + h))
-                painter.drawLine(int(x + w), int(y), int(x + w), int(y + h))
-                painter.drawLine(int(x), int(y), int(x + w), int(y))
-                painter.drawLine(int(x), int(y + h), int(x + w), int(y + h))
-            
-            # 门名称标签
-            painter.setPen(QPen(QColor(160, 170, 190), 1))
-            painter.drawText(int(x), int(y) - 4, door['name'])
+            arrow = '↓' if area1_floor == 'upper' else '↑'
+        
+        # 外发光
+        glow = QRadialGradient(QPointF(cx, cy), 22)
+        glow.setColorAt(0.0, QColor(200, 180, 120, 60))
+        glow.setColorAt(0.5, QColor(200, 180, 120, 20))
+        glow.setColorAt(1.0, QColor(200, 180, 120, 0))
+        painter.setBrush(QBrush(glow))
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.drawEllipse(int(cx - 22), int(cy - 22), 44, 44)
+        
+        # 内圈
+        painter.setPen(QPen(QColor(200, 180, 120, 180), 2))
+        painter.setBrush(QBrush(QColor(200, 180, 120, 40)))
+        painter.drawEllipse(int(cx - 12), int(cy - 12), 24, 24)
+        
+        # 箭头
+        painter.setPen(QPen(QColor(240, 220, 170), 1))
+        font = painter.font()
+        old_size = font.pointSize()
+        font.setPointSize(12)
+        font.setBold(True)
+        painter.setFont(font)
+        painter.drawText(int(cx - 12), int(cy - 10), 24, 24,
+                        Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
+                        arrow)
+        font.setPointSize(old_size)
+        font.setBold(False)
+        painter.setFont(font)
     
-    def _draw_floor_divider(self, painter):
-        """绘制楼层分隔线"""
+    def _draw_floor_labels(self, painter):
+        """在区域最左边标注楼层名称"""
         if not self.scene.get('areas'):
             return
-        # 检查场景是否包含 case5 的上下层区域
+        
         has_upper = any(a['name'] in self.UPPER_FLOOR_AREAS for a in self.scene['areas'])
         has_lower = any(a['name'] in self.LOWER_FLOOR_AREAS for a in self.scene['areas'])
         if not (has_upper and has_lower):
             return
         
-        divider_y = self.FLOOR_DIVIDER_Y
-        w = self.width()
+        # 收集上下层区域的 y 范围
+        upper_y_min = float('inf')
+        upper_y_max = 0
+        lower_y_min = float('inf')
+        lower_y_max = 0
         
-        # 画分隔带背景
-        painter.fillRect(0, divider_y - 2, w, 4, QColor(40, 45, 60, 200))
+        for area in self.scene['areas']:
+            floor = self._get_area_floor(area['name'])
+            ay = area['y']
+            ah = area['height']
+            if floor == 'upper':
+                upper_y_min = min(upper_y_min, ay)
+                upper_y_max = max(upper_y_max, ay + ah)
+            elif floor == 'lower':
+                lower_y_min = min(lower_y_min, ay)
+                lower_y_max = max(lower_y_max, ay + ah)
         
-        # 画虚线
-        pen = QPen(QColor(100, 115, 150), 2, Qt.PenStyle.DashLine)
-        painter.setPen(pen)
-        painter.drawLine(0, divider_y, w, divider_y)
-        
-        # 标注
-        painter.setPen(QPen(QColor(130, 145, 180), 1))
         font = painter.font()
         old_size = font.pointSize()
-        font.setPointSize(11)
+        font.setPointSize(10)
         font.setBold(True)
         painter.setFont(font)
-        painter.drawText(15, divider_y - 8, "上层甲板")
-        painter.drawText(15, divider_y + 18, "下层舱室")
+        
+        label_x = 6
+        
+        # 上层标注
+        if upper_y_max > upper_y_min:
+            mid_y = (upper_y_min + upper_y_max) / 2
+            painter.setPen(QPen(QColor(120, 150, 190, 180), 1))
+            painter.drawText(int(label_x), int(mid_y - 30), 20, 60,
+                            Qt.AlignmentFlag.AlignCenter | Qt.TextFlag.TextWordWrap,
+                            "上层\n甲板")
+        
+        # 下层标注
+        if lower_y_max > lower_y_min:
+            mid_y = (lower_y_min + lower_y_max) / 2
+            painter.setPen(QPen(QColor(120, 170, 150, 180), 1))
+            painter.drawText(int(label_x), int(mid_y - 30), 20, 60,
+                            Qt.AlignmentFlag.AlignCenter | Qt.TextFlag.TextWordWrap,
+                            "下层\n舱室")
+        
         font.setPointSize(old_size)
         font.setBold(False)
         painter.setFont(font)
@@ -573,7 +559,7 @@ class SceneMap(QWidget):
         if not target_area:
             return
         
-        # 计算目标位置：目标区域中心，偏向远离门的方向偏移 40px
+        # 计算目标位置：目标区域中心，偏向远离门的方向偏移 60px
         target_cx = target_area['x'] + target_area['width'] / 2
         target_cy = target_area['y'] + target_area['height'] / 2
         door_cx = door['x'] + door['width'] / 2
@@ -583,8 +569,8 @@ class SceneMap(QWidget):
         dy = target_cy - door_cy
         dist = (dx ** 2 + dy ** 2) ** 0.5
         if dist > 0:
-            offset_x = dx / dist * 40
-            offset_y = dy / dist * 40
+            offset_x = dx / dist * 60
+            offset_y = dy / dist * 60
         else:
             offset_x = 0
             offset_y = 0
@@ -592,9 +578,9 @@ class SceneMap(QWidget):
         char['x'] = door_cx + offset_x
         char['y'] = door_cy + offset_y
         
-        # 确保在目标区域内
-        char['x'] = max(target_area['x'] + 8, min(char['x'], target_area['x'] + target_area['width'] - 8))
-        char['y'] = max(target_area['y'] + 8, min(char['y'], target_area['y'] + target_area['height'] - 8))
+        # 确保在目标区域内，且远离其他门
+        char['x'] = max(target_area['x'] + 15, min(char['x'], target_area['x'] + target_area['width'] - 15))
+        char['y'] = max(target_area['y'] + 15, min(char['y'], target_area['y'] + target_area['height'] - 15))
         
         # 如果 path 下一个节点是当前门的中心，移除它
         if char.get('path') and len(char['path']) > 0:
@@ -865,7 +851,6 @@ class SceneMap(QWidget):
                 char['move_direction'] = (0, 0)
             
             # === 楼梯传送检测 ===
-            # 当角色靠近楼梯门中心时，直接传送到目标区域
             import time as pytime
             now = pytime.time()
             if char.get('teleport_cooldown', 0) < now:
@@ -875,9 +860,9 @@ class SceneMap(QWidget):
                     door_cx = door['x'] + door['width'] / 2
                     door_cy = door['y'] + door['height'] / 2
                     dist_to_door = ((char['x'] - door_cx) ** 2 + (char['y'] - door_cy) ** 2) ** 0.5
-                    if dist_to_door < 18:  # 靠近门中心 18px 内触发传送
+                    if dist_to_door < 30:  # 增大触发范围到 30px，避免卡住
                         self._teleport_character(char_id, door)
-                        char['teleport_cooldown'] = now + 0.6  # 0.6秒冷却，防止死循环
+                        char['teleport_cooldown'] = now + 1.0  # 1秒冷却，确保远离
                         updated = True
                         break
         
