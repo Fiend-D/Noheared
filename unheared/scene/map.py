@@ -649,7 +649,7 @@ class SceneMap(QWidget):
         # 门（传送逻辑需要保留，但简化绘制）
         for door in self.scene.get('doors', []):
             if self._is_stair_door(door):
-                self._draw_door(painter, door)
+                self._draw_stair_marker(painter, door)
         
         # === 监听范围 ===
         listener_gradient = QRadialGradient(QPointF(self.listener_pos), self.listener_radius)
