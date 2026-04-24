@@ -439,6 +439,9 @@ class MainWindow(QMainWindow):
             position = (value / 1000) * duration
             self.audio_player.set_position(position)
             self.update_character_positions(position)
+            self._subtitle_history.clear()
+            self._seen_dialogue_ids.clear()
+            self.dialogue_display.clear()
             self.update_dialogues(position)
 
     def update_ui(self):
@@ -538,6 +541,11 @@ class MainWindow(QMainWindow):
     def update_footstep_sounds(self):
         """更新脚步声效：根据监听点周围角色的移动状态播放走路/跑动声"""
         if not hasattr(self.audio_player, '_footstep_channels') or not self.audio_player._footstep_channels:
+            return
+        # 未播放时禁止脚步声
+        if not self.audio_player.is_playing():
+            for m in ('walk', 'run'):
+                self.audio_player.set_footstep_volume(m, 0.0)
             return
         state = self.scene_map.get_footstep_state()
         for movement_type, volume in state.items():

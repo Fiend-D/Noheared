@@ -15,6 +15,7 @@ class SceneMap(QWidget):
     # 碰撞避免参数
     MIN_SEPARATION = 30
     MIN_SEPARATION_STAIRS = 18
+    DOOR_SEPARATION = 8  # 门口区域使用更小的间距避免堵门
     
     # 楼层区域（用于视觉区分和楼梯传送）
     UPPER_FLOOR_AREAS = {'露天甲板', '餐厅', '赌场', '音乐厅', '厨房', '医务室',
@@ -79,6 +80,9 @@ class SceneMap(QWidget):
         self.move_timer = QTimer(self)
         self.move_timer.timeout.connect(self.update_positions)
         self.move_timer.start(16)
+        
+        # 门口速度加速计数器
+        self._door_speed_boost = {}
     
     def _is_stair_area(self, area_name):
         """判断区域是否为楼梯"""
@@ -213,7 +217,9 @@ class SceneMap(QWidget):
         self.speaking_animations = {}
         self.selected_character = None
         self.hovered_character = None
-        for char_id, data in characters_data.items():
+        self._character_labels = {}
+        for i, (char_id, data) in enumerate(characters_data.items()):
+            self._character_labels[char_id] = chr(ord('A') + i)
             color_hex = data.get('color', '#FFFFFF')
             color = QColor(color_hex)
             self.characters[char_id] = {
@@ -226,6 +232,7 @@ class SceneMap(QWidget):
                 'info': '',
                 'path': [],
                 'movement': 'walk',
+                'is_moving': False,
                 'is_moving': False,
                 'move_direction': (0, 0)
             }
@@ -304,6 +311,26 @@ class SceneMap(QWidget):
         cy = max(area['y'] + margin, min(y, area['y'] + area['height'] - margin))
         return (cx, cy)
     
+    def _is_near_door(self, x, y, margin=15):
+        """检查坐标是否在某个门附近"""
+        for door in self.scene.get('doors', []):
+            door_cx = door['x'] + door['width'] / 2
+            door_cy = door['y'] + door['height'] / 2
+            if (abs(x - door_cx) < door['width'] / 2 + margin and
+                abs(y - door_cy) < door['height'] / 2 + margin):
+                return True
+        return False
+    
+    def _areas_connected_by_door(self, area1, area2):
+        """检查两个区域是否有门直接连接"""
+        if area1 == area2:
+            return True
+        for door in self.scene.get('doors', []):
+            if (door['area1'] == area1 and door['area2'] == area2) or \
+               (door['area1'] == area2 and door['area2'] == area1):
+                return True
+        return False
+    
     def find_path_from(self, from_x, from_y, target_x, target_y):
         """寻找从指定位置到目标位置的路径（必须经门穿越）"""
         cur_area = self.get_character_area(from_x, from_y)
@@ -335,7 +362,7 @@ class SceneMap(QWidget):
                     queue.append((neighbor, path + [(door, neighbor)]))
         
         return [(target_x, target_y)]
-
+    
     def _get_door_transit_points(self, door, from_area_name, to_area_name):
         """根据两侧区域相对位置，生成穿门时的入口点和出口点"""
         door_cx = door['x'] + door['width'] / 2
@@ -845,20 +872,27 @@ class SceneMap(QWidget):
                         painter.setPen(QPen(QColor(255, 255, 255, 100), 1))
                         painter.drawLine(int(cx), int(cy), int(ax), int(ay))
             
-            # === 标记后显示名称（更精致的标签） ===
+            # === 标签：字母标识 + 标记后显示名称 ===
+            label = self._character_labels.get(char_id, '?')
             if char['marked'] and char.get('assigned_name'):
-                # 文字阴影
-                painter.setPen(QPen(QColor(20, 22, 30), 1))
-                font = painter.font()
-                font.setPointSize(9)
-                font.setBold(True)
-                painter.setFont(font)
-                painter.drawText(int(cx - 28), int(cy - 20), char['assigned_name'])
-                # 文字
-                painter.setPen(QPen(QColor(220, 220, 240), 1))
-                painter.drawText(int(cx - 29), int(cy - 21), char['assigned_name'])
-                font.setBold(False)
-                painter.setFont(font)
+                label = f'{label}:{char["assigned_name"]}'
+            font = painter.font()
+            font.setPointSize(9)
+            font.setBold(True)
+            painter.setFont(font)
+            text_w = painter.fontMetrics().horizontalAdvance(label)
+            # 半透明背景
+            painter.setPen(Qt.PenStyle.NoPen)
+            painter.setBrush(QBrush(QColor(20, 22, 30, 180)))
+            painter.drawRoundedRect(int(cx - text_w // 2 - 4), int(cy - 22), text_w + 8, 18, 3, 3)
+            # 文字阴影
+            painter.setPen(QPen(QColor(20, 22, 30), 1))
+            painter.drawText(int(cx - text_w // 2), int(cy - 10), label)
+            # 文字
+            painter.setPen(QPen(QColor(220, 220, 240), 1))
+            painter.drawText(int(cx - text_w // 2 - 1), int(cy - 11), label)
+            font.setBold(False)
+            painter.setFont(font)
             
             # === 标记状态（金色外圈） ===
             if char['marked']:
@@ -893,11 +927,13 @@ class SceneMap(QWidget):
     def update_character_position(self, char_id, x, y, movement='walk'):
         """设置角色目标位置，并计算路径"""
         if char_id in self.characters:
-            self.characters[char_id]['target_x'] = x
-            self.characters[char_id]['target_y'] = y
-            self.characters[char_id]['movement'] = movement
-            path = self.find_path(char_id, x, y)
-            self.characters[char_id]['path'] = path
+            char = self.characters[char_id]
+            if (char['target_x'] != x or char['target_y'] != y or
+                    char.get('movement') != movement):
+                char['target_x'] = x
+                char['target_y'] = y
+                char['movement'] = movement
+                char['path'] = self.find_path(char_id, x, y)
     
     def resolve_collisions(self):
         """全局冲突解决：迭代推开重叠的角色"""
@@ -911,11 +947,18 @@ class SceneMap(QWidget):
                     dy = c1['y'] - c2['y']
                     dist = (dx ** 2 + dy ** 2) ** 0.5
                     
-                    # 根据是否在楼梯区域使用不同的最小间距
                     area1 = self.get_character_area(c1['x'], c1['y'])
                     area2 = self.get_character_area(c2['x'], c2['y'])
                     in_stairs = (area1 and self._is_stair_area(area1)) or (area2 and self._is_stair_area(area2))
-                    min_sep = self.MIN_SEPARATION_STAIRS if in_stairs else self.MIN_SEPARATION
+                    
+                    # 门口区域使用更小间距，避免两人堵门
+                    near_door = self._is_near_door(c1['x'], c1['y']) or self._is_near_door(c2['x'], c2['y'])
+                    if near_door:
+                        min_sep = self.DOOR_SEPARATION
+                    elif in_stairs:
+                        min_sep = self.MIN_SEPARATION_STAIRS
+                    else:
+                        min_sep = self.MIN_SEPARATION
                     
                     if dist < min_sep and dist > 0:
                         overlap = (min_sep - dist) / 2.0
@@ -924,16 +967,21 @@ class SceneMap(QWidget):
                         c1['y'] += dy * ratio
                         c2['x'] -= dx * ratio
                         c2['y'] -= dy * ratio
-                        # 优先留在原区域，避免被挤到墙另一侧
+                        
                         area1_after = self.get_character_area(c1['x'], c1['y'])
                         area2_after = self.get_character_area(c2['x'], c2['y'])
+                        
+                        # 如果有门连接两个区域，允许通过（不拉回原区域）
                         if area1 and area1_after != area1:
-                            c1['x'], c1['y'] = self._constrain_to_area(c1['x'], c1['y'], area1)
-                        else:
+                            if not self._areas_connected_by_door(area1, area1_after):
+                                c1['x'], c1['y'] = self._constrain_to_area(c1['x'], c1['y'], area1)
+                        elif area1 is None and near_door:
                             c1['x'], c1['y'] = self.constrain_to_walkable(c1['x'], c1['y'])
+                        
                         if area2 and area2_after != area2:
-                            c2['x'], c2['y'] = self._constrain_to_area(c2['x'], c2['y'], area2)
-                        else:
+                            if not self._areas_connected_by_door(area2, area2_after):
+                                c2['x'], c2['y'] = self._constrain_to_area(c2['x'], c2['y'], area2)
+                        elif area2 is None and near_door:
                             c2['x'], c2['y'] = self.constrain_to_walkable(c2['x'], c2['y'])
     
     def update_positions(self):
@@ -945,7 +993,10 @@ class SceneMap(QWidget):
             if char.get('path') and len(char['path']) > 0:
                 next_x, next_y = char['path'][0]
             else:
-                next_x, next_y = char['target_x'], char['target_y']
+                # 已到达最终目标，不产生移动
+                char['is_moving'] = False
+                char['move_direction'] = (0, 0)
+                continue
             
             dx = next_x - char['x']
             dy = next_y - char['y']
@@ -953,6 +1004,11 @@ class SceneMap(QWidget):
             
             if distance > 1.0:
                 speed = self._get_movement_speed(char_id)
+                # 门口速度提升，帮助快速通过
+                boost = self._door_speed_boost.get(char_id, 0)
+                if boost > 0:
+                    speed *= (1.0 + boost * 0.05)
+                    self._door_speed_boost[char_id] = boost - 1
                 # 距离目标很近时减速
                 speed = min(speed, distance)
                 ratio = speed / distance
@@ -964,7 +1020,9 @@ class SceneMap(QWidget):
             elif distance > 0.1:
                 char['x'] = next_x
                 char['y'] = next_y
-                char['is_moving'] = True
+                if char.get('path') and len(char['path']) > 0:
+                    char['path'].pop(0)
+                char['is_moving'] = bool(char.get('path') and len(char['path']) > 0)
                 char['move_direction'] = (0, 0)
                 updated = True
             else:
@@ -976,15 +1034,30 @@ class SceneMap(QWidget):
             # 如果已经进入门洞区域，直接跳过当前路径点，减少门口来回抖动
             if char.get('path'):
                 for door in self.scene.get('doors', []):
-                    if (door['x'] - 4 <= char['x'] <= door['x'] + door['width'] + 4 and
-                        door['y'] - 4 <= char['y'] <= door['y'] + door['height'] + 4):
+                    dx4, dy4 = 4, 4
+                    in_door = (door['x'] - dx4 <= char['x'] <= door['x'] + door['width'] + dx4 and
+                               door['y'] - dy4 <= char['y'] <= door['y'] + door['height'] + dy4)
+                    if in_door:
+                        # 跳过仍在门内的路径点
                         while char['path']:
                             px, py = char['path'][0]
-                            if (door['x'] - 4 <= px <= door['x'] + door['width'] + 4 and
-                                door['y'] - 4 <= py <= door['y'] + door['height'] + 4):
+                            if (door['x'] - dx4 <= px <= door['x'] + door['width'] + dx4 and
+                                door['y'] - dy4 <= py <= door['y'] + door['height'] + dy4):
                                 char['path'].pop(0)
                             else:
                                 break
+                        # 如果跳过后还有路径点，且角色已到达门对侧，跳过还在原侧的路径点
+                        if char.get('path') and len(char['path']) >= 2:
+                            current_area = self.get_character_area(char['x'], char['y'])
+                            next_area = self.get_character_area(char['path'][0][0], char['path'][0][1])
+                            if (current_area is not None and next_area is not None and
+                                    current_area != next_area and
+                                    self._areas_connected_by_door(current_area, next_area)):
+                                char['path'].pop(0)
+                        # 穿门时给个速度提升，快速通过
+                        if char.get('path') and char.get('is_moving', False):
+                            self._door_speed_boost.get(char_id, 0)
+                            self._door_speed_boost[char_id] = min(10, self._door_speed_boost.get(char_id, 0) + 1)
                         break
             
             # === 楼梯传送检测 ===
@@ -1104,10 +1177,11 @@ class SceneMap(QWidget):
             distance = ((event.pos().x() - char['x']) ** 2 + (event.pos().y() - char['y']) ** 2) ** 0.5
             if distance <= 18:
                 self.hovered_character = char_id
+                label = self._character_labels.get(char_id, '?')
                 if char['marked'] and char.get('assigned_name'):
-                    tooltip = f"? [{char['assigned_name']}]"
+                    tooltip = f"{label} [{char['assigned_name']}]"
                 else:
-                    tooltip = "?"
+                    tooltip = label
                 if char['info']:
                     tooltip += f"\n{char['info']}"
                 QToolTip.showText(event.globalPosition().toPoint(), tooltip, self)

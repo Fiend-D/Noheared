@@ -222,7 +222,7 @@
       "positions": [
         {
           "start": 0,
-          "end": 240,
+          "end": 180,
           "position": [
             160,
             130
@@ -230,7 +230,7 @@
           "movement": "walk"
         },
         {
-          "start": 240,
+          "start": 180,
           "end": 560,
           "position": [
             500,
@@ -672,7 +672,7 @@
       "positions": [
         {
           "start": 0,
-          "end": 120,
+          "end": 150,
           "position": [
             180,
             170
@@ -680,11 +680,11 @@
           "movement": "walk"
         },
         {
-          "start": 120,
+          "start": 150,
           "end": 240,
           "position": [
-            170,
-            520
+            520,
+            330
           ],
           "movement": "walk"
         },
