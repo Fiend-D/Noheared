@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import (
     QTextEdit, QMessageBox, QFrame, QSplitter, QComboBox
 )
 from PyQt6.QtCore import Qt, QTimer
+import os
 from unheared.audio.player import AudioPlayer
 from unheared.scene.map import SceneMap
 from unheared.case.case import CaseManager
@@ -370,10 +371,10 @@ class MainWindow(QMainWindow):
                 self.audio_player.add_track(track_id, file_path)
 
             # 加载脚步声音效
-            import os
-            project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-            walk_path = os.path.join(project_root, 'unheared', 'audio', 'footsteps', 'walk.wav')
-            run_path = os.path.join(project_root, 'unheared', 'audio', 'footsteps', 'run.wav')
+            from unheared.paths import get_base_dir
+            base_dir = get_base_dir()
+            walk_path = os.path.join(base_dir, 'unheared', 'audio', 'footsteps', 'walk.wav')
+            run_path = os.path.join(base_dir, 'unheared', 'audio', 'footsteps', 'run.wav')
             self.audio_player.add_footstep_tracks(walk_path, run_path)
 
             # 加载场景

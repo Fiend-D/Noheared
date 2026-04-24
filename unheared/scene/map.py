@@ -337,7 +337,7 @@ class SceneMap(QWidget):
         return [(target_x, target_y)]
 
     def _get_door_transit_points(self, door, from_area_name, to_area_name):
-        """根据门的方向和两侧区域，生成穿门时的入口点和出口点"""
+        """根据两侧区域相对位置，生成穿门时的入口点和出口点"""
         door_cx = door['x'] + door['width'] / 2
         door_cy = door['y'] + door['height'] / 2
         from_area = next((a for a in self.scene.get('areas', []) if a['name'] == from_area_name), None)
@@ -353,23 +353,29 @@ class SceneMap(QWidget):
 
         margin = 10
         pass_span = 14
-        if door['width'] >= door['height']:
-            # 水平门：上下穿越
+
+        # 用y范围重叠判断：若两区域y不重叠（或微小重叠 <=20px），则为上下堆叠 → 垂直穿越
+        fb = from_area['y'] + from_area['height']
+        tb = to_area['y'] + to_area['height']
+        y_overlap = min(fb, tb) - max(from_area['y'], to_area['y'])
+        stacked = y_overlap <= 20
+
+        if stacked:
+            # 上下相邻 → 垂直穿越：从门上下侧出入
             edge_y = door['y'] if from_cy < door_cy else door['y'] + door['height']
             toward_y = door['y'] if to_cy < door_cy else door['y'] + door['height']
             entry_x = max(door['x'] + margin, min(from_cx, door['x'] + door['width'] - margin))
             exit_x = max(door['x'] + margin, min(to_cx, door['x'] + door['width'] - margin))
             entry_y = edge_y - pass_span if from_cy < door_cy else edge_y + pass_span
             exit_y = toward_y - pass_span if to_cy < door_cy else toward_y + pass_span
-            return (entry_x, entry_y, exit_x, exit_y)
-
-        # 垂直门：左右穿越
-        edge_x = door['x'] if from_cx < door_cx else door['x'] + door['width']
-        toward_x = door['x'] if to_cx < door_cx else door['x'] + door['width']
-        entry_y = max(door['y'] + margin, min(from_cy, door['y'] + door['height'] - margin))
-        exit_y = max(door['y'] + margin, min(to_cy, door['y'] + door['height'] - margin))
-        entry_x = edge_x - pass_span if from_cx < door_cx else edge_x + pass_span
-        exit_x = toward_x - pass_span if to_cx < door_cx else toward_x + pass_span
+        else:
+            # 左右相邻 → 水平穿越：从门左右侧出入
+            edge_x = door['x'] if from_cx < door_cx else door['x'] + door['width']
+            toward_x = door['x'] if to_cx < door_cx else door['x'] + door['width']
+            entry_y = max(door['y'] + margin, min(from_cy, door['y'] + door['height'] - margin))
+            exit_y = max(door['y'] + margin, min(to_cy, door['y'] + door['height'] - margin))
+            entry_x = edge_x - pass_span if from_cx < door_cx else edge_x + pass_span
+            exit_x = toward_x - pass_span if to_cx < door_cx else toward_x + pass_span
         return (entry_x, entry_y, exit_x, exit_y)
     
     def find_path(self, char_id, target_x, target_y):
@@ -519,23 +525,18 @@ class SceneMap(QWidget):
         # 先画墙壁缺口
         self._draw_wall_gap(painter, door)
         
-        # 方向判断 & 目标区域
-        area1_floor = self._get_area_floor(door['area1'])
-        area2_floor = self._get_area_floor(door['area2'])
-        if area1_floor == 'upper' and area2_floor == 'lower':
-            arrow = '↓'
-            target_name = door['area2']
-        elif area1_floor == 'lower' and area2_floor == 'upper':
-            arrow = '↑'
-            target_name = door['area2']
+        # 方向判断 & 目标区域：以靠近楼梯的区域为入口，对侧为目的地
+        a1d = next((a for a in self.scene['areas'] if a['name'] == door['area1']), None)
+        a2d = next((a for a in self.scene['areas'] if a['name'] == door['area2']), None)
+        a1_cx = a1d['x'] + a1d['width'] / 2; a1_cy = a1d['y'] + a1d['height'] / 2
+        a2_cx = a2d['x'] + a2d['width'] / 2; a2_cy = a2d['y'] + a2d['height'] / 2
+        d1 = (cx - a1_cx)**2 + (cy - a1_cy)**2
+        d2 = (cx - a2_cx)**2 + (cy - a2_cy)**2
+        if d2 < d1:
+            target_name = door['area1']; closer_cy = a2_cy; target_cy = a1_cy
         else:
-            # 上层内部
-            if area1_floor == 'upper':
-                arrow = '↓'
-                target_name = door['area2']
-            else:
-                arrow = '↑'
-                target_name = door['area2']
+            target_name = door['area2']; closer_cy = a1_cy; target_cy = a2_cy
+        arrow = '↑' if target_cy < closer_cy else '↓'
         
         # 阶梯底板渐变（更精致）
         if w >= h:
@@ -584,18 +585,19 @@ class SceneMap(QWidget):
             painter.drawLine(int(cx), int(cy + 6), int(cx - 4), int(cy + 2))
             painter.drawLine(int(cx), int(cy + 6), int(cx + 4), int(cy + 2))
 
-        label_text = target_name[:3]
+        label_text = target_name[:4]
         font = painter.font()
         old_size = font.pointSize()
         font.setPointSize(8)
         font.setBold(True)
         painter.setFont(font)
+        bw, bh = 56, 16
         painter.setPen(QPen(QColor(22, 30, 42, 220), 1))
-        painter.drawText(int(cx - 13), int(cy + 12), 28, 10,
+        painter.drawText(int(cx - bw // 2), int(cy + 12), bw, bh,
                         Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
                         label_text)
         painter.setPen(QPen(QColor(220, 236, 255, 220), 1))
-        painter.drawText(int(cx - 14), int(cy + 11), 28, 10,
+        painter.drawText(int(cx - bw // 2 + 1), int(cy + 11), bw, bh,
                         Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter,
                         label_text)
         font.setPointSize(old_size)
@@ -641,17 +643,17 @@ class SceneMap(QWidget):
         if upper_y_max > upper_y_min:
             mid_y = (upper_y_min + upper_y_max) / 2
             painter.setPen(QPen(QColor(120, 150, 190, 180), 1))
-            painter.drawText(int(label_x), int(mid_y - 30), 20, 60,
+            painter.drawText(int(label_x), int(mid_y - 24), 36, 48,
                             Qt.AlignmentFlag.AlignCenter | Qt.TextFlag.TextWordWrap,
-                            "上层\n甲板")
+                            "上层")
         
         # 下层标注
         if lower_y_max > lower_y_min:
             mid_y = (lower_y_min + lower_y_max) / 2
             painter.setPen(QPen(QColor(120, 170, 150, 180), 1))
-            painter.drawText(int(label_x), int(mid_y - 30), 20, 60,
+            painter.drawText(int(label_x), int(mid_y - 24), 36, 48,
                             Qt.AlignmentFlag.AlignCenter | Qt.TextFlag.TextWordWrap,
-                            "下层\n舱室")
+                            "下层")
         
         font.setPointSize(old_size)
         font.setBold(False)

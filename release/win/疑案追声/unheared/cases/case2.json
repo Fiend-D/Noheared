@@ -1,0 +1,317 @@
+{
+  "name": "剧院魅影",
+  "description": "演出前夕，剧院后台发生了一系列奇怪的事件。",
+  "duration": 90,
+  "scene": {
+    "name": "剧院后台",
+    "width": 800,
+    "height": 450,
+    "areas": [
+      {
+        "name": "化妆间",
+        "x": 50,
+        "y": 50,
+        "width": 250,
+        "height": 180
+      },
+      {
+        "name": "舞台",
+        "x": 300,
+        "y": 50,
+        "width": 450,
+        "height": 180
+      },
+      {
+        "name": "走廊",
+        "x": 50,
+        "y": 230,
+        "width": 700,
+        "height": 80
+      },
+      {
+        "name": "道具室",
+        "x": 50,
+        "y": 310,
+        "width": 250,
+        "height": 100
+      }
+    ],
+    "doors": [
+      {
+        "name": "舞台门",
+        "area1": "化妆间",
+        "area2": "舞台",
+        "x": 300,
+        "y": 120,
+        "width": 10,
+        "height": 40
+      },
+      {
+        "name": "走廊门(化妆)",
+        "area1": "化妆间",
+        "area2": "走廊",
+        "x": 150,
+        "y": 230,
+        "width": 30,
+        "height": 10
+      },
+      {
+        "name": "走廊门(舞台)",
+        "area1": "舞台",
+        "area2": "走廊",
+        "x": 500,
+        "y": 230,
+        "width": 30,
+        "height": 10
+      },
+      {
+        "name": "道具门",
+        "area1": "道具室",
+        "area2": "走廊",
+        "x": 150,
+        "y": 310,
+        "width": 30,
+        "height": 10
+      }
+    ]
+  },
+  "characters": {
+    "D": {
+      "name": "演员A",
+      "color": "#FF4444",
+      "positions": [
+        {
+          "start": 0,
+          "end": 15,
+          "position": [
+            120,
+            120
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "position": [
+            450,
+            120
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 30,
+          "end": 50,
+          "position": [
+            250,
+            260
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 50,
+          "end": 90,
+          "position": [
+            550,
+            150
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "E": {
+      "name": "演员B",
+      "color": "#44FF44",
+      "positions": [
+        {
+          "start": 0,
+          "end": 15,
+          "position": [
+            200,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "position": [
+            500,
+            100
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 30,
+          "end": 50,
+          "position": [
+            280,
+            260
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 50,
+          "end": 90,
+          "position": [
+            600,
+            130
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "F": {
+      "name": "导演",
+      "color": "#4488FF",
+      "positions": [
+        {
+          "start": 0,
+          "end": 15,
+          "position": [
+            160,
+            180
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "position": [
+            400,
+            160
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 30,
+          "end": 50,
+          "position": [
+            220,
+            260
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 50,
+          "end": 90,
+          "position": [
+            480,
+            180
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "G": {
+      "name": "道具师",
+      "color": "#FFAA00",
+      "positions": [
+        {
+          "start": 0,
+          "end": 33,
+          "position": [
+            130,
+            360
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 33,
+          "end": 50,
+          "position": [
+            380,
+            260
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 50,
+          "end": 90,
+          "position": [
+            520,
+            120
+          ],
+          "movement": "walk"
+        }
+      ]
+    }
+  },
+  "audio_tracks": {
+    "D": "audio/case2/actorA.wav",
+    "E": "audio/case2/actorB.wav",
+    "F": "audio/case2/director.wav",
+    "G": "audio/case2/props.wav"
+  },
+  "dialogues": [
+    {
+      "character": "F",
+      "text": "演出还有一小时，大家准备好了吗？",
+      "start": 2,
+      "end": 9
+    },
+    {
+      "character": "D",
+      "text": "导演，我的台词还没背熟...",
+      "start": 11,
+      "end": 17
+    },
+    {
+      "character": "E",
+      "text": "我的服装怎么少了一件？",
+      "start": 21,
+      "end": 27
+    },
+    {
+      "character": "G",
+      "text": "道具都检查过了，没有问题。",
+      "start": 33,
+      "end": 40
+    },
+    {
+      "character": "F",
+      "text": "所有人到舞台集合，最后走一遍！",
+      "start": 51,
+      "end": 59
+    },
+    {
+      "character": "D",
+      "text": "今天的观众好像比预期多。",
+      "start": 66,
+      "end": 72
+    },
+    {
+      "character": "E",
+      "text": "别紧张，我们练了这么久。",
+      "start": 74,
+      "end": 80
+    },
+    {
+      "character": "G",
+      "text": "帷幕准备好，随时可以开始。",
+      "start": 82,
+      "end": 89
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "question": "演出前谁在道具室检查道具？",
+      "options": [
+        "导演",
+        "道具师",
+        "演员A"
+      ],
+      "answer": "道具师"
+    },
+    {
+      "id": "q2",
+      "question": "谁让所有人到舞台集合？",
+      "options": [
+        "导演",
+        "道具师",
+        "演员A"
+      ],
+      "answer": "导演"
+    }
+  ]
+}

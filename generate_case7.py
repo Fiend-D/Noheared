@@ -31,24 +31,24 @@ case = {
             {'name': '露台', 'x': 50, 'y': 690, 'width': 900, 'height': 140},
         ],
         'doors': [
-            # 一层横向 (Row 1, same-floor horizontal doors: 50x20)
-            {'name': '大厅-餐厅', 'area1': '大厅', 'area2': '餐厅',   'x': 350, 'y': 110, 'width': 50, 'height': 20},
-            {'name': '餐厅-厨房', 'area1': '餐厅', 'area2': '厨房',   'x': 680, 'y': 110, 'width': 50, 'height': 20},
-            # Row 2 横向 (same-floor horizontal)
-            {'name': '宴会厅-酒窖', 'area1': '宴会厅', 'area2': '酒窖', 'x': 390, 'y': 335, 'width': 50, 'height': 20},
-            # 一层纵向 (Row 1↔Row 2, vertical doors: 30x50)
-            {'name': '大厅-宴会厅', 'area1': '大厅',   'area2': '宴会厅', 'x': 185, 'y': 210, 'width': 30, 'height': 50},
-            {'name': '餐厅-酒窖',   'area1': '餐厅',   'area2': '酒窖',   'x': 525, 'y': 210, 'width': 30, 'height': 50},
-            # 楼梯 (Ground floor ↔ 2nd floor, horizontal 30x20, at y=460)
-            {'name': '大厅楼梯', 'area1': '大厅',     'area2': '老板套房', 'x': 170, 'y': 460, 'width': 30, 'height': 20},
-            {'name': '餐厅楼梯', 'area1': '餐厅',     'area2': '客房A',    'x': 540, 'y': 460, 'width': 30, 'height': 20},
-            # 二层横向 (Row 3, same-floor horizontal: 50x20)
-            {'name': '套房-客房A', 'area1': '老板套房', 'area2': '客房A', 'x': 300, 'y': 550, 'width': 50, 'height': 20},
-            {'name': '客房A-客房B', 'area1': '客房A',   'area2': '客房B', 'x': 570, 'y': 550, 'width': 50, 'height': 20},
-            # 二层→露台纵向 (Row 3↔Row 4, vertical: 30x50)
-            {'name': '套房-露台', 'area1': '老板套房', 'area2': '露台', 'x': 160, 'y': 640, 'width': 30, 'height': 50},
-            {'name': '客房A-露台', 'area1': '客房A',   'area2': '露台', 'x': 445, 'y': 640, 'width': 30, 'height': 50},
-            {'name': '客房B-露台', 'area1': '客房B',   'area2': '露台', 'x': 715, 'y': 640, 'width': 30, 'height': 50},
+            # 一层横向 (Row 1, side-by-side: 20x40 vertical doors → horizontal traversal)
+            {'name': '大厅-餐厅', 'area1': '大厅', 'area2': '餐厅',   'x': 365, 'y': 100, 'width': 20, 'height': 40},
+            {'name': '餐厅-厨房', 'area1': '餐厅', 'area2': '厨房',   'x': 695, 'y': 100, 'width': 20, 'height': 40},
+            # Row 2 横向 (side-by-side)
+            {'name': '宴会厅-酒窖', 'area1': '宴会厅', 'area2': '酒窖', 'x': 405, 'y': 325, 'width': 20, 'height': 40},
+            # 一层纵向 (Row 1↔Row 2, stacked: 40x20 horizontal doors → vertical traversal)
+            {'name': '大厅-宴会厅', 'area1': '大厅',   'area2': '宴会厅', 'x': 175, 'y': 220, 'width': 40, 'height': 20},
+            {'name': '餐厅-酒窖',   'area1': '餐厅',   'area2': '酒窖',   'x': 515, 'y': 220, 'width': 40, 'height': 20},
+            # 楼梯 (Ground floor ↔ 2nd floor, 30x20 horizontal, at y=460)
+            {'name': '大厅楼梯', 'area1': '大厅',     'area2': '老板套房', 'x': 170, 'y': 455, 'width': 30, 'height': 20},
+            {'name': '餐厅楼梯', 'area1': '餐厅',     'area2': '客房A',    'x': 540, 'y': 455, 'width': 30, 'height': 20},
+            # 二层横向 (Row 3, side-by-side: 20x40 vertical)
+            {'name': '套房-客房A', 'area1': '老板套房', 'area2': '客房A', 'x': 315, 'y': 540, 'width': 20, 'height': 40},
+            {'name': '客房A-客房B', 'area1': '客房A',   'area2': '客房B', 'x': 585, 'y': 540, 'width': 20, 'height': 40},
+            # 二层→露台纵向 (Row 3↔Row 4, stacked: 40x20 horizontal)
+            {'name': '套房-露台', 'area1': '老板套房', 'area2': '露台', 'x': 150, 'y': 650, 'width': 40, 'height': 20},
+            {'name': '客房A-露台', 'area1': '客房A',   'area2': '露台', 'x': 435, 'y': 650, 'width': 40, 'height': 20},
+            {'name': '客房B-露台', 'area1': '客房B',   'area2': '露台', 'x': 705, 'y': 650, 'width': 40, 'height': 20},
         ]
     },
     'characters': {

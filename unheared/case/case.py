@@ -3,6 +3,7 @@
 
 import json
 import os
+from unheared.paths import get_base_dir
 
 class CaseManager:
     def __init__(self):
@@ -16,19 +17,11 @@ class CaseManager:
                 self.current_case = json.load(f)
             # 修复音频文件路径
             if 'audio_tracks' in self.current_case:
-                # 获取项目根目录
-                current_file = os.path.abspath(__file__)
-                # current_file: /home/zhaohaipeng/WorkSpacee/qt/unheared/unheared/case/case.py
-                # 项目根目录是 /home/zhaohaipeng/WorkSpacee/qt/unheared
-                project_root = os.path.dirname(os.path.dirname(os.path.dirname(current_file)))
+                base_dir = get_base_dir()
 
                 for track_id, file_path in self.current_case['audio_tracks'].items():
-                    # 音频文件实际在 unheared/audio/ 目录下
-                    # 如 case1.json 中的 "audio/case1/manager.wav"
-                    # 实际路径是 /home/zhaohaipeng/WorkSpacee/qt/unheared/unheared/audio/case1/manager.wav
                     if not os.path.isabs(file_path):
-                        # 构建正确的路径：project_root + 'unheared/' + file_path
-                        full_path = os.path.join(project_root, 'unheared', file_path)
+                        full_path = os.path.join(base_dir, 'unheared', file_path)
                     else:
                         full_path = file_path
 

@@ -30,22 +30,23 @@ case = {
             {'name': '客房C', 'x': 850, 'y': 500, 'width': 200, 'height': 200},
         ],
         'doors': [
-            # 一层连通
-            {'name': '大厅-餐厅', 'area1': '大厅', 'area2': '餐厅', 'x': 400, 'y': 120, 'width': 50, 'height': 10},
-            {'name': '餐厅-厨房', 'area1': '餐厅', 'area2': '厨房', 'x': 750, 'y': 120, 'width': 50, 'height': 10},
-            {'name': '大厅-书房', 'area1': '大厅', 'area2': '书房', 'x': 170, 'y': 250, 'width': 10, 'height': 30},
-            {'name': '大厅-会客厅', 'area1': '大厅', 'area2': '会客厅', 'x': 300, 'y': 250, 'width': 10, 'height': 30},
-            {'name': '会客厅-画室', 'area1': '会客厅', 'area2': '画室', 'x': 600, 'y': 350, 'width': 50, 'height': 10},
-            {'name': '餐厅-会客厅', 'area1': '餐厅', 'area2': '会客厅', 'x': 450, 'y': 250, 'width': 10, 'height': 30},
-            # 楼梯
-            {'name': '大厅楼梯', 'area1': '大厅', 'area2': '主人卧室', 'x': 200, 'y': 240, 'width': 40, 'height': 50},
-            {'name': '会客楼梯', 'area1': '会客厅', 'area2': '客房A', 'x': 450, 'y': 460, 'width': 40, 'height': 50},
-            {'name': '画室楼梯', 'area1': '画室', 'area2': '客房B', 'x': 750, 'y': 460, 'width': 40, 'height': 50},
-            {'name': '厨房楼梯', 'area1': '厨房', 'area2': '客房C', 'x': 925, 'y': 240, 'width': 40, 'height': 50},
-            # 二层连通
-            {'name': '主卧-客房A', 'area1': '主人卧室', 'area2': '客房A', 'x': 300, 'y': 580, 'width': 50, 'height': 10},
-            {'name': '客房A-客房B', 'area1': '客房A', 'area2': '客房B', 'x': 550, 'y': 580, 'width': 50, 'height': 10},
-            {'name': '客房B-客房C', 'area1': '客房B', 'area2': '客房C', 'x': 800, 'y': 580, 'width': 50, 'height': 10},
+            # 一层连通 (side-by-side: 20x40 vertical → horizontal traversal)
+            {'name': '大厅-餐厅', 'area1': '大厅', 'area2': '餐厅', 'x': 415, 'y': 105, 'width': 20, 'height': 40},
+            {'name': '餐厅-厨房', 'area1': '餐厅', 'area2': '厨房', 'x': 765, 'y': 105, 'width': 20, 'height': 40},
+            # 一层↔二层 (row-stacked: 40x20 horizontal → vertical traversal)
+            {'name': '大厅-书房', 'area1': '大厅', 'area2': '书房', 'x': 160, 'y': 255, 'width': 40, 'height': 20},
+            {'name': '大厅-会客厅', 'area1': '大厅', 'area2': '会客厅', 'x': 290, 'y': 255, 'width': 40, 'height': 20},
+            {'name': '会客厅-画室', 'area1': '会客厅', 'area2': '画室', 'x': 615, 'y': 335, 'width': 20, 'height': 40},
+            {'name': '餐厅-会客厅', 'area1': '餐厅', 'area2': '会客厅', 'x': 440, 'y': 255, 'width': 40, 'height': 20},
+            # 楼梯 (30x40 horizontal → vertical traversal for teleport)
+            {'name': '大厅楼梯', 'area1': '大厅', 'area2': '主人卧室', 'x': 195, 'y': 240, 'width': 40, 'height': 30},
+            {'name': '会客楼梯', 'area1': '会客厅', 'area2': '客房A', 'x': 445, 'y': 460, 'width': 40, 'height': 30},
+            {'name': '画室楼梯', 'area1': '画室', 'area2': '客房B', 'x': 745, 'y': 460, 'width': 40, 'height': 30},
+            {'name': '厨房楼梯', 'area1': '厨房', 'area2': '客房C', 'x': 920, 'y': 240, 'width': 40, 'height': 30},
+            # 二层连通 (side-by-side: 20x40 → horizontal traversal)
+            {'name': '主卧-客房A', 'area1': '主人卧室', 'area2': '客房A', 'x': 315, 'y': 565, 'width': 20, 'height': 40},
+            {'name': '客房A-客房B', 'area1': '客房A', 'area2': '客房B', 'x': 565, 'y': 565, 'width': 20, 'height': 40},
+            {'name': '客房B-客房C', 'area1': '客房B', 'area2': '客房C', 'x': 815, 'y': 565, 'width': 20, 'height': 40},
         ]
     },
     'characters': {

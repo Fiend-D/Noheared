@@ -1,0 +1,1693 @@
+{
+  "name": "永夜酒店谋杀案",
+  "description": "百年历史的永夜酒店即将关闭。最后一晚，老板赵天豪设宴告别，却在中途离奇中毒身亡。八位宾客各怀秘密，真凶究竟是谁？",
+  "duration": 1680,
+  "scene": {
+    "name": "永夜酒店",
+    "width": 1000,
+    "height": 840,
+    "areas": [
+      {
+        "name": "大厅",
+        "x": 50,
+        "y": 30,
+        "width": 300,
+        "height": 180
+      },
+      {
+        "name": "餐厅",
+        "x": 400,
+        "y": 30,
+        "width": 280,
+        "height": 180
+      },
+      {
+        "name": "厨房",
+        "x": 730,
+        "y": 30,
+        "width": 220,
+        "height": 180
+      },
+      {
+        "name": "宴会厅",
+        "x": 50,
+        "y": 260,
+        "width": 340,
+        "height": 170
+      },
+      {
+        "name": "酒窖",
+        "x": 440,
+        "y": 260,
+        "width": 200,
+        "height": 170
+      },
+      {
+        "name": "老板套房",
+        "x": 50,
+        "y": 480,
+        "width": 250,
+        "height": 160
+      },
+      {
+        "name": "客房A",
+        "x": 350,
+        "y": 480,
+        "width": 220,
+        "height": 160
+      },
+      {
+        "name": "客房B",
+        "x": 620,
+        "y": 480,
+        "width": 220,
+        "height": 160
+      },
+      {
+        "name": "露台",
+        "x": 50,
+        "y": 690,
+        "width": 900,
+        "height": 140
+      }
+    ],
+    "doors": [
+      {
+        "name": "大厅-餐厅",
+        "area1": "大厅",
+        "area2": "餐厅",
+        "x": 365,
+        "y": 100,
+        "width": 20,
+        "height": 40
+      },
+      {
+        "name": "餐厅-厨房",
+        "area1": "餐厅",
+        "area2": "厨房",
+        "x": 695,
+        "y": 100,
+        "width": 20,
+        "height": 40
+      },
+      {
+        "name": "宴会厅-酒窖",
+        "area1": "宴会厅",
+        "area2": "酒窖",
+        "x": 405,
+        "y": 325,
+        "width": 20,
+        "height": 40
+      },
+      {
+        "name": "大厅-宴会厅",
+        "area1": "大厅",
+        "area2": "宴会厅",
+        "x": 175,
+        "y": 220,
+        "width": 40,
+        "height": 20
+      },
+      {
+        "name": "餐厅-酒窖",
+        "area1": "餐厅",
+        "area2": "酒窖",
+        "x": 515,
+        "y": 220,
+        "width": 40,
+        "height": 20
+      },
+      {
+        "name": "大厅楼梯",
+        "area1": "大厅",
+        "area2": "老板套房",
+        "x": 170,
+        "y": 455,
+        "width": 30,
+        "height": 20
+      },
+      {
+        "name": "餐厅楼梯",
+        "area1": "餐厅",
+        "area2": "客房A",
+        "x": 540,
+        "y": 455,
+        "width": 30,
+        "height": 20
+      },
+      {
+        "name": "套房-客房A",
+        "area1": "老板套房",
+        "area2": "客房A",
+        "x": 315,
+        "y": 540,
+        "width": 20,
+        "height": 40
+      },
+      {
+        "name": "客房A-客房B",
+        "area1": "客房A",
+        "area2": "客房B",
+        "x": 585,
+        "y": 540,
+        "width": 20,
+        "height": 40
+      },
+      {
+        "name": "套房-露台",
+        "area1": "老板套房",
+        "area2": "露台",
+        "x": 150,
+        "y": 650,
+        "width": 40,
+        "height": 20
+      },
+      {
+        "name": "客房A-露台",
+        "area1": "客房A",
+        "area2": "露台",
+        "x": 435,
+        "y": 650,
+        "width": 40,
+        "height": 20
+      },
+      {
+        "name": "客房B-露台",
+        "area1": "客房B",
+        "area2": "露台",
+        "x": 705,
+        "y": 650,
+        "width": 40,
+        "height": 20
+      }
+    ]
+  },
+  "characters": {
+    "A": {
+      "name": "赵老板",
+      "color": "#1a5276",
+      "positions": [
+        {
+          "start": 0,
+          "end": 240,
+          "position": [
+            200,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            540,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 1680,
+          "position": [
+            540,
+            110
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "B": {
+      "name": "林婉",
+      "color": "#8e44ad",
+      "positions": [
+        {
+          "start": 0,
+          "end": 240,
+          "position": [
+            160,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            500,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            250,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            170,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            250,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            170,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            160,
+            130
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "C": {
+      "name": "小张",
+      "color": "#27ae60",
+      "positions": [
+        {
+          "start": 0,
+          "end": 120,
+          "position": [
+            280,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 120,
+          "end": 240,
+          "position": [
+            580,
+            140
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            580,
+            140
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            280,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            460,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            250,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            300,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            160,
+            150
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "D": {
+      "name": "李姐",
+      "color": "#d35400",
+      "positions": [
+        {
+          "start": 0,
+          "end": 240,
+          "position": [
+            840,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 480,
+          "position": [
+            620,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 480,
+          "end": 600,
+          "position": [
+            840,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 600,
+          "end": 720,
+          "position": [
+            620,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            840,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            500,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            620,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            250,
+            110
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "E": {
+      "name": "苏雨",
+      "color": "#2980b9",
+      "positions": [
+        {
+          "start": 0,
+          "end": 240,
+          "position": [
+            140,
+            90
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            460,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            250,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 840,
+          "position": [
+            460,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 840,
+          "end": 1080,
+          "position": [
+            300,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1080,
+          "end": 1320,
+          "position": [
+            460,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1320,
+          "end": 1560,
+          "position": [
+            250,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1560,
+          "end": 1680,
+          "position": [
+            140,
+            90
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "F": {
+      "name": "陈默",
+      "color": "#2c3e50",
+      "positions": [
+        {
+          "start": 0,
+          "end": 240,
+          "position": [
+            120,
+            150
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            520,
+            90
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            220,
+            90
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            500,
+            720
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            440,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            220,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            120,
+            150
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "G": {
+      "name": "周伯",
+      "color": "#7f8c8d",
+      "positions": [
+        {
+          "start": 0,
+          "end": 120,
+          "position": [
+            250,
+            90
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 120,
+          "end": 240,
+          "position": [
+            540,
+            310
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            480,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            200,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            350,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            480,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            200,
+            130
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            250,
+            90
+          ],
+          "movement": "walk"
+        }
+      ]
+    },
+    "H": {
+      "name": "王诚",
+      "color": "#c0392b",
+      "positions": [
+        {
+          "start": 0,
+          "end": 120,
+          "position": [
+            180,
+            170
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 120,
+          "end": 240,
+          "position": [
+            170,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 240,
+          "end": 560,
+          "position": [
+            560,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 560,
+          "end": 720,
+          "position": [
+            560,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 720,
+          "end": 960,
+          "position": [
+            170,
+            520
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 960,
+          "end": 1200,
+          "position": [
+            560,
+            110
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1200,
+          "end": 1440,
+          "position": [
+            180,
+            170
+          ],
+          "movement": "walk"
+        },
+        {
+          "start": 1440,
+          "end": 1680,
+          "position": [
+            520,
+            90
+          ],
+          "movement": "walk"
+        }
+      ]
+    }
+  },
+  "audio_tracks": {
+    "A": "audio/case7/赵老板.wav",
+    "B": "audio/case7/林婉.wav",
+    "C": "audio/case7/小张.wav",
+    "D": "audio/case7/李姐.wav",
+    "E": "audio/case7/苏雨.wav",
+    "F": "audio/case7/陈默.wav",
+    "G": "audio/case7/周伯.wav",
+    "H": "audio/case7/王诚.wav"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "question": "赵老板真正的死因是什么？",
+      "options": [
+        "氰化物中毒",
+        "窒息",
+        "刀伤",
+        "心脏病发作"
+      ],
+      "answer": "氰化物中毒"
+    },
+    {
+      "id": "q2",
+      "question": "谁是真凶？",
+      "options": [
+        "林婉",
+        "周伯",
+        "王诚",
+        "苏雨"
+      ],
+      "answer": "周伯"
+    },
+    {
+      "id": "q3",
+      "question": "凶手真正的动机是什么？",
+      "options": [
+        "谋取遗产",
+        "为前夫人复仇",
+        "掩盖贪污",
+        "嫉妒"
+      ],
+      "answer": "为前夫人复仇"
+    },
+    {
+      "id": "q4",
+      "question": "毒药被下在了哪里？",
+      "options": [
+        "酒杯边缘",
+        "食物中",
+        "醒酒器里",
+        "香水手帕上"
+      ],
+      "answer": "酒杯边缘"
+    },
+    {
+      "id": "q5",
+      "question": "谁在不知情的情况下协助了下毒？",
+      "options": [
+        "林婉",
+        "小张",
+        "王诚",
+        "李姐"
+      ],
+      "answer": "林婉"
+    }
+  ],
+  "dialogues": [
+    {
+      "character": "H",
+      "text": "各位晚上好，欢迎来到永夜酒店。今晚是酒店最后一夜，赵老板特别设宴感谢各位。",
+      "start": 5,
+      "end": 15
+    },
+    {
+      "character": "A",
+      "text": "（笑着迎客）欢迎欢迎！永夜酒店百年历史，今晚画上圆满句号。",
+      "start": 18,
+      "end": 28
+    },
+    {
+      "character": "E",
+      "text": "赵老板，久仰大名。这座酒店的建筑风格真是令人叹为观止。",
+      "start": 32,
+      "end": 40
+    },
+    {
+      "character": "A",
+      "text": "苏小姐过奖了。听说您是作家，想必对老建筑很感兴趣？",
+      "start": 43,
+      "end": 51
+    },
+    {
+      "character": "E",
+      "text": "是的，我正筹备一部关于老酒店的小说，永夜酒店的故事太适合了。",
+      "start": 54,
+      "end": 63
+    },
+    {
+      "character": "F",
+      "text": "（在一旁观察）确实，这里的一砖一瓦都写满了故事。",
+      "start": 66,
+      "end": 73
+    },
+    {
+      "character": "G",
+      "text": "（鞠躬）各位先到宴会厅稍作休息，晚餐将在半小时后开始。",
+      "start": 76,
+      "end": 85
+    },
+    {
+      "character": "B",
+      "text": "（低声对A）天豪，你真的决定了吗？这酒店是你们家的根基啊。",
+      "start": 88,
+      "end": 97
+    },
+    {
+      "character": "A",
+      "text": "（叹气）时代变了，婉。永夜的时代已经过去了。",
+      "start": 100,
+      "end": 107
+    },
+    {
+      "character": "D",
+      "text": "（在厨房忙碌）今晚的菜单可是我的拿手好戏。做了二十年，今晚是最后一次了。",
+      "start": 110,
+      "end": 120
+    },
+    {
+      "character": "C",
+      "text": "李姐，需要我帮忙端菜吗？",
+      "start": 122,
+      "end": 127
+    },
+    {
+      "character": "D",
+      "text": "不用，你去餐厅看看，客人应该快入座了。",
+      "start": 130,
+      "end": 137
+    },
+    {
+      "character": "G",
+      "text": "（在酒窖挑选红酒）这瓶83年的拉菲，是老板最珍藏的一瓶。",
+      "start": 140,
+      "end": 149
+    },
+    {
+      "character": "H",
+      "text": "（走进酒窖）周伯，还在挑酒？随便拿一瓶就行了，反正酒店都要关了。",
+      "start": 152,
+      "end": 161
+    },
+    {
+      "character": "G",
+      "text": "（摇头）做人要有始有终。最后一晚，更要做到最好。",
+      "start": 164,
+      "end": 172
+    },
+    {
+      "character": "H",
+      "text": "（冷笑）随你吧。我去检查一下帐目。",
+      "start": 175,
+      "end": 180
+    },
+    {
+      "character": "C",
+      "text": "（布桌）林小姐，您今晚真美。",
+      "start": 185,
+      "end": 190
+    },
+    {
+      "character": "B",
+      "text": "（微笑）小张，你在这干得还习惯吗？",
+      "start": 193,
+      "end": 198
+    },
+    {
+      "character": "C",
+      "text": "挺好的，多亏了林小姐介绍我来这里工作。",
+      "start": 201,
+      "end": 208
+    },
+    {
+      "character": "B",
+      "text": "（低声）别说这个。记住，在这里我们只是普通认识。",
+      "start": 211,
+      "end": 219
+    },
+    {
+      "character": "F",
+      "text": "（走近E）苏小姐，您对老建筑很有研究？",
+      "start": 222,
+      "end": 228
+    },
+    {
+      "character": "E",
+      "text": "称不上研究，只是好奇。陈先生您是做哪行的？",
+      "start": 231,
+      "end": 238
+    },
+    {
+      "character": "F",
+      "text": "我做自由撰稿，来这里也是想写一篇关于永夜酒店的报道。",
+      "start": 241,
+      "end": 250
+    },
+    {
+      "character": "E",
+      "text": "（意味深长）那我们是同行了。不过我看陈先生似乎不只是为了报道而来。",
+      "start": 253,
+      "end": 263
+    },
+    {
+      "character": "F",
+      "text": "（一愣）苏小姐这话是什么意思？",
+      "start": 266,
+      "end": 271
+    },
+    {
+      "character": "E",
+      "text": "（微笑）没什么，只是直觉。女人的直觉通常很准。",
+      "start": 274,
+      "end": 282
+    },
+    {
+      "character": "A",
+      "text": "各位贵宾，请入席吧！今晚我们好好聚一聚。",
+      "start": 285,
+      "end": 293
+    },
+    {
+      "character": "G",
+      "text": "（为大家斟酒）这是老板珍藏多年的拉菲，请大家品尝。",
+      "start": 296,
+      "end": 304
+    },
+    {
+      "character": "H",
+      "text": "（举杯）来，敬永夜酒店！敬赵老板！",
+      "start": 307,
+      "end": 313
+    },
+    {
+      "character": "B",
+      "text": "（举杯，略显紧张）敬永夜...",
+      "start": 316,
+      "end": 321
+    },
+    {
+      "character": "D",
+      "text": "（端上开胃菜）第一道菜是法式鹅肝配无花果，请慢用。",
+      "start": 324,
+      "end": 332
+    },
+    {
+      "character": "A",
+      "text": "（品尝）嗯，李姐的手艺一如既往地好。",
+      "start": 335,
+      "end": 341
+    },
+    {
+      "character": "C",
+      "text": "（上菜时手抖了一下）啊，对不起！",
+      "start": 344,
+      "end": 349
+    },
+    {
+      "character": "B",
+      "text": "没事，小心点。",
+      "start": 352,
+      "end": 355
+    },
+    {
+      "character": "A",
+      "text": "年轻人难免紧张，没关系。",
+      "start": 357,
+      "end": 362
+    },
+    {
+      "character": "A",
+      "text": "（站起来）各位，在今晚正式开席之前，我有件事要宣布。",
+      "start": 365,
+      "end": 373
+    },
+    {
+      "character": "E",
+      "text": "哦？赵老板请说。",
+      "start": 376,
+      "end": 379
+    },
+    {
+      "character": "A",
+      "text": "大家都知道，永夜酒店已经有上百年的历史了。",
+      "start": 382,
+      "end": 389
+    },
+    {
+      "character": "A",
+      "text": "但这些年经营不善，债务越来越多。我已经决定把酒店卖给一家地产公司。",
+      "start": 392,
+      "end": 402
+    },
+    {
+      "character": "G",
+      "text": "（震惊）老板！这...这是赵家几代人的心血啊！",
+      "start": 405,
+      "end": 413
+    },
+    {
+      "character": "A",
+      "text": "（苦笑）周伯，时代不同了。我已经决定了。",
+      "start": 416,
+      "end": 423
+    },
+    {
+      "character": "H",
+      "text": "（眼中闪过一丝异样）老板英明，趁现在还能卖出好价钱。",
+      "start": 426,
+      "end": 434
+    },
+    {
+      "character": "E",
+      "text": "赵老板，我冒昧问一句。听说您的第一任妻子，就是在永夜酒店去世的？",
+      "start": 437,
+      "end": 448
+    },
+    {
+      "character": "A",
+      "text": "（脸色一沉）苏小姐怎么知道这件事？",
+      "start": 451,
+      "end": 457
+    },
+    {
+      "character": "E",
+      "text": "我写小说需要素材，做过一些调查。抱歉提到您的伤心事。",
+      "start": 460,
+      "end": 469
+    },
+    {
+      "character": "B",
+      "text": "（紧张）苏小姐，今晚是高兴的日子，不提这些了吧。",
+      "start": 472,
+      "end": 479
+    },
+    {
+      "character": "F",
+      "text": "（插话）我也听说过一些传闻。据说赵夫人去世得非常突然？",
+      "start": 482,
+      "end": 490
+    },
+    {
+      "character": "A",
+      "text": "（拍桌）够了！你们到底是什么人？今晚是来赴宴还是来调查我的？",
+      "start": 493,
+      "end": 503
+    },
+    {
+      "character": "G",
+      "text": "（赶紧圆场）老板息怒，各位客人也是关心。来来来，大家喝酒。",
+      "start": 506,
+      "end": 515
+    },
+    {
+      "character": "A",
+      "text": "（深呼吸，拿起酒杯）好，今晚不谈过去。我敬各位一杯！",
+      "start": 518,
+      "end": 527
+    },
+    {
+      "character": "A",
+      "text": "（喝完酒，脸色突变）这...这酒...",
+      "start": 530,
+      "end": 536
+    },
+    {
+      "character": "B",
+      "text": "天豪？你怎么了？",
+      "start": 539,
+      "end": 543
+    },
+    {
+      "character": "A",
+      "text": "（捂住喉咙，倒地）啊...救...救命...",
+      "start": 546,
+      "end": 553
+    },
+    {
+      "character": "B",
+      "text": "（尖叫）天豪！！",
+      "start": 555,
+      "end": 558
+    },
+    {
+      "character": "G",
+      "text": "老板！老板你怎么了？！",
+      "start": 560,
+      "end": 565
+    },
+    {
+      "character": "F",
+      "text": "（冲上前）快叫救护车！他中毒了！",
+      "start": 568,
+      "end": 574
+    },
+    {
+      "character": "C",
+      "text": "（惊慌失措）我...我去打电话！",
+      "start": 577,
+      "end": 582
+    },
+    {
+      "character": "D",
+      "text": "（从厨房冲出来）发生什么事了？！天哪！老板！",
+      "start": 585,
+      "end": 592
+    },
+    {
+      "character": "H",
+      "text": "（脸色苍白）这...这怎么可能？大家都没事，怎么就老板...",
+      "start": 595,
+      "end": 604
+    },
+    {
+      "character": "E",
+      "text": "（冷静地）谁都别碰现场。陈先生，你怎么知道他中毒了？",
+      "start": 607,
+      "end": 615
+    },
+    {
+      "character": "F",
+      "text": "（一愣）我...我学过一些急救知识。他嘴唇发紫，瞳孔放大，典型的氰化物中毒症状。",
+      "start": 618,
+      "end": 629
+    },
+    {
+      "character": "B",
+      "text": "（哭）氰化物...怎么会...是谁...是谁干的...",
+      "start": 632,
+      "end": 639
+    },
+    {
+      "character": "F",
+      "text": "各位，在警察到来之前，我们都不要离开。我怀疑凶手就在我们中间。",
+      "start": 642,
+      "end": 653
+    },
+    {
+      "character": "H",
+      "text": "你凭什么怀疑我们？说不定是你自己下的毒！",
+      "start": 656,
+      "end": 663
+    },
+    {
+      "character": "F",
+      "text": "我承认我隐瞒了身份。我是《晨报》的调查记者陈默，这半年来一直在调查永夜酒店。",
+      "start": 666,
+      "end": 678
+    },
+    {
+      "character": "E",
+      "text": "（点头）果然如此。那你查出什么了？",
+      "start": 681,
+      "end": 686
+    },
+    {
+      "character": "F",
+      "text": "我发现永夜酒店在过去五年里，有三起离奇的死亡事件都被认定为意外。",
+      "start": 689,
+      "end": 699
+    },
+    {
+      "character": "G",
+      "text": "（颤抖）陈先生...你到底想说什么？",
+      "start": 702,
+      "end": 707
+    },
+    {
+      "character": "F",
+      "text": "第一起是前年，维修工在酒窖触电身亡。第二起是去年，会计坠楼。第三起...",
+      "start": 710,
+      "end": 721
+    },
+    {
+      "character": "E",
+      "text": "（接话）第三起，是我的姐姐——赵老板的第一任妻子，苏晴。",
+      "start": 724,
+      "end": 733
+    },
+    {
+      "character": "B",
+      "text": "（震惊）什么？！你是...你是苏晴的妹妹？！",
+      "start": 736,
+      "end": 743
+    },
+    {
+      "character": "E",
+      "text": "是的。我姐姐在这座酒店里\"死于心脏病\"，但我一直不相信。",
+      "start": 746,
+      "end": 755
+    },
+    {
+      "character": "H",
+      "text": "（后退）所以...所以你是来复仇的...",
+      "start": 758,
+      "end": 764
+    },
+    {
+      "character": "G",
+      "text": "（缓缓坐下）够了...是我做的。",
+      "start": 768,
+      "end": 774
+    },
+    {
+      "character": "B",
+      "text": "（惊）周伯？！你说什么？！",
+      "start": 777,
+      "end": 781
+    },
+    {
+      "character": "G",
+      "text": "毒是我下的。在酒杯边缘。",
+      "start": 784,
+      "end": 789
+    },
+    {
+      "character": "F",
+      "text": "周伯，你...为什么？",
+      "start": 792,
+      "end": 796
+    },
+    {
+      "character": "G",
+      "text": "（老泪纵横）你们知道吗...苏晴小姐...是我这辈子见过最好的人。",
+      "start": 799,
+      "end": 808
+    },
+    {
+      "character": "G",
+      "text": "她善良、温柔，嫁进赵家后从未有过一句怨言。但赵天豪呢？他根本不珍惜她！",
+      "start": 811,
+      "end": 822
+    },
+    {
+      "character": "E",
+      "text": "（声音哽咽）周伯...你...你觉得是我姐姐是被他害死的？",
+      "start": 825,
+      "end": 834
+    },
+    {
+      "character": "G",
+      "text": "不是觉得，是知道。苏晴小姐发现了赵天豪挪用酒店资金的证据，他怕她揭发。",
+      "start": 837,
+      "end": 848
+    },
+    {
+      "character": "B",
+      "text": "（瘫坐）不...不可能...天豪他虽然贪财，但不会杀人...",
+      "start": 851,
+      "end": 860
+    },
+    {
+      "character": "G",
+      "text": "（冷笑）不会？林小姐，你以为他真的爱你吗？你只是另一个棋子。",
+      "start": 863,
+      "end": 872
+    },
+    {
+      "character": "G",
+      "text": "他承诺娶你，不过是看中你父亲的人脉。现在你父亲退休了，他对你的态度你也清楚。",
+      "start": 875,
+      "end": 886
+    },
+    {
+      "character": "B",
+      "text": "（哭泣）别说了...求你别说了...",
+      "start": 889,
+      "end": 894
+    },
+    {
+      "character": "F",
+      "text": "周伯，你是怎么下毒的？每个人都看着酒瓶和杯子。",
+      "start": 897,
+      "end": 905
+    },
+    {
+      "character": "G",
+      "text": "（平静）赵天豪有个习惯——他只用自己专属的那只水晶杯。",
+      "start": 908,
+      "end": 916
+    },
+    {
+      "character": "G",
+      "text": "我在他杯口内侧涂了氰化物，剂量掌握得刚好。只有他嘴唇碰到的地方有毒。",
+      "start": 919,
+      "end": 930
+    },
+    {
+      "character": "H",
+      "text": "但是...今晚的酒杯不是大家一起碰杯的吗？你就不怕别人误用他的杯子？",
+      "start": 933,
+      "end": 943
+    },
+    {
+      "character": "G",
+      "text": "（看了B一眼）我本来安排了林小姐坐在他旁边，负责提醒大家不要用错杯子。",
+      "start": 946,
+      "end": 957
+    },
+    {
+      "character": "B",
+      "text": "（恍惚）提醒...他让我提醒大家不要弄混杯子...原来...原来是这样...",
+      "start": 960,
+      "end": 970
+    },
+    {
+      "character": "E",
+      "text": "林小姐，你...你知道周伯的计划？",
+      "start": 973,
+      "end": 978
+    },
+    {
+      "character": "B",
+      "text": "（哭）我不知道！周伯只告诉我，要在餐桌上引导大家不要用错酒杯...",
+      "start": 981,
+      "end": 991
+    },
+    {
+      "character": "B",
+      "text": "他说这样能帮苏晴姐讨回公道...我以为只是让天豪当众出丑...",
+      "start": 994,
+      "end": 1003
+    },
+    {
+      "character": "F",
+      "text": "所以你无意中成了帮凶。",
+      "start": 1006,
+      "end": 1010
+    },
+    {
+      "character": "G",
+      "text": "（对B）林小姐，对不起。但赵天豪不死，还会有更多受害者。",
+      "start": 1013,
+      "end": 1022
+    },
+    {
+      "character": "E",
+      "text": "周伯，你是怎么知道我姐姐是被害的？",
+      "start": 1025,
+      "end": 1031
+    },
+    {
+      "character": "G",
+      "text": "（叹息）苏晴小姐去世那晚，我就在门外。我听到了他们的争吵。",
+      "start": 1034,
+      "end": 1043
+    },
+    {
+      "character": "G",
+      "text": "赵天豪威胁她，说她如果敢揭发，就让她身败名裂。然后...然后她就再也没出来。",
+      "start": 1046,
+      "end": 1058
+    },
+    {
+      "character": "F",
+      "text": "当晚医生出具的死亡原因是\"心脏病突发\"。但法医报告说...",
+      "start": 1061,
+      "end": 1070
+    },
+    {
+      "character": "G",
+      "text": "（接话）报告被她弟弟收买了。赵天豪花了一大笔钱。",
+      "start": 1073,
+      "end": 1081
+    },
+    {
+      "character": "D",
+      "text": "老天爷...我在这个厨房做了二十年，竟然不知道这里发生了这么多事。",
+      "start": 1084,
+      "end": 1094
+    },
+    {
+      "character": "C",
+      "text": "（突然开口）周伯，你为苏晴复仇...那我姐呢？我姐又算什么？",
+      "start": 1097,
+      "end": 1106
+    },
+    {
+      "character": "B",
+      "text": "（大惊）小张！别说！",
+      "start": 1109,
+      "end": 1113
+    },
+    {
+      "character": "F",
+      "text": "你姐？林小姐是你姐姐？",
+      "start": 1116,
+      "end": 1120
+    },
+    {
+      "character": "C",
+      "text": "（激动）是的！她是我亲姐姐！她为了让我有份好工作，低声下气求赵天豪收留我。",
+      "start": 1123,
+      "end": 1134
+    },
+    {
+      "character": "C",
+      "text": "而那个男人呢？他把我姐当什么？情妇？工具？用完就扔？",
+      "start": 1137,
+      "end": 1146
+    },
+    {
+      "character": "B",
+      "text": "（流泪）小张，别说了...这都是姐心甘情愿的...",
+      "start": 1149,
+      "end": 1156
+    },
+    {
+      "character": "F",
+      "text": "（沉思）所以小张也有杀人动机。不过下毒手法很专业，不像年轻人所为。",
+      "start": 1159,
+      "end": 1169
+    },
+    {
+      "character": "H",
+      "text": "（突然冷笑）各位，你们以为赵天豪是唯一的恶人吗？他不过是自作自受。",
+      "start": 1172,
+      "end": 1182
+    },
+    {
+      "character": "E",
+      "text": "王经理，你这话是什么意思？",
+      "start": 1185,
+      "end": 1189
+    },
+    {
+      "character": "H",
+      "text": "（豁出去）我是贪了酒店的钱，但不是从我开始的！赵天豪自己就在洗钱！",
+      "start": 1192,
+      "end": 1202
+    },
+    {
+      "character": "H",
+      "text": "他把酒店当幌子，暗中做非法资金转移。我要是不配合他，死的就是我！",
+      "start": 1205,
+      "end": 1215
+    },
+    {
+      "character": "F",
+      "text": "所以你一直在帮赵天豪洗钱？然后趁机自己也捞一笔？",
+      "start": 1218,
+      "end": 1226
+    },
+    {
+      "character": "H",
+      "text": "（低头）是。但这和今晚的事无关。我承认我贪，但我没杀人。",
+      "start": 1229,
+      "end": 1238
+    },
+    {
+      "character": "F",
+      "text": "（整理思路）现在情况明了了。毒是周伯下的，在赵天豪的专属酒杯边缘。",
+      "start": 1241,
+      "end": 1251
+    },
+    {
+      "character": "F",
+      "text": "林小姐被利用来协助，确保目标使用正确的杯子。",
+      "start": 1254,
+      "end": 1261
+    },
+    {
+      "character": "F",
+      "text": "动机是为苏晴复仇。证据是周伯对苏晴的忠诚和对赵天豪的了解。",
+      "start": 1264,
+      "end": 1274
+    },
+    {
+      "character": "E",
+      "text": "（走向周伯）周伯...谢谢你为我姐姐做的一切。但你本不该用这种方式。",
+      "start": 1277,
+      "end": 1287
+    },
+    {
+      "character": "G",
+      "text": "（平静）苏小姐，我这把老骨头没什么可在乎的了。我在这酒店做了四十年，看着赵家从兴盛到腐朽。",
+      "start": 1290,
+      "end": 1303
+    },
+    {
+      "character": "G",
+      "text": "苏晴小姐是唯一真心对我好的人。她走了，这酒店也没什么值得留恋的了。",
+      "start": 1306,
+      "end": 1316
+    },
+    {
+      "character": "C",
+      "text": "（扶B坐下）姐，我们离开这里吧。重新开始。",
+      "start": 1319,
+      "end": 1325
+    },
+    {
+      "character": "B",
+      "text": "（擦泪）嗯...是该重新开始了。",
+      "start": 1328,
+      "end": 1333
+    },
+    {
+      "character": "D",
+      "text": "（叹息）唉...这一桌菜，算是白做了。但至少...真相大白了。",
+      "start": 1336,
+      "end": 1345
+    },
+    {
+      "character": "F",
+      "text": "等警察来了，我会把所有证据交给他们。包括这半年我收集的酒店黑幕。",
+      "start": 1348,
+      "end": 1358
+    },
+    {
+      "character": "H",
+      "text": "（颓然）我也逃不掉了。也好...提心吊胆的日子终于结束了。",
+      "start": 1361,
+      "end": 1370
+    },
+    {
+      "character": "E",
+      "text": "（握住周伯的手）周伯，我会请最好的律师。姐姐在天之灵...会理解的。",
+      "start": 1373,
+      "end": 1383
+    },
+    {
+      "character": "G",
+      "text": "（望向窗外）今晚的月亮真圆啊。和四十年前我第一天来永夜酒店时一样。",
+      "start": 1386,
+      "end": 1397
+    },
+    {
+      "character": "G",
+      "text": "那时候赵老爷子还健在，酒店宾客盈门，欢声笑语。",
+      "start": 1400,
+      "end": 1408
+    },
+    {
+      "character": "G",
+      "text": "一转眼...什么都没了。",
+      "start": 1411,
+      "end": 1416
+    },
+    {
+      "character": "D",
+      "text": "（抹眼泪）周伯...你为什么要做这种事啊...",
+      "start": 1419,
+      "end": 1425
+    },
+    {
+      "character": "G",
+      "text": "因为有些债，总要有人来讨。法律讨不了的，就只能用我的方式了。",
+      "start": 1428,
+      "end": 1439
+    },
+    {
+      "character": "F",
+      "text": "（记录完毕）周伯的话我会如实记录。至于法律如何裁决，那就是法官的事了。",
+      "start": 1442,
+      "end": 1453
+    },
+    {
+      "character": "E",
+      "text": "（独自站在窗边）姐姐，我终于为你讨回了一个公道。虽然方式...出乎意料。",
+      "start": 1456,
+      "end": 1467
+    },
+    {
+      "character": "B",
+      "text": "（收拾东西，走向C）小张，我们走吧。这里已经没有我们的容身之地了。",
+      "start": 1470,
+      "end": 1479
+    },
+    {
+      "character": "C",
+      "text": "（点头）嗯。姐，以后我来照顾你。",
+      "start": 1482,
+      "end": 1487
+    },
+    {
+      "character": "D",
+      "text": "（脱下厨师服）我也该走了。这身衣服，穿了二十年...",
+      "start": 1490,
+      "end": 1498
+    },
+    {
+      "character": "H",
+      "text": "（被F看管着）酒店没了，老板死了，帐也查了...全完了。",
+      "start": 1501,
+      "end": 1509
+    },
+    {
+      "character": "G",
+      "text": "（被戴上手铐）各位，对不起。但我不后悔。",
+      "start": 1512,
+      "end": 1519
+    },
+    {
+      "character": "F",
+      "text": "（对着录音笔）案件记录：永夜酒店，最后一夜。七位客人，一位死者，一个真相。",
+      "start": 1522,
+      "end": 1535
+    },
+    {
+      "character": "E",
+      "text": "（最后环顾大厅）永夜酒店...故事结束了。但新的篇章永远都会开始。",
+      "start": 1538,
+      "end": 1549
+    },
+    {
+      "character": "G",
+      "text": "（被带走前回头）苏小姐，替我给苏晴上一炷香。就说...老周尽力了。",
+      "start": 1552,
+      "end": 1562
+    },
+    {
+      "character": "E",
+      "text": "（含泪点头）我会的。周伯，谢谢您。",
+      "start": 1565,
+      "end": 1571
+    },
+    {
+      "character": "D",
+      "text": "（最后一个离开厨房，关灯）再见了，永夜酒店。",
+      "start": 1574,
+      "end": 1582
+    },
+    {
+      "character": "B",
+      "text": "（在门口最后回望）天豪...不管你是怎样的人，终究是我爱过的人。安息吧。",
+      "start": 1585,
+      "end": 1596
+    },
+    {
+      "character": "C",
+      "text": "（轻声）姐，走吧。外面的天...快亮了。",
+      "start": 1599,
+      "end": 1605
+    }
+  ]
+}
