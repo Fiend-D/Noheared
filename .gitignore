@@ -12,11 +12,30 @@ env/
 *.swp
 *.swo
 
-
 # Build files
 build/
 dist/
 *.egg-info/
+
+# Godot
+game/.godot/
+game/export/
+game/reports/
+*.translation
+
+# Generated audio that is not needed to run the game.
+# The voice lines in game/cases/*/audio and game/audio/ stay committed: the game and CI exports need them.
+tools/voice_prompts/
+
+# Legacy build output and source recordings (kept locally only; the migrated per-line clips live in game/cases)
+legacy/release/
+legacy/unheared/audio/
+legacy/**/*.wav
+legacy/**/*.mp3
+
+# Audio scratch files
+*.wav
+!game/**/*.wav
 
 # Logs
 *.log
