@@ -1,0 +1,63 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://map/case_map.gd" id="1_jox84"]
+[ext_resource type="Script" path="res://map/room.gd" id="2_5vr6t"]
+[ext_resource type="Script" path="res://map/door.gd" id="3_164ua"]
+
+[node name="CaseMap" type="Node2D" unique_id=1374455465]
+script = ExtResource("1_jox84")
+floor_names = PackedStringArray("一层")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1886139588]
+
+[node name="化妆间" type="Node2D" parent="Rooms" unique_id=727454737]
+script = ExtResource("2_5vr6t")
+room_name = "化妆间"
+polygon = PackedVector2Array(50, 50, 300, 50, 300, 230, 50, 230)
+
+[node name="舞台" type="Node2D" parent="Rooms" unique_id=1031837591]
+script = ExtResource("2_5vr6t")
+room_name = "舞台"
+polygon = PackedVector2Array(300, 50, 750, 50, 750, 230, 300, 230)
+
+[node name="走廊" type="Node2D" parent="Rooms" unique_id=459149647]
+script = ExtResource("2_5vr6t")
+room_name = "走廊"
+polygon = PackedVector2Array(50, 230, 750, 230, 750, 310, 50, 310)
+
+[node name="道具室" type="Node2D" parent="Rooms" unique_id=1926611142]
+script = ExtResource("2_5vr6t")
+room_name = "道具室"
+polygon = PackedVector2Array(50, 310, 300, 310, 300, 410, 50, 410)
+
+[node name="Doors" type="Node2D" parent="." unique_id=1838082709]
+
+[node name="舞台门" type="Node2D" parent="Doors" unique_id=196209079]
+position = Vector2(305, 140)
+script = ExtResource("3_164ua")
+room_a = "化妆间"
+room_b = "舞台"
+size = Vector2(10, 40)
+
+[node name="走廊门(化妆)" type="Node2D" parent="Doors" unique_id=239593315]
+position = Vector2(165, 235)
+script = ExtResource("3_164ua")
+room_a = "化妆间"
+room_b = "走廊"
+size = Vector2(30, 10)
+
+[node name="走廊门(舞台)" type="Node2D" parent="Doors" unique_id=1691287908]
+position = Vector2(515, 235)
+script = ExtResource("3_164ua")
+room_a = "舞台"
+room_b = "走廊"
+size = Vector2(30, 10)
+
+[node name="道具门" type="Node2D" parent="Doors" unique_id=1021056680]
+position = Vector2(165, 315)
+script = ExtResource("3_164ua")
+room_a = "道具室"
+room_b = "走廊"
+size = Vector2(30, 10)
+
+[node name="Stairs" type="Node2D" parent="." unique_id=1185693535]

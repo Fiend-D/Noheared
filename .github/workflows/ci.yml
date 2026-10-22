@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "gdtoolkit==4.*"
+      - name: gdformat
+        working-directory: game
+        run: gdformat --check --line-length=120 core map ui addons/case_editor tests
+      - name: gdlint
+        working-directory: game
+        run: gdlint core map ui addons/case_editor tests
+
+  test:
+    runs-on: ubuntu-latest
+    container: barichello/godot-ci:4.7.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import project
+        working-directory: game
+        run: godot --headless --import || true
+      - name: Rebuild cases from case.json
+        working-directory: game
+        run: godot --headless --script res://addons/case_editor/import_cli.gd
+      - name: gdUnit4
+        working-directory: game
+        run: godot --headless -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: game/reports
+
+  export:
+    needs: test
+    runs-on: ubuntu-latest
+    container: barichello/godot-ci:4.7.2
+    strategy:
+      matrix:
+        preset: [Linux, Windows]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install export templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Export
+        working-directory: game
+        run: |
+          godot --headless --import || true
+          mkdir -p export/linux export/windows
+          godot --headless --export-release "${{ matrix.preset }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unheard-${{ matrix.preset }}
+          path: game/export

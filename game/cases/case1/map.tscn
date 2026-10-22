@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://map/case_map.gd" id="1_pt8mn"]
+[ext_resource type="Script" path="res://map/room.gd" id="2_b3b1y"]
+[ext_resource type="Script" path="res://map/door.gd" id="3_f1rlx"]
+
+[node name="CaseMap" type="Node2D" unique_id=2093888145]
+script = ExtResource("1_pt8mn")
+floor_names = PackedStringArray("一层")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=2070461512]
+
+[node name="房间1" type="Node2D" parent="Rooms" unique_id=959168342]
+script = ExtResource("2_b3b1y")
+room_name = "房间1"
+polygon = PackedVector2Array(100, 100, 300, 100, 300, 250, 100, 250)
+
+[node name="房间2" type="Node2D" parent="Rooms" unique_id=1219175141]
+script = ExtResource("2_b3b1y")
+room_name = "房间2"
+polygon = PackedVector2Array(400, 100, 600, 100, 600, 250, 400, 250)
+
+[node name="走廊" type="Node2D" parent="Rooms" unique_id=1954864199]
+script = ExtResource("2_b3b1y")
+room_name = "走廊"
+polygon = PackedVector2Array(100, 250, 600, 250, 600, 350, 100, 350)
+
+[node name="Doors" type="Node2D" parent="." unique_id=673053411]
+
+[node name="房间1门" type="Node2D" parent="Doors" unique_id=448329695]
+position = Vector2(200, 255)
+script = ExtResource("3_f1rlx")
+room_a = "房间1"
+room_b = "走廊"
+size = Vector2(20, 10)
+
+[node name="房间2门" type="Node2D" parent="Doors" unique_id=1078627750]
+position = Vector2(500, 255)
+script = ExtResource("3_f1rlx")
+room_a = "房间2"
+room_b = "走廊"
+size = Vector2(20, 10)
+
+[node name="Stairs" type="Node2D" parent="." unique_id=996440273]

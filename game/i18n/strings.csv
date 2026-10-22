@@ -1,0 +1,28 @@
+keys,zh_CN,en
+APP_TITLE,疑案追声,Unheard Remake
+CASE_SELECT_HINT,选择一个案件开始监听,Pick a case to start listening
+CASE_DURATION,时长 %s,Length %s
+CASE_BEST,最佳 %d%%,Best %d%%
+CASE_SOLVED,已破案,Solved
+CASE_START,开始监听,Start
+CASE_NONE,没有找到案件。请先运行导入脚本。,No cases found. Run the import script first.
+BACK,← 案件列表,← Cases
+HELP_HINT,点击房间移动 · 点击圆点选中 · 空格 播放/暂停 · ←/→ 快退/快进,Click a room to move · Click a dot to select · Space play/pause · Left/Right skip
+PLAY,▶ 播放,▶ Play
+PAUSE,⏸ 暂停,⏸ Pause
+SPEED,速度 ×%s,Speed ×%s
+TAB_NOTES,笔记,Notes
+TAB_PEOPLE,人物,People
+TAB_QUESTIONS,问题,Questions
+NOTES_EMPTY,还没有听清任何内容。,Nothing heard clearly yet.
+NOTES_HINT,点击条目跳转到该时刻,Click an entry to jump to that moment
+PEOPLE_HINT,为每个圆点指认身份,Assign an identity to each dot
+UNASSIGNED,未指认,Unassigned
+DOT_LABEL,%s 号,No. %s
+CHOOSE,请选择,Choose…
+SUBMIT,提交答案,Submit
+RESULT,问题答对 %d/%d，身份答对 %d/%d,Questions %d/%d correct · Identities %d/%d correct
+SOLVED_TITLE,真相大白,Case solved
+SOLVED_DEFAULT,你答对了所有问题。,You answered every question correctly.
+MUFFLED,……（听不清）,… (muffled)
+SFX_PREFIX,【声音】,[Sound]

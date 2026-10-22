@@ -1,0 +1,1418 @@
+[gd_resource type="Resource" script_class="CaseData" format=3]
+
+[ext_resource type="Script" path="res://core/data/character_data.gd" id="1_cw26i"]
+[ext_resource type="Script" path="res://core/data/track_key.gd" id="2_weaqk"]
+[ext_resource type="PackedScene" path="res://cases/case4/map.tscn" id="3_fpo8v"]
+[ext_resource type="Script" path="res://core/data/question.gd" id="4_lo8om"]
+[ext_resource type="Script" path="res://core/data/case_data.gd" id="5_p5nf0"]
+[ext_resource type="Script" path="res://core/data/sfx_event.gd" id="6_jrfcy"]
+[ext_resource type="Script" path="res://core/data/voice_line.gd" id="7_8nsbp"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0000.ogg" id="8_usp4q"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0001.ogg" id="9_q1gug"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0002.ogg" id="10_r5uww"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0003.ogg" id="11_n1ml8"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0004.ogg" id="12_yv254"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/D_0005.ogg" id="13_5pff2"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0006.ogg" id="14_2ya6k"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0007.ogg" id="15_w8k54"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0008.ogg" id="16_13ou2"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0009.ogg" id="17_4fagu"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0010.ogg" id="18_ati2w"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0011.ogg" id="19_p2us2"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0012.ogg" id="20_qptta"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0013.ogg" id="21_x241h"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0014.ogg" id="22_6e7af"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/D_0015.ogg" id="23_nnviw"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0016.ogg" id="24_rhscs"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0017.ogg" id="25_lymop"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0018.ogg" id="26_4w3aq"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0019.ogg" id="27_la680"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0020.ogg" id="28_ssfcd"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0021.ogg" id="29_dyu8l"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0022.ogg" id="30_vmbpw"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0023.ogg" id="31_a1oux"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0024.ogg" id="32_ergob"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0025.ogg" id="33_8mmb6"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0026.ogg" id="34_gxw8f"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0027.ogg" id="35_am8ot"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0028.ogg" id="36_ha6ds"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/D_0029.ogg" id="37_8gft5"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0030.ogg" id="38_c5e34"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0031.ogg" id="39_s5f3a"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0032.ogg" id="40_skc5i"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0033.ogg" id="41_0evao"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0034.ogg" id="42_g6uto"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/C_0035.ogg" id="43_o8u2m"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/D_0036.ogg" id="44_q4iqo"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0037.ogg" id="45_aibsf"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0038.ogg" id="46_t1jt3"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0039.ogg" id="47_x6gc0"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/A_0040.ogg" id="48_dtx2t"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0041.ogg" id="49_yayn4"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0042.ogg" id="50_sini7"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0043.ogg" id="51_x2aq6"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0044.ogg" id="52_plqyx"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0045.ogg" id="53_7rf3c"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0046.ogg" id="54_grnri"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/E_0047.ogg" id="55_3gd6s"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0048.ogg" id="56_eu002"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0049.ogg" id="57_fjjpu"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0050.ogg" id="58_5no6l"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/B_0051.ogg" id="59_im6ic"]
+[ext_resource type="AudioStream" path="res://cases/case4/audio/F_0052.ogg" id="60_y3tpa"]
+
+[sub_resource type="Resource" id="Resource_m44am"]
+script = ExtResource("2_weaqk")
+position = Vector2(550, 120)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_xplc3"]
+script = ExtResource("2_weaqk")
+time = 60.0
+position = Vector2(550, 120)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_vf5k2"]
+script = ExtResource("2_weaqk")
+time = 60.765
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_pxvwe"]
+script = ExtResource("2_weaqk")
+time = 61.285
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_l55o8"]
+script = ExtResource("2_weaqk")
+time = 62.704
+position = Vector2(180, 120)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_83dmg"]
+script = ExtResource("2_weaqk")
+time = 180.0
+position = Vector2(180, 120)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_31eyk"]
+script = ExtResource("2_weaqk")
+time = 181.419
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_dx8jj"]
+script = ExtResource("2_weaqk")
+time = 181.939
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_mbb5m"]
+script = ExtResource("2_weaqk")
+time = 182.351
+position = Vector2(520, 180)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_oldee"]
+script = ExtResource("2_weaqk")
+time = 300.0
+position = Vector2(520, 180)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_2cwi1"]
+script = ExtResource("2_weaqk")
+time = 300.412
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_nkpr6"]
+script = ExtResource("2_weaqk")
+time = 300.932
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_itxff"]
+script = ExtResource("2_weaqk")
+time = 302.407
+position = Vector2(160, 180)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_ipt43"]
+script = ExtResource("2_weaqk")
+time = 420.0
+position = Vector2(160, 180)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_t11f2"]
+script = ExtResource("2_weaqk")
+time = 421.475
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_b7wrk"]
+script = ExtResource("2_weaqk")
+time = 421.995
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_i51af"]
+script = ExtResource("2_weaqk")
+time = 422.826
+position = Vector2(580, 220)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_xoey0"]
+script = ExtResource("2_weaqk")
+time = 540.0
+position = Vector2(580, 220)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_qcli2"]
+script = ExtResource("2_weaqk")
+time = 541.337
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_i8nc2"]
+script = ExtResource("2_weaqk")
+time = 541.857
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_1mydx"]
+script = ExtResource("2_weaqk")
+time = 543.071
+position = Vector2(200, 400)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_xe71s"]
+script = ExtResource("2_weaqk")
+time = 660.0
+position = Vector2(200, 400)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_teebw"]
+script = ExtResource("2_weaqk")
+time = 661.214
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_buy61"]
+script = ExtResource("2_weaqk")
+time = 661.734
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_p0qrh"]
+script = ExtResource("2_weaqk")
+time = 662.691
+position = Vector2(520, 250)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_l3dh0"]
+script = ExtResource("1_cw26i")
+id = &"A"
+display_name = "管家"
+label = "1"
+color = Color(1, 0.53333336, 0, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_m44am"), SubResource("Resource_xplc3"), SubResource("Resource_vf5k2"), SubResource("Resource_pxvwe"), SubResource("Resource_l55o8"), SubResource("Resource_83dmg"), SubResource("Resource_31eyk"), SubResource("Resource_dx8jj"), SubResource("Resource_mbb5m"), SubResource("Resource_oldee"), SubResource("Resource_2cwi1"), SubResource("Resource_nkpr6"), SubResource("Resource_itxff"), SubResource("Resource_ipt43"), SubResource("Resource_t11f2"), SubResource("Resource_b7wrk"), SubResource("Resource_i51af"), SubResource("Resource_xoey0"), SubResource("Resource_qcli2"), SubResource("Resource_i8nc2"), SubResource("Resource_1mydx"), SubResource("Resource_xe71s"), SubResource("Resource_teebw"), SubResource("Resource_buy61"), SubResource("Resource_p0qrh")])
+
+[sub_resource type="Resource" id="Resource_yrr15"]
+script = ExtResource("2_weaqk")
+position = Vector2(650, 120)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_2bd2f"]
+script = ExtResource("2_weaqk")
+time = 90.0
+position = Vector2(650, 120)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ihkmn"]
+script = ExtResource("2_weaqk")
+time = 92.423
+position = Vector2(700, 480)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_tjauj"]
+script = ExtResource("2_weaqk")
+time = 180.0
+position = Vector2(700, 480)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ceajw"]
+script = ExtResource("2_weaqk")
+time = 182.108
+position = Vector2(600, 180)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_bq5w5"]
+script = ExtResource("2_weaqk")
+time = 300.0
+position = Vector2(600, 180)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_7m5io"]
+script = ExtResource("2_weaqk")
+time = 302.07
+position = Vector2(680, 480)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_yyygy"]
+script = ExtResource("2_weaqk")
+time = 420.0
+position = Vector2(680, 480)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_na5e5"]
+script = ExtResource("2_weaqk")
+time = 421.779
+position = Vector2(620, 220)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_1q66y"]
+script = ExtResource("2_weaqk")
+time = 540.0
+position = Vector2(620, 220)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_wuicc"]
+script = ExtResource("2_weaqk")
+time = 541.672
+position = Vector2(720, 450)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_mjheh"]
+script = ExtResource("2_weaqk")
+time = 660.0
+position = Vector2(720, 450)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_vxmc5"]
+script = ExtResource("2_weaqk")
+time = 662.07
+position = Vector2(640, 150)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_vafs4"]
+script = ExtResource("1_cw26i")
+id = &"B"
+display_name = "继承人"
+label = "2"
+color = Color(1, 0, 0, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_yrr15"), SubResource("Resource_2bd2f"), SubResource("Resource_ihkmn"), SubResource("Resource_tjauj"), SubResource("Resource_ceajw"), SubResource("Resource_bq5w5"), SubResource("Resource_7m5io"), SubResource("Resource_yyygy"), SubResource("Resource_na5e5"), SubResource("Resource_1q66y"), SubResource("Resource_wuicc"), SubResource("Resource_mjheh"), SubResource("Resource_vxmc5")])
+
+[sub_resource type="Resource" id="Resource_61mi5"]
+script = ExtResource("2_weaqk")
+position = Vector2(200, 450)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_0cgks"]
+script = ExtResource("2_weaqk")
+time = 120.0
+position = Vector2(200, 450)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_ryt66"]
+script = ExtResource("2_weaqk")
+time = 121.294
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_lsbqh"]
+script = ExtResource("2_weaqk")
+time = 121.814
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_4a8k0"]
+script = ExtResource("2_weaqk")
+time = 123.685
+position = Vector2(620, 150)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_imra3"]
+script = ExtResource("2_weaqk")
+time = 240.0
+position = Vector2(620, 150)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ng6q5"]
+script = ExtResource("2_weaqk")
+time = 241.872
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_5ulnf"]
+script = ExtResource("2_weaqk")
+time = 242.392
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_4gds2"]
+script = ExtResource("2_weaqk")
+time = 243.738
+position = Vector2(180, 400)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_1y71f"]
+script = ExtResource("2_weaqk")
+time = 360.0
+position = Vector2(180, 400)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_rqcp4"]
+script = ExtResource("2_weaqk")
+time = 361.347
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_v24dg"]
+script = ExtResource("2_weaqk")
+time = 361.867
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_f6do5"]
+script = ExtResource("2_weaqk")
+time = 363.665
+position = Vector2(660, 200)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_fuf4a"]
+script = ExtResource("2_weaqk")
+time = 480.0
+position = Vector2(660, 200)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_jslgf"]
+script = ExtResource("2_weaqk")
+time = 481.799
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_go1e0"]
+script = ExtResource("2_weaqk")
+time = 482.319
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_3auqj"]
+script = ExtResource("2_weaqk")
+time = 483.489
+position = Vector2(220, 450)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_n6qr5"]
+script = ExtResource("2_weaqk")
+time = 600.0
+position = Vector2(220, 450)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_qkyus"]
+script = ExtResource("2_weaqk")
+time = 601.17
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_jui5r"]
+script = ExtResource("2_weaqk")
+time = 601.69
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_nw4im"]
+script = ExtResource("2_weaqk")
+time = 603.184
+position = Vector2(560, 180)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_7tdg6"]
+script = ExtResource("1_cw26i")
+id = &"C"
+display_name = "秘书"
+label = "3"
+color = Color(0, 1, 1, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_61mi5"), SubResource("Resource_0cgks"), SubResource("Resource_ryt66"), SubResource("Resource_lsbqh"), SubResource("Resource_4a8k0"), SubResource("Resource_imra3"), SubResource("Resource_ng6q5"), SubResource("Resource_5ulnf"), SubResource("Resource_4gds2"), SubResource("Resource_1y71f"), SubResource("Resource_rqcp4"), SubResource("Resource_v24dg"), SubResource("Resource_f6do5"), SubResource("Resource_fuf4a"), SubResource("Resource_jslgf"), SubResource("Resource_go1e0"), SubResource("Resource_3auqj"), SubResource("Resource_n6qr5"), SubResource("Resource_qkyus"), SubResource("Resource_jui5r"), SubResource("Resource_nw4im")])
+
+[sub_resource type="Resource" id="Resource_wbbrk"]
+script = ExtResource("2_weaqk")
+position = Vector2(220, 400)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_0e3uv"]
+script = ExtResource("2_weaqk")
+time = 150.0
+position = Vector2(220, 400)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_tgrxs"]
+script = ExtResource("2_weaqk")
+time = 151.082
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_u2bdk"]
+script = ExtResource("2_weaqk")
+time = 151.602
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_1y1lo"]
+script = ExtResource("2_weaqk")
+time = 153.227
+position = Vector2(540, 150)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_pjd36"]
+script = ExtResource("2_weaqk")
+time = 300.0
+position = Vector2(540, 150)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_1im8g"]
+script = ExtResource("2_weaqk")
+time = 301.626
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_dxmpi"]
+script = ExtResource("2_weaqk")
+time = 302.146
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_h4r3d"]
+script = ExtResource("2_weaqk")
+time = 303.642
+position = Vector2(180, 480)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_rphaa"]
+script = ExtResource("2_weaqk")
+time = 450.0
+position = Vector2(180, 480)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_luejj"]
+script = ExtResource("2_weaqk")
+time = 451.497
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_md4lx"]
+script = ExtResource("2_weaqk")
+time = 452.017
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_s2ugi"]
+script = ExtResource("2_weaqk")
+time = 453.354
+position = Vector2(580, 220)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ak0q1"]
+script = ExtResource("2_weaqk")
+time = 600.0
+position = Vector2(580, 220)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_42j50"]
+script = ExtResource("2_weaqk")
+time = 601.337
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_12pi8"]
+script = ExtResource("2_weaqk")
+time = 601.857
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_80riq"]
+script = ExtResource("2_weaqk")
+time = 602.907
+position = Vector2(240, 450)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_obbdp"]
+script = ExtResource("1_cw26i")
+id = &"D"
+display_name = "厨师"
+label = "4"
+color = Color(0, 1, 0, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_wbbrk"), SubResource("Resource_0e3uv"), SubResource("Resource_tgrxs"), SubResource("Resource_u2bdk"), SubResource("Resource_1y1lo"), SubResource("Resource_pjd36"), SubResource("Resource_1im8g"), SubResource("Resource_dxmpi"), SubResource("Resource_h4r3d"), SubResource("Resource_rphaa"), SubResource("Resource_luejj"), SubResource("Resource_md4lx"), SubResource("Resource_s2ugi"), SubResource("Resource_ak0q1"), SubResource("Resource_42j50"), SubResource("Resource_12pi8"), SubResource("Resource_80riq")])
+
+[sub_resource type="Resource" id="Resource_hm3ap"]
+script = ExtResource("2_weaqk")
+position = Vector2(700, 450)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_i3wu4"]
+script = ExtResource("2_weaqk")
+time = 90.0
+position = Vector2(700, 450)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ruphc"]
+script = ExtResource("2_weaqk")
+time = 92.363
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_xmu5r"]
+script = ExtResource("2_weaqk")
+time = 92.883
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_bkj8e"]
+script = ExtResource("2_weaqk")
+time = 94.177
+position = Vector2(200, 120)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_yl05h"]
+script = ExtResource("2_weaqk")
+time = 210.0
+position = Vector2(200, 120)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_hbxli"]
+script = ExtResource("2_weaqk")
+time = 211.294
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_7eeal"]
+script = ExtResource("2_weaqk")
+time = 211.814
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_bu1ev"]
+script = ExtResource("2_weaqk")
+time = 214.129
+position = Vector2(650, 480)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_p7ish"]
+script = ExtResource("2_weaqk")
+time = 330.0
+position = Vector2(650, 480)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_0aktd"]
+script = ExtResource("2_weaqk")
+time = 332.315
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_2mrtp"]
+script = ExtResource("2_weaqk")
+time = 332.835
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_krl0v"]
+script = ExtResource("2_weaqk")
+time = 334.177
+position = Vector2(180, 180)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_vxqj5"]
+script = ExtResource("2_weaqk")
+time = 450.0
+position = Vector2(180, 180)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_xcuj7"]
+script = ExtResource("2_weaqk")
+time = 451.342
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_wylcs"]
+script = ExtResource("2_weaqk")
+time = 451.862
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_5otci"]
+script = ExtResource("2_weaqk")
+time = 454.181
+position = Vector2(720, 420)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_ndmuy"]
+script = ExtResource("2_weaqk")
+time = 570.0
+position = Vector2(720, 420)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_tvqts"]
+script = ExtResource("2_weaqk")
+time = 572.319
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_r60uu"]
+script = ExtResource("2_weaqk")
+time = 572.839
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_p2w6s"]
+script = ExtResource("2_weaqk")
+time = 573.945
+position = Vector2(220, 150)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_usgjr"]
+script = ExtResource("2_weaqk")
+time = 690.0
+position = Vector2(220, 150)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_i5njn"]
+script = ExtResource("2_weaqk")
+time = 691.106
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_e40xv"]
+script = ExtResource("2_weaqk")
+time = 691.626
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_2sb7q"]
+script = ExtResource("2_weaqk")
+time = 693.776
+position = Vector2(600, 480)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_8ig0t"]
+script = ExtResource("1_cw26i")
+id = &"E"
+display_name = "园丁"
+label = "5"
+color = Color(0, 0, 1, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_hm3ap"), SubResource("Resource_i3wu4"), SubResource("Resource_ruphc"), SubResource("Resource_xmu5r"), SubResource("Resource_bkj8e"), SubResource("Resource_yl05h"), SubResource("Resource_hbxli"), SubResource("Resource_7eeal"), SubResource("Resource_bu1ev"), SubResource("Resource_p7ish"), SubResource("Resource_0aktd"), SubResource("Resource_2mrtp"), SubResource("Resource_krl0v"), SubResource("Resource_vxqj5"), SubResource("Resource_xcuj7"), SubResource("Resource_wylcs"), SubResource("Resource_5otci"), SubResource("Resource_ndmuy"), SubResource("Resource_tvqts"), SubResource("Resource_r60uu"), SubResource("Resource_p2w6s"), SubResource("Resource_usgjr"), SubResource("Resource_i5njn"), SubResource("Resource_e40xv"), SubResource("Resource_2sb7q")])
+
+[sub_resource type="Resource" id="Resource_splbn"]
+script = ExtResource("2_weaqk")
+position = Vector2(660, 150)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_edm73"]
+script = ExtResource("2_weaqk")
+time = 60.0
+position = Vector2(660, 150)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_owqnf"]
+script = ExtResource("2_weaqk")
+time = 61.366
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_jcao5"]
+script = ExtResource("2_weaqk")
+time = 61.886
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_kvvah"]
+script = ExtResource("2_weaqk")
+time = 62.992
+position = Vector2(220, 150)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_bpi7o"]
+script = ExtResource("2_weaqk")
+time = 150.0
+position = Vector2(220, 150)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_wemw2"]
+script = ExtResource("2_weaqk")
+time = 151.106
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_nuyn7"]
+script = ExtResource("2_weaqk")
+time = 151.626
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_xml6s"]
+script = ExtResource("2_weaqk")
+time = 153.901
+position = Vector2(680, 450)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_hwmsh"]
+script = ExtResource("2_weaqk")
+time = 270.0
+position = Vector2(680, 450)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_on1hc"]
+script = ExtResource("2_weaqk")
+time = 271.545
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_wdrk5"]
+script = ExtResource("2_weaqk")
+time = 272.065
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_s2kft"]
+script = ExtResource("2_weaqk")
+time = 273.359
+position = Vector2(200, 450)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_yihns"]
+script = ExtResource("2_weaqk")
+time = 390.0
+position = Vector2(200, 450)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_8qip5"]
+script = ExtResource("2_weaqk")
+time = 391.294
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_s2e4t"]
+script = ExtResource("2_weaqk")
+time = 391.814
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_6510y"]
+script = ExtResource("2_weaqk")
+time = 393.525
+position = Vector2(620, 180)
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_40ul0"]
+script = ExtResource("2_weaqk")
+time = 510.0
+position = Vector2(620, 180)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_nb0y0"]
+script = ExtResource("2_weaqk")
+time = 511.075
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_am3gx"]
+script = ExtResource("2_weaqk")
+time = 511.595
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_l0iph"]
+script = ExtResource("2_weaqk")
+time = 512.538
+position = Vector2(240, 180)
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_8w7f0"]
+script = ExtResource("2_weaqk")
+time = 630.0
+position = Vector2(240, 180)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_g1j6q"]
+script = ExtResource("2_weaqk")
+time = 630.942
+position = Vector2(381, 190)
+movement = 1
+room = &"书房"
+
+[sub_resource type="Resource" id="Resource_4gr82"]
+script = ExtResource("2_weaqk")
+time = 631.462
+position = Vector2(459, 190)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_e5d5f"]
+script = ExtResource("2_weaqk")
+time = 632.729
+position = Vector2(459, 380)
+movement = 1
+room = &"客厅"
+
+[sub_resource type="Resource" id="Resource_j7yab"]
+script = ExtResource("2_weaqk")
+time = 633.249
+position = Vector2(381, 380)
+movement = 1
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_jo3aa"]
+script = ExtResource("2_weaqk")
+time = 634.596
+position = Vector2(180, 400)
+room = &"厨房"
+
+[sub_resource type="Resource" id="Resource_jojua"]
+script = ExtResource("1_cw26i")
+id = &"F"
+display_name = "侦探"
+label = "6"
+color = Color(0.53333336, 0, 1, 1)
+track = Array[ExtResource("2_weaqk")]([SubResource("Resource_splbn"), SubResource("Resource_edm73"), SubResource("Resource_owqnf"), SubResource("Resource_jcao5"), SubResource("Resource_kvvah"), SubResource("Resource_bpi7o"), SubResource("Resource_wemw2"), SubResource("Resource_nuyn7"), SubResource("Resource_xml6s"), SubResource("Resource_hwmsh"), SubResource("Resource_on1hc"), SubResource("Resource_wdrk5"), SubResource("Resource_s2kft"), SubResource("Resource_yihns"), SubResource("Resource_8qip5"), SubResource("Resource_s2e4t"), SubResource("Resource_6510y"), SubResource("Resource_40ul0"), SubResource("Resource_nb0y0"), SubResource("Resource_am3gx"), SubResource("Resource_l0iph"), SubResource("Resource_8w7f0"), SubResource("Resource_g1j6q"), SubResource("Resource_4gr82"), SubResource("Resource_e5d5f"), SubResource("Resource_j7yab"), SubResource("Resource_jo3aa")])
+
+[sub_resource type="Resource" id="Resource_6ilb7"]
+script = ExtResource("4_lo8om")
+id = &"q1"
+kind = 1
+prompt = "谁是杀害先生的凶手？"
+options = PackedStringArray("管家", "继承人", "秘书", "厨师", "园丁")
+answer = "继承人"
+
+[sub_resource type="Resource" id="Resource_djiv5"]
+script = ExtResource("4_lo8om")
+id = &"q2"
+prompt = "凶器是什么？"
+options = PackedStringArray("匕首", "镇纸", "毒药", "绳子")
+answer = "镇纸"
+
+[sub_resource type="Resource" id="Resource_wgdea"]
+script = ExtResource("4_lo8om")
+id = &"q3"
+prompt = "凶手是如何作案的？"
+options = PackedStringArray("从门进入", "从窗户扔进凶器", "下毒", "勒死")
+answer = "从窗户扔进凶器"
+
+[sub_resource type="Resource" id="Resource_okt1j"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 10.0
+duration = 9.235
+stream = ExtResource("8_usp4q")
+text = "各位，我是负责这个案件的侦探。昨晚8点，先生在书房被发现死亡。现在我需要了解案发时每个人的行踪。"
+
+[sub_resource type="Resource" id="Resource_3c5w6"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 27.0
+duration = 9.609
+stream = ExtResource("9_q1gug")
+text = "侦探先生，我当时在客厅整理文件。8点左右，我听到书房传来一声闷响，但以为是先生在整理东西，就没在意。"
+
+[sub_resource type="Resource" id="Resource_q0cx7"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 44.0
+duration = 8.767
+stream = ExtResource("10_r5uww")
+text = "我在花园打电话，和朋友讨论生意的事情。大概7点50分左右，我看到园丁从书房方向走出来。"
+
+[sub_resource type="Resource" id="Resource_m3grc"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 61.0
+duration = 9.231
+stream = ExtResource("11_n1ml8")
+text = "我确实去过书房，先生让我修剪书房窗外的灌木。7点45分左右我就离开了，去了花园继续工作。"
+
+[sub_resource type="Resource" id="Resource_2ctb5"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 78.0
+duration = 12.619
+stream = ExtResource("12_yv254")
+text = "我在厨房帮厨师准备晚餐。7点55分的时候，先生打电话让我送一杯咖啡到书房。我7点58分送到，先生当时还好好的。"
+
+[sub_resource type="Resource" id="Resource_kdtgk"]
+script = ExtResource("7_8nsbp")
+speaker = &"D"
+start = 95.0
+duration = 7.762
+stream = ExtResource("13_5pff2")
+text = "是的，秘书确实在厨房帮我。她7点55分离开去送咖啡，8点05分左右回来的。"
+
+[sub_resource type="Resource" id="Resource_ism61"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 107.0
+duration = 3.368
+stream = ExtResource("14_2ya6k")
+text = "秘书，你送咖啡的时候，先生有什么异常吗？"
+
+[sub_resource type="Resource" id="Resource_n7kk8"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 117.0
+duration = 7.706
+stream = ExtResource("15_w8k54")
+text = "先生看起来很生气，在电话里和人吵架。他说'你别想拿走一分钱'，然后挂了电话。"
+
+[sub_resource type="Resource" id="Resource_soe7d"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 134.0
+duration = 6.677
+stream = ExtResource("16_13ou2")
+text = "那通电话一定是打给我的！先生最近对我很不满，说我花钱大手大脚。"
+
+[sub_resource type="Resource" id="Resource_qjav1"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 146.0
+duration = 4.563
+stream = ExtResource("17_4fagu")
+text = "先生确实在考虑修改遗嘱，最近和律师谈了好几次。"
+
+[sub_resource type="Resource" id="Resource_xtmb6"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 158.0
+duration = 3.189
+stream = ExtResource("18_ati2w")
+text = "管家，你知道先生要修改遗嘱的内容吗？"
+
+[sub_resource type="Resource" id="Resource_27l1x"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 168.0
+duration = 5.613
+stream = ExtResource("19_p2us2")
+text = "具体内容我不清楚，但先生提到过要把大部分财产捐给慈善机构。"
+
+[sub_resource type="Resource" id="Resource_mnwwq"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 180.0
+duration = 5.131
+stream = ExtResource("20_qptta")
+text = "什么？那我的继承权怎么办？我是他唯一的侄子！"
+
+[sub_resource type="Resource" id="Resource_d7rsv"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 192.0
+duration = 6.795
+stream = ExtResource("21_x241h")
+text = "先生最近确实和很多人有矛盾。上周还和园丁因为花园的事情吵架。"
+
+[sub_resource type="Resource" id="Resource_8ecds"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 204.0
+duration = 6.55
+stream = ExtResource("22_6e7af")
+text = "那是因为先生要卖掉花园的一块地，我不同意。但我绝对不会伤害先生！"
+
+[sub_resource type="Resource" id="Resource_sa6mf"]
+script = ExtResource("7_8nsbp")
+speaker = &"D"
+start = 216.0
+duration = 6.034
+stream = ExtResource("23_nnviw")
+text = "先生也和厨师长吵架了，说我们的菜不符合他的口味，要扣我们工资。"
+
+[sub_resource type="Resource" id="Resource_m2oyo"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 228.0
+duration = 7.539
+stream = ExtResource("24_rhscs")
+text = "现在让我们回到案发时间。8点整，有人听到闷响。秘书，你送完咖啡后去了哪里？"
+
+[sub_resource type="Resource" id="Resource_3o6br"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 245.0
+duration = 7.244
+stream = ExtResource("25_lymop")
+text = "我回到厨房，和厨师一起准备晚餐，直到8点15分管家来说先生出事了。"
+
+[sub_resource type="Resource" id="Resource_vevsb"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 257.0
+duration = 5.555
+stream = ExtResource("26_4w3aq")
+text = "8点10分左右，我去书房送文件，发现先生倒在地上，已经没有呼吸了。"
+
+[sub_resource type="Resource" id="Resource_xotam"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 269.0
+duration = 9.001
+stream = ExtResource("27_la680")
+text = "法医初步判断死亡时间是7点55分到8点05分之间。凶器是书房里的黄铜镇纸，上面没有指纹。"
+
+[sub_resource type="Resource" id="Resource_dxaei"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 286.0
+duration = 3.546
+stream = ExtResource("28_ssfcd")
+text = "镇纸？那是我去年送给先生的礼物！"
+
+[sub_resource type="Resource" id="Resource_jrtql"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 298.0
+duration = 4.666
+stream = ExtResource("29_dyu8l")
+text = "哦？这很有趣。继承人送的镇纸成了凶器。"
+
+[sub_resource type="Resource" id="Resource_7bv5t"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 310.0
+duration = 4.722
+stream = ExtResource("30_vmbpw")
+text = "不是我！我当时在花园打电话，园丁可以证明！"
+
+[sub_resource type="Resource" id="Resource_yquhp"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 322.0
+duration = 5.124
+stream = ExtResource("31_a1oux")
+text = "是的，我在花园看到他在打电话，一直到8点10分左右。"
+
+[sub_resource type="Resource" id="Resource_f52ky"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 334.0
+duration = 4.715
+stream = ExtResource("32_ergob")
+text = "管家，你说你8点10分发现先生的尸体，之前你在做什么？"
+
+[sub_resource type="Resource" id="Resource_4mdfa"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 346.0
+duration = 5.379
+stream = ExtResource("33_8mmb6")
+text = "我一直在客厅整理文件，8点整听到闷响，8点10分去书房查看。"
+
+[sub_resource type="Resource" id="Resource_tj55m"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 358.0
+duration = 7.611
+stream = ExtResource("34_gxw8f")
+text = "秘书，你送咖啡的时间是7点58分，回来是8点05分。这段时间你在书房待了多久？"
+
+[sub_resource type="Resource" id="Resource_4ky06"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 375.0
+duration = 5.933
+stream = ExtResource("35_am8ot")
+text = "就待了1分钟左右，放下咖啡就走了。先生当时还在打电话。"
+
+[sub_resource type="Resource" id="Resource_x6o2c"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 387.0
+duration = 3.67
+stream = ExtResource("36_ha6ds")
+text = "厨师，你能证明秘书8点05分回到厨房吗？"
+
+[sub_resource type="Resource" id="Resource_o0k3j"]
+script = ExtResource("7_8nsbp")
+speaker = &"D"
+start = 399.0
+duration = 6.146
+stream = ExtResource("37_8gft5")
+text = "是的，她8点05分准时回来的，我们一起准备晚餐直到8点15分。"
+
+[sub_resource type="Resource" id="Resource_2ufva"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 411.0
+duration = 4.197
+stream = ExtResource("38_c5e34")
+text = "园丁，你7点45分离开书房后，一直都在花园吗？"
+
+[sub_resource type="Resource" id="Resource_ds0qq"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 423.0
+duration = 6.096
+stream = ExtResource("39_s5f3a")
+text = "是的，我一直在修剪花园的灌木，直到8点15分听到管家的叫声。"
+
+[sub_resource type="Resource" id="Resource_rwto1"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 435.0
+duration = 14.49
+stream = ExtResource("40_skc5i")
+text = "现在让我重新梳理一下时间线：7点45分园丁离开书房，7点55分秘书去送咖啡，7点58分到达，8点05分返回厨房，8点整管家听到闷响，8点10分管家发现尸体。"
+
+[sub_resource type="Resource" id="Resource_o31lw"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 457.0
+duration = 1.543
+stream = ExtResource("41_0evao")
+text = "是的，就是这样。"
+
+[sub_resource type="Resource" id="Resource_cf30k"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 464.0
+duration = 8.505
+stream = ExtResource("42_g6uto")
+text = "等等，有个问题。如果闷响是8点整发生的，而秘书8点05分才回到厨房，那她有足够的时间作案。"
+
+[sub_resource type="Resource" id="Resource_va7ep"]
+script = ExtResource("7_8nsbp")
+speaker = &"C"
+start = 481.0
+duration = 4.897
+stream = ExtResource("43_o8u2m")
+text = "不可能！我8点05分回到厨房，厨师可以证明！"
+
+[sub_resource type="Resource" id="Resource_ne7pg"]
+script = ExtResource("7_8nsbp")
+speaker = &"D"
+start = 493.0
+duration = 5.499
+stream = ExtResource("44_q4iqo")
+text = "是的，她确实8点05分回来的，我们一起工作到8点15分。"
+
+[sub_resource type="Resource" id="Resource_jvigl"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 505.0
+duration = 5.232
+stream = ExtResource("45_aibsf")
+text = "那管家呢？你8点整听到闷响，为什么10分钟后才去查看？"
+
+[sub_resource type="Resource" id="Resource_gm6hc"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 517.0
+duration = 6.449
+stream = ExtResource("46_t1jt3")
+text = "我以为先生在整理东西，所以没在意。直到10分钟后觉得不对劲才去查看。"
+
+[sub_resource type="Resource" id="Resource_w4snw"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 529.0
+duration = 6.414
+stream = ExtResource("47_x6gc0")
+text = "但如果是你作案，你完全可以在8点整动手，然后10分钟后假装发现尸体。"
+
+[sub_resource type="Resource" id="Resource_wa6cs"]
+script = ExtResource("7_8nsbp")
+speaker = &"A"
+start = 546.0
+duration = 5.77
+stream = ExtResource("48_dtx2t")
+text = "我没有理由伤害先生！我在这个家工作了30年，先生待我如家人。"
+
+[sub_resource type="Resource" id="Resource_s1qvy"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 558.0
+duration = 6.393
+stream = ExtResource("49_yayn4")
+text = "让我检查一下书房的窗户。园丁，你修剪灌木时，书房的窗户是开着的吗？"
+
+[sub_resource type="Resource" id="Resource_gfan8"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 575.0
+duration = 3.673
+stream = ExtResource("50_sini7")
+text = "是的，窗户是开着的，先生说要通风。"
+
+[sub_resource type="Resource" id="Resource_fpeij"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 587.0
+duration = 5.59
+stream = ExtResource("51_x2aq6")
+text = "哦？这就有意思了。如果窗户开着，凶手可以从窗外作案。"
+
+[sub_resource type="Resource" id="Resource_pn508"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 599.0
+duration = 4.769
+stream = ExtResource("52_plqyx")
+text = "从窗外？那只有园丁有机会，他当时就在花园！"
+
+[sub_resource type="Resource" id="Resource_cbg3g"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 611.0
+duration = 4.533
+stream = ExtResource("53_7rf3c")
+text = "我没有！我一直在修剪灌木，没有靠近窗户。"
+
+[sub_resource type="Resource" id="Resource_kogkc"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 623.0
+duration = 8.18
+stream = ExtResource("54_grnri")
+text = "但你有动机，先生要卖掉你精心照料的花园。而且你熟悉花园的布局，可以从窗户进入书房。"
+
+[sub_resource type="Resource" id="Resource_22vb4"]
+script = ExtResource("7_8nsbp")
+speaker = &"E"
+start = 640.0
+duration = 6.666
+stream = ExtResource("55_3gd6s")
+text = "我绝对不会这么做！先生虽然要卖地，但他答应给我一笔钱让我退休。"
+
+[sub_resource type="Resource" id="Resource_5gwrx"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 652.0
+duration = 11.325
+stream = ExtResource("56_eu002")
+text = "现在我有了一个大胆的推测。凶手不是从门进入的，而是从窗户。而且凶手知道先生8点左右会在书房，并且知道镇纸的位置。"
+
+[sub_resource type="Resource" id="Resource_hpa0w"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 669.0
+duration = 5.766
+stream = ExtResource("57_fjjpu")
+text = "镇纸是我送的，我当然知道它的位置！但我当时在花园打电话！"
+
+[sub_resource type="Resource" id="Resource_opqhk"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 681.0
+duration = 6.907
+stream = ExtResource("58_5no6l")
+text = "是的，你在花园打电话，但你可以在打电话的同时，从花园的窗户扔进镇纸，击中先生。"
+
+[sub_resource type="Resource" id="Resource_dqidr"]
+script = ExtResource("7_8nsbp")
+speaker = &"B"
+start = 698.0
+duration = 3.002
+stream = ExtResource("59_im6ic")
+text = "不可能！我没有那么准的手法！"
+
+[sub_resource type="Resource" id="Resource_yjr1v"]
+script = ExtResource("7_8nsbp")
+speaker = &"F"
+start = 710.0
+duration = 8.495
+stream = ExtResource("60_y3tpa")
+text = "但你有动机，有机会，而且是唯一知道镇纸位置的人。管家听到的闷响，就是镇纸击中先生的声音。"
+
+[resource]
+script = ExtResource("5_p5nf0")
+id = &"case4"
+title = "豪宅密室谋杀案"
+description = "一座豪华别墅的书房发生了谋杀案，富豪在密室中被杀害。所有嫌疑人都在别墅内，侦探需要通过听取对话找出真凶。"
+duration = 720.0
+map_scene = ExtResource("3_fpo8v")
+characters = Array[ExtResource("1_cw26i")]([SubResource("Resource_l3dh0"), SubResource("Resource_vafs4"), SubResource("Resource_7tdg6"), SubResource("Resource_obbdp"), SubResource("Resource_8ig0t"), SubResource("Resource_jojua")])
+voice_lines = Array[ExtResource("7_8nsbp")]([SubResource("Resource_okt1j"), SubResource("Resource_3c5w6"), SubResource("Resource_q0cx7"), SubResource("Resource_m3grc"), SubResource("Resource_2ctb5"), SubResource("Resource_kdtgk"), SubResource("Resource_ism61"), SubResource("Resource_n7kk8"), SubResource("Resource_soe7d"), SubResource("Resource_qjav1"), SubResource("Resource_xtmb6"), SubResource("Resource_27l1x"), SubResource("Resource_mnwwq"), SubResource("Resource_d7rsv"), SubResource("Resource_8ecds"), SubResource("Resource_sa6mf"), SubResource("Resource_m2oyo"), SubResource("Resource_3o6br"), SubResource("Resource_vevsb"), SubResource("Resource_xotam"), SubResource("Resource_dxaei"), SubResource("Resource_jrtql"), SubResource("Resource_7bv5t"), SubResource("Resource_yquhp"), SubResource("Resource_f52ky"), SubResource("Resource_4mdfa"), SubResource("Resource_tj55m"), SubResource("Resource_4ky06"), SubResource("Resource_x6o2c"), SubResource("Resource_o0k3j"), SubResource("Resource_2ufva"), SubResource("Resource_ds0qq"), SubResource("Resource_rwto1"), SubResource("Resource_o31lw"), SubResource("Resource_cf30k"), SubResource("Resource_va7ep"), SubResource("Resource_ne7pg"), SubResource("Resource_jvigl"), SubResource("Resource_gm6hc"), SubResource("Resource_w4snw"), SubResource("Resource_wa6cs"), SubResource("Resource_s1qvy"), SubResource("Resource_gfan8"), SubResource("Resource_fpeij"), SubResource("Resource_pn508"), SubResource("Resource_cbg3g"), SubResource("Resource_kogkc"), SubResource("Resource_22vb4"), SubResource("Resource_5gwrx"), SubResource("Resource_hpa0w"), SubResource("Resource_opqhk"), SubResource("Resource_dqidr"), SubResource("Resource_yjr1v")])
+questions = Array[ExtResource("4_lo8om")]([SubResource("Resource_6ilb7"), SubResource("Resource_djiv5"), SubResource("Resource_wgdea")])

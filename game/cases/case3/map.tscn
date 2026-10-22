@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://map/case_map.gd" id="1_amcja"]
+[ext_resource type="Script" path="res://map/room.gd" id="2_dek1j"]
+[ext_resource type="Script" path="res://map/door.gd" id="3_xergj"]
+
+[node name="CaseMap" type="Node2D" unique_id=1331695453]
+script = ExtResource("1_amcja")
+floor_names = PackedStringArray("一层")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=827192565]
+
+[node name="展厅" type="Node2D" parent="Rooms" unique_id=229481015]
+script = ExtResource("2_dek1j")
+room_name = "展厅"
+polygon = PackedVector2Array(100, 100, 400, 100, 400, 300, 100, 300)
+
+[node name="办公室" type="Node2D" parent="Rooms" unique_id=1787786818]
+script = ExtResource("2_dek1j")
+room_name = "办公室"
+polygon = PackedVector2Array(500, 100, 750, 100, 750, 300, 500, 300)
+
+[node name="走廊" type="Node2D" parent="Rooms" unique_id=630808080]
+script = ExtResource("2_dek1j")
+room_name = "走廊"
+polygon = PackedVector2Array(100, 300, 750, 300, 750, 400, 100, 400)
+
+[node name="仓库" type="Node2D" parent="Rooms" unique_id=1380945049]
+script = ExtResource("2_dek1j")
+room_name = "仓库"
+polygon = PackedVector2Array(100, 400, 400, 400, 400, 480, 100, 480)
+
+[node name="Doors" type="Node2D" parent="." unique_id=1842680234]
+
+[node name="展厅门" type="Node2D" parent="Doors" unique_id=1945672653]
+position = Vector2(265, 310)
+script = ExtResource("3_xergj")
+room_a = "展厅"
+room_b = "走廊"
+size = Vector2(30, 20)
+
+[node name="办公室门" type="Node2D" parent="Doors" unique_id=331762838]
+position = Vector2(640, 310)
+script = ExtResource("3_xergj")
+room_a = "办公室"
+room_b = "走廊"
+size = Vector2(30, 20)
+
+[node name="仓库门" type="Node2D" parent="Doors" unique_id=1074262599]
+position = Vector2(260, 400)
+script = ExtResource("3_xergj")
+room_a = "仓库"
+room_b = "走廊"
+size = Vector2(40, 20)
+
+[node name="Stairs" type="Node2D" parent="." unique_id=2063443229]
