@@ -90,6 +90,8 @@ def split_directions(text: str) -> tuple[str, list[str]]:
     """返回（要念出来的文本，表演提示列表）。"""
     directions = [d.strip() for d in DIRECTION.findall(text) if d.strip()]
     spoken = spell_numbers(re.sub(r"\s+", " ", DIRECTION.sub("", text)).strip(" ，,。"))
+    if not re.search(r"\w", spoken):  # 只有省略号之类：模型不出声，当作没有台词
+        return "", directions
     if spoken and spoken[-1] not in "。！？!?…」”":
         spoken += "。"
     return spoken, directions
