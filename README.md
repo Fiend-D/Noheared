@@ -4,7 +4,14 @@
 
 你是一个看不见的“耳朵”：案件是一段固定时长的录音，角色在多房间的蓝图地图上走动、交谈。你只能听清自己所在房间的对话，隔壁只有闷声，尖叫枪声能穿墙。反复倒带、换房间跟人，最后指认每个圆点的身份并回答问题。
 
-玩法拆解与设计说明见 [docs/unheard-analysis.md](docs/unheard-analysis.md)。
+## 文档
+
+| 文档 | 内容 |
+| --- | --- |
+| [docs/setup.md](docs/setup.md) | 环境搭建：Godot、代码检查、ffmpeg / Python 库、配音环境（edge-tts、CosyVoice2） |
+| [docs/case-authoring.md](docs/case-authoring.md) | 自制剧本：case.json 全部字段、地图与走位规则、配音脚本用法、导入校验、编辑器插件 |
+| [docs/packaging.md](docs/packaging.md) | 打包发布：导出模板、导出命令、打包内容、CI 产物、图标与版本号 |
+| [docs/unheard-analysis.md](docs/unheard-analysis.md) | 玩法拆解与设计说明 |
 
 ## 运行
 
@@ -17,27 +24,46 @@ godot -e --path game         # 打开编辑器
 
 首次打开会自动导入资源。命令行环境可先执行 `godot --headless --path game --import`。
 
-操作：点击房间移动监听者，点击圆点选中，空格播放/暂停，←/→ 快退/快进 5 秒；右侧“笔记”点击条目可跳回该时刻。
+主界面只有“开始调查 / 设置 / 退出”。开始调查进入档案室：抽屉里竖着一排案卷，后面的只露出标签，最前面一份露出案件名和海报；滚轮或方向键翻阅，点标签直接翻到那一份，点最前面的档案把它取出、摊开成卷宗（海报、案情、涉案人物、最佳成绩），点“开始查案”进入游戏。
+
+地图上的角色是棋子：还没指认时是带编号的灰色剪影，指认身份后换成该身份的头像徽章，下面挂名字缎带。
+
+操作：
+
+| 按键 | 作用 |
+| --- | --- |
+| WASD / 方向键 | 监听者走动（墙会挡住，只能从门洞进出房间；走到楼梯口自动上下楼） |
+| Shift | 快走 |
+| 鼠标左键点房间 | 监听者沿门洞、楼梯自动走过去 |
+| 鼠标左键点角色 | 选中角色，右侧切到“人物”指认 |
+| 空格 | 播放 / 暂停 |
+| Q / E | 倒退 / 快进 5 秒 |
+| R | 切换倍速（×0.5 / ×1 / ×2 / ×4） |
+| 滚轮 | 缩放地图，放大后镜头跟随监听者 |
+
+监听者按真实时间走动，暂停和倒带时也可以移动。右侧“笔记”点击条目可跳回该时刻。
 
 ## 目录
 
 ```
 game/                    Godot 项目
   core/                  时间轴、轨迹采样、声学、调度、存档、JSON 导入导出、校验
-  map/                   Room / Door / Stair / CaseMap 节点，蓝图着色器，监听者
-  ui/                    案件选择、游戏控制器、HUD
+  map/                   Room / Door / Stair / Prop / CaseMap 节点，聚光着色器，监听者
+  ui/                    主界面（书桌）、档案室（选案件）、游戏控制器、HUD
+  art/                   地板材质、家具贴图 + catalog.json、主界面素材、案件海报、角色头像
   cases/<id>/            case.json（源数据）、case.tres + map.tscn（导入结果）、audio/*.ogg
   addons/case_editor/    编辑器插件：时间轴面板、地图预览、试听、校验、导入导出
   addons/gdUnit4/        测试框架
   tests/                 gdUnit4 测试
-tools/                   Python 内容流水线（迁移、配音）
+tools/                   Python 内容流水线（迁移、配音、美术切图、自动摆家具）
+  art_sources/           AI 生成的原始素材表（家具、地板、书桌、照片、肖像表、海报）
 docs/                    设计文档
 legacy/                  旧版 PyQt 实现（只保留代码和案件 JSON 作参考）
 ```
 
 ### 仓库里提交什么
 
-提交代码、文档、案件源数据（`case.json`）以及运行游戏必需的资源：`game/cases/*/audio/*.ogg`、`game/audio/`、导入生成的 `case.tres` / `map.tscn` 和 `*.import`。这样 clone 下来就能直接运行，CI 导出的版本也带声音。
+提交代码、文档、案件源数据（`case.json`）以及运行游戏必需的资源：`game/cases/*/audio/*.ogg`、`game/audio/`、`game/art/`（以及它的原始素材表 `tools/art_sources/`）、导入生成的 `case.tres` / `map.tscn` 和 `*.import`。这样 clone 下来就能直接运行，CI 导出的版本也带声音。
 
 以下内容只留在本地，已写进 `.gitignore`：
 
@@ -51,47 +77,19 @@ legacy/                  旧版 PyQt 实现（只保留代码和案件 JSON 作�
 - **逐句语音**：每句台词一个音频片段，`CueScheduler` 按当前时间决定播放哪些片段、从哪个偏移量开始，并做漂移校正。变速时在 Master 总线上做音高补偿。
 - **声学**：`Acoustics` 用房间连通图（门、楼梯；关着的门代价更高）决定可听性。同房间走 `Room` 总线（定位声像 + 按房间大小的混响），隔一道门走 `Muffled`（低通），大音量事件按跳数衰减走 `Far`。切换总线时淡入淡出。
 - **只记录听到的内容**：字幕只显示能听到的台词，隔墙的只显示“听不清”；听清的台词进入笔记。
+- **监听聚光**：地图是插画式室内（地板材质 + 可复用家具贴图，墙由房间多边形画出，和数据精确对齐）。监听者所在房间是暖色原色，其余房间按声学距离逐级变暗、变成青色单色（`map/lit.gdshader`，`MapStyle.LIGHT_LEVELS`）。
+- **家具挡路**：挡路的家具监听者走不过去，点击寻路会在房间内绕开（`CaseMap.route`）。角色仍严格按关键帧移动，所以家具必须避开角色轨迹——自动摆放脚本和校验器都会检查。
 
 ## 案件数据
 
-`game/cases/<id>/case.json` 是源数据，格式示例：
-
-```json
-{
-  "id": "case1", "title": "…", "description": "…", "duration": 120, "truth": "…",
-  "map": {
-    "floors": ["一层"],
-    "rooms":  [{"name": "房间1", "floor": 0, "polygon": [[100,100],[300,100],[300,250],[100,250]]}],
-    "doors":  [{"name": "门", "room_a": "房间1", "room_b": "走廊", "position": [200,250], "size": [20,10], "open": true}],
-    "stairs": [{"name": "楼梯", "room_a": "大厅", "room_b": "卧室", "end_a": [215,226], "end_b": [215,524]}]
-  },
-  "characters": [{"id": "A", "name": "经理", "label": "1", "color": "#ff0000",
-                  "track": [{"t": 0, "p": [160,160], "m": "idle", "room": "房间1"}]}],
-  "voice_lines": [{"speaker": "A", "start": 5.0, "duration": 3.2, "text": "（低声）……", "audio": "audio/A_xxx.ogg", "loudness": 0.5}],
-  "sfx": [{"time": 60, "duration": 1.5, "audio": "audio/shot.ogg", "position": [200,300], "loudness": 1.0, "label": "枪声"}],
-  "questions": [{"id": "q1", "kind": "character", "prompt": "谁是凶手？", "options": ["…"], "answer": "…"}]
-}
-```
-
-关键帧的 `m` 描述“从本帧到下一帧”的移动方式（idle / walk / run）。跨房间时必须经过门或楼梯两侧的点，校验器会检查穿墙。
-
-修改 `case.json` 后重新生成 `case.tres` 和 `map.tscn`：
+`game/cases/<id>/case.json` 是源数据，`case.tres` / `map.tscn` 由它导入生成：
 
 ```bash
 godot --headless --path game --import
 godot --headless --path game --script res://addons/case_editor/import_cli.gd -- case1 case5   # 不带参数则全部导入
 ```
 
-也可以在编辑器里用“项目 → 工具 → 案件：从 case.json 导入…”。
-
-## 编辑器插件
-
-在文件系统面板选中某个 `case.tres`，底部会打开“案件时间轴”：
-
-- 每个角色一行：上半是台词块（半透明表示没有语音），下半是关键帧。拖动修改时间，点击空白处设置预览时刻，Ctrl+滚轮缩放；选中的条目会显示在检查器中。
-- 打开对应的 `map.tscn` 时，视口中会画出预览时刻的人物位置。
-- 选一个“监听房间”后点“试听”，可以听到从该房间听见的效果（隔墙会被压低）。
-- “校验”列出数据问题；“保存”写回 `case.tres`。“工具 → 案件：导出当前案件为 case.json”把编辑结果写回 JSON。
+完整字段说明、设计规则和编辑器插件用法见 [docs/case-authoring.md](docs/case-authoring.md)。
 
 ## 内容流水线（tools/）
 
@@ -105,41 +103,44 @@ python3 tools/migrate_legacy_case.py            # 全部；或指定 case1 case5
 
 迁移已经做完，结果都在 `game/cases/` 里。旧版录音（`legacy/unheared/audio/`）不在仓库中，只有本地有这些文件时才能重新跑迁移。
 
+### 剧本编译
+
+```bash
+python3 tools/compose_case.py case8 --check   # 检查剧本，打印每场的起止时间
+python3 tools/compose_case.py case8           # case.play → case.json
+```
+
+把纯文本剧本 `game/cases/<id>/case.play`（房间矩形、角色、台词、“谁走到哪”）编译成 `case.json`：自动放门、规划走位、让说话的人先走到位、绕开家具，配音后按真实时长重新排时间。case8、case9 用它编写。格式和流程见 [docs/case-authoring.md](docs/case-authoring.md#12-用剧本文件编写)。
+
+### 美术素材
+
+家具、地板、主界面、角色头像和案件海报都是 AI 生成的素材，原图在 `tools/art_sources/`：家具和肖像为洋红底的 3×3 表（每格一件 / 一人），地板为 3×3 材质表，海报为单张竖图。切图并生成目录：
+
+```bash
+python3 tools/art_sheets.py   # 需要 Pillow + numpy + scipy
+```
+
+脚本按到背景色的距离和洋红色相去底、裁边，输出 `game/art/props/*.png` + `catalog.json`（地图尺寸、是否挡路、是否地毯）、`game/art/floors/*.jpg`、`game/art/exterior/*.jpg`、`game/art/title/`、`game/art/portraits/<案件>/<角色 ID>.jpg`（每格去边框、取头肩部分）和 `game/art/posters/<案件>.jpg`（裁成 3:4）。新增家具：在素材表里加一格，把名字写进 `PROP_SHEETS`、尺寸写进 `CATALOG`。家具尺寸改了以后要重新导入案件（尺寸在导入时写进 `map.tscn`）。
+
+### 自动摆家具
+
+```bash
+python3 tools/furnish.py                # 给还没有家具的案件铺地板、摆家具
+python3 tools/furnish.py case4 --force  # 重摆
+python3 tools/furnish.py case8 --force --ignore-tracks  # 不避让轨迹（之后用 compose_case.py 让角色绕开家具）
+```
+
+按房间名套模板（书房 → 书架、书桌、地毯……），家具贴图不压任何角色的轨迹和站位，门口、楼梯口、房间名附近留空；每放一件挡路家具都检查监听者仍能在门口、楼梯口之间走通。结果是确定的，可以在编辑器里继续手调。改完重新导入。
+
 ### 配音
 
-`tools/tts_lines.py` 逐句生成语音并回写 `case.json`。台词里的括号内容（“（冷笑）”“（举杯）”）不会被念出来，而是作为语气指令交给 CosyVoice；“尖叫/拍桌”会提高台词的穿墙能力，“低声/小声”会降低。
-
-默认引擎是本地 [CosyVoice2](https://github.com/FunAudioLLM/CosyVoice)，用每个角色的参考音频克隆音色。参考音频存放在 `tools/voice_prompts/`（不提交），路径写在 `case.json` 角色的 `voice_prompt` 字段。文件缺失时，脚本会从该角色现有的语音里重新挑一句 3~10 秒、不带括号的作参考，音色可能略有变化。CosyVoice 需要 Python 3.10，安装到仓库之外：
-
 ```bash
-mkdir -p ~/.local/share/unheard-tts && cd ~/.local/share/unheard-tts
-git clone --depth 1 --recursive https://github.com/FunAudioLLM/CosyVoice.git
-uv venv --python 3.10 venv && export VIRTUAL_ENV=$PWD/venv
-uv pip install "setuptools<70" wheel
-uv pip install --no-build-isolation --index-strategy unsafe-best-match \
-  --extra-index-url https://download.pytorch.org/whl/cpu "torch==2.3.1+cpu" numpy==1.26.4 openai-whisper==20231117
-uv pip install --index-strategy unsafe-best-match --extra-index-url https://download.pytorch.org/whl/cpu \
-  "torch==2.3.1+cpu" "torchaudio==2.3.1+cpu" conformer==0.3.2 diffusers==0.29.0 hydra-core==1.3.2 \
-  HyperPyYAML==1.2.3 inflect==7.3.1 librosa==0.10.2 lightning==2.2.4 matplotlib==3.7.5 modelscope==1.20.0 \
-  networkx==3.1 numpy==1.26.4 omegaconf==2.3.0 onnx==1.16.0 onnxruntime==1.18.0 protobuf==4.25 \
-  pyarrow==18.1.0 pydantic==2.7.0 pyworld==0.3.4 rich==13.7.1 soundfile==0.12.1 transformers==4.51.3 \
-  x-transformers==2.11.24 wetext==0.0.4 wget==3.2 gdown==5.1.0
-venv/bin/python -c "from modelscope import snapshot_download; snapshot_download('iic/CosyVoice2-0.5B', local_dir='models/CosyVoice2-0.5B')"
+~/.local/share/unheard-tts/venv/bin/python tools/tts_lines.py case8 case9      # CosyVoice2，生成缺失的台词，可中断续跑
+.venv/bin/python tools/tts_lines.py case8 --engine edge                        # edge-tts
+python3 tools/fix_speech_timing.py case8                                       # 配音后让角色先走到位再开口
 ```
 
-然后在仓库根目录：
-
-```bash
-~/.local/share/unheard-tts/venv/bin/python tools/tts_lines.py case6 case7      # 生成缺失/非 CosyVoice 的台词，可中断续跑
-~/.local/share/unheard-tts/venv/bin/python tools/tts_lines.py case7 --only 12  # 重做单句
-```
-
-纯 CPU 下大约每秒语音需要数秒计算（case6 + case7 共 326 句约两小时）。路径可用 `COSYVOICE_HOME`、`COSYVOICE_MODEL` 环境变量覆盖。也可用 `--engine edge` 走 edge-tts（不支持语气指令）。
-
-注意事项：
-
-- 个别台词的语气指令偶尔会被念出来。在该句上加 `"tts_instruct": false` 后用 `--only` 重做即可（case7 第 12 句就是这样处理的）。生成后建议用 venv 里的 `openai-whisper` 抽查转写结果。
-- CosyVoice 的文本规范化模型可能下载失败（日志里出现 `no frontend is avaliable`），所以脚本自己把阿拉伯数字转成中文：“83年的”读作“八三年的”，其他数字按数值读。
+括号里的表演提示不会被念出来，而是作为 CosyVoice 的语气指令。安装见 [docs/setup.md](docs/setup.md#4-配音环境)，参数、音色、返工方法见 [docs/case-authoring.md](docs/case-authoring.md#6-配音)。
 
 ## 测试与检查
 
@@ -155,8 +156,8 @@ CI（`.github/workflows/ci.yml`）会跑格式检查、lint、重新导入全部
 
 ## 导出
 
-`game/export_presets.cfg` 包含 Linux 和 Windows 预设（需要安装对应版本的导出模板）：
-
 ```bash
-cd game && godot --headless --export-release Linux
+cd game && mkdir -p export/linux && godot --headless --export-release Linux
 ```
+
+需要先安装 4.7.2 导出模板，详见 [docs/packaging.md](docs/packaging.md)。

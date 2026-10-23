@@ -7,8 +7,12 @@ venv/
 .venv/
 env/
 
-# IDE
+# IDE / OS
 .idea/
+.vscode/
+.cursor/
+.DS_Store
+Thumbs.db
 *.swp
 *.swo
 
