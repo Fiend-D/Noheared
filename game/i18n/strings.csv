@@ -1,13 +1,29 @@
 keys,zh_CN,en
 APP_TITLE,疑案追声,Unheard Remake
-CASE_SELECT_HINT,选择一个案件开始监听,Pick a case to start listening
+TITLE_TAGLINE,侧耳倾听，还原真相,Listen closely. Piece together the truth.
 CASE_DURATION,时长 %s,Length %s
 CASE_BEST,最佳 %d%%,Best %d%%
 CASE_SOLVED,已破案,Solved
-CASE_START,开始监听,Start
+CASE_START,开始调查,Investigate
 CASE_NONE,没有找到案件。请先运行导入脚本。,No cases found. Run the import script first.
-BACK,← 案件列表,← Cases
-HELP_HINT,点击房间移动 · 点击圆点选中 · 空格 播放/暂停 · ←/→ 快退/快进,Click a room to move · Click a dot to select · Space play/pause · Left/Right skip
+CASE_FILE,档案 %02d,FILE %02d
+CASE_CHARACTERS,%d 名角色,%d characters
+CASE_STAMP,已结案,CLOSED
+MENU_START,开始调查,Investigate
+MENU_SETTINGS,设置,Settings
+MENU_QUIT,退出,Quit
+SETTINGS_VOLUME,音量,Volume
+SETTINGS_FULLSCREEN,全屏,Fullscreen
+BACK,‹ 档案室,‹ Archive
+BACK_MENU,返回,Back
+CABINET_TITLE,档案室,Archive
+CABINET_HINT,滚轮或方向键翻阅档案，点击标签直接翻到那一份，点击最前面的档案取出。,"Scroll or use the arrow keys to browse, click a tab to jump to it, click the front file to pull it out."
+CABINET_LABEL,疑案 · 录音卷宗,Unsolved · Recordings
+CABINET_OPEN,取出档案 ›,Pull the file ›
+DOSSIER_CAST,涉案人物,People involved
+DOSSIER_START,开始查案,Take the case
+DOSSIER_BACK,放回,Put it back
+HELP_HINT,WASD/方向键 走动 · 点击房间 前往 · Shift 快走 · 空格 播放 · Q/E 倒退/快进 · R 倍速 · 滚轮 缩放,WASD/arrows walk · click a room to go there · Shift hurry · Space play · Q/E skip · R speed · wheel zoom
 PLAY,▶ 播放,▶ Play
 PAUSE,⏸ 暂停,⏸ Pause
 SPEED,速度 ×%s,Speed ×%s

@@ -1,94 +1,142 @@
-class_name CaseSelect
+class_name TitleScreen
 extends Control
+## 主界面：夜晚的书桌，左侧只有标题和菜单。
 
-signal case_chosen(path: String)
+signal start_requested
+
+const DESK := preload("res://art/title/desk.jpg")
+const CREAM := Color(0.95, 0.89, 0.76)
+const MENU_WIDTH := 0.3
+
+var _settings: AcceptDialog
 
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var bg := ColorRect.new()
-	bg.color = Color(0.035, 0.06, 0.11)
+	var bg := TextureRect.new()
+	bg.texture = DESK
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
+	var shade := TextureRect.new()
+	var gradient := GradientTexture2D.new()
+	gradient.gradient = Gradient.new()
+	gradient.gradient.set_color(0, Color(0, 0, 0, 0.8))
+	gradient.gradient.set_color(1, Color(0, 0, 0, 0))
+	shade.texture = gradient
+	shade.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	shade.stretch_mode = TextureRect.STRETCH_SCALE
+	shade.anchor_right = MENU_WIDTH + 0.12
+	shade.anchor_bottom = 1.0
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(shade)
+	_build_menu()
 
-	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 48)
-	add_child(margin)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		accept_event()
+		start_requested.emit()
+
+
+func _build_menu() -> void:
 	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 16)
-	margin.add_child(col)
-
+	col.anchor_right = MENU_WIDTH
+	col.anchor_bottom = 1.0
+	col.offset_left = 72
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
+	col.add_theme_constant_override("separation", 10)
+	add_child(col)
+	var ear := Label.new()
+	ear.text = "))) "
+	ear.add_theme_font_override("font", UiTheme.serif_font())
+	ear.add_theme_font_size_override("font_size", 24)
+	ear.add_theme_color_override("font_color", Color(UiTheme.ACCENT, 0.7))
+	col.add_child(ear)
 	var title := Label.new()
 	title.text = tr("APP_TITLE")
-	title.add_theme_font_size_override("font_size", 40)
+	title.add_theme_font_override("font", UiTheme.serif_font())
+	title.add_theme_font_size_override("font_size", 84)
+	title.add_theme_color_override("font_color", CREAM)
+	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.75))
+	title.add_theme_constant_override("shadow_offset_x", 3)
+	title.add_theme_constant_override("shadow_offset_y", 4)
 	col.add_child(title)
-	var hint := Label.new()
-	hint.text = tr("CASE_SELECT_HINT")
-	hint.add_theme_color_override("font_color", UiTheme.TEXT_DIM)
-	col.add_child(hint)
-
-	var scroll := ScrollContainer.new()
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	col.add_child(scroll)
-	var grid := GridContainer.new()
-	grid.columns = 3
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 16)
-	grid.add_theme_constant_override("v_separation", 16)
-	scroll.add_child(grid)
-
-	var paths := CaseLibrary.list_case_paths()
-	if paths.is_empty():
-		var none := Label.new()
-		none.text = tr("CASE_NONE")
-		col.add_child(none)
-	for path in paths:
-		var data := CaseLibrary.load_case(path)
-		if data:
-			grid.add_child(_card(path, data))
+	var rule := ColorRect.new()
+	rule.color = Color(CREAM, 0.45)
+	rule.custom_minimum_size = Vector2(280, 1)
+	rule.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	col.add_child(rule)
+	var tagline := Label.new()
+	tagline.text = tr("TITLE_TAGLINE")
+	tagline.add_theme_font_override("font", UiTheme.serif_font())
+	tagline.add_theme_font_size_override("font_size", 16)
+	tagline.add_theme_color_override("font_color", Color(CREAM, 0.6))
+	col.add_child(tagline)
+	var gap := Control.new()
+	gap.custom_minimum_size.y = 48
+	col.add_child(gap)
+	col.add_child(menu_item(tr("MENU_START"), start_requested.emit))
+	col.add_child(menu_item(tr("MENU_SETTINGS"), _show_settings))
+	col.add_child(menu_item(tr("MENU_QUIT"), func() -> void: get_tree().quit()))
+	var tail := Control.new()
+	tail.custom_minimum_size.y = 80
+	col.add_child(tail)
 
 
-func _card(path: String, data: CaseData) -> Control:
-	var panel := PanelContainer.new()
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.custom_minimum_size = Vector2(0, 190)
-	var box := StyleBoxFlat.new()
-	box.bg_color = UiTheme.BG_LIGHT
-	box.set_corner_radius_all(10)
-	box.set_content_margin_all(16)
-	panel.add_theme_stylebox_override("panel", box)
+## 菜单项：衬线大字，悬停时前面出现 ›。档案室的返回按钮也用它。
+static func menu_item(text: String, action: Callable, font_size: int = 30) -> Button:
+	var b := Button.new()
+	b.text = "  " + text
+	b.flat = true
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.focus_mode = Control.FOCUS_NONE
+	b.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	b.add_theme_font_override("font", UiTheme.serif_font())
+	b.add_theme_font_size_override("font_size", font_size)
+	b.add_theme_color_override("font_color", CREAM)
+	b.add_theme_color_override("font_hover_color", UiTheme.ACCENT)
+	b.add_theme_color_override("font_pressed_color", UiTheme.ACCENT)
+	b.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.7))
+	b.add_theme_constant_override("shadow_offset_y", 2)
+	for state in ["normal", "hover", "pressed", "focus"]:
+		b.add_theme_stylebox_override(state, StyleBoxEmpty.new())
+	b.mouse_entered.connect(func() -> void: b.text = "› " + text)
+	b.mouse_exited.connect(func() -> void: b.text = "  " + text)
+	b.pressed.connect(action)
+	return b
 
-	var col := VBoxContainer.new()
-	panel.add_child(col)
-	var title := Label.new()
-	title.text = data.title
-	title.add_theme_font_size_override("font_size", 22)
-	col.add_child(title)
 
-	var save := SaveGame.load_for(data.id)
-	var meta := Label.new()
-	var bits := [tr("CASE_DURATION") % UiTheme.format_time(data.duration)]
-	if save.best_score > 0.0:
-		bits.append(tr("CASE_BEST") % int(round(save.best_score * 100.0)))
-	if save.solved:
-		bits.append(tr("CASE_SOLVED"))
-	meta.text = " · ".join(bits)
-	meta.add_theme_color_override("font_color", UiTheme.ACCENT)
-	col.add_child(meta)
-
-	var desc := Label.new()
-	desc.text = data.description
-	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	desc.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	desc.add_theme_color_override("font_color", UiTheme.TEXT_DIM)
-	col.add_child(desc)
-
-	var start := Button.new()
-	start.text = tr("CASE_START")
-	start.pressed.connect(func() -> void: case_chosen.emit(path))
-	col.add_child(start)
-	return panel
+func _show_settings() -> void:
+	if _settings == null:
+		_settings = AcceptDialog.new()
+		_settings.title = tr("MENU_SETTINGS")
+		var grid := GridContainer.new()
+		grid.columns = 2
+		grid.add_theme_constant_override("h_separation", 16)
+		var vol_label := Label.new()
+		vol_label.text = tr("SETTINGS_VOLUME")
+		grid.add_child(vol_label)
+		var vol := HSlider.new()
+		vol.custom_minimum_size.x = 220
+		vol.min_value = 0.0
+		vol.max_value = 1.0
+		vol.step = 0.05
+		vol.value = db_to_linear(AudioServer.get_bus_volume_db(0))
+		vol.value_changed.connect(func(v: float) -> void: AudioServer.set_bus_volume_db(0, linear_to_db(v)))
+		grid.add_child(vol)
+		var fs_label := Label.new()
+		fs_label.text = tr("SETTINGS_FULLSCREEN")
+		grid.add_child(fs_label)
+		var fs := CheckBox.new()
+		fs.button_pressed = get_window().mode == Window.MODE_FULLSCREEN
+		fs.toggled.connect(
+			func(on: bool) -> void: get_window().mode = Window.MODE_FULLSCREEN if on else Window.MODE_WINDOWED
+		)
+		grid.add_child(fs)
+		_settings.add_child(grid)
+		add_child(_settings)
+	_settings.popup_centered()
