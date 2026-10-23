@@ -10,7 +10,8 @@ var case_data: CaseData
 var transcript: Transcript
 var save: SaveGame
 
-var _notes: ItemList
+var _notes: VBoxContainer
+var _notes_scroll: ScrollContainer
 var _note_times: Array[float] = []
 var _people_rows: Dictionary = {}
 var _question_inputs: Dictionary = {}
@@ -36,49 +37,82 @@ func setup(data: CaseData, notes: Transcript, save_game: SaveGame, names: Callab
 func _build_notes() -> Control:
 	var col := VBoxContainer.new()
 	col.add_child(_hint(tr("NOTES_HINT")))
-	_notes = ItemList.new()
-	_notes.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_notes.auto_height = false
-	_notes.max_columns = 1
-	_notes.fixed_column_width = int(Game.SIDE_WIDTH) - 48
-	_notes.max_text_lines = 4
-	_notes.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	_notes.item_clicked.connect(
-		func(i: int, _pos: Vector2, _button: int) -> void:
-			if i < _note_times.size() and _note_times[i] >= 0.0:
-				seek_requested.emit(_note_times[i])
-	)
-	col.add_child(_notes)
+	_notes_scroll = ScrollContainer.new()
+	_notes_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_notes_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	col.add_child(_notes_scroll)
+	_notes = VBoxContainer.new()
+	_notes.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_notes.add_theme_constant_override("separation", 2)
+	_notes_scroll.add_child(_notes)
 	return col
 
 
 func refresh_notes() -> void:
 	if _notes == null:
 		return
-	var scroll_to_end := _notes.get_v_scroll_bar().value >= _notes.get_v_scroll_bar().max_value - _notes.size.y - 4
-	_notes.clear()
+	var bar := _notes_scroll.get_v_scroll_bar()
+	var scroll_to_end := bar.value >= bar.max_value - _notes_scroll.size.y - 4
+	for child in _notes.get_children():
+		child.queue_free()
 	_note_times.clear()
 	var entries := transcript.entries(case_data)
 	if entries.is_empty():
-		_notes.add_item(tr("NOTES_EMPTY"), null, false)
-		_note_times.append(-1.0)
+		_notes.add_child(_hint(tr("NOTES_EMPTY")))
 		return
 	for e in entries:
-		var stamp := "[%s] " % UiTheme.format_time(e.time)
+		var stamp := (
+			"[font_size=12][color=#%s]%s[/color][/font_size]  "
+			% [UiTheme.ACCENT.to_html(false), UiTheme.format_time(e.time)]
+		)
+		var accent := UiTheme.ACCENT
+		var body: String
 		if e.kind == "line":
 			var line := case_data.voice_lines[e.index]
-			var idx := _notes.add_item("%s%s：%s" % [stamp, _names.call(line.speaker), line.text])
 			var c := case_data.get_character(line.speaker)
-			if c:
-				_notes.set_item_custom_fg_color(idx, c.color.lightened(0.45))
+			accent = c.color if c else UiTheme.TEXT
+			body = (
+				"[color=#%s][b]%s[/b][/color]\n%s"
+				% [accent.lightened(0.3).to_html(false), _names.call(line.speaker), line.text.replace("[", "[lb]")]
+			)
 		else:
 			var ev := case_data.sfx_events[e.index]
-			var idx := _notes.add_item("%s%s%s" % [stamp, tr("SFX_PREFIX"), ev.label])
-			_notes.set_item_custom_fg_color(idx, Color(0.95, 0.8, 0.5))
+			body = "[color=#%s]%s%s[/color]" % [UiTheme.ACCENT.to_html(false), tr("SFX_PREFIX"), ev.label]
+		_notes.add_child(_note_entry(stamp + body, accent, e.time))
 		_note_times.append(e.time)
 	if scroll_to_end:
-		var bar := _notes.get_v_scroll_bar()
 		bar.set_deferred("value", bar.max_value)
+
+
+func _note_entry(bbcode: String, accent: Color, t: float) -> Control:
+	var panel := PanelContainer.new()
+	var normal := UiTheme.box(Color(1, 1, 1, 0.02), Color(0, 0, 0, 0), 10)
+	normal.border_color = Color(accent, 0.8)
+	normal.border_width_left = 3
+	var hover := normal.duplicate() as StyleBoxFlat
+	hover.bg_color = Color(UiTheme.ACCENT, 0.1)
+	panel.add_theme_stylebox_override("panel", normal)
+	panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	panel.tooltip_text = tr("NOTES_HINT")
+	panel.mouse_entered.connect(func() -> void: panel.add_theme_stylebox_override("panel", hover))
+	panel.mouse_exited.connect(func() -> void: panel.add_theme_stylebox_override("panel", normal))
+	panel.gui_input.connect(
+		func(event: InputEvent) -> void:
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				seek_requested.emit(t)
+	)
+	var label := RichTextLabel.new()
+	label.bbcode_enabled = true
+	label.fit_content = true
+	label.scroll_active = false
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("normal_font_size", 15)
+	label.add_theme_font_size_override("bold_font_size", 14)
+	label.add_theme_font_override("mono_font", UiTheme.mono_font())
+	label.text = bbcode
+	panel.add_child(label)
+	return panel
 
 
 func _build_people() -> Control:

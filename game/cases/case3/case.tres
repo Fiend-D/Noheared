@@ -142,14 +142,14 @@ room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_u1j0w"]
 script = ExtResource("2_01j6r")
-time = 20.0
+time = 23.867
 position = Vector2(350, 330)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_sipvw"]
 script = ExtResource("2_01j6r")
-time = 20.467
+time = 24.334
 position = Vector2(280, 330)
 room = &"走廊"
 
@@ -705,3 +705,4 @@ map_scene = ExtResource("3_gjvin")
 characters = Array[ExtResource("1_rc0a6")]([SubResource("Resource_pomtj"), SubResource("Resource_nj5kj"), SubResource("Resource_lu21l"), SubResource("Resource_300fb"), SubResource("Resource_mkr54"), SubResource("Resource_fn148")])
 voice_lines = Array[ExtResource("7_5vlho")]([SubResource("Resource_35t08"), SubResource("Resource_haa6g"), SubResource("Resource_4a6da"), SubResource("Resource_o4e5o"), SubResource("Resource_07wsb"), SubResource("Resource_pdwsm"), SubResource("Resource_y7g8t"), SubResource("Resource_kds2c"), SubResource("Resource_amvcs"), SubResource("Resource_arlot"), SubResource("Resource_tky0p"), SubResource("Resource_sg2h5"), SubResource("Resource_770v7"), SubResource("Resource_rb0vg"), SubResource("Resource_37v3i"), SubResource("Resource_43ntm"), SubResource("Resource_u7mw2"), SubResource("Resource_fc3qe"), SubResource("Resource_1ouku"), SubResource("Resource_jun87"), SubResource("Resource_vrvo2")])
 questions = Array[ExtResource("4_mag14")]([SubResource("Resource_ygnmo"), SubResource("Resource_rnat8"), SubResource("Resource_kukax")])
+cover = "gallery"

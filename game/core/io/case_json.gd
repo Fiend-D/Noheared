@@ -45,6 +45,7 @@ static func build_map(m: Dictionary) -> CaseMap:
 	var map := CaseMap.new()
 	map.name = "CaseMap"
 	map.floor_names = PackedStringArray(m.get("floors", ["一层"]))
+	map.backdrop = PropCatalog.exterior_texture(m.get("backdrop", ""))
 	var rooms := _group(map, "Rooms")
 	var doors := _group(map, "Doors")
 	var stairs := _group(map, "Stairs")
@@ -57,6 +58,8 @@ static func build_map(m: Dictionary) -> CaseMap:
 		for p: Array in r.polygon:
 			poly.append(_vec(p))
 		room.polygon = poly
+		room.floor_texture = PropCatalog.floor_texture(r.get("floor_material", ""))
+		room.outdoor = bool(r.get("outdoor", false))
 		_attach(rooms, room, map)
 	for d: Dictionary in m.get("doors", []):
 		var door := Door.new()
@@ -75,6 +78,16 @@ static func build_map(m: Dictionary) -> CaseMap:
 		stair.position = _vec(s.end_a)
 		stair.end_b = _vec(s.end_b)
 		_attach(stairs, stair, map)
+	var props := _group(map, "Props")
+	for i in m.get("props", []).size():
+		var p: Dictionary = m.props[i]
+		var prop := Prop.new()
+		prop.name = "%s_%d" % [p.type, i]
+		PropCatalog.apply(prop, p.type)
+		prop.position = _vec(p.position)
+		prop.room_name = p.get("room", "")
+		prop.flip_h = bool(p.get("flip", false))
+		_attach(props, prop, map)
 	return map
 
 
@@ -85,6 +98,7 @@ static func build_case(data: Dictionary, case_dir: String) -> CaseData:
 	c.description = data.get("description", "")
 	c.duration = float(data.get("duration", 60.0))
 	c.truth = data.get("truth", "")
+	c.cover = data.get("cover", "")
 
 	for ch: Dictionary in data.get("characters", []):
 		var cd := CharacterData.new()
@@ -145,6 +159,7 @@ static func export_case(c: CaseData, case_dir: String) -> Dictionary:
 		"description": c.description,
 		"duration": c.duration,
 		"truth": c.truth,
+		"cover": c.cover,
 		"characters": [],
 		"voice_lines": [],
 		"sfx": [],
@@ -208,13 +223,25 @@ static func export_case(c: CaseData, case_dir: String) -> Dictionary:
 
 
 static func export_map(map: CaseMap) -> Dictionary:
-	var m := {"floors": Array(map.floor_names), "rooms": [], "doors": [], "stairs": []}
+	var m := {"floors": Array(map.floor_names), "rooms": [], "doors": [], "stairs": [], "props": []}
+	if map.backdrop:
+		m["backdrop"] = PropCatalog.floor_id(map.backdrop)
 	for r in map.get_rooms():
 		var poly := []
 		for p in r.polygon:
 			var g := p + r.position
 			poly.append([g.x, g.y])
-		m.rooms.append({"name": r.room_name, "floor": r.floor_index, "polygon": poly})
+		var room := {"name": r.room_name, "floor": r.floor_index, "polygon": poly}
+		if r.floor_texture:
+			room["floor_material"] = PropCatalog.floor_id(r.floor_texture)
+		if r.outdoor:
+			room["outdoor"] = true
+		m.rooms.append(room)
+	for p in map.get_props():
+		var prop := {"type": p.prop_type, "position": [p.position.x, p.position.y], "room": p.room_name}
+		if p.flip_h:
+			prop["flip"] = true
+		m.props.append(prop)
 	for d in map.get_doors():
 		(
 			m

@@ -13,6 +13,8 @@ extends Resource
 @export var questions: Array[Question] = []
 ## 全部答对后展示的真相。
 @export_multiline var truth: String = ""
+## 案件选择界面档案袋上的照片（`art/title/photo_<cover>.png`）。
+@export var cover: String = ""
 
 
 func get_character(character_id: StringName) -> CharacterData:

@@ -23,28 +23,28 @@ room = &"房间1"
 
 [sub_resource type="Resource" id="Resource_5w7ij"]
 script = ExtResource("2_v10tc")
-time = 60.0
+time = 58.834
 position = Vector2(160, 160)
 movement = 1
 room = &"房间1"
 
 [sub_resource type="Resource" id="Resource_wy52o"]
 script = ExtResource("2_v10tc")
-time = 60.573
+time = 59.407
 position = Vector2(200, 236)
 movement = 1
 room = &"房间1"
 
 [sub_resource type="Resource" id="Resource_wm8gj"]
 script = ExtResource("2_v10tc")
-time = 60.826
+time = 59.66
 position = Vector2(200, 274)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_mm804"]
 script = ExtResource("2_v10tc")
-time = 60.866
+time = 59.7
 position = Vector2(200, 280)
 room = &"走廊"
 
@@ -157,28 +157,28 @@ room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_2j3fx"]
 script = ExtResource("2_v10tc")
-time = 30.0
+time = 28.206
 position = Vector2(350, 280)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_c57gl"]
 script = ExtResource("2_v10tc")
-time = 31.001
+time = 29.207
 position = Vector2(200, 274)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_0tp66"]
 script = ExtResource("2_v10tc")
-time = 31.254
+time = 29.46
 position = Vector2(200, 236)
 movement = 1
 room = &"房间1"
 
 [sub_resource type="Resource" id="Resource_s1nbh"]
 script = ExtResource("2_v10tc")
-time = 31.494
+time = 29.7
 position = Vector2(200, 200)
 room = &"房间1"
 
@@ -321,3 +321,4 @@ map_scene = ExtResource("3_7j4hf")
 characters = Array[ExtResource("1_wv5yb")]([SubResource("Resource_f15dc"), SubResource("Resource_fusby"), SubResource("Resource_o1ah4")])
 voice_lines = Array[ExtResource("7_6bd68")]([SubResource("Resource_jdkw1"), SubResource("Resource_2l0b5"), SubResource("Resource_x4v5f"), SubResource("Resource_4l42b"), SubResource("Resource_6aqrj"), SubResource("Resource_cjsle"), SubResource("Resource_rw8lw"), SubResource("Resource_ptoxk")])
 questions = Array[ExtResource("4_01ok0")]([SubResource("Resource_g1bn7"), SubResource("Resource_atukn")])
+cover = "office"

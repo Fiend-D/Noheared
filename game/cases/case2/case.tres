@@ -265,28 +265,28 @@ room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_iy0js"]
 script = ExtResource("2_r4f6h")
-time = 50.0
+time = 48.146
 position = Vector2(220, 260)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_s4vkv"]
 script = ExtResource("2_r4f6h")
-time = 51.934
+time = 50.08
 position = Vector2(510, 254)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_du4xe"]
 script = ExtResource("2_r4f6h")
-time = 52.196
+time = 50.342
 position = Vector2(520, 216)
 movement = 1
 room = &"舞台"
 
 [sub_resource type="Resource" id="Resource_2l7um"]
 script = ExtResource("2_r4f6h")
-time = 52.554
+time = 50.7
 position = Vector2(480, 180)
 room = &"舞台"
 
@@ -305,28 +305,28 @@ room = &"道具室"
 
 [sub_resource type="Resource" id="Resource_55kk7"]
 script = ExtResource("2_r4f6h")
-time = 33.0
+time = 30.708
 position = Vector2(130, 360)
 movement = 1
 room = &"道具室"
 
 [sub_resource type="Resource" id="Resource_1nx50"]
 script = ExtResource("2_r4f6h")
-time = 33.318
+time = 31.026
 position = Vector2(170, 334)
 movement = 1
 room = &"道具室"
 
 [sub_resource type="Resource" id="Resource_d8a4p"]
 script = ExtResource("2_r4f6h")
-time = 33.571
+time = 31.279
 position = Vector2(170, 296)
 movement = 1
 room = &"走廊"
 
 [sub_resource type="Resource" id="Resource_0dsys"]
 script = ExtResource("2_r4f6h")
-time = 34.992
+time = 32.7
 position = Vector2(380, 260)
 room = &"走廊"
 
@@ -455,3 +455,4 @@ map_scene = ExtResource("3_ryxv6")
 characters = Array[ExtResource("1_t6pmc")]([SubResource("Resource_rocyi"), SubResource("Resource_qsiv8"), SubResource("Resource_vhpbj"), SubResource("Resource_7i8ft")])
 voice_lines = Array[ExtResource("7_qj5vo")]([SubResource("Resource_p5n5c"), SubResource("Resource_lvhpm"), SubResource("Resource_k1eqn"), SubResource("Resource_ibkaq"), SubResource("Resource_wbktw"), SubResource("Resource_71h80"), SubResource("Resource_js2tr"), SubResource("Resource_fnjo0")])
 questions = Array[ExtResource("4_cy0k4")]([SubResource("Resource_vou8t"), SubResource("Resource_eulum")])
+cover = "theatre"

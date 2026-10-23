@@ -3,6 +3,9 @@ class_name CaseValidator
 extends RefCounted
 ## 案件数据校验。返回 "ERROR: ..." / "WARN: ..." 形式的提示列表。
 
+const MAX_DOOR_GAP := 80.0
+const FURNITURE_SAMPLE := 4.0
+
 
 static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
 	var issues := PackedStringArray()
@@ -10,6 +13,9 @@ static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
 		issues.append("ERROR: 案件时长必须大于 0")
 	if c.map_scene == null and map == null:
 		issues.append("ERROR: 缺少地图")
+
+	if map:
+		_check_map(map, issues)
 
 	var ids := {}
 	for ch in c.characters:
@@ -21,8 +27,11 @@ static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
 			continue
 		if map:
 			_check_track(ch, map, issues)
+			_check_furniture(ch, map, issues)
 
 	_check_lines(c, ids, issues)
+	if map:
+		_check_speech_positions(c, map, issues)
 
 	for ev in c.sfx_events:
 		if ev.attach_to != &"" and not ids.has(ev.attach_to):
@@ -37,6 +46,58 @@ static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
 		elif not options.has(q.answer):
 			issues.append("ERROR: 问题 %s 的答案“%s”不在选项中" % [q.id, q.answer])
 	return issues
+
+
+## 同层房间不能重叠；门必须贴着它连接的两个房间，否则监听者走不过去；家具必须在所属房间内。
+static func _check_map(map: CaseMap, issues: PackedStringArray) -> void:
+	var rooms := map.get_rooms()
+	for i in rooms.size():
+		for j in range(i + 1, rooms.size()):
+			var a := rooms[i]
+			var b := rooms[j]
+			if a.floor_index != b.floor_index:
+				continue
+			for overlap in Geometry2D.intersect_polygons(a.polygon, b.polygon):
+				if _area(overlap) > 1.0:
+					issues.append("ERROR: 房间 %s 与 %s 重叠" % [a.room_name, b.room_name])
+					break
+	map.refresh()
+	for d in map.get_doors():
+		for side in [[d.room_a, d.end_a], [d.room_b, d.end_b]]:
+			var room := map.get_room(side[0])
+			if room == null:
+				issues.append("ERROR: 门 %s 连接了不存在的房间 %s" % [d.name, side[0]])
+			elif room.closest_wall_point(side[1]).distance_to(side[1]) > 1.0:
+				issues.append("ERROR: 门 %s 没有对着房间 %s 的墙" % [d.name, side[0]])
+		if d.passage_length() > MAX_DOOR_GAP:
+			issues.append("ERROR: 门 %s 两侧房间相距 %.0f，超过 %.0f" % [d.name, d.passage_length(), MAX_DOOR_GAP])
+	for p in map.get_props():
+		var room := map.get_room(p.room_name)
+		if room == null or not room.contains_point(p.position):
+			issues.append("ERROR: 家具 %s 不在房间 %s 里" % [p.name, p.room_name])
+		if p.texture == null:
+			issues.append("WARN: 家具 %s 的类型 %s 不在家具目录里" % [p.name, p.prop_type])
+
+
+## 角色应当先走到位再开口、说完再离开：开口时还在走，或说话途中换了房间，都提示出来。
+static func _check_speech_positions(c: CaseData, map: CaseMap, issues: PackedStringArray) -> void:
+	for line in c.voice_lines:
+		var ch := c.get_character(line.speaker)
+		if ch == null or ch.track.is_empty():
+			continue
+		var at_start := TrackMath.sample(ch.track, line.start + 0.05)
+		var at_end := TrackMath.sample(ch.track, line.end_time())
+		if at_start.moving:
+			issues.append("WARN: 角色 %s 在 %.1fs 开口时还在走：%s" % [ch.id, line.start, line.text.left(16)])
+		elif map.room_for_pose(ch, at_start) != map.room_for_pose(ch, at_end):
+			issues.append("WARN: 角色 %s 在 %.1fs 的台词说到一半换了房间：%s" % [ch.id, line.start, line.text.left(16)])
+
+
+static func _area(poly: PackedVector2Array) -> float:
+	var s := 0.0
+	for i in poly.size():
+		s += poly[i].cross(poly[(i + 1) % poly.size()])
+	return absf(s) * 0.5
 
 
 ## 相邻关键帧所在房间必须相同或通过门/楼梯直接相连（门洞中的帧跳过），否则就是穿墙。
@@ -57,6 +118,37 @@ static func _check_track(ch: CharacterData, map: CaseMap, issues: PackedStringAr
 				"ERROR: 角色 %s 在 %.1fs 从 %s 直接到了 %s（两房间不相连）" % [ch.id, k.time, prev_room.room_name, room.room_name]
 			)
 		prev_room = room
+
+
+## 角色轨迹不能穿过挡路的家具（角色按关键帧直线移动，不会绕开家具）。
+static func _check_furniture(ch: CharacterData, map: CaseMap, issues: PackedStringArray) -> void:
+	var props := map.get_props().filter(func(p: Prop) -> bool: return p.blocks)
+	if props.is_empty():
+		return
+	var reported := {}
+	for i in ch.track.size():
+		var a := ch.track[i].position
+		var b := ch.track[mini(i + 1, ch.track.size() - 1)].position
+		# 楼梯两端不在同一层，地图上两点间的连线不是实际路线
+		if _floor_of(map, ch.track[i].room) != _floor_of(map, ch.track[mini(i + 1, ch.track.size() - 1)].room):
+			continue
+		var steps := maxi(int(a.distance_to(b) / FURNITURE_SAMPLE), 1)
+		for s in steps + 1:
+			var p := a.lerp(b, float(s) / steps)
+			for prop: Prop in props:
+				if not reported.has(prop) and prop.footprint().has_point(p) and prop.room_name == _room_name(map, p):
+					reported[prop] = true
+					issues.append("WARN: 角色 %s 在 %.1fs 穿过家具 %s" % [ch.id, ch.track[i].time, prop.name])
+
+
+static func _floor_of(map: CaseMap, room_name: String) -> int:
+	var r := map.get_room(room_name)
+	return r.floor_index if r else -1
+
+
+static func _room_name(map: CaseMap, p: Vector2) -> String:
+	var r := map.room_at(p)
+	return r.room_name if r else ""
 
 
 static func _check_lines(c: CaseData, ids: Dictionary, issues: PackedStringArray) -> void:

@@ -1,0 +1,407 @@
+{
+ "sofa": {
+  "sheet": "living",
+  "size": [
+   98.0,
+   52.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "armchair": {
+  "sheet": "living",
+  "size": [
+   42.0,
+   50.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "coffee_table": {
+  "sheet": "living",
+  "size": [
+   61.6,
+   33.0
+  ],
+  "block": true,
+  "rug": false
+ },
+ "rug_persian": {
+  "sheet": "living",
+  "size": [
+   117.6,
+   68.0
+  ],
+  "block": false,
+  "rug": true
+ },
+ "fireplace": {
+  "sheet": "living",
+  "size": [
+   75.6,
+   65.0
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bookshelf": {
+  "sheet": "living",
+  "size": [
+   56.0,
+   79.6
+  ],
+  "block": true,
+  "rug": false
+ },
+ "plant": {
+  "sheet": "living",
+  "size": [
+   39.2,
+   38.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "side_table": {
+  "sheet": "living",
+  "size": [
+   30.8,
+   35.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "desk": {
+  "sheet": "living",
+  "size": [
+   70.0,
+   63.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bed_double": {
+  "sheet": "bedroom",
+  "size": [
+   78.4,
+   107.9
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bed_single": {
+  "sheet": "bedroom",
+  "size": [
+   50.4,
+   100.0
+  ],
+  "block": true,
+  "rug": false
+ },
+ "wardrobe": {
+  "sheet": "bedroom",
+  "size": [
+   56.0,
+   87.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "nightstand": {
+  "sheet": "bedroom",
+  "size": [
+   30.8,
+   60.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "vanity": {
+  "sheet": "bedroom",
+  "size": [
+   64.4,
+   68.5
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bunk_bed": {
+  "sheet": "bedroom",
+  "size": [
+   53.2,
+   80.1
+  ],
+  "block": true,
+  "rug": false
+ },
+ "chair": {
+  "sheet": "bedroom",
+  "size": [
+   25.2,
+   50.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "rug_round": {
+  "sheet": "bedroom",
+  "size": [
+   75.6,
+   61.1
+  ],
+  "block": false,
+  "rug": true
+ },
+ "drawers": {
+  "sheet": "bedroom",
+  "size": [
+   50.4,
+   56.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "dining_table": {
+  "sheet": "kitchen",
+  "size": [
+   134.4,
+   101.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "round_table": {
+  "sheet": "kitchen",
+  "size": [
+   78.4,
+   79.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "counter": {
+  "sheet": "kitchen",
+  "size": [
+   112.0,
+   52.1
+  ],
+  "block": true,
+  "rug": false
+ },
+ "stove": {
+  "sheet": "kitchen",
+  "size": [
+   56.0,
+   54.6
+  ],
+  "block": true,
+  "rug": false
+ },
+ "sink": {
+  "sheet": "kitchen",
+  "size": [
+   56.0,
+   48.5
+  ],
+  "block": true,
+  "rug": false
+ },
+ "fridge": {
+  "sheet": "kitchen",
+  "size": [
+   42.0,
+   77.1
+  ],
+  "block": true,
+  "rug": false
+ },
+ "barrel": {
+  "sheet": "kitchen",
+  "size": [
+   39.2,
+   46.1
+  ],
+  "block": true,
+  "rug": false
+ },
+ "wine_rack": {
+  "sheet": "kitchen",
+  "size": [
+   70.0,
+   51.7
+  ],
+  "block": true,
+  "rug": false
+ },
+ "crates": {
+  "sheet": "kitchen",
+  "size": [
+   61.6,
+   58.5
+  ],
+  "block": true,
+  "rug": false
+ },
+ "piano": {
+  "sheet": "venue",
+  "size": [
+   81.2,
+   111.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "roulette": {
+  "sheet": "venue",
+  "size": [
+   75.6,
+   76.2
+  ],
+  "block": true,
+  "rug": false
+ },
+ "card_table": {
+  "sheet": "venue",
+  "size": [
+   78.4,
+   72.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "theatre_seats": {
+  "sheet": "venue",
+  "size": [
+   128.8,
+   51.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "display_case": {
+  "sheet": "venue",
+  "size": [
+   78.4,
+   54.0
+  ],
+  "block": true,
+  "rug": false
+ },
+ "statue": {
+  "sheet": "venue",
+  "size": [
+   39.2,
+   85.8
+  ],
+  "block": true,
+  "rug": false
+ },
+ "easel": {
+  "sheet": "venue",
+  "size": [
+   50.4,
+   78.7
+  ],
+  "block": true,
+  "rug": false
+ },
+ "filing_cabinet": {
+  "sheet": "venue",
+  "size": [
+   33.6,
+   66.7
+  ],
+  "block": true,
+  "rug": false
+ },
+ "clothes_rack": {
+  "sheet": "venue",
+  "size": [
+   67.2,
+   71.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "tree": {
+  "sheet": "outdoor",
+  "size": [
+   100.8,
+   97.3
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bush": {
+  "sheet": "outdoor",
+  "size": [
+   50.4,
+   50.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "fountain": {
+  "sheet": "outdoor",
+  "size": [
+   100.8,
+   97.6
+  ],
+  "block": true,
+  "rug": false
+ },
+ "bench": {
+  "sheet": "outdoor",
+  "size": [
+   75.6,
+   53.5
+  ],
+  "block": true,
+  "rug": false
+ },
+ "deck_chair": {
+  "sheet": "outdoor",
+  "size": [
+   36.4,
+   55.5
+  ],
+  "block": true,
+  "rug": false
+ },
+ "lifebuoy": {
+  "sheet": "outdoor",
+  "size": [
+   36.4,
+   34.6
+  ],
+  "block": false,
+  "rug": false
+ },
+ "hospital_bed": {
+  "sheet": "outdoor",
+  "size": [
+   44.8,
+   88.9
+  ],
+  "block": true,
+  "rug": false
+ },
+ "medicine_cabinet": {
+  "sheet": "outdoor",
+  "size": [
+   44.8,
+   47.4
+  ],
+  "block": true,
+  "rug": false
+ },
+ "map_table": {
+  "sheet": "outdoor",
+  "size": [
+   78.4,
+   78.1
+  ],
+  "block": true,
+  "rug": false
+ }
+}

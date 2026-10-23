@@ -5,10 +5,12 @@
  "description": "闭馆后，名画《呐喊》突然失窃，需要通过听取不同角色的对话，找出窃贼的身份和作案手法。",
  "duration": 180,
  "truth": "",
+ "cover": "gallery",
  "map": {
   "floors": [
    "一层"
   ],
+  "backdrop": "cobblestone",
   "rooms": [
    {
     "name": "展厅",
@@ -30,7 +32,8 @@
       100,
       300
      ]
-    ]
+    ],
+    "floor_material": "marble"
    },
    {
     "name": "办公室",
@@ -52,7 +55,8 @@
       500,
       300
      ]
-    ]
+    ],
+    "floor_material": "wood"
    },
    {
     "name": "走廊",
@@ -74,7 +78,8 @@
       100,
       400
      ]
-    ]
+    ],
+    "floor_material": "carpet"
    },
    {
     "name": "仓库",
@@ -96,7 +101,8 @@
       100,
       480
      ]
-    ]
+    ],
+    "floor_material": "concrete"
    }
   ],
   "doors": [
@@ -140,7 +146,103 @@
     ]
    }
   ],
-  "stairs": []
+  "stairs": [],
+  "props": [
+   {
+    "type": "display_case",
+    "position": [
+     344.2,
+     136.0
+    ],
+    "room": "展厅"
+   },
+   {
+    "type": "display_case",
+    "position": [
+     148.2,
+     264.0
+    ],
+    "room": "展厅"
+   },
+   {
+    "type": "display_case",
+    "position": [
+     340.2,
+     208.0
+    ],
+    "room": "展厅"
+   },
+   {
+    "type": "display_case",
+    "position": [
+     352.2,
+     268.0
+    ],
+    "room": "展厅",
+    "flip": true
+   },
+   {
+    "type": "chair",
+    "position": [
+     529.6,
+     266.2
+    ],
+    "room": "办公室"
+   },
+   {
+    "type": "plant",
+    "position": [
+     725.4,
+     275.9
+    ],
+    "room": "办公室",
+    "flip": true
+   },
+   {
+    "type": "plant",
+    "position": [
+     725.4,
+     375.9
+    ],
+    "room": "走廊",
+    "flip": true
+   },
+   {
+    "type": "plant",
+    "position": [
+     124.6,
+     375.9
+    ],
+    "room": "走廊",
+    "flip": true
+   },
+   {
+    "type": "side_table",
+    "position": [
+     456.4,
+     370.6
+    ],
+    "room": "走廊"
+   },
+   {
+    "type": "statue",
+    "position": [
+     200.6,
+     347.9
+    ],
+    "room": "走廊",
+    "flip": true
+   },
+   {
+    "type": "crates",
+    "position": [
+     331.8,
+     438.2
+    ],
+    "room": "仓库",
+    "flip": true
+   }
+  ]
  },
  "characters": [
   {
@@ -302,7 +404,7 @@
      "room": "走廊"
     },
     {
-     "t": 20.0,
+     "t": 23.867,
      "p": [
       350,
       330
@@ -311,7 +413,7 @@
      "room": "走廊"
     },
     {
-     "t": 20.467,
+     "t": 24.334,
      "p": [
       280,
       330

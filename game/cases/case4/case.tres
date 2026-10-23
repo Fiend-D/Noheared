@@ -251,19 +251,19 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_ihkmn"]
 script = ExtResource("2_weaqk")
 time = 92.423
-position = Vector2(700, 480)
+position = Vector2(700, 348)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_tjauj"]
 script = ExtResource("2_weaqk")
-time = 180.0
-position = Vector2(700, 480)
+time = 177.592
+position = Vector2(700, 348)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_ceajw"]
 script = ExtResource("2_weaqk")
-time = 182.108
+time = 179.7
 position = Vector2(600, 180)
 room = &"客厅"
 
@@ -277,13 +277,13 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_7m5io"]
 script = ExtResource("2_weaqk")
 time = 302.07
-position = Vector2(680, 480)
+position = Vector2(680, 348)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_yyygy"]
 script = ExtResource("2_weaqk")
 time = 420.0
-position = Vector2(680, 480)
+position = Vector2(680, 348)
 movement = 1
 room = &"客厅"
 
@@ -303,13 +303,13 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_wuicc"]
 script = ExtResource("2_weaqk")
 time = 541.672
-position = Vector2(720, 450)
+position = Vector2(720, 330)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_mjheh"]
 script = ExtResource("2_weaqk")
 time = 660.0
-position = Vector2(720, 450)
+position = Vector2(720, 330)
 movement = 1
 room = &"客厅"
 
@@ -334,28 +334,28 @@ room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_0cgks"]
 script = ExtResource("2_weaqk")
-time = 120.0
+time = 125.006
 position = Vector2(200, 450)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_ryt66"]
 script = ExtResource("2_weaqk")
-time = 121.294
+time = 126.3
 position = Vector2(381, 380)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_lsbqh"]
 script = ExtResource("2_weaqk")
-time = 121.814
+time = 126.82
 position = Vector2(459, 380)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_4a8k0"]
 script = ExtResource("2_weaqk")
-time = 123.685
+time = 128.691
 position = Vector2(620, 150)
 room = &"客厅"
 
@@ -415,28 +415,28 @@ room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_fuf4a"]
 script = ExtResource("2_weaqk")
-time = 480.0
+time = 477.211
 position = Vector2(660, 200)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_jslgf"]
 script = ExtResource("2_weaqk")
-time = 481.799
+time = 479.01
 position = Vector2(459, 380)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_go1e0"]
 script = ExtResource("2_weaqk")
-time = 482.319
+time = 479.53
 position = Vector2(381, 380)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_3auqj"]
 script = ExtResource("2_weaqk")
-time = 483.489
+time = 480.7
 position = Vector2(220, 450)
 room = &"厨房"
 
@@ -598,13 +598,13 @@ track = Array[ExtResource("2_weaqk")]([SubResource("Resource_wbbrk"), SubResourc
 
 [sub_resource type="Resource" id="Resource_hm3ap"]
 script = ExtResource("2_weaqk")
-position = Vector2(700, 450)
+position = Vector2(700, 330)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_i3wu4"]
 script = ExtResource("2_weaqk")
 time = 90.0
-position = Vector2(700, 450)
+position = Vector2(700, 330)
 movement = 1
 room = &"客厅"
 
@@ -630,35 +630,35 @@ room = &"书房"
 
 [sub_resource type="Resource" id="Resource_yl05h"]
 script = ExtResource("2_weaqk")
-time = 210.0
+time = 210.85
 position = Vector2(200, 120)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_hbxli"]
 script = ExtResource("2_weaqk")
-time = 211.294
+time = 212.144
 position = Vector2(381, 190)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_7eeal"]
 script = ExtResource("2_weaqk")
-time = 211.814
+time = 212.664
 position = Vector2(459, 190)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_bu1ev"]
 script = ExtResource("2_weaqk")
-time = 214.129
-position = Vector2(650, 480)
+time = 214.979
+position = Vector2(650, 348)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_p7ish"]
 script = ExtResource("2_weaqk")
 time = 330.0
-position = Vector2(650, 480)
+position = Vector2(650, 348)
 movement = 1
 room = &"客厅"
 
@@ -706,13 +706,13 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_5otci"]
 script = ExtResource("2_weaqk")
 time = 454.181
-position = Vector2(720, 420)
+position = Vector2(720, 312)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_ndmuy"]
 script = ExtResource("2_weaqk")
 time = 570.0
-position = Vector2(720, 420)
+position = Vector2(720, 312)
 movement = 1
 room = &"客厅"
 
@@ -760,7 +760,7 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_2sb7q"]
 script = ExtResource("2_weaqk")
 time = 693.776
-position = Vector2(600, 480)
+position = Vector2(600, 348)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_8ig0t"]
@@ -827,128 +827,128 @@ room = &"客厅"
 [sub_resource type="Resource" id="Resource_xml6s"]
 script = ExtResource("2_weaqk")
 time = 153.901
-position = Vector2(680, 450)
+position = Vector2(680, 330)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_hwmsh"]
 script = ExtResource("2_weaqk")
-time = 270.0
-position = Vector2(680, 450)
+time = 278.301
+position = Vector2(680, 330)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_on1hc"]
 script = ExtResource("2_weaqk")
-time = 271.545
+time = 279.846
 position = Vector2(459, 380)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_wdrk5"]
 script = ExtResource("2_weaqk")
-time = 272.065
+time = 280.366
 position = Vector2(381, 380)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_s2kft"]
 script = ExtResource("2_weaqk")
-time = 273.359
+time = 281.66
 position = Vector2(200, 450)
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_yihns"]
 script = ExtResource("2_weaqk")
-time = 390.0
+time = 390.97
 position = Vector2(200, 450)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_8qip5"]
 script = ExtResource("2_weaqk")
-time = 391.294
+time = 392.264
 position = Vector2(381, 380)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_s2e4t"]
 script = ExtResource("2_weaqk")
-time = 391.814
+time = 392.784
 position = Vector2(459, 380)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_6510y"]
 script = ExtResource("2_weaqk")
-time = 393.525
+time = 394.495
 position = Vector2(620, 180)
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_40ul0"]
 script = ExtResource("2_weaqk")
-time = 510.0
+time = 510.532
 position = Vector2(620, 180)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_nb0y0"]
 script = ExtResource("2_weaqk")
-time = 511.075
+time = 511.607
 position = Vector2(459, 190)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_am3gx"]
 script = ExtResource("2_weaqk")
-time = 511.595
+time = 512.127
 position = Vector2(381, 190)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_l0iph"]
 script = ExtResource("2_weaqk")
-time = 512.538
+time = 513.07
 position = Vector2(240, 180)
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_8w7f0"]
 script = ExtResource("2_weaqk")
-time = 630.0
+time = 631.48
 position = Vector2(240, 180)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_g1j6q"]
 script = ExtResource("2_weaqk")
-time = 630.942
+time = 632.422
 position = Vector2(381, 190)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_4gr82"]
 script = ExtResource("2_weaqk")
-time = 631.462
+time = 632.942
 position = Vector2(459, 190)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_e5d5f"]
 script = ExtResource("2_weaqk")
-time = 632.729
+time = 634.209
 position = Vector2(459, 380)
 movement = 1
 room = &"客厅"
 
 [sub_resource type="Resource" id="Resource_j7yab"]
 script = ExtResource("2_weaqk")
-time = 633.249
+time = 634.729
 position = Vector2(381, 380)
 movement = 1
 room = &"厨房"
 
 [sub_resource type="Resource" id="Resource_jo3aa"]
 script = ExtResource("2_weaqk")
-time = 634.596
+time = 636.076
 position = Vector2(180, 400)
 room = &"厨房"
 
@@ -1416,3 +1416,4 @@ map_scene = ExtResource("3_fpo8v")
 characters = Array[ExtResource("1_cw26i")]([SubResource("Resource_l3dh0"), SubResource("Resource_vafs4"), SubResource("Resource_7tdg6"), SubResource("Resource_obbdp"), SubResource("Resource_8ig0t"), SubResource("Resource_jojua")])
 voice_lines = Array[ExtResource("7_8nsbp")]([SubResource("Resource_okt1j"), SubResource("Resource_3c5w6"), SubResource("Resource_q0cx7"), SubResource("Resource_m3grc"), SubResource("Resource_2ctb5"), SubResource("Resource_kdtgk"), SubResource("Resource_ism61"), SubResource("Resource_n7kk8"), SubResource("Resource_soe7d"), SubResource("Resource_qjav1"), SubResource("Resource_xtmb6"), SubResource("Resource_27l1x"), SubResource("Resource_mnwwq"), SubResource("Resource_d7rsv"), SubResource("Resource_8ecds"), SubResource("Resource_sa6mf"), SubResource("Resource_m2oyo"), SubResource("Resource_3o6br"), SubResource("Resource_vevsb"), SubResource("Resource_xotam"), SubResource("Resource_dxaei"), SubResource("Resource_jrtql"), SubResource("Resource_7bv5t"), SubResource("Resource_yquhp"), SubResource("Resource_f52ky"), SubResource("Resource_4mdfa"), SubResource("Resource_tj55m"), SubResource("Resource_4ky06"), SubResource("Resource_x6o2c"), SubResource("Resource_o0k3j"), SubResource("Resource_2ufva"), SubResource("Resource_ds0qq"), SubResource("Resource_rwto1"), SubResource("Resource_o31lw"), SubResource("Resource_cf30k"), SubResource("Resource_va7ep"), SubResource("Resource_ne7pg"), SubResource("Resource_jvigl"), SubResource("Resource_gm6hc"), SubResource("Resource_w4snw"), SubResource("Resource_wa6cs"), SubResource("Resource_s1qvy"), SubResource("Resource_gfan8"), SubResource("Resource_fpeij"), SubResource("Resource_pn508"), SubResource("Resource_cbg3g"), SubResource("Resource_kogkc"), SubResource("Resource_22vb4"), SubResource("Resource_5gwrx"), SubResource("Resource_hpa0w"), SubResource("Resource_opqhk"), SubResource("Resource_dqidr"), SubResource("Resource_yjr1v")])
 questions = Array[ExtResource("4_lo8om")]([SubResource("Resource_6ilb7"), SubResource("Resource_djiv5"), SubResource("Resource_wgdea")])
+cover = "study"

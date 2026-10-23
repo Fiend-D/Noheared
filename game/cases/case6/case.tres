@@ -439,42 +439,42 @@ room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_487mj"]
 script = ExtResource("2_mx6u5")
-time = 180.0
+time = 184.86
 position = Vector2(550, 120)
 movement = 1
 room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_sy3lq"]
 script = ExtResource("2_mx6u5")
-time = 180.967
+time = 185.827
 position = Vector2(470, 241)
 movement = 1
 room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_5ou5q"]
 script = ExtResource("2_mx6u5")
-time = 181.287
+time = 186.147
 position = Vector2(470, 289)
 movement = 1
 room = &"会客厅"
 
 [sub_resource type="Resource" id="Resource_1os7f"]
 script = ExtResource("2_mx6u5")
-time = 182.257
+time = 187.117
 position = Vector2(594, 365)
 movement = 1
 room = &"会客厅"
 
 [sub_resource type="Resource" id="Resource_uc6jh"]
 script = ExtResource("2_mx6u5")
-time = 182.67
+time = 187.53
 position = Vector2(656, 365)
 movement = 1
 room = &"画室"
 
 [sub_resource type="Resource" id="Resource_1mgg1"]
 script = ExtResource("2_mx6u5")
-time = 183.108
+time = 187.968
 position = Vector2(720, 350)
 room = &"画室"
 
@@ -955,28 +955,28 @@ room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_exxrs"]
 script = ExtResource("2_mx6u5")
-time = 1440.0
+time = 1442.5
 position = Vector2(550, 120)
 movement = 1
 room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_fl6gc"]
 script = ExtResource("2_mx6u5")
-time = 1440.635
+time = 1443.135
 position = Vector2(456, 135)
 movement = 1
 room = &"餐厅"
 
 [sub_resource type="Resource" id="Resource_0desl"]
 script = ExtResource("2_mx6u5")
-time = 1441.048
+time = 1443.548
 position = Vector2(394, 135)
 movement = 1
 room = &"大厅"
 
 [sub_resource type="Resource" id="Resource_jgfqj"]
 script = ExtResource("2_mx6u5")
-time = 1442.345
+time = 1444.845
 position = Vector2(200, 120)
 room = &"大厅"
 
@@ -1184,56 +1184,56 @@ room = &"书房"
 
 [sub_resource type="Resource" id="Resource_8rpsi"]
 script = ExtResource("2_mx6u5")
-time = 540.0
+time = 535.183
 position = Vector2(150, 350)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_ql8u7"]
 script = ExtResource("2_mx6u5")
-time = 540.439
+time = 535.622
 position = Vector2(175, 289)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_rqvrq"]
 script = ExtResource("2_mx6u5")
-time = 540.775
+time = 535.958
 position = Vector2(190, 241)
 movement = 1
 room = &"大厅"
 
 [sub_resource type="Resource" id="Resource_l5nal"]
 script = ExtResource("2_mx6u5")
-time = 541.508
+time = 536.691
 position = Vector2(300, 241)
 movement = 1
 room = &"大厅"
 
 [sub_resource type="Resource" id="Resource_djnfq"]
 script = ExtResource("2_mx6u5")
-time = 542.0
+time = 537.183
 position = Vector2(356, 289)
 movement = 1
 room = &"会客厅"
 
 [sub_resource type="Resource" id="Resource_ob08m"]
 script = ExtResource("2_mx6u5")
-time = 543.665
+time = 538.848
 position = Vector2(594, 365)
 movement = 1
 room = &"会客厅"
 
 [sub_resource type="Resource" id="Resource_rctyu"]
 script = ExtResource("2_mx6u5")
-time = 544.079
+time = 539.262
 position = Vector2(656, 365)
 movement = 1
 room = &"画室"
 
 [sub_resource type="Resource" id="Resource_umiib"]
 script = ExtResource("2_mx6u5")
-time = 544.517
+time = 539.7
 position = Vector2(720, 350)
 room = &"画室"
 
@@ -2422,42 +2422,42 @@ room = &"书房"
 
 [sub_resource type="Resource" id="Resource_j8bpd"]
 script = ExtResource("2_mx6u5")
-time = 720.0
+time = 720.62
 position = Vector2(150, 350)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_grdfh"]
 script = ExtResource("2_mx6u5")
-time = 720.439
+time = 721.059
 position = Vector2(175, 289)
 movement = 1
 room = &"书房"
 
 [sub_resource type="Resource" id="Resource_cy7bi"]
 script = ExtResource("2_mx6u5")
-time = 720.775
+time = 721.395
 position = Vector2(190, 241)
 movement = 1
 room = &"大厅"
 
 [sub_resource type="Resource" id="Resource_bjy1q"]
 script = ExtResource("2_mx6u5")
-time = 721.508
+time = 722.128
 position = Vector2(300, 241)
 movement = 1
 room = &"大厅"
 
 [sub_resource type="Resource" id="Resource_ngsxi"]
 script = ExtResource("2_mx6u5")
-time = 722.0
+time = 722.62
 position = Vector2(356, 289)
 movement = 1
 room = &"会客厅"
 
 [sub_resource type="Resource" id="Resource_hgpcf"]
 script = ExtResource("2_mx6u5")
-time = 722.747
+time = 723.367
 position = Vector2(450, 350)
 room = &"会客厅"
 
@@ -4273,3 +4273,4 @@ map_scene = ExtResource("3_j6q10")
 characters = Array[ExtResource("1_q282j")]([SubResource("Resource_ss0dj"), SubResource("Resource_43ddp"), SubResource("Resource_cat4b"), SubResource("Resource_arc0i"), SubResource("Resource_fgho3"), SubResource("Resource_lhrd3"), SubResource("Resource_mai15"), SubResource("Resource_r1xgu"), SubResource("Resource_8aqyo"), SubResource("Resource_qulgc")])
 voice_lines = Array[ExtResource("7_2lv3s")]([SubResource("Resource_43gbr"), SubResource("Resource_d65d6"), SubResource("Resource_lrwgy"), SubResource("Resource_g0rtg"), SubResource("Resource_tls06"), SubResource("Resource_u1y0a"), SubResource("Resource_1pdsg"), SubResource("Resource_j2pad"), SubResource("Resource_gq2uy"), SubResource("Resource_5ynfg"), SubResource("Resource_bll0f"), SubResource("Resource_j31nc"), SubResource("Resource_ju8tp"), SubResource("Resource_nch6p"), SubResource("Resource_rswed"), SubResource("Resource_iak8a"), SubResource("Resource_t7xl0"), SubResource("Resource_8ic56"), SubResource("Resource_2f8aa"), SubResource("Resource_pgtkq"), SubResource("Resource_hhsgu"), SubResource("Resource_nsi5x"), SubResource("Resource_r8ff7"), SubResource("Resource_lp5nl"), SubResource("Resource_lksd1"), SubResource("Resource_4frfu"), SubResource("Resource_gh2ic"), SubResource("Resource_vmrik"), SubResource("Resource_8yulf"), SubResource("Resource_oj5j4"), SubResource("Resource_22y56"), SubResource("Resource_i3yws"), SubResource("Resource_ri1g6"), SubResource("Resource_l6ijs"), SubResource("Resource_lpxun"), SubResource("Resource_iiwxw"), SubResource("Resource_tsuat"), SubResource("Resource_y0p7r"), SubResource("Resource_cpkdm"), SubResource("Resource_3mhgc"), SubResource("Resource_nneco"), SubResource("Resource_ic14i"), SubResource("Resource_i4wk5"), SubResource("Resource_hbwc4"), SubResource("Resource_d6hvw"), SubResource("Resource_oju6e"), SubResource("Resource_iey1n"), SubResource("Resource_vfe63"), SubResource("Resource_my0qu"), SubResource("Resource_rpfq6"), SubResource("Resource_i1wo2"), SubResource("Resource_figgd"), SubResource("Resource_23hvd"), SubResource("Resource_lkgc1"), SubResource("Resource_7d531"), SubResource("Resource_qswxq"), SubResource("Resource_r13r5"), SubResource("Resource_u5npi"), SubResource("Resource_v2oh0"), SubResource("Resource_kjvu0"), SubResource("Resource_3d3v0"), SubResource("Resource_22272"), SubResource("Resource_emghq"), SubResource("Resource_2g684"), SubResource("Resource_m1xj1"), SubResource("Resource_qho7b"), SubResource("Resource_g1lqm"), SubResource("Resource_3vf0f"), SubResource("Resource_jq7kq"), SubResource("Resource_2ke16"), SubResource("Resource_oacft"), SubResource("Resource_ftqok"), SubResource("Resource_djpru"), SubResource("Resource_kn6pv"), SubResource("Resource_ftwk4"), SubResource("Resource_8thsm"), SubResource("Resource_4th2x"), SubResource("Resource_bvb3n"), SubResource("Resource_a4nsr"), SubResource("Resource_fm36q"), SubResource("Resource_d0e6r"), SubResource("Resource_8a6iw"), SubResource("Resource_h6ffr"), SubResource("Resource_5w4p5"), SubResource("Resource_uof4l"), SubResource("Resource_bv3qe"), SubResource("Resource_4uaoa"), SubResource("Resource_h55v2"), SubResource("Resource_cquwl"), SubResource("Resource_sje6c"), SubResource("Resource_4yuc7"), SubResource("Resource_laidi"), SubResource("Resource_5n1hx"), SubResource("Resource_jh5mi"), SubResource("Resource_260wj"), SubResource("Resource_ojs6x"), SubResource("Resource_t720s"), SubResource("Resource_s5d3x"), SubResource("Resource_nn8no"), SubResource("Resource_rosg8"), SubResource("Resource_4wpdk"), SubResource("Resource_mdc6v"), SubResource("Resource_p25g0"), SubResource("Resource_patrf"), SubResource("Resource_ooo8f"), SubResource("Resource_cfuof"), SubResource("Resource_r3far"), SubResource("Resource_j2j0a"), SubResource("Resource_8j26g"), SubResource("Resource_s5yrb"), SubResource("Resource_681ki"), SubResource("Resource_he4dd"), SubResource("Resource_a52yf"), SubResource("Resource_n614t"), SubResource("Resource_xk616"), SubResource("Resource_4gkdl"), SubResource("Resource_3lg87"), SubResource("Resource_ebxwy"), SubResource("Resource_0w3tw"), SubResource("Resource_lnq38"), SubResource("Resource_7seim"), SubResource("Resource_xia7k"), SubResource("Resource_um6bw"), SubResource("Resource_fh57r"), SubResource("Resource_igt5m"), SubResource("Resource_mefhk"), SubResource("Resource_lgpa5"), SubResource("Resource_bcijq"), SubResource("Resource_4f38c"), SubResource("Resource_i5yny"), SubResource("Resource_vw8qh"), SubResource("Resource_oj656"), SubResource("Resource_r8cgt"), SubResource("Resource_wlan7"), SubResource("Resource_7frj5"), SubResource("Resource_hnnad"), SubResource("Resource_8isp7"), SubResource("Resource_8fjyl"), SubResource("Resource_d7wh4"), SubResource("Resource_55ya4"), SubResource("Resource_lejav"), SubResource("Resource_1rsml"), SubResource("Resource_kibrr"), SubResource("Resource_3qpmd"), SubResource("Resource_jd51j"), SubResource("Resource_jeeaf"), SubResource("Resource_hvybt"), SubResource("Resource_wo1rm"), SubResource("Resource_hqt8u"), SubResource("Resource_o4cpy"), SubResource("Resource_sc6w7"), SubResource("Resource_8a1oe"), SubResource("Resource_wrv2u"), SubResource("Resource_4r0s7"), SubResource("Resource_8ci0k"), SubResource("Resource_nolj6"), SubResource("Resource_nvm06"), SubResource("Resource_y0jkh"), SubResource("Resource_jpxgb"), SubResource("Resource_enbkm"), SubResource("Resource_djqmd"), SubResource("Resource_n7bxj"), SubResource("Resource_yvt0y"), SubResource("Resource_jwpr4"), SubResource("Resource_fs1op"), SubResource("Resource_ghoum"), SubResource("Resource_61s5n"), SubResource("Resource_eme7g"), SubResource("Resource_2da6r"), SubResource("Resource_1307i"), SubResource("Resource_q7ark"), SubResource("Resource_ie4dg"), SubResource("Resource_asa2y"), SubResource("Resource_5kvpk"), SubResource("Resource_ru7t8"), SubResource("Resource_lj7jr"), SubResource("Resource_7tnhl"), SubResource("Resource_uon6j"), SubResource("Resource_7xb8n"), SubResource("Resource_k5tdu")])
 questions = Array[ExtResource("4_smlgh")]([SubResource("Resource_a7sjp"), SubResource("Resource_q4m27"), SubResource("Resource_4bk37"), SubResource("Resource_rh8s0"), SubResource("Resource_8vcjh")])
+cover = "manor"

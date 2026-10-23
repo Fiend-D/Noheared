@@ -47,3 +47,13 @@ func test_imported_cases_validate_without_errors() -> void:
 			func(s: String) -> bool: return s.begins_with("ERROR")
 		)
 		assert_array(errors).override_failure_message("%s: %s" % [path, errors]).is_empty()
+
+
+func test_imported_cases_never_talk_while_walking() -> void:
+	for path in CaseLibrary.list_case_paths():
+		var data: CaseData = load(path)
+		var map: CaseMap = auto_free(data.map_scene.instantiate())
+		var walking := Array(CaseValidator.validate(data, map)).filter(
+			func(s: String) -> bool: return s.contains("还在走") or s.contains("换了房间")
+		)
+		assert_array(walking).override_failure_message("%s: %s" % [path, walking]).is_empty()
