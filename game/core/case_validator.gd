@@ -5,6 +5,10 @@ extends RefCounted
 
 const MAX_DOOR_GAP := 80.0
 const FURNITURE_SAMPLE := 4.0
+## 与 tools/pacing.py 保持一致：全图无声的上限（秒）。
+const MAX_GAP := 20.0
+const MAX_OPENING := 10.0
+const MAX_TAIL := 15.0
 
 
 static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
@@ -30,6 +34,7 @@ static func validate(c: CaseData, map: CaseMap) -> PackedStringArray:
 			_check_furniture(ch, map, issues)
 
 	_check_lines(c, ids, issues)
+	_check_pacing(c, issues)
 	if map:
 		_check_speech_positions(c, map, issues)
 
@@ -149,6 +154,27 @@ static func _floor_of(map: CaseMap, room_name: String) -> int:
 static func _room_name(map: CaseMap, p: Vector2) -> String:
 	var r := map.room_at(p)
 	return r.room_name if r else ""
+
+
+## 空窗期：全图任何地方都没有台词和音效的时间段。
+static func _check_pacing(c: CaseData, issues: PackedStringArray) -> void:
+	var spans: Array[Vector2] = []
+	for line in c.voice_lines:
+		spans.append(Vector2(line.start, line.end_time()))
+	for ev in c.sfx_events:
+		spans.append(Vector2(ev.time, ev.time + ev.duration))
+	if spans.is_empty():
+		return
+	spans.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
+	if spans[0].x > MAX_OPENING:
+		issues.append("WARN: 开场 %.1fs 才有第一声（上限 %.0fs）" % [spans[0].x, MAX_OPENING])
+	var t := spans[0].y
+	for s in spans:
+		if s.x - t > MAX_GAP:
+			issues.append("WARN: %.1fs 起全图空窗 %.1fs（上限 %.0fs）" % [t, s.x - t, MAX_GAP])
+		t = maxf(t, s.y)
+	if c.duration - t > MAX_TAIL:
+		issues.append("WARN: 最后一声之后还有 %.1fs 留白（上限 %.0fs）" % [c.duration - t, MAX_TAIL])
 
 
 static func _check_lines(c: CaseData, ids: Dictionary, issues: PackedStringArray) -> void:

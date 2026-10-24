@@ -171,3 +171,23 @@ func test_route_across_floors_uses_stairs() -> void:
 	_walk(Vector2.ZERO, 3.0)
 	assert_str(listener.room.room_name).is_equal("E")
 	assert_int(listener.floor_index).is_equal(1)
+
+
+func test_click_stair_walks_there_and_changes_floor() -> void:
+	listener.place(Vector2(150, 50), map.get_room("B"))
+	var stair: Stair = map.get_stairs()[0]
+	assert_int(stair.end_at(Vector2(54, 78), 0)).is_equal(0)
+	assert_int(stair.end_at(Vector2(50, 320), 0)).is_equal(-1)
+	assert_int(stair.end_at(Vector2(50, 320), 1)).is_equal(1)
+	var floors: Array[int] = []
+	listener.floor_changed.connect(func(f: int) -> void: floors.append(f))
+	listener.take_stair(stair, 0)
+	_walk(Vector2.ZERO, 3.0)
+	assert_bool(listener.has_path()).is_false()
+	assert_str(listener.room.room_name).is_equal("E")
+	assert_vector(listener.position).is_equal(Vector2(50, 320))
+	assert_array(floors).contains_exactly([1])
+	listener.take_stair(stair, 1)
+	_walk(Vector2.ZERO, 1.0)
+	assert_str(listener.room.room_name).is_equal("A")
+	assert_int(listener.floor_index).is_equal(0)

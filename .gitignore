@@ -29,6 +29,8 @@ game/reports/
 
 # Generated audio that is not needed to run the game.
 # The voice lines in game/cases/*/audio and game/audio/ stay committed: the game and CI exports need them.
+# Screenplays (game/cases/*/case.play) are the source for cases 1–3 and 8–9; keep them tracked.
+# CosyVoice reference clips are local only. TTS writes them here and deletes unreferenced case oggs itself.
 tools/voice_prompts/
 
 # Legacy build output and source recordings (kept locally only; the migrated per-line clips live in game/cases)

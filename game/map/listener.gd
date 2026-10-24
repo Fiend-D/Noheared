@@ -55,6 +55,19 @@ func walk_to(map_point: Vector2, new_room: Room) -> void:
 	_path = map.route(room, map_point, new_room, position)
 
 
+## 走到 `stair` 在 `end` 一侧的楼梯口，再从另一头出来（换楼层）。走不到时原地不动。
+func take_stair(stair: Stair, end: int) -> void:
+	var near := map.get_room(stair.near_room(end)) if map else null
+	if near == null or room == null:
+		return
+	var mouth := stair.end_in(near.room_name)
+	var path := map.route(room, mouth, near, position)
+	if path.is_empty() and position.distance_to(mouth) > ARRIVE_EPSILON:
+		return
+	path.append({"pos": stair.end_in(stair.far_room(end)), "jump": true})
+	_path = path
+
+
 func stop() -> void:
 	_path.clear()
 

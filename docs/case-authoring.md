@@ -16,7 +16,7 @@
 
 源数据只有 `game/cases/<id>/case.json` 和 `audio/` 下的音频；`case.tres`、`map.tscn` 都是导入生成的，不要手改。
 
-手写关键帧很累。更省事的做法是写一个剧本文件 `case.play`，用 `tools/compose_case.py` 自动生成走位和台词时间，见[第 12 节](#12-用剧本文件编写)（case8、case9 就是这样写的）。
+手写关键帧很累。更省事的做法是写一个剧本文件 `case.play`，用 `tools/compose_case.py` 自动生成走位和台词时间，见[第 12 节](#12-用剧本文件编写)（case1、case2、case3、case8、case9 就是这样写的）。
 
 ## 1. 新建案件
 
@@ -68,7 +68,7 @@ mkdir -p game/cases/case8/audio
 | `game/art/posters/<id>.jpg` | `tools/art_sources/poster_<id>.jpg` | 竖版电影海报风插画，不要文字；脚本居中裁成 3:4、缩到 600×800 |
 | `game/art/portraits/<id>/<角色 ID>.jpg` | `tools/art_sources/portraits_<n>.jpg` | 洋红底 3×3 肖像表，每格一人：米色细边框、深色背景、头肩像、脸居中，不要文字。在 `tools/art_sheets.py` 的 `PORTRAITS` 里按格子顺序写上 `"<案件>/<角色 ID>"` |
 
-生成肖像时把性别、年龄、职业和年代写清楚，并和配音音色对上（音高 200 Hz 以上一般是女声）。放好原图后运行 `python3 tools/art_sheets.py`，再 `godot --headless --path game --import`。头像按身份名（`name`）匹配：玩家给某个棋子指认了“宋院长”，棋子上就显示 `name` 为“宋院长”的那个角色的头像。
+生成肖像时把性别、年龄、职业和年代写清楚，并和配音音色对上（音高 200 Hz 以上一般是女声）。放好原图后运行 `python3 tools/art_sheets.py`，再 `godot --headless --path game --import`。头像按身份名（`name`）匹配：玩家给某个棋子指认了“宋院长”，棋子上就显示 `name` 为“宋院长”的那个角色的头像。case1、case2、case3 重写后旧头像已删掉，新头像还没切，指认后仍是灰色剪影。
 
 ## 2. 剧本设计要点
 
@@ -79,6 +79,29 @@ mkdir -p game/cases/case8/audio
 - **大音量事件做节点**。尖叫、枪声、摔门能穿墙，适合标记“出事了”，引导玩家赶过去。
 - **说谎和不在场证明**。角色私下说的和公开说的不一样，玩家需要两边都听到。
 - **时长**：入门 2–5 分钟、3–4 人；完整案件 20–30 分钟、8–10 人（参考 case6 / case7）。
+- **不要冷场**：玩家能去任何房间，所以“空窗期”指全图都没人说话、也没有音效的时间。规则见下面 2.1。
+
+### 2.1 节奏规则
+
+`tools/pacing.py` 检查已生成的 `case.json`；`compose_case.py` 编译时自动跑同样的检查，有**错误**就不写 `case.json`。
+
+```bash
+python3 tools/pacing.py case8 case9   # 有错误时退出码为 1
+```
+
+| 规则 | 级别 |
+| --- | --- |
+| 开场 10 秒内必须有第一声 | 错误 |
+| 任何一段全图空窗不超过 20 秒 | 错误 |
+| 10 秒以上的空窗每 5 分钟最多 1 段（不足 5 分钟按 1 段算） | 错误 |
+| 最后一声之后留白不超过 15 秒（剧本里写 `时长: 自动` 就不会超） | 错误 |
+| 单句台词不超过 12 秒 / 60 字，太长就拆开 | 提示 |
+| 同一房间两个人同时说话（重叠超过 0.3 秒），听不清 | 提示 |
+| 同一时刻最多 3 个房间在说话，再多玩家顾不过来 | 提示 |
+| 每个角色至少 5 句台词，否则很难认出 | 提示 |
+| 每个身份至少被别人叫到 2 次（全名；三个字以上的去掉首字，如“宋院长”→“院长”；两个字的人名加姓氏称呼，如“林小姐”“林姐”） | 提示 |
+
+补空窗的办法是**加一场戏**（让闲着的角色在别的房间聊几句、顺带埋一条线索），而不是把后面的场景硬往前挪。游戏里的校验（第 7 节）也会对开场、空窗、留白给出 WARN，旧案件的录音里还有几处超标的空窗。
 
 建议先写一张时间表（时间 × 房间 × 谁在场 × 说什么），再落到 JSON。
 
@@ -95,7 +118,7 @@ mkdir -p game/cases/case8/audio
 - `name` 在整个案件中唯一，地图上显示在房间左上角。
 - `polygon` 按顺序给出顶点，推荐矩形。同一层的房间**不能重叠**（校验报错）；可以共用一面墙，也可以留 20–50 的缝（缝会画成厚墙）。
 - `floor` 是 `map.floors` 的下标。多层建筑的各层放在不同的 y 区间，不要重叠。
-- `floor_material`：`wood` `parquet` `checker` `carpet` `marble` `deck` `flagstone` `grass` `concrete`（不写则由 `furnish.py` 按房间名选）。
+- `floor_material`：`wood` `parquet` `checker` `carpet` `marble` `deck` `flagstone` `grass` `concrete`（不写则由 `furnish.py` 按房间名里的关键词选，更具体的词优先，例如「总经理室 / 副总室 / 财务室」先于「办公室」，「会议室」「茶水间」「前台」各自有模板）。
 - `outdoor: true`：花园、甲板、露台等，画围栏而不是墙。
 
 ### 3.2 门 `doors`
@@ -310,6 +333,7 @@ godot --headless --path game --script res://addons/case_editor/import_cli.gd -- 
 | WARN 穿过家具 | 挪开家具，或 `furnish.py --force` |
 | WARN 与上一句重叠 | 同一角色两句台词时间重叠 |
 | WARN N 句台词没有语音 | 只显示字幕，可接受但最好补上 |
+| WARN 开场 X 秒才有第一声 / 全图空窗 X 秒 / 最后一声之后还有 X 秒留白 | 节奏规则（2.1 节），补一场戏或缩短 `duration` |
 
 `ERROR` 必须修；测试 `tests/test_case_json.gd`、`tests/test_listener_walk.gd` 会对所有案件检查说话时站定、门能走通、家具不堵路，CI 不过就合不进去。
 
@@ -363,7 +387,7 @@ godot --headless --path game --script res://addons/case_editor/import_cli.gd -- 
 ```
 # 井号开头是注释
 标题: 雨夜书店
-时长: 1800
+时长: 自动                     # 或秒数；“自动”= 最后一声结束后再留 8 秒
 封面: street
 外景: cobblestone
 简介: 第一段。
@@ -409,7 +433,7 @@ A: （尖叫）啊——！ {1.0}       # 行尾 {} 里可写响度，或 {无�
 ### 12.2 流程
 
 ```bash
-python3 tools/compose_case.py case8 --check            # 检查格式，打印每场的起止时间和推迟提示，不写文件
+python3 tools/compose_case.py case8 --check            # 检查格式，打印总时长、每场的起止时间、推迟提示和节奏检查，不写文件
 python3 tools/compose_case.py case8                    # 生成 case.json（台词时长先按字数估算）
 python3 tools/furnish.py case8 --force --ignore-tracks # 摆家具，不避让角色轨迹
 python3 tools/compose_case.py case8                    # 重新编译：站位和路线绕开家具
@@ -420,6 +444,7 @@ godot --headless --path game --script res://addons/case_editor/import_cli.gd -- 
 ```
 
 - 配音会改变台词时长，配完一定要重新编译，再看一次 `--check` 的场景时间：哪一场拖得太长和后面撞了，就把后面那场的 `@` 时间往后挪，或删减台词。
+- 编译时会跑节奏检查（2.1 节）：有错误就打印“节奏错误”并拒绝写 `case.json`，按提示的时间点补戏或调整 `@`；“节奏提示”不挡编译。
 - 不要在 `tts_lines.py` 运行时编译（两边都会写 `case.json`）。
 - 改了剧本里的台词文本，那一句会变成“没有语音”，再跑一次 `tts_lines.py` 只会补这一句。
 - 编辑器里改过的走位，下次编译会被剧本覆盖；用剧本写的案件就一直改剧本。

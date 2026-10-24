@@ -37,6 +37,7 @@ var _selected: ActorDot
 var _autosave_left: float = AUTOSAVE_INTERVAL
 var _fit_zoom: float = 1.0
 var _zoom_factor: float = 1.0
+var _cursor := Input.CURSOR_ARROW
 
 
 func _ready() -> void:
@@ -224,6 +225,7 @@ func _process(delta: float) -> void:
 	listener.step(direction, Input.is_action_pressed("move_run"), delta)
 	listener.modulate.a = 1.0 if listener.floor_index == map.current_floor else 0.0
 	_update_camera(minf(delta * CAMERA_FOLLOW, 1.0))
+	_update_hover()
 	_subtitles.show_lines(scheduler.active_lines, case_data)
 	_autosave_left -= delta
 	if _autosave_left <= 0.0:
@@ -264,9 +266,39 @@ func _on_map_click(point: Vector2) -> void:
 		dot.selected = true
 		_side.highlight_person(dot.character.id)
 		return
+	var stair := _stair_end_at(point)
+	if not stair.is_empty():
+		listener.take_stair(stair.stair, stair.end)
+		return
 	var room := map.room_at(point, &"", map.current_floor)
 	if room:
 		listener.walk_to(map.nearest_walkable(room, room.clamp_point(point, CaseMap.WALK_MARGIN + 4.0)), room)
+
+
+## 鼠标指着楼梯口时高亮它、换成手形光标。指着 HUD 时不算。
+func _update_hover() -> void:
+	var hit := {}
+	if get_viewport().gui_get_hovered_control() == null:
+		hit = _stair_end_at(_world.get_global_mouse_position())
+	for s in map.get_stairs():
+		s.hovered_end = hit.end if s == hit.get("stair") else -1
+	var shape := Input.CURSOR_POINTING_HAND if not hit.is_empty() else Input.CURSOR_ARROW
+	if shape != _cursor:
+		_cursor = shape
+		Input.set_default_cursor_shape(shape)
+
+
+## 当前楼层上 `point` 指着的楼梯口：{stair, end}，没有返回空字典。
+func _stair_end_at(point: Vector2) -> Dictionary:
+	for s in map.get_stairs():
+		var end := s.end_at(point, map.current_floor)
+		if end >= 0:
+			return {"stair": s, "end": end}
+	return {}
+
+
+func _exit_tree() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 
 func _on_listener_moved(room: Room) -> void:

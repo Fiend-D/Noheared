@@ -35,6 +35,7 @@ godot -e --path game         # 打开编辑器
 | WASD / 方向键 | 监听者走动（墙会挡住，只能从门洞进出房间；走到楼梯口自动上下楼） |
 | Shift | 快走 |
 | 鼠标左键点房间 | 监听者沿门洞、楼梯自动走过去 |
+| 鼠标指向 / 点击楼梯口 | 楼梯口高亮；点击后监听者走过去上 / 下楼，地图切到对应楼层 |
 | 鼠标左键点角色 | 选中角色，右侧切到“人物”指认 |
 | 空格 | 播放 / 暂停 |
 | Q / E | 倒退 / 快进 5 秒 |
@@ -107,10 +108,11 @@ python3 tools/migrate_legacy_case.py            # 全部；或指定 case1 case5
 
 ```bash
 python3 tools/compose_case.py case8 --check   # 检查剧本，打印每场的起止时间
-python3 tools/compose_case.py case8           # case.play → case.json
+python3 tools/compose_case.py case8           # case.play → case.json（节奏检查有错误时不写入）
+python3 tools/pacing.py case8 case9           # 节奏检查：空窗期、开头结尾、台词长度、串话、身份线索
 ```
 
-把纯文本剧本 `game/cases/<id>/case.play`（房间矩形、角色、台词、“谁走到哪”）编译成 `case.json`：自动放门、规划走位、让说话的人先走到位、绕开家具，配音后按真实时长重新排时间。case8、case9 用它编写。格式和流程见 [docs/case-authoring.md](docs/case-authoring.md#12-用剧本文件编写)。
+把纯文本剧本 `game/cases/<id>/case.play`（房间矩形、角色、台词、“谁走到哪”）编译成 `case.json`：自动放门、规划走位、让说话的人先走到位、绕开家具，配音后按真实时长重新排时间。case1、case2、case3、case8、case9 用它编写。格式和流程见 [docs/case-authoring.md](docs/case-authoring.md#12-用剧本文件编写)。
 
 ### 美术素材
 

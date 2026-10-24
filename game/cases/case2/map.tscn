@@ -1,176 +1,634 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://map/case_map.gd" id="1_fln4h"]
-[ext_resource type="Texture2D" path="res://art/exterior/cobblestone.jpg" id="2_groo5"]
-[ext_resource type="Script" path="res://map/room.gd" id="3_k1khn"]
-[ext_resource type="Texture2D" path="res://art/floors/wood.jpg" id="4_e517l"]
-[ext_resource type="Texture2D" path="res://art/floors/parquet.jpg" id="5_6d48d"]
-[ext_resource type="Texture2D" path="res://art/floors/carpet.jpg" id="6_88815"]
-[ext_resource type="Texture2D" path="res://art/floors/concrete.jpg" id="7_b7smo"]
-[ext_resource type="Script" path="res://map/door.gd" id="8_unpxq"]
-[ext_resource type="Script" path="res://map/prop.gd" id="9_3r7dt"]
-[ext_resource type="Texture2D" path="res://art/props/clothes_rack.png" id="10_h1fme"]
-[ext_resource type="Texture2D" path="res://art/props/chair.png" id="11_hp0kn"]
-[ext_resource type="Texture2D" path="res://art/props/piano.png" id="12_14n2x"]
-[ext_resource type="Texture2D" path="res://art/props/plant.png" id="13_posgk"]
-[ext_resource type="Texture2D" path="res://art/props/side_table.png" id="14_pc5kc"]
-[ext_resource type="Texture2D" path="res://art/props/crates.png" id="15_omo6y"]
-[ext_resource type="Texture2D" path="res://art/props/barrel.png" id="16_7jjhi"]
+[ext_resource type="Script" path="res://map/case_map.gd" id="1_posgk"]
+[ext_resource type="Texture2D" path="res://art/exterior/cobblestone.jpg" id="2_pc5kc"]
+[ext_resource type="Script" path="res://map/room.gd" id="3_omo6y"]
+[ext_resource type="Texture2D" path="res://art/floors/marble.jpg" id="4_7jjhi"]
+[ext_resource type="Texture2D" path="res://art/floors/parquet.jpg" id="5_rvjwd"]
+[ext_resource type="Texture2D" path="res://art/floors/carpet.jpg" id="6_7mwer"]
+[ext_resource type="Texture2D" path="res://art/floors/wood.jpg" id="7_vican"]
+[ext_resource type="Texture2D" path="res://art/floors/concrete.jpg" id="8_7unkv"]
+[ext_resource type="Script" path="res://map/door.gd" id="9_7mwrb"]
+[ext_resource type="Script" path="res://map/stair.gd" id="10_rytuu"]
+[ext_resource type="Script" path="res://map/prop.gd" id="11_3qtq0"]
+[ext_resource type="Texture2D" path="res://art/props/bench.png" id="12_7r74y"]
+[ext_resource type="Texture2D" path="res://art/props/side_table.png" id="13_ul66s"]
+[ext_resource type="Texture2D" path="res://art/props/plant.png" id="14_a4u6a"]
+[ext_resource type="Texture2D" path="res://art/props/piano.png" id="15_5n7lh"]
+[ext_resource type="Texture2D" path="res://art/props/theatre_seats.png" id="16_k7w1x"]
+[ext_resource type="Texture2D" path="res://art/props/chair.png" id="17_5k4df"]
+[ext_resource type="Texture2D" path="res://art/props/statue.png" id="18_1gm7w"]
+[ext_resource type="Texture2D" path="res://art/props/vanity.png" id="19_nju0a"]
+[ext_resource type="Texture2D" path="res://art/props/clothes_rack.png" id="20_4h2rm"]
+[ext_resource type="Texture2D" path="res://art/props/crates.png" id="21_y10bu"]
+[ext_resource type="Texture2D" path="res://art/props/barrel.png" id="22_datdc"]
+[ext_resource type="Texture2D" path="res://art/props/desk.png" id="23_b3nw6"]
+[ext_resource type="Texture2D" path="res://art/props/filing_cabinet.png" id="24_prp4h"]
+[ext_resource type="Texture2D" path="res://art/props/sofa.png" id="25_fk3nk"]
+[ext_resource type="Texture2D" path="res://art/props/coffee_table.png" id="26_jku3c"]
+[ext_resource type="Texture2D" path="res://art/props/armchair.png" id="27_juyae"]
+[ext_resource type="Texture2D" path="res://art/props/bed_single.png" id="28_dx2jt"]
 
-[node name="CaseMap" type="Node2D" unique_id=53200522]
-script = ExtResource("1_fln4h")
-floor_names = PackedStringArray("一层")
-backdrop = ExtResource("2_groo5")
+[node name="CaseMap" type="Node2D" unique_id=1429895767]
+script = ExtResource("1_posgk")
+floor_names = PackedStringArray("一层", "二层")
+backdrop = ExtResource("2_pc5kc")
 
-[node name="Rooms" type="Node2D" parent="." unique_id=876774991]
+[node name="Rooms" type="Node2D" parent="." unique_id=1732979822]
 
-[node name="化妆间" type="Node2D" parent="Rooms" unique_id=1845487416]
-script = ExtResource("3_k1khn")
-room_name = "化妆间"
-polygon = PackedVector2Array(50, 50, 300, 50, 300, 230, 50, 230)
-floor_texture = ExtResource("4_e517l")
+[node name="门厅" type="Node2D" parent="Rooms" unique_id=1180203639]
+script = ExtResource("3_omo6y")
+room_name = "门厅"
+polygon = PackedVector2Array(40, 40, 260, 40, 260, 200, 40, 200)
+floor_texture = ExtResource("4_7jjhi")
 
-[node name="舞台" type="Node2D" parent="Rooms" unique_id=1709734700]
-script = ExtResource("3_k1khn")
+[node name="音乐厅" type="Node2D" parent="Rooms" unique_id=1811690290]
+script = ExtResource("3_omo6y")
+room_name = "音乐厅"
+polygon = PackedVector2Array(300, 40, 780, 40, 780, 200, 300, 200)
+floor_texture = ExtResource("5_rvjwd")
+
+[node name="舞台" type="Node2D" parent="Rooms" unique_id=1603452658]
+script = ExtResource("3_omo6y")
 room_name = "舞台"
-polygon = PackedVector2Array(300, 50, 750, 50, 750, 230, 300, 230)
-floor_texture = ExtResource("5_6d48d")
+polygon = PackedVector2Array(820, 40, 1120, 40, 1120, 220, 820, 220)
+floor_texture = ExtResource("5_rvjwd")
 
-[node name="走廊" type="Node2D" parent="Rooms" unique_id=161463674]
-script = ExtResource("3_k1khn")
-room_name = "走廊"
-polygon = PackedVector2Array(50, 230, 750, 230, 750, 310, 50, 310)
-floor_texture = ExtResource("6_88815")
+[node name="一层走廊" type="Node2D" parent="Rooms" unique_id=1694038217]
+script = ExtResource("3_omo6y")
+room_name = "一层走廊"
+polygon = PackedVector2Array(40, 250, 1120, 250, 1120, 330, 40, 330)
+floor_texture = ExtResource("6_7mwer")
 
-[node name="道具室" type="Node2D" parent="Rooms" unique_id=1300585866]
-script = ExtResource("3_k1khn")
+[node name="化妆间" type="Node2D" parent="Rooms" unique_id=843046941]
+script = ExtResource("3_omo6y")
+room_name = "化妆间"
+polygon = PackedVector2Array(40, 370, 320, 370, 320, 580, 40, 580)
+floor_texture = ExtResource("7_vican")
+
+[node name="道具室" type="Node2D" parent="Rooms" unique_id=1996034600]
+script = ExtResource("3_omo6y")
 room_name = "道具室"
-polygon = PackedVector2Array(50, 310, 300, 310, 300, 410, 50, 410)
-floor_texture = ExtResource("7_b7smo")
+polygon = PackedVector2Array(360, 370, 640, 370, 640, 560, 360, 560)
+floor_texture = ExtResource("8_7unkv")
 
-[node name="Doors" type="Node2D" parent="." unique_id=539151083]
+[node name="办公室" type="Node2D" parent="Rooms" unique_id=1715780278]
+script = ExtResource("3_omo6y")
+room_name = "办公室"
+polygon = PackedVector2Array(680, 370, 900, 370, 900, 580, 680, 580)
+floor_texture = ExtResource("7_vican")
 
-[node name="舞台门" type="Node2D" parent="Doors" unique_id=1760289053]
-position = Vector2(305, 140)
-script = ExtResource("8_unpxq")
-room_a = "化妆间"
-room_b = "舞台"
-size = Vector2(10, 40)
+[node name="休息室" type="Node2D" parent="Rooms" unique_id=533470341]
+script = ExtResource("3_omo6y")
+room_name = "休息室"
+polygon = PackedVector2Array(940, 370, 1120, 370, 1120, 560, 940, 560)
+floor_texture = ExtResource("7_vican")
 
-[node name="走廊门(化妆)" type="Node2D" parent="Doors" unique_id=564687229]
-position = Vector2(165, 235)
-script = ExtResource("8_unpxq")
-room_a = "化妆间"
-room_b = "走廊"
-size = Vector2(30, 10)
+[node name="档案室" type="Node2D" parent="Rooms" unique_id=249879931]
+script = ExtResource("3_omo6y")
+room_name = "档案室"
+floor_index = 1
+polygon = PackedVector2Array(40, 660, 360, 660, 360, 860, 40, 860)
+floor_texture = ExtResource("8_7unkv")
 
-[node name="走廊门(舞台)" type="Node2D" parent="Doors" unique_id=20760549]
-position = Vector2(515, 235)
-script = ExtResource("8_unpxq")
+[node name="值班室" type="Node2D" parent="Rooms" unique_id=300785138]
+script = ExtResource("3_omo6y")
+room_name = "值班室"
+floor_index = 1
+polygon = PackedVector2Array(400, 660, 720, 660, 720, 840, 400, 840)
+floor_texture = ExtResource("8_7unkv")
+
+[node name="灯光机房" type="Node2D" parent="Rooms" unique_id=108583899]
+script = ExtResource("3_omo6y")
+room_name = "灯光机房"
+floor_index = 1
+polygon = PackedVector2Array(760, 660, 1120, 660, 1120, 860, 760, 860)
+floor_texture = ExtResource("8_7unkv")
+
+[node name="二层走廊" type="Node2D" parent="Rooms" unique_id=1942757846]
+script = ExtResource("3_omo6y")
+room_name = "二层走廊"
+floor_index = 1
+polygon = PackedVector2Array(40, 900, 1120, 900, 1120, 980, 40, 980)
+floor_texture = ExtResource("6_7mwer")
+
+[node name="Doors" type="Node2D" parent="." unique_id=1533190378]
+
+[node name="门厅-一层走廊" type="Node2D" parent="Doors" unique_id=1544695773]
+position = Vector2(150, 225)
+script = ExtResource("9_7mwrb")
+room_a = "门厅"
+room_b = "一层走廊"
+size = Vector2(40, 20)
+
+[node name="音乐厅-一层走廊" type="Node2D" parent="Doors" unique_id=997870218]
+position = Vector2(540, 225)
+script = ExtResource("9_7mwrb")
+room_a = "音乐厅"
+room_b = "一层走廊"
+size = Vector2(40, 20)
+
+[node name="舞台-一层走廊" type="Node2D" parent="Doors" unique_id=1502976101]
+position = Vector2(970, 235)
+script = ExtResource("9_7mwrb")
 room_a = "舞台"
-room_b = "走廊"
-size = Vector2(30, 10)
+room_b = "一层走廊"
+size = Vector2(40, 20)
 
-[node name="道具门" type="Node2D" parent="Doors" unique_id=1454870225]
-position = Vector2(165, 315)
-script = ExtResource("8_unpxq")
-room_a = "道具室"
-room_b = "走廊"
-size = Vector2(30, 10)
+[node name="一层走廊-化妆间" type="Node2D" parent="Doors" unique_id=246886827]
+position = Vector2(180, 350)
+script = ExtResource("9_7mwrb")
+room_a = "一层走廊"
+room_b = "化妆间"
+size = Vector2(40, 20)
 
-[node name="Stairs" type="Node2D" parent="." unique_id=972991610]
+[node name="一层走廊-道具室" type="Node2D" parent="Doors" unique_id=566445000]
+position = Vector2(500, 350)
+script = ExtResource("9_7mwrb")
+room_a = "一层走廊"
+room_b = "道具室"
+size = Vector2(40, 20)
 
-[node name="Props" type="Node2D" parent="." unique_id=1631048492]
+[node name="一层走廊-办公室" type="Node2D" parent="Doors" unique_id=1752908532]
+position = Vector2(790, 350)
+script = ExtResource("9_7mwrb")
+room_a = "一层走廊"
+room_b = "办公室"
+size = Vector2(40, 20)
 
-[node name="clothes_rack_0" type="Node2D" parent="Props" unique_id=1756190749]
-position = Vector2(96.6, 174.7)
-script = ExtResource("9_3r7dt")
+[node name="一层走廊-休息室" type="Node2D" parent="Doors" unique_id=971755827]
+position = Vector2(1030, 350)
+script = ExtResource("9_7mwrb")
+room_a = "一层走廊"
+room_b = "休息室"
+size = Vector2(40, 20)
+
+[node name="档案室-二层走廊" type="Node2D" parent="Doors" unique_id=883798529]
+position = Vector2(200, 880)
+script = ExtResource("9_7mwrb")
+room_a = "档案室"
+room_b = "二层走廊"
+size = Vector2(40, 20)
+
+[node name="值班室-二层走廊" type="Node2D" parent="Doors" unique_id=2007962051]
+position = Vector2(560, 870)
+script = ExtResource("9_7mwrb")
+room_a = "值班室"
+room_b = "二层走廊"
+size = Vector2(40, 20)
+
+[node name="灯光机房-二层走廊" type="Node2D" parent="Doors" unique_id=568716914]
+position = Vector2(940, 880)
+script = ExtResource("9_7mwrb")
+room_a = "灯光机房"
+room_b = "二层走廊"
+size = Vector2(40, 20)
+
+[node name="Stairs" type="Node2D" parent="." unique_id=1500315498]
+
+[node name="一层走廊楼梯" type="Node2D" parent="Stairs" unique_id=1962278852]
+position = Vector2(180, 290)
+script = ExtResource("10_rytuu")
+room_a = "一层走廊"
+room_b = "二层走廊"
+end_b = Vector2(180, 940)
+
+[node name="一层走廊楼梯2" type="Node2D" parent="Stairs" unique_id=1337435661]
+position = Vector2(980, 290)
+script = ExtResource("10_rytuu")
+room_a = "一层走廊"
+room_b = "二层走廊"
+end_b = Vector2(980, 940)
+
+[node name="Props" type="Node2D" parent="." unique_id=1896150660]
+
+[node name="bench_0" type="Node2D" parent="Props" unique_id=436251058]
+position = Vector2(154.8, 111.8)
+script = ExtResource("11_3qtq0")
+prop_type = "bench"
+texture = ExtResource("12_7r74y")
+size = Vector2(75.6, 53.5)
+flip_h = true
+room_name = "门厅"
+
+[node name="side_table_1" type="Node2D" parent="Props" unique_id=1429331921]
+position = Vector2(176.4, 62.6)
+script = ExtResource("11_3qtq0")
+prop_type = "side_table"
+texture = ExtResource("13_ul66s")
+size = Vector2(30.8, 35.2)
+room_name = "门厅"
+
+[node name="plant_2" type="Node2D" parent="Props" unique_id=1592180071]
+position = Vector2(64.6, 175.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "门厅"
+
+[node name="plant_3" type="Node2D" parent="Props" unique_id=455502323]
+position = Vector2(235.4, 175.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "门厅"
+
+[node name="piano_4" type="Node2D" parent="Props" unique_id=1677390560]
+position = Vector2(709.6, 100.9)
+script = ExtResource("11_3qtq0")
+prop_type = "piano"
+texture = ExtResource("15_5n7lh")
+size = Vector2(81.2, 111.8)
+room_name = "音乐厅"
+
+[node name="theatre_seats_5" type="Node2D" parent="Props" unique_id=1014185021]
+position = Vector2(581.4, 102.9)
+script = ExtResource("11_3qtq0")
+prop_type = "theatre_seats"
+texture = ExtResource("16_k7w1x")
+size = Vector2(128.8, 51.8)
+flip_h = true
+room_name = "音乐厅"
+
+[node name="theatre_seats_6" type="Node2D" parent="Props" unique_id=1408775708]
+position = Vector2(445.4, 74.9)
+script = ExtResource("11_3qtq0")
+prop_type = "theatre_seats"
+texture = ExtResource("16_k7w1x")
+size = Vector2(128.8, 51.8)
+room_name = "音乐厅"
+
+[node name="theatre_seats_7" type="Node2D" parent="Props" unique_id=627073908]
+position = Vector2(421.4, 150.9)
+script = ExtResource("11_3qtq0")
+prop_type = "theatre_seats"
+texture = ExtResource("16_k7w1x")
+size = Vector2(128.8, 51.8)
+room_name = "音乐厅"
+
+[node name="plant_8" type="Node2D" parent="Props" unique_id=118435017]
+position = Vector2(324.6, 175.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+flip_h = true
+room_name = "音乐厅"
+
+[node name="piano_9" type="Node2D" parent="Props" unique_id=206268278]
+position = Vector2(1074.4, 100.9)
+script = ExtResource("11_3qtq0")
+prop_type = "piano"
+texture = ExtResource("15_5n7lh")
+size = Vector2(81.2, 111.8)
+room_name = "舞台"
+
+[node name="chair_10" type="Node2D" parent="Props" unique_id=230724998]
+position = Vector2(1101.6, 186.2)
+script = ExtResource("11_3qtq0")
+prop_type = "chair"
+texture = ExtResource("17_5k4df")
+size = Vector2(25.2, 50.4)
+flip_h = true
+room_name = "舞台"
+
+[node name="chair_11" type="Node2D" parent="Props" unique_id=214839151]
+position = Vector2(989.6, 130.2)
+script = ExtResource("11_3qtq0")
+prop_type = "chair"
+texture = ExtResource("17_5k4df")
+size = Vector2(25.2, 50.4)
+flip_h = true
+room_name = "舞台"
+
+[node name="chair_12" type="Node2D" parent="Props" unique_id=1922885331]
+position = Vector2(1013.6, 70.2)
+script = ExtResource("11_3qtq0")
+prop_type = "chair"
+texture = ExtResource("17_5k4df")
+size = Vector2(25.2, 50.4)
+room_name = "舞台"
+
+[node name="statue_13" type="Node2D" parent="Props" unique_id=397824345]
+position = Vector2(844.6, 172.1)
+script = ExtResource("11_3qtq0")
+prop_type = "statue"
+texture = ExtResource("18_1gm7w")
+size = Vector2(39.2, 85.8)
+flip_h = true
+room_name = "舞台"
+
+[node name="plant_14" type="Node2D" parent="Props" unique_id=649833179]
+position = Vector2(1095.4, 274.1)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+flip_h = true
+room_name = "一层走廊"
+
+[node name="plant_15" type="Node2D" parent="Props" unique_id=672169519]
+position = Vector2(64.6, 305.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+flip_h = true
+room_name = "一层走廊"
+
+[node name="side_table_16" type="Node2D" parent="Props" unique_id=1730777205]
+position = Vector2(332.4, 284.6)
+script = ExtResource("11_3qtq0")
+prop_type = "side_table"
+texture = ExtResource("13_ul66s")
+size = Vector2(30.8, 35.2)
+room_name = "一层走廊"
+
+[node name="vanity_17" type="Node2D" parent="Props" unique_id=1178744353]
+position = Vector2(253.2, 409.2)
+script = ExtResource("11_3qtq0")
+prop_type = "vanity"
+texture = ExtResource("19_nju0a")
+size = Vector2(64.4, 68.5)
+room_name = "化妆间"
+
+[node name="clothes_rack_18" type="Node2D" parent="Props" unique_id=354577795]
+position = Vector2(214.6, 486.7)
+script = ExtResource("11_3qtq0")
 prop_type = "clothes_rack"
-texture = ExtResource("10_h1fme")
+texture = ExtResource("20_4h2rm")
+size = Vector2(67.2, 71.4)
+room_name = "化妆间"
+
+[node name="clothes_rack_19" type="Node2D" parent="Props" unique_id=638522449]
+position = Vector2(102.6, 514.7)
+script = ExtResource("11_3qtq0")
+prop_type = "clothes_rack"
+texture = ExtResource("20_4h2rm")
 size = Vector2(67.2, 71.4)
 flip_h = true
 room_name = "化妆间"
 
-[node name="chair_1" type="Node2D" parent="Props" unique_id=107244337]
-position = Vector2(215.6, 80.2)
-script = ExtResource("9_3r7dt")
+[node name="chair_20" type="Node2D" parent="Props" unique_id=141855929]
+position = Vector2(93.6, 436.2)
+script = ExtResource("11_3qtq0")
 prop_type = "chair"
-texture = ExtResource("11_hp0kn")
+texture = ExtResource("17_5k4df")
 size = Vector2(25.2, 50.4)
 room_name = "化妆间"
 
-[node name="piano_2" type="Node2D" parent="Props" unique_id=690765731]
-position = Vector2(704.4, 169.1)
-script = ExtResource("9_3r7dt")
-prop_type = "piano"
-texture = ExtResource("12_14n2x")
-size = Vector2(81.2, 111.8)
-flip_h = true
-room_name = "舞台"
-
-[node name="chair_3" type="Node2D" parent="Props" unique_id=1187896043]
-position = Vector2(369.6, 84.2)
-script = ExtResource("9_3r7dt")
-prop_type = "chair"
-texture = ExtResource("11_hp0kn")
-size = Vector2(25.2, 50.4)
-room_name = "舞台"
-
-[node name="chair_4" type="Node2D" parent="Props" unique_id=479278503]
-position = Vector2(681.6, 84.2)
-script = ExtResource("9_3r7dt")
-prop_type = "chair"
-texture = ExtResource("11_hp0kn")
-size = Vector2(25.2, 50.4)
-room_name = "舞台"
-
-[node name="chair_5" type="Node2D" parent="Props" unique_id=845511872]
-position = Vector2(365.6, 196.2)
-script = ExtResource("9_3r7dt")
-prop_type = "chair"
-texture = ExtResource("11_hp0kn")
-size = Vector2(25.2, 50.4)
-flip_h = true
-room_name = "舞台"
-
-[node name="plant_6" type="Node2D" parent="Props" unique_id=361897667]
-position = Vector2(725.4, 254.1)
-script = ExtResource("9_3r7dt")
-prop_type = "plant"
-texture = ExtResource("13_posgk")
-size = Vector2(39.2, 38.2)
-room_name = "走廊"
-
-[node name="plant_7" type="Node2D" parent="Props" unique_id=1255115982]
-position = Vector2(74.6, 285.9)
-script = ExtResource("9_3r7dt")
-prop_type = "plant"
-texture = ExtResource("13_posgk")
-size = Vector2(39.2, 38.2)
-room_name = "走廊"
-
-[node name="side_table_8" type="Node2D" parent="Props" unique_id=2068160888]
-position = Vector2(626.4, 252.6)
-script = ExtResource("9_3r7dt")
-prop_type = "side_table"
-texture = ExtResource("14_pc5kc")
-size = Vector2(30.8, 35.2)
-flip_h = true
-room_name = "走廊"
-
-[node name="crates_9" type="Node2D" parent="Props" unique_id=1398121187]
-position = Vector2(261.8, 360.2)
-script = ExtResource("9_3r7dt")
+[node name="crates_21" type="Node2D" parent="Props" unique_id=1542845119]
+position = Vector2(487.8, 448.2)
+script = ExtResource("11_3qtq0")
 prop_type = "crates"
-texture = ExtResource("15_omo6y")
+texture = ExtResource("21_y10bu")
+size = Vector2(61.6, 58.5)
+room_name = "道具室"
+
+[node name="crates_22" type="Node2D" parent="Props" unique_id=228060160]
+position = Vector2(427.8, 516.2)
+script = ExtResource("11_3qtq0")
+prop_type = "crates"
+texture = ExtResource("21_y10bu")
+size = Vector2(61.6, 58.5)
+room_name = "道具室"
+
+[node name="clothes_rack_23" type="Node2D" parent="Props" unique_id=489387236]
+position = Vector2(594.6, 474.7)
+script = ExtResource("11_3qtq0")
+prop_type = "clothes_rack"
+texture = ExtResource("20_4h2rm")
+size = Vector2(67.2, 71.4)
+room_name = "道具室"
+
+[node name="barrel_24" type="Node2D" parent="Props" unique_id=659838904]
+position = Vector2(615.4, 398.1)
+script = ExtResource("11_3qtq0")
+prop_type = "barrel"
+texture = ExtResource("22_datdc")
+size = Vector2(39.2, 46.1)
+flip_h = true
+room_name = "道具室"
+
+[node name="desk_25" type="Node2D" parent="Props" unique_id=2035040327]
+position = Vector2(860, 482.6)
+script = ExtResource("11_3qtq0")
+prop_type = "desk"
+texture = ExtResource("23_b3nw6")
+size = Vector2(70, 63.2)
+room_name = "办公室"
+
+[node name="filing_cabinet_26" type="Node2D" parent="Props" unique_id=9363420]
+position = Vector2(853.8, 408.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "办公室"
+
+[node name="chair_27" type="Node2D" parent="Props" unique_id=1786732377]
+position = Vector2(793.6, 444.2)
+script = ExtResource("11_3qtq0")
+prop_type = "chair"
+texture = ExtResource("17_5k4df")
+size = Vector2(25.2, 50.4)
+room_name = "办公室"
+
+[node name="plant_28" type="Node2D" parent="Props" unique_id=797245972]
+position = Vector2(704.6, 555.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "办公室"
+
+[node name="sofa_29" type="Node2D" parent="Props" unique_id=1473548521]
+position = Vector2(1030, 505.2)
+script = ExtResource("11_3qtq0")
+prop_type = "sofa"
+texture = ExtResource("25_fk3nk")
+size = Vector2(98, 52.4)
+flip_h = true
+room_name = "休息室"
+
+[node name="coffee_table_30" type="Node2D" parent="Props" unique_id=371976600]
+position = Vector2(1031.8, 455.5)
+script = ExtResource("11_3qtq0")
+prop_type = "coffee_table"
+texture = ExtResource("26_jku3c")
+size = Vector2(61.6, 33)
+room_name = "休息室"
+
+[node name="armchair_31" type="Node2D" parent="Props" unique_id=1902364366]
+position = Vector2(1090, 444.1)
+script = ExtResource("11_3qtq0")
+prop_type = "armchair"
+texture = ExtResource("27_juyae")
+size = Vector2(42, 50.2)
+room_name = "休息室"
+
+[node name="plant_32" type="Node2D" parent="Props" unique_id=637721454]
+position = Vector2(1095.4, 394.1)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "休息室"
+
+[node name="filing_cabinet_33" type="Node2D" parent="Props" unique_id=955996623]
+position = Vector2(177.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "档案室"
+
+[node name="filing_cabinet_34" type="Node2D" parent="Props" unique_id=2085412056]
+position = Vector2(273.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "档案室"
+
+[node name="filing_cabinet_35" type="Node2D" parent="Props" unique_id=462989263]
+position = Vector2(133.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "档案室"
+
+[node name="filing_cabinet_36" type="Node2D" parent="Props" unique_id=1447710467]
+position = Vector2(313.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "档案室"
+
+[node name="crates_37" type="Node2D" parent="Props" unique_id=308459963]
+position = Vector2(211.8, 774.2)
+script = ExtResource("11_3qtq0")
+prop_type = "crates"
+texture = ExtResource("21_y10bu")
+size = Vector2(61.6, 58.5)
+room_name = "档案室"
+
+[node name="crates_38" type="Node2D" parent="Props" unique_id=872028400]
+position = Vector2(143.8, 774.2)
+script = ExtResource("11_3qtq0")
+prop_type = "crates"
+texture = ExtResource("21_y10bu")
 size = Vector2(61.6, 58.5)
 flip_h = true
-room_name = "道具室"
+room_name = "档案室"
 
-[node name="barrel_10" type="Node2D" parent="Props" unique_id=1120905635]
-position = Vector2(74.6, 381.9)
-script = ExtResource("9_3r7dt")
-prop_type = "barrel"
-texture = ExtResource("16_7jjhi")
-size = Vector2(39.2, 46.1)
-room_name = "道具室"
+[node name="bed_single_39" type="Node2D" parent="Props" unique_id=1578361481]
+position = Vector2(650.2, 715)
+script = ExtResource("11_3qtq0")
+prop_type = "bed_single"
+texture = ExtResource("28_dx2jt")
+size = Vector2(50.4, 100)
+room_name = "值班室"
+
+[node name="desk_40" type="Node2D" parent="Props" unique_id=1937206965]
+position = Vector2(652, 800.6)
+script = ExtResource("11_3qtq0")
+prop_type = "desk"
+texture = ExtResource("23_b3nw6")
+size = Vector2(70, 63.2)
+flip_h = true
+room_name = "值班室"
+
+[node name="chair_41" type="Node2D" parent="Props" unique_id=1807418350]
+position = Vector2(697.6, 718.2)
+script = ExtResource("11_3qtq0")
+prop_type = "chair"
+texture = ExtResource("17_5k4df")
+size = Vector2(25.2, 50.4)
+room_name = "值班室"
+
+[node name="filing_cabinet_42" type="Node2D" parent="Props" unique_id=1341489979]
+position = Vector2(557.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "值班室"
+
+[node name="filing_cabinet_43" type="Node2D" parent="Props" unique_id=1183508088]
+position = Vector2(973.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "灯光机房"
+
+[node name="filing_cabinet_44" type="Node2D" parent="Props" unique_id=1795439381]
+position = Vector2(1049.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "灯光机房"
+
+[node name="filing_cabinet_45" type="Node2D" parent="Props" unique_id=1949597021]
+position = Vector2(869.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "灯光机房"
+
+[node name="filing_cabinet_46" type="Node2D" parent="Props" unique_id=2009815235]
+position = Vector2(1085.8, 698.4)
+script = ExtResource("11_3qtq0")
+prop_type = "filing_cabinet"
+texture = ExtResource("24_prp4h")
+size = Vector2(33.6, 66.7)
+room_name = "灯光机房"
+
+[node name="desk_47" type="Node2D" parent="Props" unique_id=1475549272]
+position = Vector2(1004, 780.6)
+script = ExtResource("11_3qtq0")
+prop_type = "desk"
+texture = ExtResource("23_b3nw6")
+size = Vector2(70, 63.2)
+flip_h = true
+room_name = "灯光机房"
+
+[node name="crates_48" type="Node2D" parent="Props" unique_id=479744211]
+position = Vector2(863.8, 770.2)
+script = ExtResource("11_3qtq0")
+prop_type = "crates"
+texture = ExtResource("21_y10bu")
+size = Vector2(61.6, 58.5)
+flip_h = true
+room_name = "灯光机房"
+
+[node name="plant_49" type="Node2D" parent="Props" unique_id=1435159362]
+position = Vector2(64.6, 955.9)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "二层走廊"
+
+[node name="plant_50" type="Node2D" parent="Props" unique_id=567901236]
+position = Vector2(1095.4, 924.1)
+script = ExtResource("11_3qtq0")
+prop_type = "plant"
+texture = ExtResource("14_a4u6a")
+size = Vector2(39.2, 38.2)
+room_name = "二层走廊"
+
+[node name="side_table_51" type="Node2D" parent="Props" unique_id=394120390]
+position = Vector2(708.4, 950.6)
+script = ExtResource("11_3qtq0")
+prop_type = "side_table"
+texture = ExtResource("13_ul66s")
+size = Vector2(30.8, 35.2)
+room_name = "二层走廊"

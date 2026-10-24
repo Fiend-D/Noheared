@@ -112,8 +112,8 @@ func refresh() -> void:
 		var rb := get_room(stair.room_b)
 		stair.floor_a = ra.floor_index if ra else 0
 		stair.floor_b = rb.floor_index if rb else 0
-		stair.label_below_a = _near_top_wall(ra, stair.end_a())
-		stair.label_below_b = _near_top_wall(rb, stair.end_b)
+		stair.label_below_a = _label_below(ra, stair.end_a())
+		stair.label_below_b = _label_below(rb, stair.end_b)
 		stair.queue_redraw()
 	_blocking.clear()
 	for prop in get_props():
@@ -164,11 +164,16 @@ func _compute_passage(door: Door, ra: Room, rb: Room) -> void:
 	door.set_passage(pa, pb, axis, maxf(across * 0.5, MIN_DOOR_HALF_WIDTH))
 
 
-func _near_top_wall(room: Room, point: Vector2) -> bool:
+## 楼梯口的标签画在下方：靠近上墙，或者画在上方会压到左上角的房间名。
+func _label_below(room: Room, point: Vector2) -> bool:
 	if room == null:
 		return false
 	var b := room.get_bounds()
-	return point.y - b.position.y < b.end.y - point.y
+	if point.y - b.position.y < b.end.y - point.y:
+		return true
+	var name_box := Rect2(b.position + Vector2(10, 6), Vector2(room.room_name.length() * 15.0, 22))
+	var label_box := Rect2(point + Vector2(-57, -Stair.ICON_SIZE.y * 0.5 - 18), Vector2(114, 16))
+	return name_box.intersects(label_box)
 
 
 ## 监听者能否站在这里：在房间内离墙足够远，或在门洞通道里，且不压在挡路的家具上。

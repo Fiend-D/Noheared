@@ -36,3 +36,13 @@ func test_warns_on_overlapping_lines() -> void:
 	data.sort_voice_lines()
 	var issues := Array(CaseValidator.validate(data, map))
 	assert_bool(issues.any(func(s: String) -> bool: return s.contains("重叠"))).is_true()
+
+
+func test_warns_on_dead_air() -> void:
+	var issues := Array(CaseValidator.validate(data, map))
+	assert_bool(issues.any(func(s: String) -> bool: return s.contains("6.0s 起全图空窗 24.0s"))).is_true()
+	assert_bool(issues.any(func(s: String) -> bool: return s.contains("留白"))).is_true()
+	data.voice_lines[2].start = 20.0
+	data.duration = 30.0
+	issues = Array(CaseValidator.validate(data, map))
+	assert_bool(issues.any(func(s: String) -> bool: return s.contains("空窗") or s.contains("留白"))).is_false()

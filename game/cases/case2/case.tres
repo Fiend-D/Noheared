@@ -1,458 +1,3941 @@
 [gd_resource type="Resource" script_class="CaseData" format=3]
 
-[ext_resource type="Script" path="res://core/data/character_data.gd" id="1_t6pmc"]
-[ext_resource type="Script" path="res://core/data/track_key.gd" id="2_r4f6h"]
-[ext_resource type="PackedScene" path="res://cases/case2/map.tscn" id="3_ryxv6"]
-[ext_resource type="Script" path="res://core/data/question.gd" id="4_cy0k4"]
-[ext_resource type="Script" path="res://core/data/case_data.gd" id="5_opnjq"]
-[ext_resource type="Script" path="res://core/data/sfx_event.gd" id="6_3yiqo"]
-[ext_resource type="Script" path="res://core/data/voice_line.gd" id="7_qj5vo"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/F_0000.ogg" id="8_dj2o0"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/D_0001.ogg" id="9_nfjyk"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/E_0002.ogg" id="10_o3srw"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/G_0003.ogg" id="11_c1ktb"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/F_0004.ogg" id="12_ekflr"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/D_0005.ogg" id="13_2b0sy"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/E_0006.ogg" id="14_jwd3s"]
-[ext_resource type="AudioStream" path="res://cases/case2/audio/G_0007.ogg" id="15_bfva2"]
+[ext_resource type="Script" path="res://core/data/character_data.gd" id="1_ts2jt"]
+[ext_resource type="Script" path="res://core/data/track_key.gd" id="2_p27nd"]
+[ext_resource type="PackedScene" path="res://cases/case2/map.tscn" id="3_ned3d"]
+[ext_resource type="Script" path="res://core/data/question.gd" id="4_3ug6k"]
+[ext_resource type="Script" path="res://core/data/case_data.gd" id="5_nduvm"]
+[ext_resource type="Script" path="res://core/data/sfx_event.gd" id="6_1c1kd"]
+[ext_resource type="Script" path="res://core/data/voice_line.gd" id="7_wfn1y"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_f2782c6ad0.ogg" id="8_c3k46"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_207861437e.ogg" id="9_ld20a"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_2f32654582.ogg" id="10_6i2kx"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_8091e28a61.ogg" id="11_x1jut"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_0d9a827a76.ogg" id="12_6ecvd"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_03fb92f6f9.ogg" id="13_ncgw8"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_5d6770f664.ogg" id="14_efubo"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_7ff339c0d1.ogg" id="15_6kxxd"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_384070fc52.ogg" id="16_2yhrn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_0e8b97f5bb.ogg" id="17_hix24"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_8f4eaaa41d.ogg" id="18_5g4cf"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_ffbef1ad9f.ogg" id="19_ppfr6"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_a63175d431.ogg" id="20_5sxc5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_2963f405bf.ogg" id="21_loial"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_2b009fa31c.ogg" id="22_878oa"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_ef185b4ac7.ogg" id="23_s4may"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_94bb1be207.ogg" id="24_5j3va"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_4955725e62.ogg" id="25_l6jw8"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_06feb3e6fd.ogg" id="26_xei66"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_4fefd36a8d.ogg" id="27_0cl80"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_159617a2eb.ogg" id="28_lixuh"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_2a179f65d5.ogg" id="29_5ahrs"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_b595b40791.ogg" id="30_qj1tr"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_8598f73cd1.ogg" id="31_do0xy"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_6d12b19743.ogg" id="32_cl6ep"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_dbd001affe.ogg" id="33_vrl5w"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_0f66c09e06.ogg" id="34_vocc2"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_8b7776428c.ogg" id="35_y8bt6"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_a3e73ca4ec.ogg" id="36_v184a"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_6870456b09.ogg" id="37_nnda5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_4858a61a2e.ogg" id="38_m5lws"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_8bc758a104.ogg" id="39_ev74k"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_85f72c45cd.ogg" id="40_2027n"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_8c41eba52d.ogg" id="41_21ri7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_26dfb4aec6.ogg" id="42_p8eqk"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_783954ea2f.ogg" id="43_iow7n"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_5ab07b1c73.ogg" id="44_dfkbx"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_22446dccde.ogg" id="45_0mwpi"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_5faceab001.ogg" id="46_na1mr"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_1627418677.ogg" id="47_xnew3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_39330ad150.ogg" id="48_jrsds"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_79bce09a3e.ogg" id="49_j12cw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_32db93d782.ogg" id="50_aw4gn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_1639d6ecdf.ogg" id="51_7ovli"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_1d35b90713.ogg" id="52_is2gn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_50638a8e81.ogg" id="53_yax14"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_7bcf88295e.ogg" id="54_33erx"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_e192e48e52.ogg" id="55_ugrmu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_3ecbb80be3.ogg" id="56_0rcqe"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_241b06eb29.ogg" id="57_65vqb"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_1aa8264e62.ogg" id="58_05sm6"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_dbb82acdf3.ogg" id="59_vsnwi"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_559c748357.ogg" id="60_0h57p"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_66d4bd87bc.ogg" id="61_fhe0n"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_bdf53523d4.ogg" id="62_0noa1"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_d2588ac701.ogg" id="63_ke1xu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_b3c6982ae6.ogg" id="64_f5ukv"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_a7c28d5094.ogg" id="65_u6pi0"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_78309d0a8c.ogg" id="66_t44iw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_9568c4594e.ogg" id="67_05wmu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_715380d910.ogg" id="68_4x1j2"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_d1233af36e.ogg" id="69_k5g18"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_110a6820da.ogg" id="70_4y6yn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_2d3b202cdd.ogg" id="71_e70kl"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_12d8f2abf0.ogg" id="72_1vlny"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_ab11728348.ogg" id="73_2053a"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_01a67020fc.ogg" id="74_x6pjr"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_560ce3621a.ogg" id="75_4kwfc"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_a0138654f3.ogg" id="76_67wv6"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_8617b89c5d.ogg" id="77_xqujd"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_4f301e387f.ogg" id="78_jb5ke"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_6c54d4cb74.ogg" id="79_11veg"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_2508ede984.ogg" id="80_y1k8a"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_bc0b5df860.ogg" id="81_r2t4p"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_c10033d3cf.ogg" id="82_almtu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_8f6dfdf113.ogg" id="83_0fcvi"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_00c46e87c6.ogg" id="84_gc0ks"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_47a1f5acf1.ogg" id="85_0trov"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_f39d048206.ogg" id="86_w5ew8"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_bc3be80042.ogg" id="87_5dgyl"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_1d468bcdfb.ogg" id="88_l5w8i"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_6c6c2dc7cf.ogg" id="89_b1o8x"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_381e5f26a8.ogg" id="90_bjoqc"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_82c25fb3e3.ogg" id="91_7a7s8"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_0e1b41594a.ogg" id="92_ipcj5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_09537d5ddd.ogg" id="93_xmti1"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_4963b0833b.ogg" id="94_kr26d"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_8e0de02a8a.ogg" id="95_23l44"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_a9e4cf0859.ogg" id="96_lrllk"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_b76f52d270.ogg" id="97_8k43l"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_b306c79a50.ogg" id="98_1yaeu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_a3d12a8d7b.ogg" id="99_ovvjn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_8ae49277d2.ogg" id="100_8pe8c"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_a780ffa97d.ogg" id="101_fe6na"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_614847c4b9.ogg" id="102_rvlbh"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_9591c628e5.ogg" id="103_4guib"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_7d5dee70cf.ogg" id="104_bl5kb"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_043811d32f.ogg" id="105_jprhq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_2d23fd3600.ogg" id="106_aq3fa"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_d1a613e38b.ogg" id="107_rfp10"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_1d5732f677.ogg" id="108_0uxbt"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_57284884c6.ogg" id="109_xkdoc"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_60691f97f9.ogg" id="110_nk451"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_67b9bcf93b.ogg" id="111_qx2hi"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_e05e585272.ogg" id="112_w5w5u"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_97b8049b53.ogg" id="113_rkylp"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_7e85fbbbfb.ogg" id="114_uitjn"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_78d43fa24f.ogg" id="115_ebwi7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_a913c065bc.ogg" id="116_cmvvy"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_96dbd86518.ogg" id="117_xr88m"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_f1bd161d17.ogg" id="118_bqvo1"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_5e00a6b0dc.ogg" id="119_umqng"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_01f1f85185.ogg" id="120_767om"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_96b00778d4.ogg" id="121_7xrbt"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_2088e3ff0d.ogg" id="122_c1jcy"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_84ea706fa0.ogg" id="123_3t74i"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_96cd631166.ogg" id="124_18npe"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_4ca3187d1c.ogg" id="125_s0m18"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_790690b798.ogg" id="126_y3shf"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_2a7a084c6d.ogg" id="127_wpqto"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_093e077a52.ogg" id="128_iw2es"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_430da3ef6a.ogg" id="129_s6oux"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_d86a6441cd.ogg" id="130_hyi5r"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_080a556ddb.ogg" id="131_bt35x"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_6f05b47a39.ogg" id="132_0ffuw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_c080da5e5c.ogg" id="133_dablm"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_cfa0b76498.ogg" id="134_43avt"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_906a6bf636.ogg" id="135_5rnbc"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_3325f541ab.ogg" id="136_x66bv"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_f910d85430.ogg" id="137_jain4"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_05f86e04df.ogg" id="138_athvm"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_c3a92e3683.ogg" id="139_t0mue"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_aa0e65a528.ogg" id="140_qkx5h"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_529ad28c83.ogg" id="141_hk1u3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_4b8c02d372.ogg" id="142_tocly"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_237f5ba3db.ogg" id="143_hfsfr"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_bff3df759b.ogg" id="144_kqwqw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_803783fbe2.ogg" id="145_vuwuh"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_ab9515943c.ogg" id="146_r5dfq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_1228a88f7b.ogg" id="147_l8ypm"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_4f4afcdd55.ogg" id="148_5cuyj"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_83ea355f8b.ogg" id="149_205yy"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_d88258d8c3.ogg" id="150_bjthh"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_de934cbc8f.ogg" id="151_fpiy8"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_da96523445.ogg" id="152_qumi7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_87e29ce42f.ogg" id="153_qixx3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_a4d94ca012.ogg" id="154_alik7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_91f9b99ba4.ogg" id="155_asgmq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_c2612f96f3.ogg" id="156_xibs5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_a3c9e4505c.ogg" id="157_1c0wl"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_0d662da0f6.ogg" id="158_d5fss"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_851a75c593.ogg" id="159_lrxmm"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_73e2d3d058.ogg" id="160_65paq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_85a90a0954.ogg" id="161_kr1r3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_32f1841331.ogg" id="162_7i3o4"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_8bce3d8246.ogg" id="163_l5p10"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_7d83375c14.ogg" id="164_n33cw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_0681ea0daf.ogg" id="165_m6c0v"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_1af1edbea8.ogg" id="166_2t1vq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_65369186bc.ogg" id="167_76uuo"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_05703266c2.ogg" id="168_bmbi7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_f9fd8f3deb.ogg" id="169_wd0x7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_e9ce03c746.ogg" id="170_gm6j1"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_35d22aec84.ogg" id="171_pchi5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_9b36d50df3.ogg" id="172_igtgv"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_7c6b6bc4ba.ogg" id="173_gve7c"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_3174b5b407.ogg" id="174_rtf0i"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_bc23c02de1.ogg" id="175_o5h1q"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_8d07796603.ogg" id="176_h1o2k"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_f7e118a468.ogg" id="177_d3qop"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_077639aa7b.ogg" id="178_o0t4p"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_e606c9ea3e.ogg" id="179_m1ddt"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_fd354d28b8.ogg" id="180_e8kl4"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_5e7a435464.ogg" id="181_lnop6"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_1f16c38c72.ogg" id="182_rg34q"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_43fa2263a8.ogg" id="183_n65tu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_731e50ae03.ogg" id="184_5oqgu"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_9959306c54.ogg" id="185_7kx8f"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_c41993293c.ogg" id="186_jntqb"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_f416bcedf3.ogg" id="187_2qhv7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_954d214041.ogg" id="188_0xjna"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_64238240be.ogg" id="189_ilwmw"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_a4e315f9b4.ogg" id="190_r4tur"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_b7ced6a64b.ogg" id="191_p56nb"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_09c150d1d0.ogg" id="192_ylybi"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_f4710fed39.ogg" id="193_ycp6e"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_f7b6fa1911.ogg" id="194_pgg7r"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_d6b3b4f94c.ogg" id="195_g5qah"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_497fd4eb9c.ogg" id="196_85uk4"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_8aefa007d7.ogg" id="197_tncm3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_1fd2353956.ogg" id="198_gg15j"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_ea72919613.ogg" id="199_bb8hq"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_52282cc884.ogg" id="200_gfcrj"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_2c8a9dd4c6.ogg" id="201_hmmg0"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_814dae75e0.ogg" id="202_hxvcp"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_d7f664edae.ogg" id="203_x1s5q"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_8c1b9935b2.ogg" id="204_y7g6q"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_a42a1a36fb.ogg" id="205_hw5g2"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_62171f18de.ogg" id="206_2kop2"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/A_f9d64e039d.ogg" id="207_une66"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/G_94ffe16305.ogg" id="208_rm77s"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/F_43148741ec.ogg" id="209_16up4"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/E_eda064d30f.ogg" id="210_221f3"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/C_953d9e419c.ogg" id="211_qxiv7"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/B_fb4b31c6fb.ogg" id="212_g32t5"]
+[ext_resource type="AudioStream" path="res://cases/case2/audio/D_c6206b33f0.ogg" id="213_dwj2b"]
 
-[sub_resource type="Resource" id="Resource_5monc"]
-script = ExtResource("2_r4f6h")
-position = Vector2(120, 120)
+[sub_resource type="Resource" id="Resource_mbg5r"]
+script = ExtResource("2_p27nd")
+position = Vector2(160, 480)
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_cg2dg"]
-script = ExtResource("2_r4f6h")
-time = 15.0
-position = Vector2(120, 120)
+[sub_resource type="Resource" id="Resource_uk6sn"]
+script = ExtResource("2_p27nd")
+time = 137.432
+position = Vector2(160, 480)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_o8xne"]
-script = ExtResource("2_r4f6h")
-time = 16.115
-position = Vector2(286, 140)
+[sub_resource type="Resource" id="Resource_f2bb3"]
+script = ExtResource("2_p27nd")
+time = 138.138
+position = Vector2(180, 376)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_bbb82"]
-script = ExtResource("2_r4f6h")
-time = 16.368
-position = Vector2(324, 140)
+[sub_resource type="Resource" id="Resource_8r5p1"]
+script = ExtResource("2_p27nd")
+time = 138.485
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_lcerq"]
+script = ExtResource("2_p27nd")
+time = 143.649
+position = Vector2(953, 274)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_smkfl"]
+script = ExtResource("2_p27nd")
+time = 143.814
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_44uuk"]
+script = ExtResource("2_p27nd")
+time = 144.094
+position = Vector2(970, 214)
 movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_w2u2g"]
-script = ExtResource("2_r4f6h")
-time = 17.219
-position = Vector2(450, 120)
-room = &"舞台"
-
-[sub_resource type="Resource" id="Resource_vmreb"]
-script = ExtResource("2_r4f6h")
-time = 30.0
-position = Vector2(450, 120)
+[sub_resource type="Resource" id="Resource_ethnp"]
+script = ExtResource("2_p27nd")
+time = 144.723
+position = Vector2(963, 120)
 movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_aatcj"]
-script = ExtResource("2_r4f6h")
-time = 30.792
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_2i058"]
+script = ExtResource("2_p27nd")
+time = 144.909
+position = Vector2(963, 92)
 movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_ltjum"]
-script = ExtResource("2_r4f6h")
-time = 31.054
-position = Vector2(510, 254)
-movement = 1
-room = &"走廊"
+[sub_resource type="Resource" id="Resource_yobnl"]
+script = ExtResource("2_p27nd")
+time = 145.097
+position = Vector2(990, 84)
+room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_aeuwo"]
-script = ExtResource("2_r4f6h")
-time = 32.788
-position = Vector2(250, 260)
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_rql44"]
-script = ExtResource("2_r4f6h")
-time = 50.0
-position = Vector2(250, 260)
-movement = 1
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_epcbe"]
-script = ExtResource("2_r4f6h")
-time = 51.734
-position = Vector2(510, 254)
-movement = 1
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_5rb7r"]
-script = ExtResource("2_r4f6h")
-time = 51.996
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_nb8t0"]
+script = ExtResource("2_p27nd")
+time = 247.669
+position = Vector2(990, 84)
 movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_cxget"]
-script = ExtResource("2_r4f6h")
-time = 52.479
-position = Vector2(550, 150)
+[sub_resource type="Resource" id="Resource_rcvtc"]
+script = ExtResource("2_p27nd")
+time = 247.874
+position = Vector2(963, 99)
+movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_rocyi"]
-script = ExtResource("1_t6pmc")
-id = &"D"
-display_name = "演员A"
+[sub_resource type="Resource" id="Resource_6kdp4"]
+script = ExtResource("2_p27nd")
+time = 248.528
+position = Vector2(963, 197)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_d63ww"]
+script = ExtResource("2_p27nd")
+time = 248.65
+position = Vector2(970, 214)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_qtjjc"]
+script = ExtResource("2_p27nd")
+time = 248.93
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_6lv22"]
+script = ExtResource("2_p27nd")
+time = 253.309
+position = Vector2(316, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_qyni4"]
+script = ExtResource("2_p27nd")
+time = 254.217
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_mycsh"]
+script = ExtResource("2_p27nd")
+time = 254.564
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_gxmj8"]
+script = ExtResource("2_p27nd")
+time = 255.195
+position = Vector2(168, 470)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_cidhe"]
+script = ExtResource("1_ts2jt")
+id = &"A"
+display_name = "林晚宁"
 label = "1"
-color = Color(1, 0.26666668, 0.26666668, 1)
-track = Array[ExtResource("2_r4f6h")]([SubResource("Resource_5monc"), SubResource("Resource_cg2dg"), SubResource("Resource_o8xne"), SubResource("Resource_bbb82"), SubResource("Resource_w2u2g"), SubResource("Resource_vmreb"), SubResource("Resource_aatcj"), SubResource("Resource_ltjum"), SubResource("Resource_aeuwo"), SubResource("Resource_rql44"), SubResource("Resource_epcbe"), SubResource("Resource_5rb7r"), SubResource("Resource_cxget")])
+color = Color(0.7529412, 0.22352941, 0.16862746, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_mbg5r"), SubResource("Resource_uk6sn"), SubResource("Resource_f2bb3"), SubResource("Resource_8r5p1"), SubResource("Resource_lcerq"), SubResource("Resource_smkfl"), SubResource("Resource_44uuk"), SubResource("Resource_ethnp"), SubResource("Resource_2i058"), SubResource("Resource_yobnl"), SubResource("Resource_nb8t0"), SubResource("Resource_rcvtc"), SubResource("Resource_6kdp4"), SubResource("Resource_d63ww"), SubResource("Resource_qtjjc"), SubResource("Resource_6lv22"), SubResource("Resource_qyni4"), SubResource("Resource_mycsh"), SubResource("Resource_gxmj8")])
 
-[sub_resource type="Resource" id="Resource_akn1e"]
-script = ExtResource("2_r4f6h")
-position = Vector2(200, 150)
-room = &"化妆间"
+[sub_resource type="Resource" id="Resource_mwns6"]
+script = ExtResource("2_p27nd")
+position = Vector2(787, 484)
+room = &"办公室"
 
-[sub_resource type="Resource" id="Resource_s6gbl"]
-script = ExtResource("2_r4f6h")
-time = 15.0
-position = Vector2(200, 150)
+[sub_resource type="Resource" id="Resource_jk7d4"]
+script = ExtResource("2_p27nd")
+time = 51.08
+position = Vector2(787, 484)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_rdgx1"]
+script = ExtResource("2_p27nd")
+time = 51.219
+position = Vector2(767, 478)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_dd3ae"]
+script = ExtResource("2_p27nd")
+time = 51.733
+position = Vector2(767, 401)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_etvy8"]
+script = ExtResource("2_p27nd")
+time = 51.959
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_rldtj"]
+script = ExtResource("2_p27nd")
+time = 52.306
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_cajyj"]
+script = ExtResource("2_p27nd")
+time = 56.213
+position = Vector2(204, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_lln8e"]
+script = ExtResource("2_p27nd")
+time = 56.751
+position = Vector2(150, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_mphl0"]
+script = ExtResource("2_p27nd")
+time = 57.164
+position = Vector2(150, 194)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_1wyi8"]
+script = ExtResource("2_p27nd")
+time = 57.623
+position = Vector2(106, 141)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_q6uhn"]
+script = ExtResource("2_p27nd")
+time = 57.824
+position = Vector2(98, 112)
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_xf61i"]
+script = ExtResource("2_p27nd")
+time = 113.998
+position = Vector2(98, 112)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_bgv3b"]
+script = ExtResource("2_p27nd")
+time = 114.302
+position = Vector2(113, 155)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_l0dfx"]
+script = ExtResource("2_p27nd")
+time = 114.66
+position = Vector2(150, 194)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_iycj8"]
+script = ExtResource("2_p27nd")
+time = 115.073
+position = Vector2(150, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_gqgw4"]
+script = ExtResource("2_p27nd")
+time = 115.569
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_qnaxc"]
+script = ExtResource("2_p27nd")
+time = 115.916
+position = Vector2(180, 376)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_ho01p"]
-script = ExtResource("2_r4f6h")
-time = 15.577
-position = Vector2(286, 140)
+[sub_resource type="Resource" id="Resource_2jlod"]
+script = ExtResource("2_p27nd")
+time = 116.739
+position = Vector2(169, 499)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_ydvww"]
-script = ExtResource("2_r4f6h")
-time = 15.831
-position = Vector2(324, 140)
+[sub_resource type="Resource" id="Resource_f52ns"]
+script = ExtResource("2_p27nd")
+time = 117.012
+position = Vector2(168, 540)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_pkdly"]
+script = ExtResource("2_p27nd")
+time = 137.432
+position = Vector2(168, 540)
 movement = 1
-room = &"舞台"
+room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_xyw4i"]
-script = ExtResource("2_r4f6h")
-time = 17.034
-position = Vector2(500, 100)
-room = &"舞台"
-
-[sub_resource type="Resource" id="Resource_6h4hy"]
-script = ExtResource("2_r4f6h")
-time = 30.0
-position = Vector2(500, 100)
+[sub_resource type="Resource" id="Resource_w6jxd"]
+script = ExtResource("2_p27nd")
+time = 138.454
+position = Vector2(176, 387)
 movement = 1
-room = &"舞台"
+room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_wo8ja"]
-script = ExtResource("2_r4f6h")
-time = 30.785
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_4gmpg"]
+script = ExtResource("2_p27nd")
+time = 138.532
+position = Vector2(180, 376)
 movement = 1
-room = &"舞台"
+room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_6f3lh"]
-script = ExtResource("2_r4f6h")
-time = 31.047
-position = Vector2(510, 254)
+[sub_resource type="Resource" id="Resource_uxr17"]
+script = ExtResource("2_p27nd")
+time = 138.878
+position = Vector2(180, 324)
 movement = 1
-room = &"走廊"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_r7l5o"]
-script = ExtResource("2_r4f6h")
-time = 32.581
-position = Vector2(280, 260)
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_64qmw"]
-script = ExtResource("2_r4f6h")
-time = 50.0
-position = Vector2(280, 260)
+[sub_resource type="Resource" id="Resource_wr7p8"]
+script = ExtResource("2_p27nd")
+time = 141.012
+position = Vector2(500, 324)
 movement = 1
-room = &"走廊"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_h8pe8"]
-script = ExtResource("2_r4f6h")
-time = 51.534
-position = Vector2(510, 254)
+[sub_resource type="Resource" id="Resource_v6dma"]
+script = ExtResource("2_p27nd")
+time = 141.358
+position = Vector2(500, 376)
 movement = 1
-room = &"走廊"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_tixb4"]
-script = ExtResource("2_r4f6h")
-time = 51.796
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_mcast"]
+script = ExtResource("2_p27nd")
+time = 141.691
+position = Vector2(531, 415)
 movement = 1
-room = &"舞台"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_6meck"]
-script = ExtResource("2_r4f6h")
-time = 52.579
-position = Vector2(600, 130)
-room = &"舞台"
+[sub_resource type="Resource" id="Resource_dch67"]
+script = ExtResource("2_p27nd")
+time = 142.057
+position = Vector2(530, 470)
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_qsiv8"]
-script = ExtResource("1_t6pmc")
-id = &"E"
-display_name = "演员B"
+[sub_resource type="Resource" id="Resource_2wnnx"]
+script = ExtResource("2_p27nd")
+time = 211.983
+position = Vector2(530, 470)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_cmavw"]
+script = ExtResource("2_p27nd")
+time = 212.396
+position = Vector2(531, 408)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_ax8fc"]
+script = ExtResource("2_p27nd")
+time = 212.693
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_lare1"]
+script = ExtResource("2_p27nd")
+time = 213.04
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_7bqea"]
+script = ExtResource("2_p27nd")
+time = 214.973
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_luu8x"]
+script = ExtResource("2_p27nd")
+time = 215.32
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_dx62l"]
+script = ExtResource("2_p27nd")
+time = 215.622
+position = Vector2(767, 415)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_f4b32"]
+script = ExtResource("2_p27nd")
+time = 216.042
+position = Vector2(767, 478)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_51g26"]
+script = ExtResource("2_p27nd")
+time = 216.226
+position = Vector2(794, 484)
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_em4j7"]
+script = ExtResource("2_p27nd")
+time = 363.565
+position = Vector2(794, 484)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_sg52j"]
+script = ExtResource("2_p27nd")
+time = 363.749
+position = Vector2(767, 478)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_urjay"]
+script = ExtResource("2_p27nd")
+time = 364.263
+position = Vector2(767, 401)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_onryj"]
+script = ExtResource("2_p27nd")
+time = 364.489
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_ms63x"]
+script = ExtResource("2_p27nd")
+time = 364.836
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_45mp0"]
+script = ExtResource("2_p27nd")
+time = 366.769
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_uvkhn"]
+script = ExtResource("2_p27nd")
+time = 367.116
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_33poa"]
+script = ExtResource("2_p27nd")
+time = 367.448
+position = Vector2(531, 415)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_3ovfd"]
+script = ExtResource("2_p27nd")
+time = 367.961
+position = Vector2(531, 492)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_mwe50"]
+script = ExtResource("2_p27nd")
+time = 368.343
+position = Vector2(474, 498)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_4m18g"]
+script = ExtResource("2_p27nd")
+time = 468.536
+position = Vector2(474, 498)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_q15ma"]
+script = ExtResource("2_p27nd")
+time = 468.926
+position = Vector2(531, 485)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_ejn3r"]
+script = ExtResource("2_p27nd")
+time = 469.439
+position = Vector2(531, 408)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_7myny"]
+script = ExtResource("2_p27nd")
+time = 469.736
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_kk8d1"]
+script = ExtResource("2_p27nd")
+time = 470.083
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_ybrgm"]
+script = ExtResource("2_p27nd")
+time = 472.016
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_u2lgh"]
+script = ExtResource("2_p27nd")
+time = 472.363
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_0672r"]
+script = ExtResource("2_p27nd")
+time = 472.664
+position = Vector2(767, 415)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_ubi63"]
+script = ExtResource("2_p27nd")
+time = 473.084
+position = Vector2(767, 478)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_w1xvo"]
+script = ExtResource("2_p27nd")
+time = 473.269
+position = Vector2(794, 484)
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_tdy4b"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(794, 484)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_usqqw"]
+script = ExtResource("2_p27nd")
+time = 757.704
+position = Vector2(767, 478)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_bxtvp"]
+script = ExtResource("2_p27nd")
+time = 758.218
+position = Vector2(767, 401)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_cca7a"]
+script = ExtResource("2_p27nd")
+time = 758.444
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_fxy2x"]
+script = ExtResource("2_p27nd")
+time = 758.791
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_0eheh"]
+script = ExtResource("2_p27nd")
+time = 760.152
+position = Vector2(588, 294)
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_tv14b"]
+script = ExtResource("2_p27nd")
+time = 865.937
+position = Vector2(588, 294)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_dwvw8"]
+script = ExtResource("2_p27nd")
+time = 866.557
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_xsg3b"]
+script = ExtResource("2_p27nd")
+time = 866.904
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_mui24"]
+script = ExtResource("2_p27nd")
+time = 867.316
+position = Vector2(447, 408)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_m8i4u"]
+script = ExtResource("2_p27nd")
+time = 867.543
+position = Vector2(446, 442)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_cime8"]
+script = ExtResource("1_ts2jt")
+id = &"B"
+display_name = "乔安"
 label = "2"
-color = Color(0.26666668, 1, 0.26666668, 1)
-track = Array[ExtResource("2_r4f6h")]([SubResource("Resource_akn1e"), SubResource("Resource_s6gbl"), SubResource("Resource_ho01p"), SubResource("Resource_ydvww"), SubResource("Resource_xyw4i"), SubResource("Resource_6h4hy"), SubResource("Resource_wo8ja"), SubResource("Resource_6f3lh"), SubResource("Resource_r7l5o"), SubResource("Resource_64qmw"), SubResource("Resource_h8pe8"), SubResource("Resource_tixb4"), SubResource("Resource_6meck")])
+color = Color(0.101960786, 0.32156864, 0.4627451, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_mwns6"), SubResource("Resource_jk7d4"), SubResource("Resource_rdgx1"), SubResource("Resource_dd3ae"), SubResource("Resource_etvy8"), SubResource("Resource_rldtj"), SubResource("Resource_cajyj"), SubResource("Resource_lln8e"), SubResource("Resource_mphl0"), SubResource("Resource_1wyi8"), SubResource("Resource_q6uhn"), SubResource("Resource_xf61i"), SubResource("Resource_bgv3b"), SubResource("Resource_l0dfx"), SubResource("Resource_iycj8"), SubResource("Resource_gqgw4"), SubResource("Resource_qnaxc"), SubResource("Resource_2jlod"), SubResource("Resource_f52ns"), SubResource("Resource_pkdly"), SubResource("Resource_w6jxd"), SubResource("Resource_4gmpg"), SubResource("Resource_uxr17"), SubResource("Resource_wr7p8"), SubResource("Resource_v6dma"), SubResource("Resource_mcast"), SubResource("Resource_dch67"), SubResource("Resource_2wnnx"), SubResource("Resource_cmavw"), SubResource("Resource_ax8fc"), SubResource("Resource_lare1"), SubResource("Resource_7bqea"), SubResource("Resource_luu8x"), SubResource("Resource_dx62l"), SubResource("Resource_f4b32"), SubResource("Resource_51g26"), SubResource("Resource_em4j7"), SubResource("Resource_sg52j"), SubResource("Resource_urjay"), SubResource("Resource_onryj"), SubResource("Resource_ms63x"), SubResource("Resource_45mp0"), SubResource("Resource_uvkhn"), SubResource("Resource_33poa"), SubResource("Resource_3ovfd"), SubResource("Resource_mwe50"), SubResource("Resource_4m18g"), SubResource("Resource_q15ma"), SubResource("Resource_ejn3r"), SubResource("Resource_7myny"), SubResource("Resource_kk8d1"), SubResource("Resource_ybrgm"), SubResource("Resource_u2lgh"), SubResource("Resource_0672r"), SubResource("Resource_ubi63"), SubResource("Resource_w1xvo"), SubResource("Resource_tdy4b"), SubResource("Resource_usqqw"), SubResource("Resource_bxtvp"), SubResource("Resource_cca7a"), SubResource("Resource_fxy2x"), SubResource("Resource_0eheh"), SubResource("Resource_tv14b"), SubResource("Resource_dwvw8"), SubResource("Resource_xsg3b"), SubResource("Resource_mui24"), SubResource("Resource_m8i4u")])
 
-[sub_resource type="Resource" id="Resource_hw37i"]
-script = ExtResource("2_r4f6h")
-position = Vector2(160, 180)
-room = &"化妆间"
+[sub_resource type="Resource" id="Resource_8b2ck"]
+script = ExtResource("2_p27nd")
+position = Vector2(530, 449)
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_nyhdl"]
-script = ExtResource("2_r4f6h")
-time = 15.0
-position = Vector2(160, 180)
+[sub_resource type="Resource" id="Resource_5705u"]
+script = ExtResource("2_p27nd")
+time = 84.364
+position = Vector2(530, 449)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_yw7b6"]
+script = ExtResource("2_p27nd")
+time = 84.637
+position = Vector2(531, 408)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_dhqt3"]
+script = ExtResource("2_p27nd")
+time = 84.934
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_01hni"]
+script = ExtResource("2_p27nd")
+time = 85.281
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_nfj3c"]
+script = ExtResource("2_p27nd")
+time = 87.414
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_32yml"]
+script = ExtResource("2_p27nd")
+time = 87.761
+position = Vector2(180, 376)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_vomc5"]
-script = ExtResource("2_r4f6h")
-time = 15.881
-position = Vector2(286, 140)
+[sub_resource type="Resource" id="Resource_cs786"]
+script = ExtResource("2_p27nd")
+time = 88.244
+position = Vector2(210, 442)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_2ealx"]
+script = ExtResource("2_p27nd")
+time = 137.432
+position = Vector2(210, 442)
 movement = 1
 room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_cfrja"]
-script = ExtResource("2_r4f6h")
-time = 16.135
-position = Vector2(324, 140)
+[sub_resource type="Resource" id="Resource_r3dn4"]
+script = ExtResource("2_p27nd")
+time = 137.916
+position = Vector2(180, 376)
 movement = 1
-room = &"舞台"
+room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_bsanm"]
-script = ExtResource("2_r4f6h")
-time = 16.659
-position = Vector2(400, 160)
-room = &"舞台"
-
-[sub_resource type="Resource" id="Resource_3viit"]
-script = ExtResource("2_r4f6h")
-time = 30.0
-position = Vector2(400, 160)
+[sub_resource type="Resource" id="Resource_bg0mc"]
+script = ExtResource("2_p27nd")
+time = 138.262
+position = Vector2(180, 324)
 movement = 1
-room = &"舞台"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_f8tnt"]
-script = ExtResource("2_r4f6h")
-time = 30.883
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_3176l"]
+script = ExtResource("2_p27nd")
+time = 140.396
+position = Vector2(500, 324)
 movement = 1
-room = &"舞台"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_4ngsg"]
-script = ExtResource("2_r4f6h")
-time = 31.145
-position = Vector2(510, 254)
+[sub_resource type="Resource" id="Resource_ekl82"]
+script = ExtResource("2_p27nd")
+time = 140.742
+position = Vector2(500, 376)
 movement = 1
-room = &"走廊"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_a7r0q"]
-script = ExtResource("2_r4f6h")
-time = 33.079
-position = Vector2(220, 260)
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_iy0js"]
-script = ExtResource("2_r4f6h")
-time = 48.146
-position = Vector2(220, 260)
+[sub_resource type="Resource" id="Resource_wudiv"]
+script = ExtResource("2_p27nd")
+time = 141.074
+position = Vector2(531, 415)
 movement = 1
-room = &"走廊"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_s4vkv"]
-script = ExtResource("2_r4f6h")
-time = 50.08
-position = Vector2(510, 254)
+[sub_resource type="Resource" id="Resource_cbc1e"]
+script = ExtResource("2_p27nd")
+time = 141.441
+position = Vector2(530, 470)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_si8nt"]
+script = ExtResource("2_p27nd")
+time = 211.983
+position = Vector2(530, 470)
 movement = 1
-room = &"走廊"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_du4xe"]
-script = ExtResource("2_r4f6h")
-time = 50.342
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_tq4em"]
+script = ExtResource("2_p27nd")
+time = 212.396
+position = Vector2(531, 408)
 movement = 1
-room = &"舞台"
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_2l7um"]
-script = ExtResource("2_r4f6h")
-time = 50.7
-position = Vector2(480, 180)
-room = &"舞台"
+[sub_resource type="Resource" id="Resource_k410h"]
+script = ExtResource("2_p27nd")
+time = 212.693
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
 
-[sub_resource type="Resource" id="Resource_vhpbj"]
-script = ExtResource("1_t6pmc")
-id = &"F"
-display_name = "导演"
+[sub_resource type="Resource" id="Resource_xu2uy"]
+script = ExtResource("2_p27nd")
+time = 213.04
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_csum6"]
+script = ExtResource("2_p27nd")
+time = 213.566
+position = Vector2(540, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_h8efp"]
+script = ExtResource("2_p27nd")
+time = 213.979
+position = Vector2(540, 194)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_j4cp2"]
+script = ExtResource("2_p27nd")
+time = 214.339
+position = Vector2(540, 140)
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_pgbav"]
+script = ExtResource("2_p27nd")
+time = 354.6
+position = Vector2(540, 140)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_w0884"]
+script = ExtResource("2_p27nd")
+time = 354.96
+position = Vector2(540, 194)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_sckhk"]
+script = ExtResource("2_p27nd")
+time = 355.373
+position = Vector2(540, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_47jp3"]
+script = ExtResource("2_p27nd")
+time = 355.899
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_dafqy"]
+script = ExtResource("2_p27nd")
+time = 356.246
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_e14py"]
+script = ExtResource("2_p27nd")
+time = 356.578
+position = Vector2(531, 415)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_xckyv"]
+script = ExtResource("2_p27nd")
+time = 356.945
+position = Vector2(530, 470)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_ggu8n"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(530, 470)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_atgdy"]
+script = ExtResource("2_p27nd")
+time = 757.57
+position = Vector2(530, 470)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_nj7k1"]
+script = ExtResource("1_ts2jt")
+id = &"C"
+display_name = "罗茵"
 label = "3"
-color = Color(0.26666668, 0.53333336, 1, 1)
-track = Array[ExtResource("2_r4f6h")]([SubResource("Resource_hw37i"), SubResource("Resource_nyhdl"), SubResource("Resource_vomc5"), SubResource("Resource_cfrja"), SubResource("Resource_bsanm"), SubResource("Resource_3viit"), SubResource("Resource_f8tnt"), SubResource("Resource_4ngsg"), SubResource("Resource_a7r0q"), SubResource("Resource_iy0js"), SubResource("Resource_s4vkv"), SubResource("Resource_du4xe"), SubResource("Resource_2l7um")])
+color = Color(0.49019608, 0.23529412, 0.59607846, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_8b2ck"), SubResource("Resource_5705u"), SubResource("Resource_yw7b6"), SubResource("Resource_dhqt3"), SubResource("Resource_01hni"), SubResource("Resource_nfj3c"), SubResource("Resource_32yml"), SubResource("Resource_cs786"), SubResource("Resource_2ealx"), SubResource("Resource_r3dn4"), SubResource("Resource_bg0mc"), SubResource("Resource_3176l"), SubResource("Resource_ekl82"), SubResource("Resource_wudiv"), SubResource("Resource_cbc1e"), SubResource("Resource_si8nt"), SubResource("Resource_tq4em"), SubResource("Resource_k410h"), SubResource("Resource_xu2uy"), SubResource("Resource_csum6"), SubResource("Resource_h8efp"), SubResource("Resource_j4cp2"), SubResource("Resource_pgbav"), SubResource("Resource_w0884"), SubResource("Resource_sckhk"), SubResource("Resource_47jp3"), SubResource("Resource_dafqy"), SubResource("Resource_e14py"), SubResource("Resource_xckyv"), SubResource("Resource_ggu8n"), SubResource("Resource_atgdy")])
 
-[sub_resource type="Resource" id="Resource_lfkrg"]
-script = ExtResource("2_r4f6h")
-position = Vector2(130, 360)
-room = &"道具室"
+[sub_resource type="Resource" id="Resource_3bipr"]
+script = ExtResource("2_p27nd")
+position = Vector2(1033, 428)
+room = &"休息室"
 
-[sub_resource type="Resource" id="Resource_55kk7"]
-script = ExtResource("2_r4f6h")
-time = 30.708
-position = Vector2(130, 360)
+[sub_resource type="Resource" id="Resource_mnvv6"]
+script = ExtResource("2_p27nd")
+time = 84.364
+position = Vector2(1033, 428)
 movement = 1
-room = &"道具室"
+room = &"休息室"
 
-[sub_resource type="Resource" id="Resource_1nx50"]
-script = ExtResource("2_r4f6h")
-time = 31.026
-position = Vector2(170, 334)
+[sub_resource type="Resource" id="Resource_6jybj"]
+script = ExtResource("2_p27nd")
+time = 84.711
+position = Vector2(1030, 376)
 movement = 1
-room = &"道具室"
+room = &"休息室"
 
-[sub_resource type="Resource" id="Resource_d8a4p"]
-script = ExtResource("2_r4f6h")
-time = 31.279
-position = Vector2(170, 296)
+[sub_resource type="Resource" id="Resource_nsh6e"]
+script = ExtResource("2_p27nd")
+time = 85.058
+position = Vector2(1030, 324)
 movement = 1
-room = &"走廊"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_0dsys"]
-script = ExtResource("2_r4f6h")
-time = 32.7
-position = Vector2(380, 260)
-room = &"走廊"
-
-[sub_resource type="Resource" id="Resource_u11fs"]
-script = ExtResource("2_r4f6h")
-time = 50.0
-position = Vector2(380, 260)
+[sub_resource type="Resource" id="Resource_mcxkq"]
+script = ExtResource("2_p27nd")
+time = 90.725
+position = Vector2(180, 324)
 movement = 1
-room = &"走廊"
+room = &"一层走廊"
 
-[sub_resource type="Resource" id="Resource_kxesf"]
-script = ExtResource("2_r4f6h")
-time = 50.868
-position = Vector2(510, 254)
+[sub_resource type="Resource" id="Resource_p7dca"]
+script = ExtResource("2_p27nd")
+time = 91.071
+position = Vector2(180, 376)
 movement = 1
-room = &"走廊"
+room = &"化妆间"
 
-[sub_resource type="Resource" id="Resource_hsjgs"]
-script = ExtResource("2_r4f6h")
-time = 51.13
-position = Vector2(520, 216)
+[sub_resource type="Resource" id="Resource_63j0i"]
+script = ExtResource("2_p27nd")
+time = 91.378
+position = Vector2(154, 414)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_0q0j5"]
+script = ExtResource("2_p27nd")
+time = 223.663
+position = Vector2(154, 414)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_1vtsd"]
+script = ExtResource("2_p27nd")
+time = 223.97
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_dk8o3"]
+script = ExtResource("2_p27nd")
+time = 224.317
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_qp6cp"]
+script = ExtResource("2_p27nd")
+time = 229.481
+position = Vector2(953, 274)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_tnkxj"]
+script = ExtResource("2_p27nd")
+time = 229.646
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_ijk2u"]
+script = ExtResource("2_p27nd")
+time = 229.926
+position = Vector2(970, 214)
 movement = 1
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_6nf46"]
-script = ExtResource("2_r4f6h")
-time = 51.77
-position = Vector2(520, 120)
+[sub_resource type="Resource" id="Resource_1m0sv"]
+script = ExtResource("2_p27nd")
+time = 230.729
+position = Vector2(906, 112)
 room = &"舞台"
 
-[sub_resource type="Resource" id="Resource_7i8ft"]
-script = ExtResource("1_t6pmc")
-id = &"G"
-display_name = "道具师"
+[sub_resource type="Resource" id="Resource_pmdat"]
+script = ExtResource("2_p27nd")
+time = 247.669
+position = Vector2(906, 112)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_0lj4e"]
+script = ExtResource("2_p27nd")
+time = 248.471
+position = Vector2(970, 214)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_flmry"]
+script = ExtResource("2_p27nd")
+time = 248.751
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_2d7vo"]
+script = ExtResource("2_p27nd")
+time = 253.13
+position = Vector2(316, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_e43ae"]
+script = ExtResource("2_p27nd")
+time = 254.038
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_vy2ym"]
+script = ExtResource("2_p27nd")
+time = 254.385
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_yi5xv"]
+script = ExtResource("2_p27nd")
+time = 255.295
+position = Vector2(168, 512)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_4m0k7"]
+script = ExtResource("2_p27nd")
+time = 406.723
+position = Vector2(168, 512)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_maw0y"]
+script = ExtResource("2_p27nd")
+time = 407.633
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_xinui"]
+script = ExtResource("2_p27nd")
+time = 407.98
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_1me2y"]
+script = ExtResource("2_p27nd")
+time = 408.207
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_unio7"]
+script = ExtResource("2_p27nd")
+time = 408.257
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_4nqw5"]
+script = ExtResource("2_p27nd")
+time = 408.307
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_kwo2p"]
+script = ExtResource("2_p27nd")
+time = 408.57
+position = Vector2(200, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_sg0eo"]
+script = ExtResource("2_p27nd")
+time = 408.916
+position = Vector2(200, 854)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_800m2"]
+script = ExtResource("2_p27nd")
+time = 409.378
+position = Vector2(176, 789)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_7rvou"]
+script = ExtResource("2_p27nd")
+time = 409.708
+position = Vector2(183, 740)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_807bt"]
+script = ExtResource("2_p27nd")
+time = 409.896
+position = Vector2(210, 732)
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_ri40n"]
+script = ExtResource("2_p27nd")
+time = 658.76
+position = Vector2(210, 732)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_hjup3"]
+script = ExtResource("2_p27nd")
+time = 659.008
+position = Vector2(176, 747)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_6s3dr"]
+script = ExtResource("2_p27nd")
+time = 659.57
+position = Vector2(183, 831)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_wpacb"]
+script = ExtResource("2_p27nd")
+time = 659.76
+position = Vector2(200, 854)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_ya0oj"]
+script = ExtResource("2_p27nd")
+time = 660.107
+position = Vector2(200, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_yhxre"]
+script = ExtResource("2_p27nd")
+time = 660.37
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_ldmf0"]
+script = ExtResource("2_p27nd")
+time = 660.42
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_bgha1"]
+script = ExtResource("2_p27nd")
+time = 660.47
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_rs36s"]
+script = ExtResource("2_p27nd")
+time = 660.697
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_w4lli"]
+script = ExtResource("2_p27nd")
+time = 661.043
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_8ubml"]
+script = ExtResource("2_p27nd")
+time = 661.318
+position = Vector2(196, 414)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_8ev3j"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(196, 414)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_84h5d"]
+script = ExtResource("2_p27nd")
+time = 757.795
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_tghgp"]
+script = ExtResource("2_p27nd")
+time = 758.142
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_pkvpy"]
+script = ExtResource("2_p27nd")
+time = 760.732
+position = Vector2(568, 302)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_vkpry"]
+script = ExtResource("2_p27nd")
+time = 760.799
+position = Vector2(574, 294)
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_efrec"]
+script = ExtResource("2_p27nd")
+time = 880.003
+position = Vector2(574, 294)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_qnc13"]
+script = ExtResource("2_p27nd")
+time = 880.536
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_et5x3"]
+script = ExtResource("2_p27nd")
+time = 880.882
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_5xhwb"]
+script = ExtResource("2_p27nd")
+time = 881.344
+position = Vector2(558, 414)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_u65t4"]
+script = ExtResource("1_ts2jt")
+id = &"D"
+display_name = "阮琪"
 label = "4"
-color = Color(1, 0.6666667, 0, 1)
-track = Array[ExtResource("2_r4f6h")]([SubResource("Resource_lfkrg"), SubResource("Resource_55kk7"), SubResource("Resource_1nx50"), SubResource("Resource_d8a4p"), SubResource("Resource_0dsys"), SubResource("Resource_u11fs"), SubResource("Resource_kxesf"), SubResource("Resource_hsjgs"), SubResource("Resource_6nf46")])
+color = Color(0.7176471, 0.58431375, 0.043137256, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_3bipr"), SubResource("Resource_mnvv6"), SubResource("Resource_6jybj"), SubResource("Resource_nsh6e"), SubResource("Resource_mcxkq"), SubResource("Resource_p7dca"), SubResource("Resource_63j0i"), SubResource("Resource_0q0j5"), SubResource("Resource_1vtsd"), SubResource("Resource_dk8o3"), SubResource("Resource_qp6cp"), SubResource("Resource_tnkxj"), SubResource("Resource_ijk2u"), SubResource("Resource_1m0sv"), SubResource("Resource_pmdat"), SubResource("Resource_0lj4e"), SubResource("Resource_flmry"), SubResource("Resource_2d7vo"), SubResource("Resource_e43ae"), SubResource("Resource_vy2ym"), SubResource("Resource_yi5xv"), SubResource("Resource_4m0k7"), SubResource("Resource_maw0y"), SubResource("Resource_xinui"), SubResource("Resource_1me2y"), SubResource("Resource_unio7"), SubResource("Resource_4nqw5"), SubResource("Resource_kwo2p"), SubResource("Resource_sg0eo"), SubResource("Resource_800m2"), SubResource("Resource_7rvou"), SubResource("Resource_807bt"), SubResource("Resource_ri40n"), SubResource("Resource_hjup3"), SubResource("Resource_6s3dr"), SubResource("Resource_wpacb"), SubResource("Resource_ya0oj"), SubResource("Resource_yhxre"), SubResource("Resource_ldmf0"), SubResource("Resource_bgha1"), SubResource("Resource_rs36s"), SubResource("Resource_w4lli"), SubResource("Resource_8ubml"), SubResource("Resource_8ev3j"), SubResource("Resource_84h5d"), SubResource("Resource_tghgp"), SubResource("Resource_pkvpy"), SubResource("Resource_vkpry"), SubResource("Resource_efrec"), SubResource("Resource_qnc13"), SubResource("Resource_et5x3"), SubResource("Resource_5xhwb")])
 
-[sub_resource type="Resource" id="Resource_vou8t"]
-script = ExtResource("4_cy0k4")
+[sub_resource type="Resource" id="Resource_ivwly"]
+script = ExtResource("2_p27nd")
+position = Vector2(147, 147)
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_bawpj"]
+script = ExtResource("2_p27nd")
+time = 211.983
+position = Vector2(147, 147)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_7d5du"]
+script = ExtResource("2_p27nd")
+time = 212.297
+position = Vector2(150, 194)
+movement = 1
+room = &"门厅"
+
+[sub_resource type="Resource" id="Resource_rb2gs"]
+script = ExtResource("2_p27nd")
+time = 212.71
+position = Vector2(150, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_xgxc7"]
+script = ExtResource("2_p27nd")
+time = 213.887
+position = Vector2(316, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_ecvft"]
+script = ExtResource("2_p27nd")
+time = 217.048
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_dqlob"]
+script = ExtResource("2_p27nd")
+time = 217.394
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_2pp5p"]
+script = ExtResource("2_p27nd")
+time = 217.696
+position = Vector2(767, 415)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_htdor"]
+script = ExtResource("2_p27nd")
+time = 217.783
+position = Vector2(766, 428)
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("2_p27nd")
+time = 416.916
+position = Vector2(766, 428)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_gmyrs"]
+script = ExtResource("2_p27nd")
+time = 417.05
+position = Vector2(767, 408)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_80o6w"]
+script = ExtResource("2_p27nd")
+time = 417.312
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_a2523"]
+script = ExtResource("2_p27nd")
+time = 417.659
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_3bd33"]
+script = ExtResource("2_p27nd")
+time = 421.519
+position = Vector2(211, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_1yyaj"]
+script = ExtResource("2_p27nd")
+time = 421.789
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_k7err"]
+script = ExtResource("2_p27nd")
+time = 421.839
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_70nu5"]
+script = ExtResource("2_p27nd")
+time = 421.889
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_7jlks"]
+script = ExtResource("2_p27nd")
+time = 424.516
+position = Vector2(574, 944)
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_ccmbb"]
+script = ExtResource("2_p27nd")
+time = 430.456
+position = Vector2(574, 944)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_fx5k3"]
+script = ExtResource("2_p27nd")
+time = 432.962
+position = Vector2(200, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_tp86u"]
+script = ExtResource("2_p27nd")
+time = 433.309
+position = Vector2(200, 854)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_jdp0p"]
+script = ExtResource("2_p27nd")
+time = 433.768
+position = Vector2(253, 810)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_shai6"]
+script = ExtResource("2_p27nd")
+time = 434.112
+position = Vector2(266, 760)
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_w7sqv"]
+script = ExtResource("2_p27nd")
+time = 723.357
+position = Vector2(266, 760)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_anhtl"]
+script = ExtResource("2_p27nd")
+time = 723.746
+position = Vector2(253, 817)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_cweah"]
+script = ExtResource("2_p27nd")
+time = 724.177
+position = Vector2(200, 854)
+movement = 1
+room = &"档案室"
+
+[sub_resource type="Resource" id="Resource_fcl60"]
+script = ExtResource("2_p27nd")
+time = 724.524
+position = Vector2(200, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_rf61a"]
+script = ExtResource("2_p27nd")
+time = 724.787
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_8xtpd"]
+script = ExtResource("2_p27nd")
+time = 724.837
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_uvded"]
+script = ExtResource("2_p27nd")
+time = 724.887
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_mcu5h"]
+script = ExtResource("2_p27nd")
+time = 725.902
+position = Vector2(330, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_kkdds"]
+script = ExtResource("2_p27nd")
+time = 728.969
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_3oxtg"]
+script = ExtResource("2_p27nd")
+time = 729.316
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_sfmui"]
+script = ExtResource("2_p27nd")
+time = 729.617
+position = Vector2(767, 415)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_dtki4"]
+script = ExtResource("2_p27nd")
+time = 729.704
+position = Vector2(766, 428)
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_72dck"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(766, 428)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_w4iiw"]
+script = ExtResource("2_p27nd")
+time = 757.653
+position = Vector2(767, 408)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_e0tkd"]
+script = ExtResource("2_p27nd")
+time = 757.916
+position = Vector2(790, 376)
+movement = 1
+room = &"办公室"
+
+[sub_resource type="Resource" id="Resource_xyy1r"]
+script = ExtResource("2_p27nd")
+time = 758.263
+position = Vector2(790, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_ifvnt"]
+script = ExtResource("2_p27nd")
+time = 760.469
+position = Vector2(462, 280)
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_o2d75"]
+script = ExtResource("2_p27nd")
+time = 887.444
+position = Vector2(462, 280)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_akuev"]
+script = ExtResource("2_p27nd")
+time = 887.832
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_oiyie"]
+script = ExtResource("2_p27nd")
+time = 888.179
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_ye56g"]
+script = ExtResource("2_p27nd")
+time = 888.511
+position = Vector2(531, 415)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_cxjnm"]
+script = ExtResource("2_p27nd")
+time = 889.225
+position = Vector2(552, 520)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_c2tyw"]
+script = ExtResource("2_p27nd")
+time = 889.281
+position = Vector2(558, 526)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_uvsv7"]
+script = ExtResource("1_ts2jt")
+id = &"E"
+display_name = "方叔"
+label = "5"
+color = Color(0.09803922, 0.43529412, 0.23921569, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_ivwly"), SubResource("Resource_bawpj"), SubResource("Resource_7d5du"), SubResource("Resource_rb2gs"), SubResource("Resource_xgxc7"), SubResource("Resource_ecvft"), SubResource("Resource_dqlob"), SubResource("Resource_2pp5p"), SubResource("Resource_htdor"), SubResource("Resource_jncna"), SubResource("Resource_gmyrs"), SubResource("Resource_80o6w"), SubResource("Resource_a2523"), SubResource("Resource_3bd33"), SubResource("Resource_1yyaj"), SubResource("Resource_k7err"), SubResource("Resource_70nu5"), SubResource("Resource_7jlks"), SubResource("Resource_ccmbb"), SubResource("Resource_fx5k3"), SubResource("Resource_tp86u"), SubResource("Resource_jdp0p"), SubResource("Resource_shai6"), SubResource("Resource_w7sqv"), SubResource("Resource_anhtl"), SubResource("Resource_cweah"), SubResource("Resource_fcl60"), SubResource("Resource_rf61a"), SubResource("Resource_8xtpd"), SubResource("Resource_uvded"), SubResource("Resource_mcu5h"), SubResource("Resource_kkdds"), SubResource("Resource_3oxtg"), SubResource("Resource_sfmui"), SubResource("Resource_dtki4"), SubResource("Resource_72dck"), SubResource("Resource_w4iiw"), SubResource("Resource_e0tkd"), SubResource("Resource_xyy1r"), SubResource("Resource_ifvnt"), SubResource("Resource_o2d75"), SubResource("Resource_akuev"), SubResource("Resource_oiyie"), SubResource("Resource_ye56g"), SubResource("Resource_cxjnm"), SubResource("Resource_c2tyw")])
+
+[sub_resource type="Resource" id="Resource_liyhp"]
+script = ExtResource("2_p27nd")
+position = Vector2(512, 133)
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_43glc"]
+script = ExtResource("2_p27nd")
+time = 146.912
+position = Vector2(512, 133)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_gr4hu"]
+script = ExtResource("2_p27nd")
+time = 147.36
+position = Vector2(540, 194)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_ddpwi"]
+script = ExtResource("2_p27nd")
+time = 147.773
+position = Vector2(540, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_jecbm"]
+script = ExtResource("2_p27nd")
+time = 150.64
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_n50sm"]
+script = ExtResource("2_p27nd")
+time = 150.92
+position = Vector2(970, 214)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_dupnw"]
+script = ExtResource("2_p27nd")
+time = 151.363
+position = Vector2(1018, 168)
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_3b5mi"]
+script = ExtResource("2_p27nd")
+time = 338.949
+position = Vector2(1018, 168)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_c5cs5"]
+script = ExtResource("2_p27nd")
+time = 339.392
+position = Vector2(970, 214)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_s548s"]
+script = ExtResource("2_p27nd")
+time = 339.672
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_kkn3x"]
+script = ExtResource("2_p27nd")
+time = 344.05
+position = Vector2(316, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_w0h5r"]
+script = ExtResource("2_p27nd")
+time = 344.973
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_cry4l"]
+script = ExtResource("2_p27nd")
+time = 345.023
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_8gk2y"]
+script = ExtResource("2_p27nd")
+time = 345.073
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_8st6i"]
+script = ExtResource("2_p27nd")
+time = 347.7
+position = Vector2(574, 944)
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_q4k8p"]
+script = ExtResource("2_p27nd")
+time = 354.6
+position = Vector2(574, 944)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_0qypj"]
+script = ExtResource("2_p27nd")
+time = 354.87
+position = Vector2(560, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_wh7ps"]
+script = ExtResource("2_p27nd")
+time = 355.35
+position = Vector2(560, 834)
+movement = 1
+room = &"值班室"
+
+[sub_resource type="Resource" id="Resource_eq2ia"]
+script = ExtResource("2_p27nd")
+time = 355.937
+position = Vector2(556, 746)
+room = &"值班室"
+
+[sub_resource type="Resource" id="Resource_danoy"]
+script = ExtResource("2_p27nd")
+time = 709.513
+position = Vector2(556, 746)
+movement = 1
+room = &"值班室"
+
+[sub_resource type="Resource" id="Resource_qmuko"]
+script = ExtResource("2_p27nd")
+time = 710.101
+position = Vector2(560, 834)
+movement = 1
+room = &"值班室"
+
+[sub_resource type="Resource" id="Resource_bqf1u"]
+script = ExtResource("2_p27nd")
+time = 710.581
+position = Vector2(560, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_vbbva"]
+script = ExtResource("2_p27nd")
+time = 713.124
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_f5eth"]
+script = ExtResource("2_p27nd")
+time = 713.174
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_6nocg"]
+script = ExtResource("2_p27nd")
+time = 713.224
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_1cce3"]
+script = ExtResource("2_p27nd")
+time = 714.239
+position = Vector2(330, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_2rj51"]
+script = ExtResource("2_p27nd")
+time = 715.414
+position = Vector2(505, 295)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_71vye"]
+script = ExtResource("2_p27nd")
+time = 715.763
+position = Vector2(540, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_ernwq"]
+script = ExtResource("2_p27nd")
+time = 716.177
+position = Vector2(540, 194)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_qrplp"]
+script = ExtResource("2_p27nd")
+time = 716.537
+position = Vector2(540, 140)
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_nn31n"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(540, 140)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_swoiy"]
+script = ExtResource("2_p27nd")
+time = 757.88
+position = Vector2(540, 194)
+movement = 1
+room = &"音乐厅"
+
+[sub_resource type="Resource" id="Resource_7ia6s"]
+script = ExtResource("2_p27nd")
+time = 758.293
+position = Vector2(540, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_qsqi0"]
+script = ExtResource("2_p27nd")
+time = 759.209
+position = Vector2(672, 294)
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_p7y2q"]
+script = ExtResource("2_p27nd")
+time = 838.699
+position = Vector2(672, 294)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_gao6h"]
+script = ExtResource("2_p27nd")
+time = 839.863
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_1w1vp"]
+script = ExtResource("2_p27nd")
+time = 840.21
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_24tat"]
+script = ExtResource("2_p27nd")
+time = 840.542
+position = Vector2(531, 415)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_a2dy0"]
+script = ExtResource("2_p27nd")
+time = 841.055
+position = Vector2(531, 492)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_kiekd"]
+script = ExtResource("2_p27nd")
+time = 841.437
+position = Vector2(474, 498)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_arbsy"]
+script = ExtResource("1_ts2jt")
+id = &"F"
+display_name = "石伯"
+label = "6"
+color = Color(0.43137255, 0.17254902, 0, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_liyhp"), SubResource("Resource_43glc"), SubResource("Resource_gr4hu"), SubResource("Resource_ddpwi"), SubResource("Resource_jecbm"), SubResource("Resource_n50sm"), SubResource("Resource_dupnw"), SubResource("Resource_3b5mi"), SubResource("Resource_c5cs5"), SubResource("Resource_s548s"), SubResource("Resource_kkn3x"), SubResource("Resource_w0h5r"), SubResource("Resource_cry4l"), SubResource("Resource_8gk2y"), SubResource("Resource_8st6i"), SubResource("Resource_q4k8p"), SubResource("Resource_0qypj"), SubResource("Resource_wh7ps"), SubResource("Resource_eq2ia"), SubResource("Resource_danoy"), SubResource("Resource_qmuko"), SubResource("Resource_bqf1u"), SubResource("Resource_vbbva"), SubResource("Resource_f5eth"), SubResource("Resource_6nocg"), SubResource("Resource_1cce3"), SubResource("Resource_2rj51"), SubResource("Resource_71vye"), SubResource("Resource_ernwq"), SubResource("Resource_qrplp"), SubResource("Resource_nn31n"), SubResource("Resource_swoiy"), SubResource("Resource_7ia6s"), SubResource("Resource_qsqi0"), SubResource("Resource_p7y2q"), SubResource("Resource_gao6h"), SubResource("Resource_1w1vp"), SubResource("Resource_24tat"), SubResource("Resource_a2dy0"), SubResource("Resource_kiekd")])
+
+[sub_resource type="Resource" id="Resource_vwtcj"]
+script = ExtResource("2_p27nd")
+position = Vector2(962, 140)
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_ptsvy"]
+script = ExtResource("2_p27nd")
+time = 317.549
+position = Vector2(962, 140)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_oy2v8"]
+script = ExtResource("2_p27nd")
+time = 318.045
+position = Vector2(970, 214)
+movement = 1
+room = &"舞台"
+
+[sub_resource type="Resource" id="Resource_r2gf0"]
+script = ExtResource("2_p27nd")
+time = 318.325
+position = Vector2(970, 256)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_58kg6"]
+script = ExtResource("2_p27nd")
+time = 322.703
+position = Vector2(316, 316)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_jkvip"]
+script = ExtResource("2_p27nd")
+time = 323.626
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_7sfk2"]
+script = ExtResource("2_p27nd")
+time = 323.676
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_fi4ke"]
+script = ExtResource("2_p27nd")
+time = 323.726
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_rdqw0"]
+script = ExtResource("2_p27nd")
+time = 328.798
+position = Vector2(940, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_338dl"]
+script = ExtResource("2_p27nd")
+time = 329.145
+position = Vector2(940, 854)
+movement = 1
+room = &"灯光机房"
+
+[sub_resource type="Resource" id="Resource_iv3dj"]
+script = ExtResource("2_p27nd")
+time = 329.772
+position = Vector2(944, 760)
+room = &"灯光机房"
+
+[sub_resource type="Resource" id="Resource_o0ulf"]
+script = ExtResource("2_p27nd")
+time = 476.056
+position = Vector2(944, 760)
+movement = 1
+room = &"灯光机房"
+
+[sub_resource type="Resource" id="Resource_g6wpv"]
+script = ExtResource("2_p27nd")
+time = 476.683
+position = Vector2(940, 854)
+movement = 1
+room = &"灯光机房"
+
+[sub_resource type="Resource" id="Resource_xtopw"]
+script = ExtResource("2_p27nd")
+time = 477.03
+position = Vector2(940, 906)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_qkmmk"]
+script = ExtResource("2_p27nd")
+time = 479.326
+position = Vector2(596, 924)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_ifl3j"]
+script = ExtResource("2_p27nd")
+time = 479.524
+position = Vector2(574, 944)
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_n8def"]
+script = ExtResource("2_p27nd")
+time = 678.738
+position = Vector2(574, 944)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_pmo2x"]
+script = ExtResource("2_p27nd")
+time = 681.365
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_ex1uo"]
+script = ExtResource("2_p27nd")
+time = 681.415
+position = Vector2(180, 940)
+movement = 1
+room = &"二层走廊"
+
+[sub_resource type="Resource" id="Resource_jff6b"]
+script = ExtResource("2_p27nd")
+time = 681.465
+position = Vector2(180, 290)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_6qe2m"]
+script = ExtResource("2_p27nd")
+time = 681.692
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_jxxvv"]
+script = ExtResource("2_p27nd")
+time = 682.038
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_vxb14"]
+script = ExtResource("2_p27nd")
+time = 683.053
+position = Vector2(154, 526)
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_a7jfs"]
+script = ExtResource("2_p27nd")
+time = 757.52
+position = Vector2(154, 526)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_rcdxn"]
+script = ExtResource("2_p27nd")
+time = 758.535
+position = Vector2(180, 376)
+movement = 1
+room = &"化妆间"
+
+[sub_resource type="Resource" id="Resource_l8tjr"]
+script = ExtResource("2_p27nd")
+time = 758.882
+position = Vector2(180, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_0o1xy"]
+script = ExtResource("2_p27nd")
+time = 762.503
+position = Vector2(722, 288)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_bf53p"]
+script = ExtResource("2_p27nd")
+time = 762.57
+position = Vector2(728, 280)
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_h50xc"]
+script = ExtResource("2_p27nd")
+time = 896.181
+position = Vector2(728, 280)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_xajwc"]
+script = ExtResource("2_p27nd")
+time = 897.729
+position = Vector2(500, 324)
+movement = 1
+room = &"一层走廊"
+
+[sub_resource type="Resource" id="Resource_2fc08"]
+script = ExtResource("2_p27nd")
+time = 898.076
+position = Vector2(500, 376)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_k658n"]
+script = ExtResource("2_p27nd")
+time = 898.489
+position = Vector2(447, 408)
+movement = 1
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_j7toe"]
+script = ExtResource("2_p27nd")
+time = 899.05
+position = Vector2(390, 470)
+room = &"道具室"
+
+[sub_resource type="Resource" id="Resource_lorsc"]
+script = ExtResource("1_ts2jt")
+id = &"G"
+display_name = "阿凯"
+label = "7"
+color = Color(0.12156863, 0.38039216, 0.5529412, 1)
+track = Array[ExtResource("2_p27nd")]([SubResource("Resource_vwtcj"), SubResource("Resource_ptsvy"), SubResource("Resource_oy2v8"), SubResource("Resource_r2gf0"), SubResource("Resource_58kg6"), SubResource("Resource_jkvip"), SubResource("Resource_7sfk2"), SubResource("Resource_fi4ke"), SubResource("Resource_rdqw0"), SubResource("Resource_338dl"), SubResource("Resource_iv3dj"), SubResource("Resource_o0ulf"), SubResource("Resource_g6wpv"), SubResource("Resource_xtopw"), SubResource("Resource_qkmmk"), SubResource("Resource_ifl3j"), SubResource("Resource_n8def"), SubResource("Resource_pmo2x"), SubResource("Resource_ex1uo"), SubResource("Resource_jff6b"), SubResource("Resource_6qe2m"), SubResource("Resource_jxxvv"), SubResource("Resource_vxb14"), SubResource("Resource_a7jfs"), SubResource("Resource_rcdxn"), SubResource("Resource_l8tjr"), SubResource("Resource_0o1xy"), SubResource("Resource_bf53p"), SubResource("Resource_h50xc"), SubResource("Resource_xajwc"), SubResource("Resource_2fc08"), SubResource("Resource_k658n"), SubResource("Resource_j7toe")])
+
+[sub_resource type="Resource" id="Resource_ckaav"]
+script = ExtResource("4_3ug6k")
 id = &"q1"
 kind = 1
-prompt = "演出前谁在道具室检查道具？"
-options = PackedStringArray("导演", "道具师", "演员A")
-answer = "道具师"
+prompt = "谁给林晚宁下的毒？"
+options = PackedStringArray("乔安", "罗茵", "阮琪", "方叔", "石伯", "阿凯")
+answer = "乔安"
 
-[sub_resource type="Resource" id="Resource_eulum"]
-script = ExtResource("4_cy0k4")
+[sub_resource type="Resource" id="Resource_7udov"]
+script = ExtResource("4_3ug6k")
 id = &"q2"
-kind = 1
-prompt = "谁让所有人到舞台集合？"
-options = PackedStringArray("导演", "道具师", "演员A")
-answer = "导演"
+prompt = "毒下在什么地方？"
+options = PackedStringArray("化妆间的水杯", "舞台上的琴键", "休息室的点心", "门厅的欢迎酒")
+answer = "化妆间的水杯"
 
-[sub_resource type="Resource" id="Resource_p5n5c"]
-script = ExtResource("7_qj5vo")
-speaker = &"F"
-start = 2.0
-duration = 2.903
-stream = ExtResource("8_dj2o0")
-text = "演出还有一小时，大家准备好了吗？"
+[sub_resource type="Resource" id="Resource_5avk4"]
+script = ExtResource("4_3ug6k")
+id = &"q3"
+prompt = "音乐厅里那个白纱是谁？"
+options = PackedStringArray("罗茵", "林晚宁", "梵音的鬼魂", "阮琪")
+answer = "罗茵"
 
-[sub_resource type="Resource" id="Resource_lvhpm"]
-script = ExtResource("7_qj5vo")
-speaker = &"D"
-start = 11.0
-duration = 2.49
-stream = ExtResource("9_nfjyk")
-text = "导演，我的台词还没背熟..."
+[sub_resource type="Resource" id="Resource_3qmb7"]
+script = ExtResource("4_3ug6k")
+id = &"q4"
+prompt = "梵音当年是怎么死的？"
+options = PackedStringArray("演出失败后服毒自杀", "彩排时坠楼", "被道具剑误伤", "病死在值班室")
+answer = "演出失败后服毒自杀"
 
-[sub_resource type="Resource" id="Resource_k1eqn"]
-script = ExtResource("7_qj5vo")
+[sub_resource type="Resource" id="Resource_2xi7v"]
+script = ExtResource("4_3ug6k")
+id = &"q5"
+prompt = "方叔为什么一直听乔安的？"
+options = PackedStringArray("乔安拿梵音的死要挟他", "乔安是剧院股东", "阮琪替乔安求情", "石伯作了伪证")
+answer = "乔安拿梵音的死要挟他"
+
+[sub_resource type="Resource" id="Resource_e413t"]
+script = ExtResource("7_wfn1y")
 speaker = &"E"
-start = 21.0
-duration = 2.261
-stream = ExtResource("10_o3srw")
-text = "我的服装怎么少了一件？"
+start = 5.0
+duration = 4.32
+stream = ExtResource("8_c3k46")
+text = "石伯，侧幕如果再有人嚷白纱，你让他们把嘴闭上。"
 
-[sub_resource type="Resource" id="Resource_ibkaq"]
-script = ExtResource("7_qj5vo")
-speaker = &"G"
-start = 33.0
-duration = 2.593
-stream = ExtResource("11_c1ktb")
-text = "道具都检查过了，没有问题。"
-
-[sub_resource type="Resource" id="Resource_wbktw"]
-script = ExtResource("7_qj5vo")
+[sub_resource type="Resource" id="Resource_ykm5r"]
+script = ExtResource("7_wfn1y")
 speaker = &"F"
-start = 51.0
-duration = 2.92
-stream = ExtResource("12_ekflr")
-text = "所有人到舞台集合，最后走一遍！"
+start = 9.72
+duration = 5.88
+stream = ExtResource("9_ld20a")
+text = "方叔，我亲眼看见的。音乐厅侧幕站着一个女人，脸蒙着纱。"
 
-[sub_resource type="Resource" id="Resource_71h80"]
-script = ExtResource("7_qj5vo")
-speaker = &"D"
-start = 66.0
-duration = 2.48
-stream = ExtResource("13_2b0sy")
-text = "今天的观众好像比预期多。"
-
-[sub_resource type="Resource" id="Resource_js2tr"]
-script = ExtResource("7_qj5vo")
+[sub_resource type="Resource" id="Resource_ou6dh"]
+script = ExtResource("7_wfn1y")
 speaker = &"E"
-start = 74.0
-duration = 2.365
-stream = ExtResource("14_jwd3s")
-text = "别紧张，我们练了这么久。"
+start = 16.0
+duration = 6.12
+stream = ExtResource("10_6i2kx")
+text = "林晚宁还在化妆间。纱不是她。今晚是她的独奏，别自己吓自己。"
 
-[sub_resource type="Resource" id="Resource_fnjo0"]
-script = ExtResource("7_qj5vo")
+[sub_resource type="Resource" id="Resource_chwec"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 22.52
+duration = 4.96
+stream = ExtResource("11_x1jut")
+text = "不是林晚宁。那人身量矮一截，白纱是旧道具箱里的。"
+
+[sub_resource type="Resource" id="Resource_10r8q"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 27.88
+duration = 5.12
+stream = ExtResource("12_6ecvd")
+text = "旧纱是梵音的。人都走了这么多年，石伯别再提那个名字。"
+
+[sub_resource type="Resource" id="Resource_lg25n"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 33.4
+duration = 6.64
+stream = ExtResource("13_ncgw8")
+text = "梵音的名字是你不让提。清洁工石伯只负责把看见的说出来。"
+
+[sub_resource type="Resource" id="Resource_5ctv5"]
+script = ExtResource("7_wfn1y")
 speaker = &"G"
-start = 82.0
-duration = 2.601
-stream = ExtResource("15_bfva2")
-text = "帷幕准备好，随时可以开始。"
+start = 40.44
+duration = 4.48
+stream = ExtResource("14_efubo")
+text = "阿凯在舞台上对灯。林晚宁一上台，侧幕必须是空的。"
+
+[sub_resource type="Resource" id="Resource_2xs41"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 45.32
+duration = 5.36
+stream = ExtResource("15_6kxxd")
+text = "空着。乔安把这场独奏抢到谱风剧院，砸了招牌我负责不起。"
+
+[sub_resource type="Resource" id="Resource_tnl15"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 58.124
+duration = 5.12
+stream = ExtResource("16_2yhrn")
+text = "方叔，嘉宾已经进音乐厅了。林晚宁的水，我让人放在化妆间。"
+
+[sub_resource type="Resource" id="Resource_5ct7n"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 63.644
+duration = 4.0
+stream = ExtResource("17_hix24")
+text = "乔安你少指挥到后台。水杯的事让阮琪管。"
+
+[sub_resource type="Resource" id="Resource_uxvvs"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 68.044
+duration = 4.44
+stream = ExtResource("18_5g4cf")
+text = "阮琪管琴，不管水。我放一杯温的，林晚宁喝了润手。"
+
+[sub_resource type="Resource" id="Resource_16l1f"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 72.884
+duration = 5.16
+stream = ExtResource("19_ppfr6")
+text = "乔安先生，你经过侧幕的时候，有没有看见白纱？"
+
+[sub_resource type="Resource" id="Resource_ux1es"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 78.444
+duration = 5.52
+stream = ExtResource("20_5sxc5")
+text = "没有。石伯眼睛花了。白纱是道具室的布，罗茵在那儿整理。"
+
+[sub_resource type="Resource" id="Resource_ctu75"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 84.364
+duration = 4.68
+stream = ExtResource("21_loial")
+text = "阮琪老师，手还是冷。林晚宁想先在琴上坐五分钟。"
+
+[sub_resource type="Resource" id="Resource_lxdh4"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 91.678
+duration = 6.12
+stream = ExtResource("22_878oa")
+text = "坐。水杯在右手边，乔安说是温的。你润一口再上台。"
+
+[sub_resource type="Resource" id="Resource_6m1q2"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 98.198
+duration = 5.08
+stream = ExtResource("23_s4may")
+text = "我不喝别人倒的。林晚宁自己倒，阮琪你知道的。"
+
+[sub_resource type="Resource" id="Resource_16hdj"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 103.678
+duration = 4.36
+stream = ExtResource("24_5j3va")
+text = "今天例外。乔安办的这场，方叔把后台都让给他了。"
+
+[sub_resource type="Resource" id="Resource_ychel"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 108.438
+duration = 5.16
+stream = ExtResource("25_l6jw8")
+text = "（低声）纱在道具室。林晚宁要是出来，罗茵就先躲到侧幕后面。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_ie8rh"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 117.312
+duration = 3.2
+stream = ExtResource("26_xei66")
+text = "晚宁，喝一口。上台之前别让嘴唇干。"
+
+[sub_resource type="Resource" id="Resource_b0kk7"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 120.912
+duration = 5.28
+stream = ExtResource("27_0cl80")
+text = "乔安，杯子是你放的？那我等阮琪老师喝过第一口。"
+
+[sub_resource type="Resource" id="Resource_bogyf"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 126.592
+duration = 5.4
+stream = ExtResource("28_lixuh")
+text = "我不喝。学员的水，导师不抢。林晚宁你自己决定。"
+
+[sub_resource type="Resource" id="Resource_sjtgi"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 132.392
+duration = 4.64
+stream = ExtResource("29_5ahrs")
+text = "那就一口。谢了，乔安。剩下的我彩排完再喝。"
+
+[sub_resource type="Resource" id="Resource_fiomw"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 137.432
+duration = 4.24
+stream = ExtResource("30_qj1tr")
+text = "她喝了。阮琪在化妆间看着那杯子，水面齐了一线。"
+
+[sub_resource type="Resource" id="Resource_40wx5"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 142.072
+duration = 4.44
+stream = ExtResource("31_do0xy")
+text = "林晚宁上台了。阿凯把追光压低，别打到侧幕。"
+
+[sub_resource type="Resource" id="Resource_q0nch"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 151.663
+duration = 5.84
+stream = ExtResource("32_cl6ep")
+text = "舞台上是林晚宁。可音乐厅侧幕刚才又动了一下白纱。"
+
+[sub_resource type="Resource" id="Resource_itnlb"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 157.903
+duration = 4.56
+stream = ExtResource("33_vrl5w")
+text = "石伯你站好。侧幕归阿凯看，你别挡灯。"
+
+[sub_resource type="Resource" id="Resource_o26ue"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 162.863
+duration = 4.88
+stream = ExtResource("34_vocc2")
+text = "（低声）乔安，粉已经在杯底了。她喝下去，半个时辰内会倒。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_fdp25"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 168.143
+duration = 5.08
+stream = ExtResource("35_y8bt6")
+text = "青矾散无色。罗茵你别在这儿打开纸包，见了空气会发绿。"
+
+[sub_resource type="Resource" id="Resource_8l6cg"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 173.623
+duration = 4.16
+stream = ExtResource("36_v184a")
+text = "发绿就发绿。我要的是你选我，不是选林晚宁。"
+
+[sub_resource type="Resource" id="Resource_n2tm5"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 178.183
+duration = 4.52
+stream = ExtResource("37_nnda5")
+text = "录音那句你别再放。昨夜你说只能留一个，我听见了。"
+
+[sub_resource type="Resource" id="Resource_6qykt"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 183.103
+duration = 5.0
+stream = ExtResource("38_m5lws")
+text = "那就今晚留我。梵音的纱我披上，方叔一看见就不敢问。"
+
+[sub_resource type="Resource" id="Resource_xo612"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 188.503
+duration = 4.08
+stream = ExtResource("39_ev74k")
+text = "方叔怕的不是鬼，是当年那份压下去的验尸。"
+
+[sub_resource type="Resource" id="Resource_s7lo4"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 192.983
+duration = 6.8
+stream = ExtResource("40_2027n")
+text = "验尸写服毒。乔安你把梵音推上她扛不住的第一场，她自己喝的。"
+
+[sub_resource type="Resource" id="Resource_l06vx"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 200.183
+duration = 4.64
+stream = ExtResource("41_21ri7")
+text = "是她自己喝的。可条子要是见报，谱风剧院就没有下一季。"
+
+[sub_resource type="Resource" id="Resource_i56q5"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 205.223
+duration = 6.36
+stream = ExtResource("42_p8eqk")
+text = "所以白纱还得出现。罗茵去音乐厅绕一圈，你去办公室看着方叔。"
+
+[sub_resource type="Resource" id="Resource_xc5dr"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 211.983
+duration = 5.84
+stream = ExtResource("43_iow7n")
+text = "音乐厅侧幕又是白纱。石伯可以发誓，林晚宁人在舞台上。"
+
+[sub_resource type="Resource" id="Resource_qo7ih"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 218.223
+duration = 5.04
+stream = ExtResource("44_dfkbx")
+text = "阿凯也看见了。白纱比林晚宁矮，裙摆是道具室那条旧的。"
+
+[sub_resource type="Resource" id="Resource_pgb5s"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 231.029
+duration = 5.96
+stream = ExtResource("45_0mwpi")
+text = "晚宁，右手别抖。阮琪在侧幕听着，你只弹开头那一段。"
+
+[sub_resource type="Resource" id="Resource_gjw8d"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 237.389
+duration = 4.84
+stream = ExtResource("46_na1mr")
+text = "头晕。水杯里有一股说不上来的涩，林晚宁想吐。"
+
+[sub_resource type="Resource" id="Resource_w1f3l"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 242.629
+duration = 4.64
+stream = ExtResource("47_xnew3")
+text = "先别吐在琴上。你下来，阮琪扶你回化妆间。"
+
+[sub_resource type="Resource" id="Resource_4pchi"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 247.669
+duration = 5.0
+stream = ExtResource("48_jrsds")
+text = "乔安，办公室的门我锁过。你又把梵音的旧档从档案室调走了？"
+
+[sub_resource type="Resource" id="Resource_jam7y"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 253.069
+duration = 5.16
+stream = ExtResource("49_j12cw")
+text = "调走是为了你好。方叔，当年的验尸不要在独奏的晚上被人翻到。"
+
+[sub_resource type="Resource" id="Resource_utoqv"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 258.629
+duration = 5.6
+stream = ExtResource("50_aw4gn")
+text = "梵音是服毒自杀。我压下它，是怕剧院被说成逼死新人。"
+
+[sub_resource type="Resource" id="Resource_nckym"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 264.629
+duration = 5.6
+stream = ExtResource("51_7ovli")
+text = "你压得对。从那以后，谱风剧院有一半的场子不收我的场租。"
+
+[sub_resource type="Resource" id="Resource_1du1r"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 270.629
+duration = 5.48
+stream = ExtResource("52_is2gn")
+text = "那不叫合作，叫要挟。乔安，白纱要是你安排的，今晚就收。"
+
+[sub_resource type="Resource" id="Resource_tud4c"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 276.509
+duration = 5.04
+stream = ExtResource("53_yax14")
+text = "白纱不是我。你要是报警，我就把梵音的遗书交给记者。"
+
+[sub_resource type="Resource" id="Resource_u2h6e"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 281.949
+duration = 4.0
+stream = ExtResource("54_33erx")
+text = "遗书在你手里？方叔这些年白养了你这份沉默。"
+
+[sub_resource type="Resource" id="Resource_bge75"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 286.349
+duration = 5.16
+stream = ExtResource("55_ugrmu")
+text = "沉默继续。林晚宁这场完了，你仍然什么都没看见。"
+
+[sub_resource type="Resource" id="Resource_uimxu"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 291.909
+duration = 4.12
+stream = ExtResource("56_0rcqe")
+text = "晚宁，躺一下。水杯我带回来了，你别再碰。"
+
+[sub_resource type="Resource" id="Resource_j46jh"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 296.429
+duration = 5.72
+stream = ExtResource("57_65vqb")
+text = "阮琪老师，眼睛发花。林晚宁彩排还没完，不能倒在化妆间。"
+
+[sub_resource type="Resource" id="Resource_ob6yf"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 302.549
+duration = 5.32
+stream = ExtResource("58_05sm6")
+text = "能倒也得让人看见是病，不是舞台上的事故。你听我的。"
+
+[sub_resource type="Resource" id="Resource_m3dq4"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 308.269
+duration = 4.36
+stream = ExtResource("59_vsnwi")
+text = "杯底怎么有一点绿？刚才喝的时候是清的。"
+
+[sub_resource type="Resource" id="Resource_1grnu"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 313.029
+duration = 4.12
+stream = ExtResource("60_0h57p")
+text = "绿？阮琪看看。乔安倒的这杯，见了空气在变色。"
+
+[sub_resource type="Resource" id="Resource_p0183"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 317.549
+duration = 5.12
+stream = ExtResource("61_fhe0n")
+text = "阮琪先看着杯。阿凯上去调录音，绿还在往上浮。"
+
+[sub_resource type="Resource" id="Resource_r0j3k"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 323.069
+duration = 5.16
+stream = ExtResource("62_0noa1")
+text = "林晚宁哪儿也不去。化妆间的门别锁死，我还能答应。"
+
+[sub_resource type="Resource" id="Resource_5bnkt"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 328.629
+duration = 5.36
+stream = ExtResource("63_ke1xu")
+text = "石伯在侧幕。白纱那一下，我可以再比一次身高。"
+
+[sub_resource type="Resource" id="Resource_3iy7j"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 334.389
+duration = 4.16
+stream = ExtResource("64_f5ukv")
+text = "阿凯上灯光机房。昨夜的板录还在，有个女人的声音。"
+
+[sub_resource type="Resource" id="Resource_2b333"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 348.0
+duration = 6.2
+stream = ExtResource("65_u6pi0")
+text = "石伯也上去。值班室的日志要写上：白纱出现时，林晚宁在舞台。"
+
+[sub_resource type="Resource" id="Resource_c8yii"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 357.245
+duration = 5.92
+stream = ExtResource("66_t44iw")
+text = "（低声）纱摘了。罗茵在道具室。音乐厅那一圈，够方叔不敢出声。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_1qdyy"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 368.643
+duration = 4.32
+stream = ExtResource("67_05wmu")
+text = "她喝了半口。青矾散进了胃，你别再去化妆间。"
+
+[sub_resource type="Resource" id="Resource_7rbqn"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 373.363
+duration = 5.32
+stream = ExtResource("68_4x1j2")
+text = "我不去。林晚宁倒下来的时候，你人要在办公室，别在杯旁边。"
+
+[sub_resource type="Resource" id="Resource_n4w0a"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 379.083
+duration = 4.04
+stream = ExtResource("69_k5g18")
+text = "办公室有方叔看着。乔安中途出去过，他会说。"
+
+[sub_resource type="Resource" id="Resource_ww26i"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 383.523
+duration = 4.8
+stream = ExtResource("70_4y6yn")
+text = "就说去了厕所。罗茵谁也不是，名册上没有我。"
+
+[sub_resource type="Resource" id="Resource_m252e"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 388.723
+duration = 4.36
+stream = ExtResource("71_e70kl")
+text = "灯光机房这部录音，时间是昨夜凌晨。阿凯放到最小。"
+
+[sub_resource type="Resource" id="Resource_wyx0o"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 393.483
+duration = 6.2
+stream = ExtResource("72_1vlny")
+text = "女人说：你只能在我和她之间选一个。声音年轻，不是阮琪。"
+
+[sub_resource type="Resource" id="Resource_v700t"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 400.083
+duration = 6.24
+stream = ExtResource("73_2053a")
+text = "值班室的本子我写好了。石伯看见白纱的时候，舞台上是林晚宁。"
+
+[sub_resource type="Resource" id="Resource_auych"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 410.196
+duration = 6.32
+stream = ExtResource("74_x6pjr")
+text = "档案室不该上锁。阮琪记得梵音的档就在这层柜子。"
+
+[sub_resource type="Resource" id="Resource_eqnyn"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 424.816
+duration = 5.24
+stream = ExtResource("75_4kwfc")
+text = "阮琪你慢点。方叔把钥匙带来了，别撬档案室的门。"
+
+[sub_resource type="Resource" id="Resource_dx1k5"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 430.456
+duration = 5.68
+stream = ExtResource("76_67wv6")
+text = "验尸意见在。梵音，演出失败当晚服毒自杀。见证人栏是空的。"
+
+[sub_resource type="Resource" id="Resource_68e6c"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 436.536
+duration = 4.04
+stream = ExtResource("77_xqujd")
+text = "见证人是我抽掉的。乔安说，空着比写着安全。"
+
+[sub_resource type="Resource" id="Resource_dck3n"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 440.976
+duration = 6.0
+stream = ExtResource("78_jb5ke")
+text = "方叔，林晚宁杯底发绿。旧档如果也是毒，就不是两次碰巧。"
+
+[sub_resource type="Resource" id="Resource_x6r2i"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 447.376
+duration = 5.0
+stream = ExtResource("79_11veg")
+text = "青矾散。当年后台有人这么叫过那种粉。无色，过后发绿。"
+
+[sub_resource type="Resource" id="Resource_5qvj5"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 452.776
+duration = 3.8
+stream = ExtResource("80_y1k8a")
+text = "阮琪没带过这种东西。倒水的人是乔安。"
+
+[sub_resource type="Resource" id="Resource_2o3rx"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 456.976
+duration = 5.92
+stream = ExtResource("81_r2t4p")
+text = "（低声）阮琪老师，我还在化妆间。手心全是汗，琴声都听不见了。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_nrhrc"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 463.296
+duration = 4.84
+stream = ExtResource("82_almtu")
+text = "你别动。我们马上下来。林晚宁，杯子不要倒掉。"
+
+[sub_resource type="Resource" id="Resource_lw4jq"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 468.536
+duration = 7.12
+stream = ExtResource("83_0fcvi")
+text = "乔安你走。道具室留下白纱就行，罗茵从后门……后门没有，我等灯暗。"
+
+[sub_resource type="Resource" id="Resource_ihl4h"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 479.824
+duration = 4.28
+stream = ExtResource("84_gc0ks")
+text = "录音我拷出来了。阿凯要放给阮琪听，不是放给全场。"
+
+[sub_resource type="Resource" id="Resource_t4hr2"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 484.504
+duration = 6.12
+stream = ExtResource("85_0trov")
+text = "阮琪把绿指给晚宁看。这种粉我在旧笔记里见过，叫青矾散。"
+
+[sub_resource type="Resource" id="Resource_h54m1"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 491.024
+duration = 4.08
+stream = ExtResource("86_w5ew8")
+text = "笔记上怎么写？林晚宁要知道自己喝进去的是什么。"
+
+[sub_resource type="Resource" id="Resource_t6jdd"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 495.504
+duration = 5.44
+stream = ExtResource("87_5dgyl")
+text = "无色，进了胃才发作，杯子放着会慢慢发绿。催吐已经晚了。"
+
+[sub_resource type="Resource" id="Resource_nyi7e"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 501.344
+duration = 4.4
+stream = ExtResource("88_l5w8i")
+text = "是乔安倒的。除了那一口，林晚宁今晚没吃别的。"
+
+[sub_resource type="Resource" id="Resource_tsdab"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 506.144
+duration = 4.76
+stream = ExtResource("89_b1o8x")
+text = "石伯从舞台下来了。阿凯说侧幕没有第二双鞋印。"
+
+[sub_resource type="Resource" id="Resource_lh7mv"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 511.304
+duration = 6.04
+stream = ExtResource("90_bjoqc")
+text = "阿凯可以证明。灯光机房对着侧幕，只有一个矮身影走过。"
+
+[sub_resource type="Resource" id="Resource_3w0b5"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 517.744
+duration = 5.16
+stream = ExtResource("91_7a7s8")
+text = "方叔问一句。矮身影进道具室没有？纱如果归位，人就在里面。"
+
+[sub_resource type="Resource" id="Resource_42xoq"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 523.304
+duration = 7.08
+stream = ExtResource("92_ipcj5")
+text = "（低声）归位了。罗茵把纱搭回箱子。进门先看见纱，看不见脸。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_lrrss"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 530.784
+duration = 4.28
+stream = ExtResource("93_xmti1")
+text = "乔安还在办公室。方叔现在去道具室，什么也问不出来。"
+
+[sub_resource type="Resource" id="Resource_ddij1"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 535.464
+duration = 4.72
+stream = ExtResource("94_kr26d")
+text = "我晚一点去。先让阮琪把杯子保住，林晚宁别喝第二口。"
+
+[sub_resource type="Resource" id="Resource_f8b7q"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 540.584
+duration = 4.52
+stream = ExtResource("95_23l44")
+text = "没有第二口。阮琪把杯子扣在托盘上，绿朝下。"
+
+[sub_resource type="Resource" id="Resource_syarn"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 545.504
+duration = 5.36
+stream = ExtResource("96_lrllk")
+text = "头晕变成恶心。林晚宁按你说的躺着，舞台上的琴不要了。"
+
+[sub_resource type="Resource" id="Resource_ggkee"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 551.264
+duration = 4.08
+stream = ExtResource("97_8k43l")
+text = "琴有阿凯看着。追光灭了，侧幕现在是黑的。"
+
+[sub_resource type="Resource" id="Resource_hae2m"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 555.744
+duration = 7.24
+stream = ExtResource("98_1yaeu")
+text = "石伯把日志补上。白纱消失，和林晚宁进化妆间，是前后脚。"
+
+[sub_resource type="Resource" id="Resource_2hr0o"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 563.384
+duration = 4.2
+stream = ExtResource("99_ovvjn")
+text = "前后脚说明不了毒。方叔要的是谁把粉带进剧院。"
+
+[sub_resource type="Resource" id="Resource_bn63v"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 567.984
+duration = 5.28
+stream = ExtResource("100_8pe8c")
+text = "粉不是剧院的库存。乔安可以这么说，你爱信不信。"
+
+[sub_resource type="Resource" id="Resource_isdxj"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 573.664
+duration = 6.24
+stream = ExtResource("101_fe6na")
+text = "阮琪不信。梵音的档如果也写着这种绿，两次就不是碰巧。"
+
+[sub_resource type="Resource" id="Resource_danu4"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 580.304
+duration = 6.16
+stream = ExtResource("102_rvlbh")
+text = "梵音是谁？林晚宁进团的时候，这个名字就被人拦着不提。"
+
+[sub_resource type="Resource" id="Resource_01qnp"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 586.864
+duration = 5.84
+stream = ExtResource("103_4guib")
+text = "拦着的是方叔。上一任新人被推上台，演砸了，当晚没了。"
+
+[sub_resource type="Resource" id="Resource_c4nq5"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 593.104
+duration = 6.4
+stream = ExtResource("104_bl5kb")
+text = "石伯扫过她的化妆间。杯也是绿的。那年没人让我写进日志。"
+
+[sub_resource type="Resource" id="Resource_x4tm0"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 599.904
+duration = 3.88
+stream = ExtResource("105_jprhq")
+text = "因为我让你别写。方叔错在这儿，不在今晚这杯水。"
+
+[sub_resource type="Resource" id="Resource_6l5dy"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 604.184
+duration = 4.24
+stream = ExtResource("106_aq3fa")
+text = "阿凯把旧板录留着。梵音那场的后半段，麦克风是静的。"
+
+[sub_resource type="Resource" id="Resource_pyjau"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 608.824
+duration = 6.52
+stream = ExtResource("107_rfp10")
+text = "静的是人已经不唱了。罗茵没见过梵音，纱是乔安翻给我的。"
+
+[sub_resource type="Resource" id="Resource_m24rh"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 615.744
+duration = 4.08
+stream = ExtResource("108_0uxbt")
+text = "翻给你是为了吓方叔，不是为了教你下毒。这句别记错。"
+
+[sub_resource type="Resource" id="Resource_ltvdq"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 620.224
+duration = 5.4
+stream = ExtResource("109_xkdoc")
+text = "我没下。纸包一直在你手上。罗茵只负责让音乐厅有鬼。"
+
+[sub_resource type="Resource" id="Resource_r0w5k"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 626.024
+duration = 6.4
+stream = ExtResource("110_nk451")
+text = "鬼我看见了。石伯能指认身量，指认不了脸，纱太厚。"
+
+[sub_resource type="Resource" id="Resource_xle4m"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 632.824
+duration = 6.72
+stream = ExtResource("111_qx2hi")
+text = "脸等摘纱再认。阮琪现在只问杯。乔安，纸包在不在身上？"
+
+[sub_resource type="Resource" id="Resource_i78wu"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 639.944
+duration = 4.04
+stream = ExtResource("112_w5w5u")
+text = "不在。乔安换过外套。你要搜，等林晚宁这阵过去。"
+
+[sub_resource type="Resource" id="Resource_5cnup"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 644.384
+duration = 4.84
+stream = ExtResource("113_rkylp")
+text = "别等过去。林晚宁要是说不成话，杯子就是唯一的嘴。"
+
+[sub_resource type="Resource" id="Resource_7vpm5"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 654.0
+duration = 4.36
+stream = ExtResource("114_uitjn")
+text = "（大喊）阮琪老师……林晚宁在化妆间站不住了！"
+loudness = 0.9
+
+[sub_resource type="Resource" id="Resource_ra8md"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 661.618
+duration = 4.92
+stream = ExtResource("115_ebwi7")
+text = "晚宁！眼睛睁开。阮琪在。杯里的绿已经沉到底了。"
+
+[sub_resource type="Resource" id="Resource_kou52"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 666.938
+duration = 5.44
+stream = ExtResource("116_cmvvy")
+text = "是乔安倒的水。林晚宁只喝了一口。告诉方叔，别让他走。"
+
+[sub_resource type="Resource" id="Resource_xgtdq"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 672.778
+duration = 5.56
+stream = ExtResource("117_xr88m")
+text = "你省着力气。绿是后上来的，喝的时候看不见。这是青矾散。"
+
+[sub_resource type="Resource" id="Resource_63yy2"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 683.353
+duration = 5.6
+stream = ExtResource("118_bqvo1")
+text = "阿凯把昨夜的录音带来了。林晚宁先别说话，听这一句。"
+
+[sub_resource type="Resource" id="Resource_ehglf"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 689.353
+duration = 5.92
+stream = ExtResource("119_umqng")
+text = "录音里的女人说，只能在我和她之间选一个。林晚宁，这不是你的声音。"
+
+[sub_resource type="Resource" id="Resource_0t42w"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 695.673
+duration = 3.52
+stream = ExtResource("120_767om")
+text = "不是。我没有说过这种话。乔安身边……还有别人。"
+
+[sub_resource type="Resource" id="Resource_dluve"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 699.593
+duration = 9.52
+stream = ExtResource("121_7xrbt")
+text = "（低声）纱在箱子里。罗茵谁也没看见脸。乔安答应过，倒了就结束。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_eoq7w"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 716.837
+duration = 6.12
+stream = ExtResource("122_c1jcy")
+text = "石伯再确认一次。白纱在音乐厅的时候，舞台上的人是林晚宁。"
+
+[sub_resource type="Resource" id="Resource_ak4yn"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 730.004
+duration = 4.56
+stream = ExtResource("123_3t74i")
+text = "乔安，你给我留在办公室。方叔数过，你中途出去了两回。"
+
+[sub_resource type="Resource" id="Resource_sj8tw"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 734.964
+duration = 5.2
+stream = ExtResource("124_18npe")
+text = "出去接了个电话。林晚宁的水是温水，我没往里加任何东西。"
+
+[sub_resource type="Resource" id="Resource_r1ihm"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 740.564
+duration = 5.6
+stream = ExtResource("125_s0m18")
+text = "电话可以以后再查。人倒在化妆间，杯子是你放上去的。"
+
+[sub_resource type="Resource" id="Resource_78cmn"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 752.0
+duration = 5.12
+stream = ExtResource("126_y3shf")
+text = "都到化妆间门口，别挤进来。林晚宁还有气，杯不能洗。"
+
+[sub_resource type="Resource" id="Resource_rk1g4"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 761.099
+duration = 6.88
+stream = ExtResource("127_wpqto")
+text = "杯底是绿的。青矾散无色，见空气才显。喝下去才伤胃。"
+
+[sub_resource type="Resource" id="Resource_27bry"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 768.379
+duration = 4.6
+stream = ExtResource("128_iw2es")
+text = "方叔听过这个名字。梵音那年，后台也有人提过青矾散。"
+
+[sub_resource type="Resource" id="Resource_nae2m"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 773.379
+duration = 4.12
+stream = ExtResource("129_s6oux")
+text = "提过不等于我带了。乔安办演出，倒杯水不算证据。"
+
+[sub_resource type="Resource" id="Resource_jqhq0"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 777.899
+duration = 4.64
+stream = ExtResource("130_hyi5r")
+text = "阿凯这儿有昨夜的录音。女人逼乔安在两个人里选一个。"
+
+[sub_resource type="Resource" id="Resource_ca2lr"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 782.939
+duration = 7.56
+stream = ExtResource("131_bt35x")
+text = "石伯补充。白纱出现时林晚宁在舞台上，纱比她矮，是旧道具。"
+
+[sub_resource type="Resource" id="Resource_yxkw8"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 790.899
+duration = 6.84
+stream = ExtResource("132_0ffuw")
+text = "旧纱是梵音的。阮琪看过档案，梵音是演出失败后服毒自杀。"
+
+[sub_resource type="Resource" id="Resource_ff0i7"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 798.139
+duration = 5.52
+stream = ExtResource("133_dablm")
+text = "见证人是我抽掉的。乔安拿遗书要挟我，场租这些年也没好好收。"
+
+[sub_resource type="Resource" id="Resource_u2b2b"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 804.059
+duration = 5.2
+stream = ExtResource("134_43avt")
+text = "方叔你自己怕上报。要挟是你给的口实，不是乔安求的。"
+
+[sub_resource type="Resource" id="Resource_14gqt"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 809.659
+duration = 6.4
+stream = ExtResource("135_5rnbc")
+text = "录音里那个女人还说，错过今晚就没有下一次。乔安你回她了。"
+
+[sub_resource type="Resource" id="Resource_c2dlr"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 816.459
+duration = 3.96
+stream = ExtResource("136_x66bv")
+text = "回的是气话。罗茵……我是说，那个人不是剧团的。"
+
+[sub_resource type="Resource" id="Resource_g524t"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 820.819
+duration = 5.48
+stream = ExtResource("137_jain4")
+text = "你说出罗茵了。阮琪要听清楚，是不是她让你在杯子里动手。"
+
+[sub_resource type="Resource" id="Resource_tgvjv"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 826.699
+duration = 4.64
+stream = ExtResource("138_athvm")
+text = "（低声）不要接。罗茵还在道具室，名册上没有这个名字。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_ylbx4"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 831.739
+duration = 6.56
+stream = ExtResource("139_t0mue")
+text = "道具室有人声。石伯去看的时候，白纱就搭在箱子上，人还在。"
+
+[sub_resource type="Resource" id="Resource_mmn7q"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 841.737
+duration = 7.68
+stream = ExtResource("140_qkx5h")
+text = "纱在。人也在。你是谁？音乐厅的白纱是不是你披的？"
+
+[sub_resource type="Resource" id="Resource_241wd"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 849.817
+duration = 4.28
+stream = ExtResource("141_hk1u3")
+text = "是罗茵。纱是我披的。我只想吓方叔，没有进化妆间。"
+
+[sub_resource type="Resource" id="Resource_tve0b"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 854.497
+duration = 4.88
+stream = ExtResource("142_tocly")
+text = "吓他做什么？石伯要一句实话，不听鬼故事。"
+
+[sub_resource type="Resource" id="Resource_k1fkm"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 859.777
+duration = 5.76
+stream = ExtResource("143_hfsfr")
+text = "乔安答应在我和林晚宁之间选。他要是反悔，纱就继续出现。"
+
+[sub_resource type="Resource" id="Resource_y15yo"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 867.843
+duration = 5.24
+stream = ExtResource("144_kqwqw")
+text = "罗茵你闭嘴。披纱是你自己要的，杯子的事别往我身上揽。"
+
+[sub_resource type="Resource" id="Resource_88fbi"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 873.483
+duration = 6.12
+stream = ExtResource("145_vuwuh")
+text = "粉是你放的。青矾散的纸包还在你外套内侧，我看见你抖进去的。"
+
+[sub_resource type="Resource" id="Resource_jke1j"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 881.644
+duration = 5.4
+stream = ExtResource("146_r5dfq")
+text = "纸包留下。阮琪可以认颜色。林晚宁只喝了乔安那一杯。"
+
+[sub_resource type="Resource" id="Resource_l4r1n"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 889.581
+duration = 6.2
+stream = ExtResource("147_l8ypm")
+text = "方叔把话说完。梵音的遗书在乔安手里，所以我这些年不敢查白纱。"
+
+[sub_resource type="Resource" id="Resource_mdseg"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 899.35
+duration = 5.16
+stream = ExtResource("148_5cuyj")
+text = "阿凯把录音时间对上了。昨夜说话的就是这个声音，罗茵。"
+
+[sub_resource type="Resource" id="Resource_r1sga"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 904.91
+duration = 5.28
+stream = ExtResource("149_205yy")
+text = "我说了只能留一个。我没说用毒。用毒是乔安自己决定的。"
+
+[sub_resource type="Resource" id="Resource_ue6lg"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 910.59
+duration = 5.24
+stream = ExtResource("150_bjthh")
+text = "你说错过今晚就没有下一次。乔安没有别的办法让这场消失。"
+
+[sub_resource type="Resource" id="Resource_kebpk"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 916.23
+duration = 5.36
+stream = ExtResource("151_fpiy8")
+text = "办法不是让林晚宁消失。阮琪把杯子扣上，谁也别再碰。"
+
+[sub_resource type="Resource" id="Resource_o64i7"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 921.99
+duration = 6.48
+stream = ExtResource("152_qumi7")
+text = "石伯的日志写着：白纱在音乐厅，林晚宁在舞台。两件事同时。"
+
+[sub_resource type="Resource" id="Resource_qacp0"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 928.87
+duration = 5.68
+stream = ExtResource("153_qixx3")
+text = "所以鬼是人扮的。罗茵，纱留下。乔安，纸包交出来。"
+
+[sub_resource type="Resource" id="Resource_fhwrc"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 934.95
+duration = 5.8
+stream = ExtResource("154_alik7")
+text = "纸包在内侧。青矾散是我下的。她要我选，我选了让林晚宁上不了台。"
+
+[sub_resource type="Resource" id="Resource_ueg7j"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 941.15
+duration = 6.28
+stream = ExtResource("155_asgmq")
+text = "罗茵只披了纱，只放了话。可这句话把乔安推进了化妆间。"
+
+[sub_resource type="Resource" id="Resource_tmfde"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 947.83
+duration = 5.2
+stream = ExtResource("156_xibs5")
+text = "晚宁还在屋里。阮琪守着她。剩下的账，等她能开口再对。"
+
+[sub_resource type="Resource" id="Resource_fvy7b"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 953.43
+duration = 5.0
+stream = ExtResource("157_1c0wl")
+text = "录音、日志、发绿的杯子、纸包。阿凯四样都标了时间。"
+
+[sub_resource type="Resource" id="Resource_oud2t"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 958.83
+duration = 5.28
+stream = ExtResource("158_d5fss")
+text = "石伯把白纱锁进道具室的箱子。别再让它自己走到音乐厅去。"
+
+[sub_resource type="Resource" id="Resource_8b6bb"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 964.51
+duration = 5.64
+stream = ExtResource("159_lrxmm")
+text = "方叔今晚把梵音的档放回档案室。见证人那一栏，我补自己的名字。"
+
+[sub_resource type="Resource" id="Resource_tr88w"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 970.55
+duration = 4.72
+stream = ExtResource("160_65paq")
+text = "补你的名字也改变不了杯子。乔安已经说了，粉是我抖的。"
+
+[sub_resource type="Resource" id="Resource_qgykp"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 975.67
+duration = 4.48
+stream = ExtResource("161_kr1r3")
+text = "听见了。林晚宁喝的那口，是乔安倒的。罗茵的纱，另算。"
+
+[sub_resource type="Resource" id="Resource_npcpa"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 980.55
+duration = 6.2
+stream = ExtResource("162_7i3o4")
+text = "（低声）阮琪老师，我还听得见。那口我吐出来了，可劲已经使完。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_eg7cl"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 987.15
+duration = 4.4
+stream = ExtResource("163_l5p10")
+text = "听见就好。你别起来。剩下的话有我们说。"
+
+[sub_resource type="Resource" id="Resource_7gsio"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 991.95
+duration = 5.36
+stream = ExtResource("164_n33cw")
+text = "阿凯再放一遍录音的头。罗茵，你听是不是自己的声音。"
+
+[sub_resource type="Resource" id="Resource_rxuyf"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 997.71
+duration = 4.68
+stream = ExtResource("165_m6c0v")
+text = "是我。只能留一个，是我说的。粉不是我撒的。"
+
+[sub_resource type="Resource" id="Resource_fb6xd"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1002.79
+duration = 3.84
+stream = ExtResource("166_2t1vq")
+text = "粉是我撒的。乔安把这句重复到你们不用再问。"
+
+[sub_resource type="Resource" id="Resource_eq8ef"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1007.03
+duration = 6.72
+stream = ExtResource("167_76uuo")
+text = "石伯不用再问。日志、白纱、身量，三样对得上罗茵。"
+
+[sub_resource type="Resource" id="Resource_l2rpk"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1014.15
+duration = 4.72
+stream = ExtResource("168_bmbi7")
+text = "方叔要补的是旧账。梵音的见证人，今晚写回档案室。"
+
+[sub_resource type="Resource" id="Resource_7bdmo"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1019.27
+duration = 6.2
+stream = ExtResource("169_wd0x7")
+text = "新账是这杯。青矾散、发绿、乔安的手。阮琪按这个顺序写。"
+
+[sub_resource type="Resource" id="Resource_2kfy5"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1025.87
+duration = 7.08
+stream = ExtResource("170_gm6j1")
+text = "阿凯把四样东西的时间对齐。录音在前，喝水在后，发绿在喝完之后。"
+
+[sub_resource type="Resource" id="Resource_ov7xp"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1033.35
+duration = 7.6
+stream = ExtResource("171_pchi5")
+text = "石伯的日志夹在最后。白纱和舞台上的人，两行并排，不是先后。"
+
+[sub_resource type="Resource" id="Resource_6k5xo"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1041.35
+duration = 5.48
+stream = ExtResource("172_igtgv")
+text = "方叔把遗书交出来。要挟到今晚为止，谱风剧院不再替乔安瞒。"
+
+[sub_resource type="Resource" id="Resource_xw86u"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1047.23
+duration = 4.88
+stream = ExtResource("173_gve7c")
+text = "罗茵的纱锁上。我认装鬼，不认下毒。这句话单独写。"
+
+[sub_resource type="Resource" id="Resource_tgju4"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1052.51
+duration = 4.72
+stream = ExtResource("174_rtf0i")
+text = "下毒不用你认。乔安已经说了，纸包是我的，水是我倒的。"
+
+[sub_resource type="Resource" id="Resource_758d6"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1057.63
+duration = 5.64
+stream = ExtResource("175_o5h1q")
+text = "（低声）林晚宁听见了。杯子扣着就好，阮琪老师别让人再打开。"
+loudness = 0.3
+
+[sub_resource type="Resource" id="Resource_8wybh"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1063.67
+duration = 5.0
+stream = ExtResource("176_h1o2k")
+text = "阮琪再写一遍。林晚宁只喝了乔安倒的那一口。"
+
+[sub_resource type="Resource" id="Resource_llngc"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1069.07
+duration = 4.92
+stream = ExtResource("177_d3qop")
+text = "就一口。剩下的还在杯子里，绿已经沉到底，我没有再碰。"
+
+[sub_resource type="Resource" id="Resource_e7roc"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1074.39
+duration = 5.32
+stream = ExtResource("178_o0t4p")
+text = "沉到底是药的性子。乔安早知道会发绿，所以才让你快喝。"
+
+[sub_resource type="Resource" id="Resource_uq8xi"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1080.11
+duration = 4.96
+stream = ExtResource("179_m1ddt")
+text = "发绿是你告诉我的。罗茵没进过化妆间，纱也没带进去。"
+
+[sub_resource type="Resource" id="Resource_cq867"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1085.47
+duration = 5.76
+stream = ExtResource("180_e8kl4")
+text = "石伯再写一行。白纱回到道具室，晚于林晚宁上台。"
+
+[sub_resource type="Resource" id="Resource_e23jx"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1091.63
+duration = 5.12
+stream = ExtResource("181_lnop6")
+text = "阿凯把侧幕录像停在那个身影上。身高和罗茵站在这儿一样。"
+
+[sub_resource type="Resource" id="Resource_pg1x0"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1097.15
+duration = 5.2
+stream = ExtResource("182_rg34q")
+text = "方叔把梵音的见证人补完了。空栏是我抽的，字现在补回去。"
+
+[sub_resource type="Resource" id="Resource_f13r7"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1102.75
+duration = 5.08
+stream = ExtResource("183_n65tu")
+text = "两次发绿，一种粉。梵音那年没写成案子，今晚不能再漏。"
+
+[sub_resource type="Resource" id="Resource_crnyb"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1108.23
+duration = 5.96
+stream = ExtResource("184_5oqgu")
+text = "林晚宁还头晕，可话已经说完。杯子交给阮琪，我在化妆间等。"
+
+[sub_resource type="Resource" id="Resource_fk2ms"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1114.59
+duration = 5.72
+stream = ExtResource("185_7kx8f")
+text = "阿凯把录音再标一个点。昨夜那句“只能留一个”，对过罗茵。"
+
+[sub_resource type="Resource" id="Resource_jsicp"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1120.71
+duration = 4.88
+stream = ExtResource("186_jntqb")
+text = "声纹不用对。那句是我说的。我认。粉的纸包我没碰过。"
+
+[sub_resource type="Resource" id="Resource_cca0q"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1125.99
+duration = 4.2
+stream = ExtResource("187_2qhv7")
+text = "纸包在外套内侧，已经交出。乔安没有第二包。"
+
+[sub_resource type="Resource" id="Resource_lpeme"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1130.59
+duration = 5.96
+stream = ExtResource("188_0xjna")
+text = "石伯把旧纱和纸包分开放。装鬼是一件，下毒是另一件。"
+
+[sub_resource type="Resource" id="Resource_itymi"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1136.95
+duration = 4.64
+stream = ExtResource("189_ilwmw")
+text = "遗书也分开。方叔交出来的是梵音的，不是林晚宁的。"
+
+[sub_resource type="Resource" id="Resource_8ovgv"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1141.99
+duration = 5.72
+stream = ExtResource("190_r4tur")
+text = "林晚宁的只有这只杯。谁再要求冲洗，阮琪不答应。"
+
+[sub_resource type="Resource" id="Resource_cwsbg"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1148.11
+duration = 5.28
+stream = ExtResource("191_p56nb")
+text = "不要冲洗。我想看看绿变成什么样，才知道自己喝了什么。"
+
+[sub_resource type="Resource" id="Resource_j57k4"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1153.79
+duration = 5.12
+stream = ExtResource("192_ylybi")
+text = "变成这样就是青矾散。进了胃才发作，所以上台时你还站得住。"
+
+[sub_resource type="Resource" id="Resource_vpbt6"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1159.31
+duration = 5.56
+stream = ExtResource("193_ycp6e")
+text = "你站得住的那段，音乐厅里的白纱是我。罗茵把时间对给你听。"
+
+[sub_resource type="Resource" id="Resource_kpjbo"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1165.27
+duration = 5.16
+stream = ExtResource("194_pgg7r")
+text = "对得上。阿凯的灯控日志里，追光打在舞台时，侧幕有人。"
+
+[sub_resource type="Resource" id="Resource_x5acs"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1170.83
+duration = 5.64
+stream = ExtResource("195_g5qah")
+text = "侧幕那个人比林晚宁矮。石伯量过纱的下摆，是道具箱里那条。"
+
+[sub_resource type="Resource" id="Resource_0o80j"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1176.87
+duration = 5.04
+stream = ExtResource("196_85uk4")
+text = "道具箱的锁是坏的。方叔认，这些年是我默许乔安来翻。"
+
+[sub_resource type="Resource" id="Resource_l0as2"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1182.31
+duration = 6.56
+stream = ExtResource("197_tncm3")
+text = "默许到今晚为止。档案室的钥匙回来，档不再过夜放在办公室。"
+
+[sub_resource type="Resource" id="Resource_btaph"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1189.27
+duration = 5.0
+stream = ExtResource("198_gg15j")
+text = "办公室没有第二份档。乔安调走的那份，已经回到方叔手上。"
+
+[sub_resource type="Resource" id="Resource_a8iox"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1194.67
+duration = 4.84
+stream = ExtResource("199_bb8hq")
+text = "林晚宁不想听档。我只问一句：杯子是不是唯一的毒。"
+
+[sub_resource type="Resource" id="Resource_y6a5i"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1199.91
+duration = 5.0
+stream = ExtResource("200_gfcrj")
+text = "是唯一的。阮琪查过琴、门厅的水和休息室，都没有这股涩。"
+
+[sub_resource type="Resource" id="Resource_qxqu1"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1205.31
+duration = 4.36
+stream = ExtResource("201_hmmg0")
+text = "阿凯也闻过侧幕。没有粉的味道，粉只在那只杯子里。"
+
+[sub_resource type="Resource" id="Resource_kcokt"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1210.07
+duration = 5.24
+stream = ExtResource("202_hxvcp")
+text = "那就只记杯子。罗茵的罪是纱和那句话，不是这口绿。"
+
+[sub_resource type="Resource" id="Resource_rc4vr"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1215.71
+duration = 4.68
+stream = ExtResource("203_x1s5q")
+text = "石伯写完最后一行。日志合上，白纱锁进箱子。"
+
+[sub_resource type="Resource" id="Resource_4k76g"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1220.79
+duration = 5.16
+stream = ExtResource("204_y7g6q")
+text = "方叔今晚不送客。音乐厅的门先关，等人把杯子取走。"
+
+[sub_resource type="Resource" id="Resource_r56ml"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1226.35
+duration = 4.96
+stream = ExtResource("205_hw5g2")
+text = "乔安不再解释。水是我倒的，粉是我抖的，选是我选的。"
+
+[sub_resource type="Resource" id="Resource_5fcd5"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1231.71
+duration = 6.24
+stream = ExtResource("206_2kop2")
+text = "阮琪把顺序再念一遍。先录音，后倒水，再发绿，最后是你倒下。"
+
+[sub_resource type="Resource" id="Resource_02trx"]
+script = ExtResource("7_wfn1y")
+speaker = &"A"
+start = 1238.35
+duration = 5.44
+stream = ExtResource("207_une66")
+text = "顺序我记住了。倒下之前我一直在化妆间，没有回过舞台。"
+
+[sub_resource type="Resource" id="Resource_f1ean"]
+script = ExtResource("7_wfn1y")
+speaker = &"G"
+start = 1244.19
+duration = 4.52
+stream = ExtResource("208_rm77s")
+text = "舞台是空的。阿凯关掉追光之后，没有第三人上去。"
+
+[sub_resource type="Resource" id="Resource_lcr4c"]
+script = ExtResource("7_wfn1y")
+speaker = &"F"
+start = 1249.11
+duration = 5.12
+stream = ExtResource("209_16up4")
+text = "石伯守着音乐厅。白纱离开之后，侧幕没有再动。"
+
+[sub_resource type="Resource" id="Resource_h3drv"]
+script = ExtResource("7_wfn1y")
+speaker = &"E"
+start = 1254.63
+duration = 4.28
+stream = ExtResource("210_221f3")
+text = "办公室的门我锁了。乔安出去的两回，都对得上他不在我眼前。"
+
+[sub_resource type="Resource" id="Resource_304hd"]
+script = ExtResource("7_wfn1y")
+speaker = &"C"
+start = 1259.31
+duration = 4.96
+stream = ExtResource("211_qxiv7")
+text = "其中一回是来道具室看我。罗茵让他别留在杯子旁边。"
+
+[sub_resource type="Resource" id="Resource_rymam"]
+script = ExtResource("7_wfn1y")
+speaker = &"B"
+start = 1264.67
+duration = 4.64
+stream = ExtResource("212_g32t5")
+text = "另一回就是去倒水。两回我都认了，没有第三回。"
+
+[sub_resource type="Resource" id="Resource_enweb"]
+script = ExtResource("7_wfn1y")
+speaker = &"D"
+start = 1269.71
+duration = 5.56
+stream = ExtResource("213_dwj2b")
+text = "没有第三回就够。阮琪守着人，也守着杯。今晚到这儿。"
 
 [resource]
-script = ExtResource("5_opnjq")
+script = ExtResource("5_nduvm")
 id = &"case2"
 title = "剧院魅影"
-description = "演出前夕，剧院后台发生了一系列奇怪的事件。"
-duration = 90.0
-map_scene = ExtResource("3_ryxv6")
-characters = Array[ExtResource("1_t6pmc")]([SubResource("Resource_rocyi"), SubResource("Resource_qsiv8"), SubResource("Resource_vhpbj"), SubResource("Resource_7i8ft")])
-voice_lines = Array[ExtResource("7_qj5vo")]([SubResource("Resource_p5n5c"), SubResource("Resource_lvhpm"), SubResource("Resource_k1eqn"), SubResource("Resource_ibkaq"), SubResource("Resource_wbktw"), SubResource("Resource_71h80"), SubResource("Resource_js2tr"), SubResource("Resource_fnjo0")])
-questions = Array[ExtResource("4_cy0k4")]([SubResource("Resource_vou8t"), SubResource("Resource_eulum")])
+description = "谱风剧院今晚是林晚宁的钢琴独奏。彩排还没完，侧幕里有人看见白纱。你在楼里走，只能靠声音弄清谁在装鬼，谁在杯子里动了手脚。"
+duration = 1284.0
+map_scene = ExtResource("3_ned3d")
+characters = Array[ExtResource("1_ts2jt")]([SubResource("Resource_cidhe"), SubResource("Resource_cime8"), SubResource("Resource_nj7k1"), SubResource("Resource_u65t4"), SubResource("Resource_uvsv7"), SubResource("Resource_arbsy"), SubResource("Resource_lorsc")])
+voice_lines = Array[ExtResource("7_wfn1y")]([SubResource("Resource_e413t"), SubResource("Resource_ykm5r"), SubResource("Resource_ou6dh"), SubResource("Resource_chwec"), SubResource("Resource_10r8q"), SubResource("Resource_lg25n"), SubResource("Resource_5ctv5"), SubResource("Resource_2xs41"), SubResource("Resource_tnl15"), SubResource("Resource_5ct7n"), SubResource("Resource_uxvvs"), SubResource("Resource_16l1f"), SubResource("Resource_ux1es"), SubResource("Resource_ctu75"), SubResource("Resource_lxdh4"), SubResource("Resource_6m1q2"), SubResource("Resource_16hdj"), SubResource("Resource_ychel"), SubResource("Resource_ie8rh"), SubResource("Resource_b0kk7"), SubResource("Resource_bogyf"), SubResource("Resource_sjtgi"), SubResource("Resource_fiomw"), SubResource("Resource_40wx5"), SubResource("Resource_q0nch"), SubResource("Resource_itnlb"), SubResource("Resource_o26ue"), SubResource("Resource_fdp25"), SubResource("Resource_8l6cg"), SubResource("Resource_n2tm5"), SubResource("Resource_6qykt"), SubResource("Resource_xo612"), SubResource("Resource_s7lo4"), SubResource("Resource_l06vx"), SubResource("Resource_i56q5"), SubResource("Resource_xc5dr"), SubResource("Resource_qo7ih"), SubResource("Resource_pgb5s"), SubResource("Resource_gjw8d"), SubResource("Resource_w1f3l"), SubResource("Resource_4pchi"), SubResource("Resource_jam7y"), SubResource("Resource_utoqv"), SubResource("Resource_nckym"), SubResource("Resource_1du1r"), SubResource("Resource_tud4c"), SubResource("Resource_u2h6e"), SubResource("Resource_bge75"), SubResource("Resource_uimxu"), SubResource("Resource_j46jh"), SubResource("Resource_ob6yf"), SubResource("Resource_m3dq4"), SubResource("Resource_1grnu"), SubResource("Resource_p0183"), SubResource("Resource_r0j3k"), SubResource("Resource_5bnkt"), SubResource("Resource_3iy7j"), SubResource("Resource_2b333"), SubResource("Resource_c8yii"), SubResource("Resource_1qdyy"), SubResource("Resource_7rbqn"), SubResource("Resource_n4w0a"), SubResource("Resource_ww26i"), SubResource("Resource_m252e"), SubResource("Resource_wyx0o"), SubResource("Resource_v700t"), SubResource("Resource_auych"), SubResource("Resource_eqnyn"), SubResource("Resource_dx1k5"), SubResource("Resource_68e6c"), SubResource("Resource_dck3n"), SubResource("Resource_x6r2i"), SubResource("Resource_5qvj5"), SubResource("Resource_2o3rx"), SubResource("Resource_nrhrc"), SubResource("Resource_lw4jq"), SubResource("Resource_ihl4h"), SubResource("Resource_t4hr2"), SubResource("Resource_h54m1"), SubResource("Resource_t6jdd"), SubResource("Resource_nyi7e"), SubResource("Resource_tsdab"), SubResource("Resource_lh7mv"), SubResource("Resource_3w0b5"), SubResource("Resource_42xoq"), SubResource("Resource_lrrss"), SubResource("Resource_ddij1"), SubResource("Resource_f8b7q"), SubResource("Resource_syarn"), SubResource("Resource_ggkee"), SubResource("Resource_hae2m"), SubResource("Resource_2hr0o"), SubResource("Resource_bn63v"), SubResource("Resource_isdxj"), SubResource("Resource_danu4"), SubResource("Resource_01qnp"), SubResource("Resource_c4nq5"), SubResource("Resource_x4tm0"), SubResource("Resource_6l5dy"), SubResource("Resource_pyjau"), SubResource("Resource_m24rh"), SubResource("Resource_ltvdq"), SubResource("Resource_r0w5k"), SubResource("Resource_xle4m"), SubResource("Resource_i78wu"), SubResource("Resource_5cnup"), SubResource("Resource_7vpm5"), SubResource("Resource_ra8md"), SubResource("Resource_kou52"), SubResource("Resource_xgtdq"), SubResource("Resource_63yy2"), SubResource("Resource_ehglf"), SubResource("Resource_0t42w"), SubResource("Resource_dluve"), SubResource("Resource_eoq7w"), SubResource("Resource_ak4yn"), SubResource("Resource_sj8tw"), SubResource("Resource_r1ihm"), SubResource("Resource_78cmn"), SubResource("Resource_rk1g4"), SubResource("Resource_27bry"), SubResource("Resource_nae2m"), SubResource("Resource_jqhq0"), SubResource("Resource_ca2lr"), SubResource("Resource_yxkw8"), SubResource("Resource_ff0i7"), SubResource("Resource_u2b2b"), SubResource("Resource_14gqt"), SubResource("Resource_c2dlr"), SubResource("Resource_g524t"), SubResource("Resource_tgvjv"), SubResource("Resource_ylbx4"), SubResource("Resource_mmn7q"), SubResource("Resource_241wd"), SubResource("Resource_tve0b"), SubResource("Resource_k1fkm"), SubResource("Resource_y15yo"), SubResource("Resource_88fbi"), SubResource("Resource_jke1j"), SubResource("Resource_l4r1n"), SubResource("Resource_mdseg"), SubResource("Resource_r1sga"), SubResource("Resource_ue6lg"), SubResource("Resource_kebpk"), SubResource("Resource_o64i7"), SubResource("Resource_qacp0"), SubResource("Resource_fhwrc"), SubResource("Resource_ueg7j"), SubResource("Resource_tmfde"), SubResource("Resource_fvy7b"), SubResource("Resource_oud2t"), SubResource("Resource_8b6bb"), SubResource("Resource_tr88w"), SubResource("Resource_qgykp"), SubResource("Resource_npcpa"), SubResource("Resource_eg7cl"), SubResource("Resource_7gsio"), SubResource("Resource_rxuyf"), SubResource("Resource_fb6xd"), SubResource("Resource_eq8ef"), SubResource("Resource_l2rpk"), SubResource("Resource_7bdmo"), SubResource("Resource_2kfy5"), SubResource("Resource_ov7xp"), SubResource("Resource_6k5xo"), SubResource("Resource_xw86u"), SubResource("Resource_tgju4"), SubResource("Resource_758d6"), SubResource("Resource_8wybh"), SubResource("Resource_llngc"), SubResource("Resource_e7roc"), SubResource("Resource_uq8xi"), SubResource("Resource_cq867"), SubResource("Resource_e23jx"), SubResource("Resource_pg1x0"), SubResource("Resource_f13r7"), SubResource("Resource_crnyb"), SubResource("Resource_fk2ms"), SubResource("Resource_jsicp"), SubResource("Resource_cca0q"), SubResource("Resource_lpeme"), SubResource("Resource_itymi"), SubResource("Resource_8ovgv"), SubResource("Resource_cwsbg"), SubResource("Resource_j57k4"), SubResource("Resource_vpbt6"), SubResource("Resource_kpjbo"), SubResource("Resource_x5acs"), SubResource("Resource_0o80j"), SubResource("Resource_l0as2"), SubResource("Resource_btaph"), SubResource("Resource_a8iox"), SubResource("Resource_y6a5i"), SubResource("Resource_qxqu1"), SubResource("Resource_kcokt"), SubResource("Resource_rc4vr"), SubResource("Resource_4k76g"), SubResource("Resource_r56ml"), SubResource("Resource_5fcd5"), SubResource("Resource_02trx"), SubResource("Resource_f1ean"), SubResource("Resource_lcr4c"), SubResource("Resource_h3drv"), SubResource("Resource_304hd"), SubResource("Resource_rymam"), SubResource("Resource_enweb")])
+questions = Array[ExtResource("4_3ug6k")]([SubResource("Resource_ckaav"), SubResource("Resource_7udov"), SubResource("Resource_5avk4"), SubResource("Resource_3qmb7"), SubResource("Resource_2xi7v")])
+truth = "主办乔安在化妆间的水杯里下了青矾散。药粉无色，进胃才发作，见空气会慢慢发绿。他的情人罗茵逼他在林晚宁和自己之间选一个，并披着当年演员梵音的白纱在音乐厅装鬼，好继续拿梵音的自杀要挟老板方叔。梵音是乔安硬推上第一场、演砸后服毒自杀的，方叔为了剧院名声压下了这件事。林晚宁的导师阮琪认出绿痕。灯光师阿凯放出昨夜的录音，石伯证明白纱出现时林晚宁人在舞台上。"
 cover = "theatre"

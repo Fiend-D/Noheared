@@ -5,7 +5,8 @@
 - 按房间矩形自动放门，按门 / 楼梯规划走位路线，生成关键帧（走 150 px/s，跑 300 px/s）；
 - 台词按顺序排时间：说话的人先走到位再开口，说完再离开；
 - 已有语音（同一角色、同一句文本）保留音频并用真实时长重新排时间；
-- 保留 case.json 里已摆好的家具和地板材质。
+- 保留 case.json 里已摆好的家具和地板材质；
+- 检查节奏（tools/pacing.py）：全图空窗期过长、过多，开头、结尾留白过长时报错，不写 case.json。
 
 用法：
   python3 tools/compose_case.py case8 [case9 ...]
@@ -26,6 +27,7 @@ import sys
 from dataclasses import dataclass, field
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import pacing  # noqa: E402
 from tts_lines import loudness_for, probe_duration, split_directions  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +42,7 @@ MAX_DOOR_GAP = 80.0
 LINE_GAP = 0.4  # 一句说完到下一句开口
 LEAD = 0.3  # 到位后多久开口 / 说完多久出发
 CHARS_PER_SECOND = 4.3  # 没有语音时估算时长
+TAIL_PAD = 8.0  # 时长写“自动”时，最后一声之后留的秒数
 SPOT_STEP = 14.0
 SPOT_INSET = 30.0
 SPOT_CLEAR = 36.0  # 站位离门口、楼梯口的距离
@@ -620,8 +623,12 @@ def build(case_id: str, check: bool) -> None:
 
     play.set_props(old.get("map", {}).get("props", []))
     h = play.header
-    duration = float(h["时长"])
+    auto = h["时长"].strip() == "自动"
+    duration = math.inf if auto else float(h["时长"])
     compiled = compile_script(play, case_dir, old_lines, duration)
+    if auto:
+        ends = [l["start"] + l["duration"] for l in compiled.lines] + [s["time"] + s["duration"] for s in compiled.sfx]
+        duration = math.ceil(max(ends, default=0.0) + TAIL_PAD)
 
     rooms = []
     for r in play.rooms.values():
@@ -687,10 +694,18 @@ def build(case_id: str, check: bool) -> None:
     print(f"{case_id}：{len(characters)} 名角色，{len(compiled.lines)} 句台词（{voiced} 句有语音），最后一句在 {last / 60:.1f} 分钟结束")
     for w in compiled.warnings:
         print("  " + w)
+    errors, notes = pacing.check(case)
+    for w in notes:
+        print("  节奏提示：" + w)
+    for e in errors:
+        print("  节奏错误：" + e)
     if check:
+        print(f"  时长 {_mmss(duration)}")
         for scene in compiled.scenes:
             print("  场景 " + scene)
         return
+    if errors:
+        raise PlayError(f"节奏检查有 {len(errors)} 个错误，没有写入 case.json（用 --check 查看场景时间表）")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(case, f, ensure_ascii=False, indent=1)
         f.write("\n")
