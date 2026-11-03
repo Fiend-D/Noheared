@@ -111,3 +111,5 @@ godot --headless --export-release Windows
 - [gdUnit4](https://github.com/godot-gdunit-labs/gdUnit4)：MIT，许可证在 `game/addons/gdUnit4/LICENSE`，版权归 Mike Schulze。
 - 配音脚本调用的 CosyVoice2 和 edge-tts 不包含在本仓库中，使用它们时遵循各自的许可证。
 - 参考音色文件 `tools/voice_prompts/` 不提交。本地缺失时，`tts_lines.py` 会从已有台词里重新挑选。
+
+**本程序仅作交流学习，请勿用于商业用途，请勿倒卖，二次开发请标明来处**
